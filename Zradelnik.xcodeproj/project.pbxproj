@@ -11,14 +11,17 @@
 		09AE247127F31C9200BC6208 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE247027F31C9200BC6208 /* ContentView.swift */; };
 		09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247227F31C9300BC6208 /* Assets.xcassets */; };
 		09AE247627F31C9300BC6208 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247527F31C9300BC6208 /* Preview Assets.xcassets */; };
+		09AE248227F320BA00BC6208 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 09AE248127F320BA00BC6208 /* Apollo */; };
+		09AE248527F326D900BC6208 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 09AE248427F326D900BC6208 /* schema.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09AE246B27F31C9200BC6208 /* Zradelnik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zradelnik.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09AE246B27F31C9200BC6208 /* Žrádelník.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Žrádelník.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZradelnikApp.swift; sourceTree = "<group>"; };
 		09AE247027F31C9200BC6208 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		09AE247227F31C9300BC6208 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09AE247527F31C9300BC6208 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		09AE248427F326D900BC6208 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09AE248227F320BA00BC6208 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,7 +47,7 @@
 		09AE246C27F31C9200BC6208 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				09AE246B27F31C9200BC6208 /* Zradelnik.app */,
+				09AE246B27F31C9200BC6208 /* Žrádelník.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,7 +56,8 @@
 			isa = PBXGroup;
 			children = (
 				09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */,
-				09AE247027F31C9200BC6208 /* ContentView.swift */,
+				09AE247C27F31CBB00BC6208 /* Views */,
+				09AE248327F324A400BC6208 /* Resources */,
 				09AE247227F31C9300BC6208 /* Assets.xcassets */,
 				09AE247427F31C9300BC6208 /* Preview Content */,
 			);
@@ -65,6 +70,22 @@
 				09AE247527F31C9300BC6208 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		09AE247C27F31CBB00BC6208 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09AE247027F31C9200BC6208 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		09AE248327F324A400BC6208 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				09AE248427F326D900BC6208 /* schema.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,8 +104,11 @@
 			dependencies = (
 			);
 			name = Zradelnik;
+			packageProductDependencies = (
+				09AE248127F320BA00BC6208 /* Apollo */,
+			);
 			productName = Zradelnik;
-			productReference = 09AE246B27F31C9200BC6208 /* Zradelnik.app */;
+			productReference = 09AE246B27F31C9200BC6208 /* Žrádelník.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -111,6 +135,9 @@
 				Base,
 			);
 			mainGroup = 09AE246227F31C9200BC6208;
+			packageReferences = (
+				09AE248027F320BA00BC6208 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = 09AE246C27F31C9200BC6208 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09AE247627F31C9300BC6208 /* Preview Assets.xcassets in Resources */,
+				09AE248527F326D900BC6208 /* schema.json in Resources */,
 				09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Zradelnik/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -280,7 +309,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.jakubricar.Zradelnik;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Žrádelník";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -295,6 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Zradelnik/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -308,7 +338,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.jakubricar.Zradelnik;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Žrádelník";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -337,6 +367,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		09AE248027F320BA00BC6208 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.9.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		09AE248127F320BA00BC6208 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09AE248027F320BA00BC6208 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 09AE246327F31C9200BC6208 /* Project object */;
 }
