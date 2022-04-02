@@ -23,27 +23,31 @@ struct RecipeListItem: View {
                         ProgressView()
                     }
                 }
+                .modifier(ImageModifier(recipe: recipe))
+            } else {
+                Image("placeholder")
+                    .resizable()
+                    .scaledToFit()
+                    .modifier(ImageModifier(recipe: recipe))
+            }
+        }
+        .background(.background)
+        .cornerRadius(8)
+        .shadow(radius: 8)
+    }
+    
+    struct ImageModifier: ViewModifier {
+        let recipe: Recipe
+        
+        func body(content: Content) -> some View {
+            content
                 .frame(height: 300)
                 .frame(maxWidth: .infinity)
                 .clipped()
                 .overlay {
                     TextOverlay(recipe: recipe)
                 }
-            } else {
-                Image("placeholder")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 300)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
-                    .overlay {
-                        TextOverlay(recipe: recipe)
-                    }
-            }
         }
-        .background(.background)
-        .cornerRadius(8)
-        .shadow(radius: 8)
     }
 }
 
