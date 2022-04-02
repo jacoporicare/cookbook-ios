@@ -1,0 +1,585 @@
+[
+    {
+        "id": "5b4f00f4f275000019d0c3b6",
+        "title": "Bábovka",
+        "slug": "babovka",
+        "directions": "1. Vejce rozklepneme a oddělíme žloutky od bílků, žloutky vyšleháme s 1/3 cukru, z bílků ušleháme sníh s 1/3 cukru\n1. Všechny sypké ingredience smícháme v míse a přisypeme ke žloutkům\n1. Přidáme olej a vodu\n1. Opatrně vmícháme sníh\n1. Asi 2/3 těsta nalijeme do vymazané a moukou vysypané formy. Do zbylé třetiny těsta přidáme 2 lžíce kakaa, zamícháme a nalijeme na světlé těsto do formy.\n1. Bábovku vkládáme do předehřáté trouby a pečeme asi 60 minut na 160 °C (horkovzduch 140 °C). Zkusíme špejlí, jestli je uvnitř hotová\n1. Upečenou bábovku vyklopíme, pocukrujeme a můžeme servírovat",
+        "sideDish": null,
+        "preparationTime": 90,
+        "servingCount": null,
+        "user": {
+            "id": "5cfbe70e4309d1001b800400",
+            "username": "kubik",
+            "displayName": "Kubík",
+            "isAdmin": true,
+            "lastActivity": "2022-03-22T15:53:16.267Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=1080x1080&format=webp",
+        "creationDate": "2018-07-18T08:57:24Z",
+        "lastModifiedDate": "2021-03-06T20:16:40.639Z",
+        "ingredients": [
+            {
+                "id": "6043e32822d1620018b0c9af",
+                "amount": 2,
+                "amountUnit": "hrnky",
+                "name": "polohrubá mouka",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b0",
+                "amount": 1,
+                "amountUnit": "hrnek",
+                "name": "cukr",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b1",
+                "amount": 1,
+                "amountUnit": "sklenka",
+                "name": "řepkový olej",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b2",
+                "amount": 1,
+                "amountUnit": "sklenka",
+                "name": "teplá voda",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b3",
+                "amount": 3,
+                "amountUnit": "ks",
+                "name": "vejce",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b4",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "prášek do pečiva",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b5",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "vanilkový cukr",
+                "isGroup": false
+            },
+            {
+                "id": "6043e32822d1620018b0c9b6",
+                "amount": 2,
+                "amountUnit": "lžíce",
+                "name": "kakao",
+                "isGroup": false
+            }
+        ],
+        "tags": [
+            "sladké"
+        ],
+        "deleted": false
+    },
+    {
+        "id": "58067fc20cde48000f329083",
+        "title": "Boršč",
+        "slug": "borsc",
+        "directions": "1. Maso zalijeme studenou vodou a přidáme koření, vaříme do měkka (cca 2h), necháme si vývar\n1. Omytou řepu zalijeme studenou vodou, osolíme a vaříme do měkka (cca 2h), necháme si vývar\n1. Zeleninu nakrájíme na kostičky\n1. Zalijeme masovým vývarem a vaříme do měkka\n1. Maso a řepu nakrájíme na kostičky\n1. Přidáme maso, řepu, vývar z řepy, kysané zelí včetně nálevu a chvíli povaříme\n1. Dochutíme solí, pepřem, octem nebo citronem a troškou cukru\n\nChuť boršče by měla být příjemně slaná, ale se sladkokyselým nádechem",
+        "sideDish": null,
+        "preparationTime": 180,
+        "servingCount": 8,
+        "user": {
+            "id": "5cfbe70e4309d1001b800400",
+            "username": "kubik",
+            "displayName": "Kubík",
+            "isAdmin": true,
+            "lastActivity": "2022-03-22T15:53:16.267Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/borsc_61acf2dc0f9d377d5068cd9f?size=640x640&format=webp",
+        "creationDate": "2016-10-18T20:02:10Z",
+        "lastModifiedDate": "2021-12-05T17:12:03.693Z",
+        "ingredients": [
+            {
+                "id": "61acf2e30f9d377d5068cda0",
+                "amount": 300,
+                "amountUnit": "g",
+                "name": "hovězí žebra nebo kližka",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda1",
+                "amount": 300,
+                "amountUnit": "g",
+                "name": "vepřová plec nebo libový bůček",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda2",
+                "amount": 500,
+                "amountUnit": "g",
+                "name": "kysané zelí",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda3",
+                "amount": 2,
+                "amountUnit": "ks",
+                "name": "řepa (střední)",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda4",
+                "amount": 2,
+                "amountUnit": "ks",
+                "name": "mrkev",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda5",
+                "amount": 4,
+                "amountUnit": "ks",
+                "name": "brambory",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda6",
+                "amount": 0.25,
+                "amountUnit": "ks",
+                "name": "celer",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda7",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "petržel",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda8",
+                "amount": 2,
+                "amountUnit": "ks",
+                "name": "bobkový list",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cda9",
+                "amount": 4,
+                "amountUnit": "ks",
+                "name": "nové koření",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cdaa",
+                "amount": 5,
+                "amountUnit": "ks",
+                "name": "pepř černý celý",
+                "isGroup": false
+            },
+            {
+                "id": "61acf2e30f9d377d5068cdab",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "cibule",
+                "isGroup": false
+            }
+        ],
+        "tags": [
+            "polévka"
+        ],
+        "deleted": false
+    },
+    {
+        "id": "5f7ed0d7916a2300114884a5",
+        "title": "Bramboračka",
+        "slug": "bramboracka",
+        "directions": "1. V hrnci rozpustíme máslo, přidáme hladkou mouku a vytvoříme si tmavší jíšku\n2. K jíšce přilijeme zeleninový vývar a důkladně promícháme\n3. Do vývaru přidáme na kostičky nakrájenou mrkev, petržel, celer, cibuli, vymačkaný česnek a vaříme 5 minut, potom přidáme i na kostičky nakrájené brambory s lesními houbami a vaříme cca dalších 15 minut, dokud zelenina nezměkne \n4. Dochutíme solí, pepřem, majoránkou a nakonec můžeme přidat i čerstvě nasekanou petrželku\n\n* *Pozor, sušené houby je potřeba před použitím cca na 2 hodiny namočit do vlažné vody.*",
+        "sideDish": null,
+        "preparationTime": 30,
+        "servingCount": 6,
+        "user": {
+            "id": "5cfbe70e4309d1001b800401",
+            "username": "terezka",
+            "displayName": "Terezka",
+            "isAdmin": true,
+            "lastActivity": "2021-05-05T18:20:31.806Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/bramboracka_60b625c871cc4b28a638d3fd?size=640x640&format=webp",
+        "creationDate": "2020-10-08T08:41:59Z",
+        "lastModifiedDate": "2020-10-08T09:10:44.949Z",
+        "ingredients": [
+            {
+                "id": "5f7ed794916a2300114884b3",
+                "amount": 4,
+                "amountUnit": "ks",
+                "name": "brambory",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884b4",
+                "amount": 2,
+                "amountUnit": "ks",
+                "name": "mrkev",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884b5",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "petržel",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884b6",
+                "amount": 0.25,
+                "amountUnit": "ks",
+                "name": "celer",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884b7",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "cibule",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884b8",
+                "amount": 2,
+                "amountUnit": "ks",
+                "name": "česnek",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884b9",
+                "amount": 20,
+                "amountUnit": "g",
+                "name": "směs lesních hub (sušené)",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884ba",
+                "amount": 2,
+                "amountUnit": "lžíce",
+                "name": "máslo",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884bb",
+                "amount": 3,
+                "amountUnit": "lžíce",
+                "name": "hladká mouka",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884bc",
+                "amount": null,
+                "amountUnit": null,
+                "name": "majoránka",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884bd",
+                "amount": null,
+                "amountUnit": null,
+                "name": "čerstvá petrželka",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884be",
+                "amount": null,
+                "amountUnit": null,
+                "name": "sůl",
+                "isGroup": false
+            },
+            {
+                "id": "5f7ed794916a2300114884bf",
+                "amount": null,
+                "amountUnit": null,
+                "name": "pepř",
+                "isGroup": false
+            }
+        ],
+        "tags": [
+            "polévka"
+        ],
+        "deleted": false
+    },
+    {
+        "id": "5f40c30315dcd00011654592",
+        "title": "Bramborák z trouby",
+        "slug": "bramborak-z-trouby",
+        "directions": null,
+        "sideDish": null,
+        "preparationTime": null,
+        "servingCount": null,
+        "user": {
+            "id": "5cfbe70e4309d1001b800400",
+            "username": "kubik",
+            "displayName": "Kubík",
+            "isAdmin": true,
+            "lastActivity": "2022-03-22T15:53:16.267Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/bramborak-z-trouby_60b625c871cc4b28a638d3fe?size=640x640&format=webp",
+        "creationDate": "2020-08-22T07:02:27Z",
+        "lastModifiedDate": "2020-08-22T07:02:27.083Z",
+        "ingredients": null,
+        "tags": null,
+        "deleted": false
+    },
+    {
+        "id": "59a48c7cddd1b8001b58032a",
+        "title": "Bramborové knedlíky plněné uzeným",
+        "slug": "bramborove-knedliky-plnene-uzenym",
+        "directions": "1. Uzené maso a 1 cibuli si nakrájíme na malé kostičky\n1. Na rozehřátém oleji nejprve osmahneme dosklovata cibuli a přimícháme uzené maso, chvíli opékáme pro zvýraznění chuti, poté odstavíme a necháme vychladnout\n1. Vychladlé (*nejlépe den předem uvařené*) brambory oloupeme a najemno nastrouháme\n1. V připravené míse je prosolíme špetkou soli a smícháme s vejcem a hrubou moukou (*můžeme přidat i nějaké bylinky, pokud máme po ruce*)\n1. Směs rychle zpracujeme na vláčné tužší těsto (***POZOR nenecháváme ho odpočívat a zaděláváme ho jen krátce a co nejrychleji, jinak začne řídnout***)\n1. Ze vzniklého těsta vyválíme váleček, rozkrájíme ho na stejně velké kousky (*na dvě porce -  cca 6 kousků*), z těch si uděláme placičky a každou z nich naplníme hotovou směsí uzeného masa s cibulkou, opatrně uzavřeme a vytvarujeme kulaté knedlíky\n1. Ihned je vkládáme do vroucí osolené vody a vaříme podle velikosti 10–15 minut\n1. Uvařené knedlíky vyjmeme děrovanou lžící a podáváme s osmaženou cibulkou a dušeným zelím nebo špenátem",
+        "sideDish": "zelí, špenát",
+        "preparationTime": 60,
+        "servingCount": 2,
+        "user": {
+            "id": "5cfbe70e4309d1001b800401",
+            "username": "terezka",
+            "displayName": "Terezka",
+            "isAdmin": true,
+            "lastActivity": "2021-05-05T18:20:31.806Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/bramborove-knedliky-plnene-uzenym_60b625c871cc4b28a638d3ff?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/bramborove-knedliky-plnene-uzenym_60b625c871cc4b28a638d3ff?size=1024x1024&format=webp",
+        "creationDate": "2017-08-28T21:34:52Z",
+        "lastModifiedDate": "2020-03-21T10:01:16.034Z",
+        "ingredients": [
+            {
+                "id": "5e75e5ec550395001b29c2b3",
+                "amount": 500,
+                "amountUnit": "g",
+                "name": "brambory",
+                "isGroup": false
+            },
+            {
+                "id": "5e75e5ec550395001b29c2b4",
+                "amount": 250,
+                "amountUnit": "g",
+                "name": "uzené maso",
+                "isGroup": false
+            },
+            {
+                "id": "5e75e5ec550395001b29c2b5",
+                "amount": 200,
+                "amountUnit": "g",
+                "name": "hrubá mouka",
+                "isGroup": false
+            },
+            {
+                "id": "5e75e5ec550395001b29c2b6",
+                "amount": 2,
+                "amountUnit": "ks",
+                "name": "cibule",
+                "isGroup": false
+            },
+            {
+                "id": "5e75e5ec550395001b29c2b7",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "vejce",
+                "isGroup": false
+            },
+            {
+                "id": "5e75e5ec550395001b29c2b8",
+                "amount": null,
+                "amountUnit": "",
+                "name": "sůl",
+                "isGroup": false
+            }
+        ],
+        "tags": [
+            "uzené"
+        ],
+        "deleted": false
+    },
+    {
+        "id": "60e1bcc9d7dccb3d074a9a80",
+        "title": "Bramborové šišky s mákem",
+        "slug": "bramborove-sisky-s-makem",
+        "directions": null,
+        "sideDish": null,
+        "preparationTime": null,
+        "servingCount": null,
+        "user": {
+            "id": "5cfbe70e4309d1001b800400",
+            "username": "kubik",
+            "displayName": "Kubík",
+            "isAdmin": true,
+            "lastActivity": "2022-03-22T15:53:16.267Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/bramborove-sisky-s-makem_60e1bcc3d7dccb3d074a9a7f?size=640x640&format=webp",
+        "creationDate": "2021-07-04T13:51:05Z",
+        "lastModifiedDate": "2022-02-15T19:48:34.709Z",
+        "ingredients": null,
+        "tags": [
+            "sladké"
+        ],
+        "deleted": false
+    },
+    {
+        "id": "5a77086b2b8ac70019202fbe",
+        "title": "Bramborový knedlík",
+        "slug": "bramborovy-knedlik",
+        "directions": "_Do doby přípravy není zahrnuta doba vaření a chladnutí brambor._\n\n1. Brambory si nejlépe den předem uvaříme vcelku ve slupce a necháme vychladnout\n2. Oškrábeme a nastrouháme nahrubo\n3. Smíchame s moukou, vejcem a osolíme\n4. Vytvarujeme 3 šišky\n5. Vaříme ve vroucí osolené vodě 10-12 minut (v půlce obrátíme)\n6. Po vyndání propícháme vidličkou, aby se nám nesrazil",
+        "sideDish": null,
+        "preparationTime": 30,
+        "servingCount": 5,
+        "user": {
+            "id": "5cfbe70e4309d1001b800400",
+            "username": "kubik",
+            "displayName": "Kubík",
+            "isAdmin": true,
+            "lastActivity": "2022-03-22T15:53:16.267Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/bramborovy-knedlik_60b625c871cc4b28a638d400?size=640x640&format=webp",
+        "creationDate": "2018-02-04T13:19:39Z",
+        "lastModifiedDate": "2021-03-01T10:45:08.477Z",
+        "ingredients": [
+            {
+                "id": "603cc5b422d1620018b0c99f",
+                "amount": 700,
+                "amountUnit": "g",
+                "name": "brambory",
+                "isGroup": false
+            },
+            {
+                "id": "603cc5b422d1620018b0c9a0",
+                "amount": 200,
+                "amountUnit": "g",
+                "name": "hrubá mouka",
+                "isGroup": false
+            },
+            {
+                "id": "603cc5b422d1620018b0c9a1",
+                "amount": 1,
+                "amountUnit": "ks",
+                "name": "vejce",
+                "isGroup": false
+            },
+            {
+                "id": "603cc5b422d1620018b0c9a2",
+                "amount": null,
+                "amountUnit": "špetka",
+                "name": "sůl",
+                "isGroup": false
+            }
+        ],
+        "tags": [
+            "příloha"
+        ],
+        "deleted": false
+    },
+    {
+        "id": "5c8a2369f98ad5001a25c08e",
+        "title": "Bramborový salát",
+        "slug": "bramborovy-salat",
+        "directions": "1. Brambory si uvaříme den předem, cca 20 - 25 minut\n1. Kořenovou zeleninu oloupeme a uvaříme, cca 7 minut, vývar si necháme\n1. Cibuli nakrájíme najemno a 5 minut povaříme v zeleninovém vývaru\n1. Vejce uvaříme natvrdo (10 minut)\n1. Brambory oloupeme\n1. Brambory, kořenovou zeleninu, nakládané okurky a vejce nakrájíme na stejně velké kostičky\n1. Vše smícháme, přidáme majonézu, hořčici, osolíme, opepříme\n1. Necháme přes noc odležet",
+        "sideDish": null,
+        "preparationTime": null,
+        "servingCount": 12,
+        "user": {
+            "id": "5cfbe70e4309d1001b800400",
+            "username": "kubik",
+            "displayName": "Kubík",
+            "isAdmin": true,
+            "lastActivity": "2022-03-22T15:53:16.267Z"
+        },
+        "thumbImageUrl": "https://api.zradelnik.eu/image/bramborovy-salat_60b625c971cc4b28a638d401?size=640x640&format=webp",
+        "creationDate": "2019-03-14T09:48:25Z",
+        "lastModifiedDate": "2020-12-24T21:29:16.157Z",
+        "ingredients": [
+            {
+                "id": "5fe5082ccda1b30011682a3c",
+                "amount": 2,
+                "amountUnit": "kg",
+                "name": "brambory, varný typ A",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a3d",
+                "amount": 300,
+                "amountUnit": "g",
+                "name": "mrkev",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a3e",
+                "amount": 140,
+                "amountUnit": "g",
+                "name": "cibule",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a3f",
+                "amount": 160,
+                "amountUnit": "g",
+                "name": "celer",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a40",
+                "amount": 160,
+                "amountUnit": "g",
+                "name": "petržel",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a41",
+                "amount": 320,
+                "amountUnit": "g",
+                "name": "nakládané okurky",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a42",
+                "amount": 4,
+                "amountUnit": "lžíce",
+                "name": "láku z okurek",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a43",
+                "amount": 6,
+                "amountUnit": "ks",
+                "name": "vejce",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a44",
+                "amount": 420,
+                "amountUnit": "g",
+                "name": "majonéza",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a45",
+                "amount": 6,
+                "amountUnit": "lžiček",
+                "name": "plnotučná hořčice",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a46",
+                "amount": null,
+                "amountUnit": null,
+                "name": "sůl",
+                "isGroup": false
+            },
+            {
+                "id": "5fe5082ccda1b30011682a47",
+                "amount": null,
+                "amountUnit": null,
+                "name": "pepř",
+                "isGroup": false
+            }
+        ],
+        "tags": [
+            "příloha"
+        ],
+        "deleted": false
+    }
+]

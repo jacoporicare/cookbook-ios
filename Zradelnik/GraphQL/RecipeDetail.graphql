@@ -1,0 +1,18 @@
+query RecipeDetail($id: ID!) {
+	recipe(id: $id) {
+		id
+		title
+		fullImageUrl: imageUrl(size: { width: 1080, height: 1080 }, format: WEBP)
+		directions
+		sideDish
+		preparationTime
+		servingCount
+		ingredients {
+			id
+			name
+			isGroup
+			amount
+			amountUnit
+		}
+	}
+}
