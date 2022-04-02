@@ -11,23 +11,27 @@ struct RecipeListItem: View {
     let recipe: Recipe
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if let imageUrl = recipe.fullImageUrl {
-                AsyncImage(url: URL(string: imageUrl)) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                    
-                } placeholder: {
-                    ProgressView()
+                AsyncImage(url: URL(string: imageUrl)) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    default:
+                        ProgressView()
+                    }
                 }
-                .frame(maxWidth: .infinity, idealHeight: 300)
+                .frame(height: 300)
+                .frame(maxWidth: .infinity)
                 .clipped()
             } else {
                 Image("placeholder")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: .infinity, idealHeight: 300)
+                    .frame(height: 300)
+                    .frame(maxWidth: .infinity)
                     .clipped()
             }
             Text(recipe.title)
