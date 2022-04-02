@@ -29,7 +29,7 @@ struct RecipeList: View {
             LazyVStack(spacing: 20) {
                 ForEach(recipes) { recipe in
                     NavigationLink {
-                        RecipeDetail(id: recipe.id)
+                        RecipeDetail(id: recipe.id, title: recipe.title)
                     } label: {
                         RecipeListItem(recipe: recipe)
                     }

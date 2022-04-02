@@ -26,6 +26,9 @@ struct RecipeListItem: View {
                 .frame(height: 300)
                 .frame(maxWidth: .infinity)
                 .clipped()
+                .overlay {
+                    TextOverlay(recipe: recipe)
+                }
             } else {
                 Image("placeholder")
                     .resizable()
@@ -33,15 +36,39 @@ struct RecipeListItem: View {
                     .frame(height: 300)
                     .frame(maxWidth: .infinity)
                     .clipped()
+                    .overlay {
+                        TextOverlay(recipe: recipe)
+                    }
             }
-            Text(recipe.title)
-                .font(.title)
-                .padding(10)
-            
         }
         .background(.background)
         .cornerRadius(8)
         .shadow(radius: 8)
+    }
+}
+
+struct TextOverlay: View {
+    var recipe: Recipe
+    
+    var gradient: LinearGradient {
+        .linearGradient(
+            Gradient(colors: [.black.opacity(0.6), .black.opacity(0)]),
+            startPoint: .bottom,
+            endPoint: .center)
+    }
+    
+    var body: some View {
+        ZStack(alignment: .bottomLeading) {
+            gradient
+            VStack(alignment: .leading) {
+                Text(recipe.title)
+                    .font(.title)
+                    .bold()
+                    .multilineTextAlignment(.leading)
+            }
+            .padding()
+        }
+        .foregroundColor(.white)
     }
 }
 

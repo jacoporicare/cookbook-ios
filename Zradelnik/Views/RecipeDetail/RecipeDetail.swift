@@ -10,7 +10,8 @@ import SwiftUI
 struct RecipeDetail: View {
     @StateObject private var viewModel = RecipeDetailViewModel()
     
-    var id: String
+    let id: String
+    let title: String
     
     var body: some View {
         LoadingContent(status: viewModel.status) { recipe in
@@ -20,13 +21,6 @@ struct RecipeDetail: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.fetch(id)
-        }
-    }
-    
-    var title: String {
-        switch viewModel.status {
-        case .data(let recipe): return recipe.title
-        default: return "Recept"
         }
     }
     
@@ -57,7 +51,7 @@ struct RecipeDetail_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationView {
-            RecipeDetail(id: recipe.id)
+            RecipeDetail(id: recipe.id, title: recipe.title)
                 .loadedView(recipe: recipe)
                 .navigationTitle(recipe.title)
                 .navigationBarTitleDisplayMode(.inline)
