@@ -28,6 +28,7 @@
 		09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */; };
 		09AE247127F31C9200BC6208 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE247027F31C9200BC6208 /* ContentView.swift */; };
 		09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247227F31C9300BC6208 /* Assets.xcassets */; };
+		09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 09DC1F9D27F9DED200F01BBC /* MarkdownUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */,
+				09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +186,7 @@
 			name = Zradelnik;
 			packageProductDependencies = (
 				0989F8E127F32CBA009CB6BD /* Apollo */,
+				09DC1F9D27F9DED200F01BBC /* MarkdownUI */,
 			);
 			productName = Zradelnik;
 			productReference = 09AE246B27F31C9200BC6208 /* Žrádelník.app */;
@@ -215,6 +218,7 @@
 			mainGroup = 09AE246227F31C9200BC6208;
 			packageReferences = (
 				0989F8E027F32CBA009CB6BD /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 			);
 			productRefGroup = 09AE246C27F31C9200BC6208 /* Products */;
 			projectDirPath = "";
@@ -499,6 +503,14 @@
 				minimumVersion = 0.51.2;
 			};
 		};
+		09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -506,6 +518,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0989F8E027F32CBA009CB6BD /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		09DC1F9D27F9DED200F01BBC /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

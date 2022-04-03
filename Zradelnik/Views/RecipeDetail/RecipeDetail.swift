@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct RecipeDetail: View {
     @StateObject private var viewModel = RecipeDetailViewModel()
@@ -26,21 +27,22 @@ struct RecipeDetail: View {
     
     func loadedView(recipe: DetailedRecipe) -> some View {
         ScrollView {
-            if let imageUrl = recipe.fullImageUrl {
-                AsyncImage(url: URL(string: imageUrl)) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                    
-                    
-                } placeholder: {
-                    ProgressView()
-                        .frame(height: 300)
-                }
-            }
-            
             VStack {
-                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                if let imageUrl = recipe.fullImageUrl {
+                    AsyncImage(url: URL(string: imageUrl)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                        
+                        
+                    } placeholder: {
+                        ProgressView()
+                            .frame(height: 300)
+                    }
+                }
+                
+                Markdown(recipe.directions ?? "Kde nic tu nic.")
+                    .scenePadding()
             }
         }
     }
