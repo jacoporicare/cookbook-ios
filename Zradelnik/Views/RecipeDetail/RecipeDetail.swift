@@ -42,7 +42,7 @@ struct RecipeDetail: View {
                 }
                 
                 VStack(spacing: 20) {
-                    if let ingredients = recipe.ingredients {
+                    if let ingredients = recipe.ingredients, ingredients.count > 0 {
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Ingredience")
                                 .font(.title2)
