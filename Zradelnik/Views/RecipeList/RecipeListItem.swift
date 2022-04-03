@@ -16,9 +16,12 @@ struct RecipeListItem: View {
                 AsyncImage(url: URL(string: imageUrl)) { phase in
                     switch phase {
                     case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
+                        GeometryReader { geo in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width, height: geo.size.height)
+                        }
                     default:
                         ProgressView()
                     }
@@ -41,7 +44,7 @@ struct RecipeListItem: View {
         
         func body(content: Content) -> some View {
             content
-                .frame(height: 300)
+                .frame(height: 200)
                 .frame(maxWidth: .infinity)
                 .clipped()
                 .overlay {
@@ -58,7 +61,8 @@ struct TextOverlay: View {
         .linearGradient(
             Gradient(colors: [.black.opacity(0.6), .black.opacity(0)]),
             startPoint: .bottom,
-            endPoint: .center)
+            endPoint: .center
+        )
     }
     
     var body: some View {
@@ -66,7 +70,7 @@ struct TextOverlay: View {
             gradient
             VStack(alignment: .leading) {
                 Text(recipe.title)
-                    .font(.title)
+                    .font(.title3)
                     .bold()
                     .multilineTextAlignment(.leading)
             }

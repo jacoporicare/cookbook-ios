@@ -12,10 +12,15 @@
 		0900083927F3622800D5A746 /* LoadingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083827F3622800D5A746 /* LoadingStatus.swift */; };
 		0900083B27F3A45800D5A746 /* RecipeListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083A27F3A45800D5A746 /* RecipeListItem.swift */; };
 		0955941B27F332AA00E270E4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955941A27F332AA00E270E4 /* Recipe.swift */; };
-		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; };
+		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; settings = {ATTRIBUTES = (Required, ); }; };
 		0989F8E427F32CE4009CB6BD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E327F32CE4009CB6BD /* API.swift */; };
 		0989F8E627F32D45009CB6BD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E527F32D45009CB6BD /* Network.swift */; };
 		0989F8E927F32E92009CB6BD /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E827F32E92009CB6BD /* RecipeListViewModel.swift */; };
+		099185B627F9C2B30057FC2F /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 09AE248427F326D900BC6208 /* schema.json */; };
+		099185B727F9C2B30057FC2F /* recipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0900083227F359AE00D5A746 /* recipeData.json */; };
+		099185B827F9C2B30057FC2F /* RecipeList.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 09AE248727F3287000BC6208 /* RecipeList.graphql */; };
+		099185B927F9C2B30057FC2F /* RecipeDetail.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 09A7A3ED27F6618500E62123 /* RecipeDetail.graphql */; };
+		099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247527F31C9300BC6208 /* Preview Assets.xcassets */; };
 		09A7A3EC27F64E5B00E62123 /* LoadingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */; };
 		09A7A3F027F6622700E62123 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EF27F6622700E62123 /* RecipeDetailViewModel.swift */; };
 		09A7A3F227F6627500E62123 /* DetailedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3F127F6627500E62123 /* DetailedRecipe.swift */; };
@@ -127,6 +132,7 @@
 			children = (
 				09AE247527F31C9300BC6208 /* Preview Assets.xcassets */,
 				0900083427F35AFC00D5A746 /* PreviewData.swift */,
+				0900083227F359AE00D5A746 /* recipeData.json */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -146,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				09AE248427F326D900BC6208 /* schema.json */,
-				0900083227F359AE00D5A746 /* recipeData.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -225,6 +230,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099185B627F9C2B30057FC2F /* schema.json in Resources */,
+				099185B727F9C2B30057FC2F /* recipeData.json in Resources */,
+				099185B827F9C2B30057FC2F /* RecipeList.graphql in Resources */,
+				099185B927F9C2B30057FC2F /* RecipeDetail.graphql in Resources */,
+				099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */,
 				09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,8 +319,11 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = LVQ73P9V59;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -369,8 +382,11 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LVQ73P9V59;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -396,10 +412,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Zradelnik/Preview Content\"";
-				DEVELOPMENT_TEAM = LVQ73P9V59;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -425,10 +442,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Zradelnik/Preview Content\"";
-				DEVELOPMENT_TEAM = LVQ73P9V59;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

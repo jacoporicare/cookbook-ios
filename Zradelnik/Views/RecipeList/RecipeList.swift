@@ -9,16 +9,14 @@ import SwiftUI
 
 struct RecipeList: View {
     @StateObject private var viewModel = RecipeListViewModel()
-    
+
     let columnLayout = Array(repeating: GridItem(), count: 2)
-    
-    let title = "Žrádelník"
     
     var body: some View {
         LoadingContent(status: viewModel.status) { recipes in
             loadedView(recipes: recipes)
         }
-        .navigationTitle(title)
+        .navigationTitle("Žrádelník")
         .onAppear {
             viewModel.fetch()
         }
@@ -26,7 +24,7 @@ struct RecipeList: View {
     
     func loadedView(recipes: [Recipe]) -> some View {
         ScrollView(.vertical) {
-            LazyVStack(spacing: 20) {
+            LazyVGrid(columns: columnLayout) {
                 ForEach(recipes) { recipe in
                     NavigationLink {
                         RecipeDetail(id: recipe.id, title: recipe.title)
