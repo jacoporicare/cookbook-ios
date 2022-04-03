@@ -270,7 +270,6 @@ public final class RecipeListQuery: GraphQLQuery {
         id
         title
         thumbImageUrl: imageUrl(size: {width: 640, height: 640}, format: WEBP)
-        fullImageUrl: imageUrl(size: {width: 1080, height: 1080}, format: WEBP)
       }
     }
     """
@@ -317,7 +316,6 @@ public final class RecipeListQuery: GraphQLQuery {
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("title", type: .nonNull(.scalar(String.self))),
           GraphQLField("imageUrl", alias: "thumbImageUrl", arguments: ["size": ["width": 640, "height": 640], "format": "WEBP"], type: .scalar(String.self)),
-          GraphQLField("imageUrl", alias: "fullImageUrl", arguments: ["size": ["width": 1080, "height": 1080], "format": "WEBP"], type: .scalar(String.self)),
         ]
       }
 
@@ -327,8 +325,8 @@ public final class RecipeListQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, title: String, thumbImageUrl: String? = nil, fullImageUrl: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "thumbImageUrl": thumbImageUrl, "fullImageUrl": fullImageUrl])
+      public init(id: GraphQLID, title: String, thumbImageUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "thumbImageUrl": thumbImageUrl])
       }
 
       public var __typename: String {
@@ -364,15 +362,6 @@ public final class RecipeListQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "thumbImageUrl")
-        }
-      }
-
-      public var fullImageUrl: String? {
-        get {
-          return resultMap["fullImageUrl"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "fullImageUrl")
         }
       }
     }

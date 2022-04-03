@@ -12,7 +12,7 @@ struct RecipeListItem: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if let imageUrl = recipe.fullImageUrl {
+            if let imageUrl = recipe.thumbImageUrl {
                 AsyncImage(url: URL(string: imageUrl)) { phase in
                     switch phase {
                     case .success(let image):
@@ -22,21 +22,28 @@ struct RecipeListItem: View {
                                 .scaledToFill()
                                 .frame(width: geo.size.width, height: geo.size.height)
                         }
+                    case .failure:
+                        placeholder
                     default:
                         ProgressView()
                     }
                 }
                 .modifier(ImageModifier(recipe: recipe))
             } else {
-                Image("placeholder")
-                    .resizable()
-                    .scaledToFit()
-                    .modifier(ImageModifier(recipe: recipe))
+                placeholder
             }
         }
         .background(.background)
         .cornerRadius(8)
         .shadow(radius: 8)
+    }
+    
+    var placeholder: some View {
+        Image("placeholder")
+            .resizable()
+            .scaledToFit()
+            .modifier(ImageModifier(recipe: recipe))
+            .background(.gray)
     }
     
     struct ImageModifier: ViewModifier {

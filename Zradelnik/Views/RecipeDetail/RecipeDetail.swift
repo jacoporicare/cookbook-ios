@@ -33,8 +33,6 @@ struct RecipeDetail: View {
                         image
                             .resizable()
                             .scaledToFill()
-                        
-                        
                     } placeholder: {
                         ProgressView()
                             .frame(height: 300)

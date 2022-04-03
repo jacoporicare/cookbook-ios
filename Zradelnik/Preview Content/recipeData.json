@@ -12,7 +12,7 @@
             "username": "kubik",
             "displayName": "Kubík",
             "isAdmin": true,
-            "lastActivity": "2022-03-22T15:53:16.267Z"
+            "lastActivity": "2022-04-03T13:23:43.915Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=640x640&format=webp",
         "fullImageUrl": "https://api.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=1080x1080&format=webp",
@@ -94,9 +94,10 @@
             "username": "kubik",
             "displayName": "Kubík",
             "isAdmin": true,
-            "lastActivity": "2022-03-22T15:53:16.267Z"
+            "lastActivity": "2022-04-03T13:23:43.915Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/borsc_61acf2dc0f9d377d5068cd9f?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/borsc_61acf2dc0f9d377d5068cd9f?size=1080x1080&format=webp",
         "creationDate": "2016-10-18T20:02:10Z",
         "lastModifiedDate": "2021-12-05T17:12:03.693Z",
         "ingredients": [
@@ -205,7 +206,6 @@
             "isAdmin": true,
             "lastActivity": "2021-05-05T18:20:31.806Z"
         },
-        "thumbImageUrl": "https://api.zradelnik.eu/image/bramboracka_60b625c871cc4b28a638d3fd?size=640x640&format=webp",
         "creationDate": "2020-10-08T08:41:59Z",
         "lastModifiedDate": "2020-10-08T09:10:44.949Z",
         "ingredients": [
@@ -319,9 +319,10 @@
             "username": "kubik",
             "displayName": "Kubík",
             "isAdmin": true,
-            "lastActivity": "2022-03-22T15:53:16.267Z"
+            "lastActivity": "2022-04-03T13:23:43.915Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/bramborak-z-trouby_60b625c871cc4b28a638d3fe?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/bramborak-z-trouby_60b625c871cc4b28a638d3fe?size=1080x1080&format=webp",
         "creationDate": "2020-08-22T07:02:27Z",
         "lastModifiedDate": "2020-08-22T07:02:27.083Z",
         "ingredients": null,
@@ -344,7 +345,7 @@
             "lastActivity": "2021-05-05T18:20:31.806Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/bramborove-knedliky-plnene-uzenym_60b625c871cc4b28a638d3ff?size=640x640&format=webp",
-        "fullImageUrl": "https://api.zradelnik.eu/image/bramborove-knedliky-plnene-uzenym_60b625c871cc4b28a638d3ff?size=1024x1024&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/bramborove-knedliky-plnene-uzenym_60b625c871cc4b28a638d3ff?size=1080x1080&format=webp",
         "creationDate": "2017-08-28T21:34:52Z",
         "lastModifiedDate": "2020-03-21T10:01:16.034Z",
         "ingredients": [
@@ -409,9 +410,10 @@
             "username": "kubik",
             "displayName": "Kubík",
             "isAdmin": true,
-            "lastActivity": "2022-03-22T15:53:16.267Z"
+            "lastActivity": "2022-04-03T13:23:43.915Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/bramborove-sisky-s-makem_60e1bcc3d7dccb3d074a9a7f?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/bramborove-sisky-s-makem_60e1bcc3d7dccb3d074a9a7f?size=1080x1080&format=webp",
         "creationDate": "2021-07-04T13:51:05Z",
         "lastModifiedDate": "2022-02-15T19:48:34.709Z",
         "ingredients": null,
@@ -433,9 +435,10 @@
             "username": "kubik",
             "displayName": "Kubík",
             "isAdmin": true,
-            "lastActivity": "2022-03-22T15:53:16.267Z"
+            "lastActivity": "2022-04-03T13:23:43.915Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/bramborovy-knedlik_60b625c871cc4b28a638d400?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/bramborovy-knedlik_60b625c871cc4b28a638d400?size=1080x1080&format=webp",
         "creationDate": "2018-02-04T13:19:39Z",
         "lastModifiedDate": "2021-03-01T10:45:08.477Z",
         "ingredients": [
@@ -486,9 +489,10 @@
             "username": "kubik",
             "displayName": "Kubík",
             "isAdmin": true,
-            "lastActivity": "2022-03-22T15:53:16.267Z"
+            "lastActivity": "2022-04-03T13:23:43.915Z"
         },
         "thumbImageUrl": "https://api.zradelnik.eu/image/bramborovy-salat_60b625c971cc4b28a638d401?size=640x640&format=webp",
+        "fullImageUrl": "https://api.zradelnik.eu/image/bramborovy-salat_60b625c971cc4b28a638d401?size=1080x1080&format=webp",
         "creationDate": "2019-03-14T09:48:25Z",
         "lastModifiedDate": "2020-12-24T21:29:16.157Z",
         "ingredients": [

@@ -3,6 +3,5 @@ query RecipeList {
     id
     title
 		thumbImageUrl: imageUrl(size: { width: 640, height: 640 }, format: WEBP)
-		fullImageUrl: imageUrl(size: { width: 1080, height: 1080 }, format: WEBP)
   }
 }
