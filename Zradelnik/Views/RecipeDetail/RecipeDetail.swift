@@ -41,8 +41,51 @@ struct RecipeDetail: View {
                     }
                 }
                 
-                Markdown(recipe.directions ?? "Kde nic tu nic.")
-                    .scenePadding()
+                VStack(spacing: 20) {
+                    if let ingredients = recipe.ingredients {
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text("Ingredience")
+                                .font(.title2)
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                ForEach(ingredients) { ingredient in
+                                    if ingredient.isGroup {
+                                        Text(ingredient.name)
+                                            .bold()
+                                    } else {
+                                        VStack(alignment: .leading) {
+                                            Text(ingredient.name)
+                                            
+                                            if ingredient.amount != nil || ingredient.amountUnit != nil {
+                                                HStack {
+                                                    if let amount = ingredient.amount {
+                                                        Text(amount.formatted())
+                                                    }
+                                                    if let amountUnit = ingredient.amountUnit {
+                                                        Text(amountUnit)
+                                                    }
+                                                }
+                                                .font(.callout)
+                                                .foregroundColor(.gray)
+                                            }
+                                        }
+                                    }
+                                    
+                                    Divider()
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("Postup")
+                            .font(.title2)
+                        
+                        Markdown(recipe.directions ?? "Kde nic tu nic.")
+                    }
+                }
+                .scenePadding()
             }
         }
     }
