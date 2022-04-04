@@ -90,7 +90,7 @@ struct TextOverlay: View {
 #if DEBUG
 struct RecipeListItem_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        HStack {
             RecipeListItem(recipe: recipePreviewData[4])
             RecipeListItem(recipe: recipePreviewData[2])
         }
