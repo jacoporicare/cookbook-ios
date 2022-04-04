@@ -9,16 +9,13 @@ import Foundation
 
 final class RecipeDetailViewModel: ObservableObject {
     @Published var status: LoadingStatus<DetailedRecipe> = .loading
-
-    func fetch(_ id: String) {
+    
+    func fetch(id: String) {
         Network.shared.apollo.fetch(query: RecipeDetailQuery(id: id)) { result in
             switch result {
             case .success(let result):
-                if let recipe = result.data?.recipe {
-                    self.status = .data(DetailedRecipe(recipe))
-                } else {
-                    self.status = .error
-                }
+                guard let recipe = result.data?.recipe else { fallthrough }
+                self.status = .data(DetailedRecipe(recipe))
             case .failure:
                 self.status = .error
             }

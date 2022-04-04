@@ -14,11 +14,8 @@ final class RecipeListViewModel: ObservableObject {
         Network.shared.apollo.fetch(query: RecipeListQuery()) { result in
             switch result {
             case .success(let result):
-                if let data = result.data {
-                    self.status = .data(data.recipes.map { Recipe($0) })
-                } else {
-                    self.status = .error
-                }
+                guard let data = result.data else { fallthrough }
+                self.status = .data(data.recipes.map { Recipe($0) })
             case .failure:
                 self.status = .error
             }

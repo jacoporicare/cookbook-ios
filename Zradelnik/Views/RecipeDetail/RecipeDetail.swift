@@ -21,7 +21,7 @@ struct RecipeDetail: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            viewModel.fetch(id)
+            viewModel.fetch(id: id)
         }
     }
     
