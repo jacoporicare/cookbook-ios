@@ -38,6 +38,7 @@ struct RecipeList: View {
     }
 }
 
+#if DEBUG
 struct RecipeList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
@@ -47,3 +48,4 @@ struct RecipeList_Previews: PreviewProvider {
         }
     }
 }
+#endif

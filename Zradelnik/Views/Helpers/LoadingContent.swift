@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoadingContent<Data, Content>: View where Content : View {
+struct LoadingContent<Data, Content>: View where Content: View {
     let status: LoadingStatus<Data>
     let content: (_ data: Data) -> Content
     
@@ -21,6 +21,13 @@ struct LoadingContent<Data, Content>: View where Content : View {
             content(data)
         }
     }
+}
+
+
+enum LoadingStatus<Data> {
+    case data(Data)
+    case loading
+    case error
 }
 
 struct LoadingContent_Previews: PreviewProvider {

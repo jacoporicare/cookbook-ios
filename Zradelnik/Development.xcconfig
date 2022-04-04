@@ -1,0 +1,11 @@
+//
+//  Development.xcconfig
+//  Zradelnik
+//
+//  Created by Jakub Řičař on 03.04.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_BASE_URL = api-test.zradelnik.eu

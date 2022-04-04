@@ -87,6 +87,7 @@ struct TextOverlay: View {
     }
 }
 
+#if DEBUG
 struct RecipeListItem_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -96,3 +97,4 @@ struct RecipeListItem_Previews: PreviewProvider {
         .padding()
     }
 }
+#endif

@@ -29,7 +29,8 @@ class Network {
         let store = ApolloStore(cache: sqliteCache ?? InMemoryNormalizedCache())
         
         let provider = DefaultInterceptorProvider(store: store)
-        let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: URL(string: "https://api-test.zradelnik.eu/graphql")!)
+        let baseUrl: String = try! Configuration.value(for: "API_BASE_URL")
+        let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: URL(string: "https://\(baseUrl)/graphql")!)
         
         // 4. Assuming you've set up your `networkTransport` instance elsewhere,
         // pass the store you just created into your `ApolloClient` initializer,

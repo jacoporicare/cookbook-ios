@@ -89,6 +89,7 @@ struct RecipeDetail: View {
     }
 }
 
+#if DEBUG
 struct RecipeDetail_Previews: PreviewProvider {
     static let recipe = recipeDetailPreviewData[0]
     
@@ -101,3 +102,4 @@ struct RecipeDetail_Previews: PreviewProvider {
         }
     }
 }
+#endif
