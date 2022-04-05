@@ -50,7 +50,7 @@
 		09AE247527F31C9300BC6208 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09AE248427F326D900BC6208 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		09AE248727F3287000BC6208 /* RecipeList.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = RecipeList.graphql; sourceTree = "<group>"; tabWidth = 2; };
-		09FE90E327FA4753005C6AE3 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		09FE90E327FA4753005C6AE3 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		09FE90E427FA47D6005C6AE3 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		09FE90E827FA48A9005C6AE3 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		09FE90EC27FA4B54005C6AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +87,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		092DC68D27FC4CFB00A1B0D6 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				09FE90E327FA4753005C6AE3 /* Development.xcconfig */,
+				09FE90E427FA47D6005C6AE3 /* Production.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		0955941927F3327900E270E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				09AE246D27F31C9200BC6208 /* Zradelnik */,
+				092DC68D27FC4CFB00A1B0D6 /* Configuration */,
 				09AE246C27F31C9200BC6208 /* Products */,
 				09FE90DF27FA36BD005C6AE3 /* Frameworks */,
 			);
@@ -145,8 +155,6 @@
 				09AE247227F31C9300BC6208 /* Assets.xcassets */,
 				09AE247427F31C9300BC6208 /* Preview Content */,
 				09FE90EC27FA4B54005C6AE3 /* Info.plist */,
-				09FE90E327FA4753005C6AE3 /* Development.xcconfig */,
-				09FE90E427FA47D6005C6AE3 /* Production.xcconfig */,
 			);
 			path = Zradelnik;
 			sourceTree = "<group>";
