@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Configuration {
+enum Configuration {
     enum Error: Swift.Error {
         case missingKey, invalidValue
     }

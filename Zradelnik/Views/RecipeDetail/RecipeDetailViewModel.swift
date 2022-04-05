@@ -1,5 +1,5 @@
 //
-//  RecipeListViewModel.swift
+//  RecipeDetailViewModel.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 29.03.2022.
