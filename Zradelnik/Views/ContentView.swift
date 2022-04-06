@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authentication: Authentication
+
     var body: some View {
         NavigationView {
             RecipeList()

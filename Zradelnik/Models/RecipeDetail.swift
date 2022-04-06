@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DetailedRecipe: Identifiable, Decodable {
+struct RecipeDetail: Identifiable, Decodable {
     var id: String
     var title: String
     var fullImageUrl: String?

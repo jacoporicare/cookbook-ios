@@ -4,6 +4,101 @@
 import Apollo
 import Foundation
 
+public final class LoginMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation Login($username: String!, $password: String!) {
+      login(username: $username, password: $password) {
+        __typename
+        token
+      }
+    }
+    """
+
+  public let operationName: String = "Login"
+
+  public var username: String
+  public var password: String
+
+  public init(username: String, password: String) {
+    self.username = username
+    self.password = password
+  }
+
+  public var variables: GraphQLMap? {
+    return ["username": username, "password": password]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("login", arguments: ["username": GraphQLVariable("username"), "password": GraphQLVariable("password")], type: .nonNull(.object(Login.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(login: Login) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "login": login.resultMap])
+    }
+
+    public var login: Login {
+      get {
+        return Login(unsafeResultMap: resultMap["login"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "login")
+      }
+    }
+
+    public struct Login: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["AuthPayload"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("token", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(token: String) {
+        self.init(unsafeResultMap: ["__typename": "AuthPayload", "token": token])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var token: String {
+        get {
+          return resultMap["token"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "token")
+        }
+      }
+    }
+  }
+}
+
 public final class RecipeDetailQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =

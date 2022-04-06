@@ -23,10 +23,9 @@ struct LoadingContent<Data, Content>: View where Content: View {
     }
 }
 
-
 enum LoadingStatus<Data> {
-    case data(Data)
     case loading
+    case data(Data)
     case error
 }
 

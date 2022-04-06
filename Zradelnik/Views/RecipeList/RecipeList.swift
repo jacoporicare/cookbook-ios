@@ -9,11 +9,12 @@ import SwiftUI
 
 struct RecipeList: View {
     @StateObject private var viewModel = RecipeListViewModel()
+    @State private var showingProfile = false
 
     let columnLayout = Array(repeating: GridItem(), count: 2)
     
     var body: some View {
-        LoadingContent(status: viewModel.status) { recipes in
+        LoadingContent(status: viewModel.recipes) { recipes in
             loadedView(recipes: recipes)
         }
         .navigationTitle("Žrádelník")
@@ -27,13 +28,13 @@ struct RecipeList: View {
             LazyVGrid(columns: columnLayout) {
                 ForEach(recipes) { recipe in
                     NavigationLink {
-                        RecipeDetail(id: recipe.id, title: recipe.title)
+                        RecipeView(id: recipe.id, title: recipe.title)
                     } label: {
                         RecipeListItem(recipe: recipe)
                     }
                 }
             }
-            .scenePadding()
+            .padding()
         }
     }
 }
@@ -45,6 +46,13 @@ struct RecipeList_Previews: PreviewProvider {
             RecipeList()
                 .loadedView(recipes: recipePreviewData)
                 .navigationTitle("Žrádelník")
+                .toolbar {
+                    Button {
+                        
+                    } label: {
+                        Label("Profil", systemImage: "gear")
+                    }
+                }
         }
     }
 }
