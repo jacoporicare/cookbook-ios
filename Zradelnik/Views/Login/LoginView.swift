@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var viewModel = LoginViewModel()
     @EnvironmentObject var authentication: Authentication
+    @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel = LoginViewModel()
     
     var body: some View {
         VStack {
@@ -19,6 +20,8 @@ struct LoginView: View {
             Button {
                 viewModel.login { accessToken in
                     authentication.updateAccessToken(accessToken: accessToken)
+                    dismiss()
+                    
                 }
             } label: {
                 Text("Přihlásit")

@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct RecipeList: View {
+    @EnvironmentObject var authentication: Authentication
     @StateObject private var viewModel = RecipeListViewModel()
-    @State private var showingProfile = false
-
+    @State private var showingSettings = false
+    
     let columnLayout = Array(repeating: GridItem(), count: 2)
     
     var body: some View {
@@ -20,6 +21,19 @@ struct RecipeList: View {
         .navigationTitle("Žrádelník")
         .onAppear {
             viewModel.fetch()
+        }
+        .toolbar {
+            Button {
+                showingSettings.toggle()
+            } label: {
+                Label("Nastavení", systemImage: "gear")
+            }
+        }
+        .sheet(isPresented: $showingSettings) {
+            NavigationView {
+                SettingsHost()
+                    .environmentObject(authentication)
+            }
         }
     }
     

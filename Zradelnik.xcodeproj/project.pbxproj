@@ -14,6 +14,10 @@
 		091815FC27FDF883003A2250 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FB27FDF883003A2250 /* Authentication.swift */; };
 		091815FE27FDFF68003A2250 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FD27FDFF68003A2250 /* LoginView.swift */; };
 		092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC67127FB6F9C00A1B0D6 /* API.swift */; };
+		0946D78D27FF265E00F81F18 /* SettingsHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78C27FF265E00F81F18 /* SettingsHost.swift */; };
+		0946D78F27FF276B00F81F18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78E27FF276B00F81F18 /* SettingsView.swift */; };
+		0946D79127FF2C8D00F81F18 /* MeQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0946D79027FF2C8D00F81F18 /* MeQuery.graphql */; };
+		0946D79327FF325300F81F18 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D79227FF325300F81F18 /* Keychain.swift */; };
 		0955941B27F332AA00E270E4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955941A27F332AA00E270E4 /* Recipe.swift */; };
 		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; settings = {ATTRIBUTES = (Required, ); }; };
 		0989F8E627F32D45009CB6BD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E527F32D45009CB6BD /* Network.swift */; };
@@ -42,6 +46,10 @@
 		091815FB27FDF883003A2250 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		091815FD27FDFF68003A2250 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		092DC67127FB6F9C00A1B0D6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0946D78C27FF265E00F81F18 /* SettingsHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHost.swift; sourceTree = "<group>"; };
+		0946D78E27FF276B00F81F18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0946D79027FF2C8D00F81F18 /* MeQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = MeQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
+		0946D79227FF325300F81F18 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		0955941A27F332AA00E270E4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0989F8E827F32E92009CB6BD /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
@@ -107,6 +115,15 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		0946D78B27FF25FA00F81F18 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0946D78C27FF265E00F81F18 /* SettingsHost.swift */,
+				0946D78E27FF276B00F81F18 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		0955941927F3327900E270E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +186,7 @@
 				09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */,
 				09FE90E827FA48A9005C6AE3 /* Configuration.swift */,
 				091815FB27FDF883003A2250 /* Authentication.swift */,
+				0946D79227FF325300F81F18 /* Keychain.swift */,
 				092DC67027FB6F6000A1B0D6 /* Network */,
 				09AE247C27F31CBB00BC6208 /* Views */,
 				0955941927F3327900E270E4 /* Models */,
@@ -197,6 +215,7 @@
 				09AE247027F31C9200BC6208 /* ContentView.swift */,
 				0989F8E727F32E7F009CB6BD /* RecipeList */,
 				09A7A3E627F63CFC00E62123 /* RecipeDetail */,
+				0946D78B27FF25FA00F81F18 /* Settings */,
 				098BD2A927FC85A9006D9C7B /* Login */,
 				092DC67627FB70C900A1B0D6 /* Helpers */,
 			);
@@ -217,6 +236,7 @@
 				09AE248727F3287000BC6208 /* RecipeListQuery.graphql */,
 				09A7A3ED27F6618500E62123 /* RecipeDetailQuery.graphql */,
 				098BD2AC27FC8608006D9C7B /* LoginMutation.graphql */,
+				0946D79027FF2C8D00F81F18 /* MeQuery.graphql */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -298,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0946D79127FF2C8D00F81F18 /* MeQuery.graphql in Resources */,
 				09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */,
 				099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */,
 				099185B727F9C2B30057FC2F /* recipeData.json in Resources */,
@@ -337,6 +358,7 @@
 				0989F8E627F32D45009CB6BD /* Network.swift in Sources */,
 				0955941B27F332AA00E270E4 /* Recipe.swift in Sources */,
 				092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */,
+				0946D78F27FF276B00F81F18 /* SettingsView.swift in Sources */,
 				0900083527F35AFC00D5A746 /* PreviewData.swift in Sources */,
 				09FE90E927FA48A9005C6AE3 /* Configuration.swift in Sources */,
 				09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */,
@@ -345,11 +367,13 @@
 				09A7A3F227F6627500E62123 /* RecipeDetail.swift in Sources */,
 				0900083B27F3A45800D5A746 /* RecipeListItem.swift in Sources */,
 				091815FE27FDFF68003A2250 /* LoginView.swift in Sources */,
+				0946D78D27FF265E00F81F18 /* SettingsHost.swift in Sources */,
 				09A7A3EC27F64E5B00E62123 /* LoadingContent.swift in Sources */,
 				0989F8E927F32E92009CB6BD /* RecipeListViewModel.swift in Sources */,
 				09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */,
 				0900083727F35B9A00D5A746 /* RecipeList.swift in Sources */,
 				098BD2B027FC8A50006D9C7B /* RecipeIngredientListView.swift in Sources */,
+				0946D79327FF325300F81F18 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

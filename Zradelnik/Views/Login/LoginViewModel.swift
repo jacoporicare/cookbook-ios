@@ -24,7 +24,7 @@ final class LoginViewModel: ObservableObject {
         
         Network.shared.apollo.perform(mutation: LoginMutation(username: username, password: password)) { result in
             self.loggingIn = false
-
+            
             switch result {
             case .success(let result):
                 guard let token = result.data?.login.token else {
