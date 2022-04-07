@@ -120,6 +120,8 @@
 			children = (
 				0946D78C27FF265E00F81F18 /* SettingsHost.swift */,
 				0946D78E27FF276B00F81F18 /* SettingsView.swift */,
+				098BD2AA27FC85BD006D9C7B /* LoginViewModel.swift */,
+				091815FD27FDFF68003A2250 /* LoginView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -141,15 +143,6 @@
 				0900083A27F3A45800D5A746 /* RecipeListItem.swift */,
 			);
 			path = RecipeList;
-			sourceTree = "<group>";
-		};
-		098BD2A927FC85A9006D9C7B /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				098BD2AA27FC85BD006D9C7B /* LoginViewModel.swift */,
-				091815FD27FDFF68003A2250 /* LoginView.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		09A7A3E627F63CFC00E62123 /* RecipeDetail */ = {
@@ -216,7 +209,6 @@
 				0989F8E727F32E7F009CB6BD /* RecipeList */,
 				09A7A3E627F63CFC00E62123 /* RecipeDetail */,
 				0946D78B27FF25FA00F81F18 /* Settings */,
-				098BD2A927FC85A9006D9C7B /* Login */,
 				092DC67627FB70C900A1B0D6 /* Helpers */,
 			);
 			path = Views;

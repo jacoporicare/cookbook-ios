@@ -42,6 +42,7 @@ struct LoginView: View {
             Spacer()
         }
         .navigationTitle("Přihlášení")
+        .navigationBarTitleDisplayMode(.inline)
         .padding()
         .textInputAutocapitalization(.never)
         .disableAutocorrection(true)
