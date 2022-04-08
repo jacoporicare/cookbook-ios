@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+import Apollo
 
-final class LoginViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
+    private var request: Cancellable?
+    
     @Published var loggingIn = false
     @Published var error = false
     @Published var username = ""
@@ -18,25 +21,24 @@ final class LoginViewModel: ObservableObject {
         username.isEmpty || password.isEmpty
     }
     
-    func login(completion: @escaping (String) -> Void) {
+    func login(success: @escaping (String) -> Void) {
         loggingIn = true
         error = false
         
-        Network.shared.apollo.perform(mutation: LoginMutation(username: username, password: password)) { result in
-            self.loggingIn = false
+        request = Network.shared.apollo.perform(mutation: LoginMutation(username: username, password: password)) { [weak self] result in
+            self?.loggingIn = false
             
             switch result {
             case .success(let result):
-                guard let token = result.data?.login.token else {
-                    self.error = true
-                    return
-                }
-                
-                self.error = false
-                completion(token)
+                guard let token = result.data?.login.token else { fallthrough }
+                success(token)
             case .failure:
-                self.error = true
+                self?.error = true
             }
         }
+    }
+    
+    deinit {
+        request?.cancel()
     }
 }

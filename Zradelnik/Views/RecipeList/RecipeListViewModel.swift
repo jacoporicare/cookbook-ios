@@ -6,19 +6,26 @@
 //
 
 import Foundation
+import Apollo
 
-final class RecipeListViewModel: ObservableObject {
+class RecipeListViewModel: ObservableObject {
+    private var request: Cancellable?
+    
     @Published var recipes: LoadingStatus<[Recipe]> = .loading
-
+    
     func fetch() {
-        Network.shared.apollo.fetch(query: RecipeListQuery()) { result in
+        request = Network.shared.apollo.fetch(query: RecipeListQuery()) { [weak self] result in
             switch result {
             case .success(let result):
                 guard let data = result.data else { fallthrough }
-                self.recipes = .data(data.recipes.map { Recipe($0) })
+                self?.recipes = .data(data.recipes.map { Recipe($0) })
             case .failure:
-                self.recipes = .error
+                self?.recipes = .error
             }
         }
+    }
+    
+    deinit {
+        self.request?.cancel()
     }
 }

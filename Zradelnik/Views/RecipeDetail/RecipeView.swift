@@ -35,7 +35,7 @@ struct RecipeView: View {
                             .scaledToFill()
                     } placeholder: {
                         ProgressView()
-                            .frame(height: 300)
+                            .frame(height: 390)
                     }
                 }
                 
