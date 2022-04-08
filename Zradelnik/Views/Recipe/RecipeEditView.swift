@@ -10,30 +10,41 @@ import SwiftUI
 struct RecipeEditView: View {
     @Environment(\.editMode) var editMode
     
-    let recipe: RecipeDetail
+    @State private var draftRecipe = RecipeEdit.default
+    
+    init(recipe: RecipeDetail? = nil) {
+        guard let recipe = recipe else { return }
+        _draftRecipe = State(initialValue: RecipeEdit(recipe))
+    }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                Group {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Uložit") {
-                            editMode?.animation().wrappedValue = .inactive
-                        }
+        Form {
+            Section("Základní informace") {
+                TextField("Název", text: $draftRecipe.title)
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            Group {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Uložit") {
+                        editMode?.animation().wrappedValue = .inactive
                     }
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Zrušit") {
-                            editMode?.animation().wrappedValue = .inactive
-                        }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Zrušit") {
+                        editMode?.animation().wrappedValue = .inactive
                     }
                 }
             }
+        }
     }
 }
 
+#if DEBUG
 struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
         RecipeEditView(recipe: recipeDetailPreviewData[0])
     }
 }
+#endif

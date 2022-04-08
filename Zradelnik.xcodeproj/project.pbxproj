@@ -16,6 +16,7 @@
 		092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC67127FB6F9C00A1B0D6 /* API.swift */; };
 		09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F872800953200AACAA3 /* RecipeEditView.swift */; };
 		09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F892800959F00AACAA3 /* RecipeDetailView.swift */; };
+		09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */; };
 		0946D78D27FF265E00F81F18 /* SettingsHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78C27FF265E00F81F18 /* SettingsHost.swift */; };
 		0946D78F27FF276B00F81F18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78E27FF276B00F81F18 /* SettingsView.swift */; };
 		0946D79127FF2C8D00F81F18 /* MeQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0946D79027FF2C8D00F81F18 /* MeQuery.graphql */; };
@@ -50,6 +51,7 @@
 		092DC67127FB6F9C00A1B0D6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		09395F872800953200AACAA3 /* RecipeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditView.swift; sourceTree = "<group>"; };
 		09395F892800959F00AACAA3 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEdit.swift; sourceTree = "<group>"; };
 		0946D78C27FF265E00F81F18 /* SettingsHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHost.swift; sourceTree = "<group>"; };
 		0946D78E27FF276B00F81F18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0946D79027FF2C8D00F81F18 /* MeQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = MeQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
@@ -135,6 +137,7 @@
 			children = (
 				0955941A27F332AA00E270E4 /* Recipe.swift */,
 				09A7A3F127F6627500E62123 /* RecipeDetail.swift */,
+				09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				0900083527F35AFC00D5A746 /* PreviewData.swift in Sources */,
 				09FE90E927FA48A9005C6AE3 /* Configuration.swift in Sources */,
 				09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */,
+				09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */,
 				091815FC27FDF883003A2250 /* Authentication.swift in Sources */,
 				098BD2AB27FC85BD006D9C7B /* LoginViewModel.swift in Sources */,
 				09A7A3F227F6627500E62123 /* RecipeDetail.swift in Sources */,
