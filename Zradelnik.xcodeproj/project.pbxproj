@@ -14,6 +14,8 @@
 		091815FC27FDF883003A2250 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FB27FDF883003A2250 /* Authentication.swift */; };
 		091815FE27FDFF68003A2250 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FD27FDFF68003A2250 /* LoginView.swift */; };
 		092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC67127FB6F9C00A1B0D6 /* API.swift */; };
+		09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F872800953200AACAA3 /* RecipeEditView.swift */; };
+		09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F892800959F00AACAA3 /* RecipeDetailView.swift */; };
 		0946D78D27FF265E00F81F18 /* SettingsHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78C27FF265E00F81F18 /* SettingsHost.swift */; };
 		0946D78F27FF276B00F81F18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78E27FF276B00F81F18 /* SettingsView.swift */; };
 		0946D79127FF2C8D00F81F18 /* MeQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0946D79027FF2C8D00F81F18 /* MeQuery.graphql */; };
@@ -46,6 +48,8 @@
 		091815FB27FDF883003A2250 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		091815FD27FDFF68003A2250 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		092DC67127FB6F9C00A1B0D6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		09395F872800953200AACAA3 /* RecipeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditView.swift; sourceTree = "<group>"; };
+		09395F892800959F00AACAA3 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		0946D78C27FF265E00F81F18 /* SettingsHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHost.swift; sourceTree = "<group>"; };
 		0946D78E27FF276B00F81F18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0946D79027FF2C8D00F81F18 /* MeQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = MeQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
@@ -145,14 +149,16 @@
 			path = RecipeList;
 			sourceTree = "<group>";
 		};
-		09A7A3E627F63CFC00E62123 /* RecipeDetail */ = {
+		09A7A3E627F63CFC00E62123 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
 				09A7A3EF27F6622700E62123 /* RecipeViewModel.swift */,
 				09A7A3F327F6642500E62123 /* RecipeView.swift */,
+				09395F892800959F00AACAA3 /* RecipeDetailView.swift */,
 				098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */,
+				09395F872800953200AACAA3 /* RecipeEditView.swift */,
 			);
-			path = RecipeDetail;
+			path = Recipe;
 			sourceTree = "<group>";
 		};
 		09AE246227F31C9200BC6208 = {
@@ -207,7 +213,7 @@
 			children = (
 				09AE247027F31C9200BC6208 /* ContentView.swift */,
 				0989F8E727F32E7F009CB6BD /* RecipeList */,
-				09A7A3E627F63CFC00E62123 /* RecipeDetail */,
+				09A7A3E627F63CFC00E62123 /* Recipe */,
 				0946D78B27FF25FA00F81F18 /* Settings */,
 				092DC67627FB70C900A1B0D6 /* Helpers */,
 			);
@@ -359,6 +365,8 @@
 				09A7A3F227F6627500E62123 /* RecipeDetail.swift in Sources */,
 				0900083B27F3A45800D5A746 /* RecipeListItem.swift in Sources */,
 				091815FE27FDFF68003A2250 /* LoginView.swift in Sources */,
+				09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */,
+				09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */,
 				0946D78D27FF265E00F81F18 /* SettingsHost.swift in Sources */,
 				09A7A3EC27F64E5B00E62123 /* LoadingContent.swift in Sources */,
 				0989F8E927F32E92009CB6BD /* RecipeListViewModel.swift in Sources */,

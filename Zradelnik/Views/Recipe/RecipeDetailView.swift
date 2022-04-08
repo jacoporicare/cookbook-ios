@@ -1,31 +1,19 @@
 //
-//  RecipeDetail.swift
+//  RecipeDetailView.swift
 //  Zradelnik
 //
-//  Created by Jakub Řičař on 31.03.2022.
+//  Created by Jakub Řičař on 08.04.2022.
 //
 
 import SwiftUI
 import MarkdownUI
 
-struct RecipeView: View {
-    @StateObject private var viewModel = RecipeViewModel()
+struct RecipeDetailView: View {
+    @Environment(\.editMode) var editMode
     
-    let id: String
-    let title: String
+    let recipe: RecipeDetail
     
     var body: some View {
-        LoadingContent(status: viewModel.recipe) { recipe in
-            loadedView(recipe: recipe)
-        }
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.fetch(id: id)
-        }
-    }
-    
-    func loadedView(recipe: RecipeDetail) -> some View {
         ScrollView {
             VStack {
                 if let imageUrl = recipe.fullImageUrl {
@@ -60,20 +48,16 @@ struct RecipeView: View {
                 .padding()
             }
         }
-    }
-}
-
-#if DEBUG
-struct RecipeDetail_Previews: PreviewProvider {
-    static let recipe = recipeDetailPreviewData[0]
-    
-    static var previews: some View {
-        NavigationView {
-            RecipeView(id: recipe.id, title: recipe.title)
-                .loadedView(recipe: recipe)
-                .navigationTitle(recipe.title)
-                .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            Button("Upravit") {
+                editMode?.animation().wrappedValue = .active
+            }
         }
     }
 }
-#endif
+
+struct RecipeDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        RecipeDetailView(recipe: recipeDetailPreviewData[0])
+    }
+}
