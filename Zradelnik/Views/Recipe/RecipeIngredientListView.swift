@@ -1,5 +1,5 @@
 //
-//  RecipeDetailIngredients.swift
+//  RecipeIngredientListView.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 05.04.2022.

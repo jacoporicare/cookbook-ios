@@ -1,5 +1,5 @@
 //
-//  Recipe.swift
+//  RecipeDetail.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 29.03.2022.

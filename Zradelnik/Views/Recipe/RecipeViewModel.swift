@@ -1,5 +1,5 @@
 //
-//  RecipeDetailViewModel.swift
+//  RecipeViewModel.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 29.03.2022.
@@ -9,12 +9,17 @@ import Apollo
 import Foundation
 
 class RecipeViewModel: ObservableObject {
-    private var request: Cancellable?
+    private var watcher: GraphQLQueryWatcher<RecipeDetailQuery>?
 
     @Published var recipe: LoadingStatus<RecipeDetail> = .loading
 
     func fetch(id: String) {
-        request = Network.shared.apollo.fetch(query: RecipeDetailQuery(id: id)) { [weak self] result in
+        if let watcher = watcher {
+            watcher.refetch()
+            return
+        }
+        
+        watcher = Network.shared.apollo.watch(query: RecipeDetailQuery(id: id), cachePolicy: .returnCacheDataAndFetch) { [weak self] result in
             switch result {
             case .success(let result):
                 guard let recipe = result.data?.recipe else { fallthrough }
@@ -26,6 +31,6 @@ class RecipeViewModel: ObservableObject {
     }
 
     deinit {
-        self.request?.cancel()
+        self.watcher?.cancel()
     }
 }

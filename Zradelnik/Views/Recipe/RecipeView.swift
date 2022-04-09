@@ -22,9 +22,12 @@ struct RecipeView: View {
                 if editMode?.wrappedValue == .inactive {
                     RecipeDetailView(recipe: recipe)
                 } else {
-                    RecipeEditView(recipe: recipe)
+                    RecipeEditView(recipe: recipe) {
+                        viewModel.fetch(id: id)
+                    }
                 }
             }
+            .navigationTitle(recipe.title)
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)

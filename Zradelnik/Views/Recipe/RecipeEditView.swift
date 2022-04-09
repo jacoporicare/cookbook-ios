@@ -9,27 +9,19 @@ import SwiftUI
 
 struct RecipeEditView: View {
     @Environment(\.editMode) var editMode
-    
-    private var originalRecipe: RecipeDetail?
-    
-    @State private var draftRecipe = RecipeEdit.default
-    @State private var image: Image?
-    @State private var showingImagePicker = false
-    @State private var inputImage: UIImage?
-    
-    init(recipe: RecipeDetail? = nil) {
-        guard let recipe = recipe else { return }
-        _draftRecipe = State(initialValue: RecipeEdit(from: recipe))
-        originalRecipe = recipe
-    }
-    
+
+    @StateObject private var viewModel = RecipeEditViewModel()
+
+    let recipe: RecipeDetail?
+    let refetch: () -> Void
+
     var body: some View {
         ScrollView {
             VStack {
                 Group {
-                    if let image = image {
-                        image.centerCropped()
-                    } else if let imageUrl = originalRecipe?.fullImageUrl {
+                    if let image = viewModel.inputImage {
+                        Image(uiImage: image).centerCropped()
+                    } else if let imageUrl = viewModel.originalRecipe?.fullImageUrl {
                         AsyncImage(url: URL(string: imageUrl)) { image in
                             image.centerCropped()
                         } placeholder: {
@@ -39,26 +31,32 @@ struct RecipeEditView: View {
                 }
                 .frame(height: 390)
                 .onTapGesture {
-                    showingImagePicker = true
+                    viewModel.showingImagePicker = true
                 }
-                
+
                 Button("Změnit fotku") {
-                    showingImagePicker = true
+                    viewModel.showingImagePicker = true
                 }
-                
+
 //                Section("Základní informace") {
-                TextField("Název", text: $draftRecipe.title)
+                TextField("Název", text: $viewModel.draftRecipe.title)
 //                }
                 Spacer()
             }
         }
         // .buttonStyle(BorderlessButtonStyle()) // Fix non-clickable buttons in Form
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            viewModel.setRecipe(recipe: recipe)
+        }
         .toolbar {
             Group {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Uložit") {
-                        editMode?.animation().wrappedValue = .inactive
+                        viewModel.save {
+                            refetch()
+                            editMode?.animation().wrappedValue = .inactive
+                        }
                     }
                 }
                 ToolbarItem(placement: .cancellationAction) {
@@ -68,20 +66,18 @@ struct RecipeEditView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $inputImage)
+        .sheet(isPresented: $viewModel.showingImagePicker) {
+            ImagePicker(image: $viewModel.inputImage)
         }
-        .onChange(of: inputImage) { _ in
-            guard let inputImage = inputImage else { return }
-            image = Image(uiImage: inputImage)
-        }
+        .disabled(viewModel.saving)
+        .alert("Při ukládání nastala chyba.", isPresented: $viewModel.error) {}
     }
 }
 
 #if DEBUG
 struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeEditView(recipe: recipeDetailPreviewData[0])
+        RecipeEditView(recipe: recipeDetailPreviewData[0]) {}
     }
 }
 #endif

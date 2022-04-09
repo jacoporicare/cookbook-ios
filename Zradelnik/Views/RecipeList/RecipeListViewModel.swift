@@ -9,12 +9,17 @@ import Apollo
 import Foundation
 
 class RecipeListViewModel: ObservableObject {
-    private var request: Cancellable?
+    private var watcher: GraphQLQueryWatcher<RecipeListQuery>?
 
     @Published var recipes: LoadingStatus<[Recipe]> = .loading
 
     func fetch() {
-        request = Network.shared.apollo.fetch(query: RecipeListQuery()) { [weak self] result in
+        if let watcher = watcher {
+            watcher.refetch()
+            return
+        }
+
+        watcher = Network.shared.apollo.watch(query: RecipeListQuery(), cachePolicy: .returnCacheDataAndFetch) { [weak self] result in
             switch result {
             case .success(let result):
                 guard let data = result.data else { fallthrough }
@@ -26,6 +31,6 @@ class RecipeListViewModel: ObservableObject {
     }
 
     deinit {
-        self.request?.cancel()
+        self.watcher?.cancel()
     }
 }
