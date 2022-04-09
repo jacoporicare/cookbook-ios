@@ -5,14 +5,14 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
-import Foundation
 import Apollo
+import Foundation
 
 class RecipeListViewModel: ObservableObject {
     private var request: Cancellable?
-    
+
     @Published var recipes: LoadingStatus<[Recipe]> = .loading
-    
+
     func fetch() {
         request = Network.shared.apollo.fetch(query: RecipeListQuery()) { [weak self] result in
             switch result {
@@ -24,7 +24,7 @@ class RecipeListViewModel: ObservableObject {
             }
         }
     }
-    
+
     deinit {
         self.request?.cancel()
     }

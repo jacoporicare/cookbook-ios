@@ -5,9 +5,9 @@
 //  Created by Jakub Řičař on 05.04.2022.
 //
 
+import Apollo
 import Foundation
 import SwiftUI
-import Apollo
 
 class LoginViewModel: ObservableObject {
     private var request: Cancellable?

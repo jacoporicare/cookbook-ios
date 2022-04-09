@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsHost: View {
     @State private var showingLogin = false
-    
+
     var body: some View {
         SettingsView()
             .navigationTitle("Nastavení")

@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct ZradelnikApp: App {
     @StateObject private var authentication = Authentication()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()

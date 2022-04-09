@@ -11,9 +11,9 @@ struct RecipeList: View {
     @EnvironmentObject var authentication: Authentication
     @StateObject private var viewModel = RecipeListViewModel()
     @State private var showingSettings = false
-    
+
     let columnLayout = Array(repeating: GridItem(), count: 2)
-    
+
     var body: some View {
         LoadingContent(status: viewModel.recipes) { recipes in
             loadedView(recipes: recipes)
@@ -36,7 +36,7 @@ struct RecipeList: View {
             }
         }
     }
-    
+
     func loadedView(recipes: [Recipe]) -> some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: columnLayout) {
@@ -61,9 +61,7 @@ struct RecipeList_Previews: PreviewProvider {
                 .loadedView(recipes: recipePreviewData)
                 .navigationTitle("Žrádelník")
                 .toolbar {
-                    Button {
-                        
-                    } label: {
+                    Button {} label: {
                         Label("Profil", systemImage: "gear")
                     }
                 }

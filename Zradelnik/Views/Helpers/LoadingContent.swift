@@ -10,7 +10,7 @@ import SwiftUI
 struct LoadingContent<Data, Content>: View where Content: View {
     let status: LoadingStatus<Data>
     let content: (_ data: Data) -> Content
-    
+
     var body: some View {
         switch status {
         case .loading:
@@ -35,11 +35,11 @@ struct LoadingContent_Previews: PreviewProvider {
             LoadingContent(status: .loading) {
                 Text("OK")
             }
-            
+
             LoadingContent(status: .error) {
                 Text("OK")
             }
-            
+
             LoadingContent(status: .data("Hello")) { data in
                 Text(data)
             }

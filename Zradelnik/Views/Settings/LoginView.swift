@@ -21,7 +21,6 @@ struct LoginView: View {
                 viewModel.login { accessToken in
                     authentication.updateAccessToken(accessToken: accessToken)
                     dismiss()
-                    
                 }
             } label: {
                 Text("Přihlásit")

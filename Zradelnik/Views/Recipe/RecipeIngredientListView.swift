@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeIngredientListView: View {
     let ingredients: [RecipeDetail.Ingredient]
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ForEach(ingredients) { ingredient in
@@ -19,7 +19,7 @@ struct RecipeIngredientListView: View {
                 } else {
                     VStack(alignment: .leading) {
                         Text(ingredient.name)
-                        
+
                         if ingredient.amount != nil || ingredient.amountUnit != nil {
                             HStack {
                                 if let amount = ingredient.amount {
@@ -34,7 +34,7 @@ struct RecipeIngredientListView: View {
                         }
                     }
                 }
-                
+
                 Divider()
             }
         }

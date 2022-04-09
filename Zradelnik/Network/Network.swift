@@ -5,9 +5,9 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
-import Foundation
 import Apollo
 import ApolloSQLite
+import Foundation
 import KeychainAccess
 
 class Network {
@@ -37,15 +37,16 @@ class TokenAddingInterceptor: ApolloInterceptor {
         chain: RequestChain,
         request: HTTPRequest<Operation>,
         response: HTTPResponse<Operation>?,
-        completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-            if let token = ZradelnikKeychain.instance[ZradelnikKeychain.accessTokenKey] {
-                request.addHeader(name: "Authorization", value: "Bearer \(token)")
-            }
-            
-            chain.proceedAsync(request: request,
-                               response: response,
-                               completion: completion)
+        completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void)
+    {
+        if let token = ZKeychain.shared[ZKeychain.Keys.accessToken] {
+            request.addHeader(name: "Authorization", value: "Bearer \(token)")
         }
+            
+        chain.proceedAsync(request: request,
+                           response: response,
+                           completion: completion)
+    }
 }
 
 class NetworkInterceptorProvider: DefaultInterceptorProvider {

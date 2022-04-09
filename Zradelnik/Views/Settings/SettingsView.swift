@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var authentication: Authentication
-    
+
     var body: some View {
         Form {
             Section("Účet") {

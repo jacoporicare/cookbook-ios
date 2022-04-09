@@ -8,8 +8,10 @@
 import Foundation
 import KeychainAccess
 
-enum ZradelnikKeychain {
-    static let instance = Keychain(service: "cz.jakubricar.zradelnik")
-    
-    static let accessTokenKey = "accessToken"
+enum ZKeychain {
+    static let shared = Keychain(service: "cz.jakubricar.zradelnik")
+
+    enum Keys {
+        static let accessToken = "accessToken"
+    }
 }

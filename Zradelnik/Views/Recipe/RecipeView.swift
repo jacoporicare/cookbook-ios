@@ -10,12 +10,12 @@ import SwiftUI
 struct RecipeView: View {
     @Environment(\.editMode) var editMode
     @EnvironmentObject var authentication: Authentication
-    
+
     @StateObject private var viewModel = RecipeViewModel()
-    
+
     let id: String
     let title: String
-    
+
     var body: some View {
         LoadingContent(status: viewModel.recipe) { recipe in
             Group {

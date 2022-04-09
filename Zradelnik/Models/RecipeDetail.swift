@@ -16,7 +16,7 @@ struct RecipeDetail: Identifiable, Decodable {
     var preparationTime: Int?
     var servingCount: Int?
     var ingredients: [Ingredient]?
-    
+
     init(_ recipe: RecipeDetailQuery.Data.Recipe) {
         self.id = recipe.id
         self.title = recipe.title
@@ -27,14 +27,14 @@ struct RecipeDetail: Identifiable, Decodable {
         self.servingCount = recipe.servingCount
         self.ingredients = recipe.ingredients?.map { Ingredient($0) }
     }
-    
+
     struct Ingredient: Identifiable, Decodable {
         var id: String
         var name: String
         var isGroup: Bool
         var amount: Double?
         var amountUnit: String?
-        
+
         init(_ ingredient: RecipeDetailQuery.Data.Recipe.Ingredient) {
             self.id = ingredient.id
             self.name = ingredient.name

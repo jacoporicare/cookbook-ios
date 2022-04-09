@@ -13,12 +13,12 @@ struct RecipeEdit {
     var sideDish: String = ""
     var preparationTime: Int = 0
     var servingCount: Int = 0
-    
+
     static let `default` = RecipeEdit()
-    
+
     init() {}
-    
-    init(_ recipe: RecipeDetail) {
+
+    init(from recipe: RecipeDetail) {
         title = recipe.title
         directions = recipe.directions ?? ""
         sideDish = recipe.sideDish ?? ""

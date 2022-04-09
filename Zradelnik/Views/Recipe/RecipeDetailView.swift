@@ -5,8 +5,8 @@
 //  Created by Jakub Řičař on 08.04.2022.
 //
 
-import SwiftUI
 import MarkdownUI
+import SwiftUI
 
 struct RecipeDetailView: View {
     @Environment(\.editMode) var editMode
@@ -18,13 +18,11 @@ struct RecipeDetailView: View {
             VStack {
                 if let imageUrl = recipe.fullImageUrl {
                     AsyncImage(url: URL(string: imageUrl)) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
+                        image.centerCropped()
                     } placeholder: {
                         ProgressView()
-                            .frame(height: 390)
                     }
+                    .frame(height: 390)
                 }
                 
                 VStack(spacing: 20) {

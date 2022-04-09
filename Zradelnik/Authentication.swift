@@ -10,11 +10,11 @@ import SwiftUI
 
 class Authentication: ObservableObject {
     @Published private(set) var userDisplayName: String?
-    
+
     var isLoggedIn: Bool {
-        (try? ZradelnikKeychain.instance.contains(ZradelnikKeychain.accessTokenKey)) ?? false
+        (try? ZKeychain.shared.contains(ZKeychain.Keys.accessToken)) ?? false
     }
-    
+
     init() {
         if isLoggedIn {
             fetchCurrentUser()
@@ -22,15 +22,15 @@ class Authentication: ObservableObject {
     }
 
     func updateAccessToken(accessToken: String?) {
-        ZradelnikKeychain.instance[ZradelnikKeychain.accessTokenKey] = accessToken
-        
+        ZKeychain.shared[ZKeychain.Keys.accessToken] = accessToken
+
         if accessToken != nil {
             fetchCurrentUser()
         } else {
             userDisplayName = nil
         }
     }
-    
+
     private func fetchCurrentUser() {
         Network.shared.apollo.fetch(query: MeQuery()) { result in
             switch result {
