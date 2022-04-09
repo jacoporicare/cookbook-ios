@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeList: View {
-    @EnvironmentObject var authentication: Authentication
+    @EnvironmentObject private var authentication: Authentication
     @StateObject private var viewModel = RecipeListViewModel()
     @State private var showingSettings = false
 

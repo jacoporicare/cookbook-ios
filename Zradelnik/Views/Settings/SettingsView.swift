@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var authentication: Authentication
+    @EnvironmentObject private var authentication: Authentication
 
     var body: some View {
         Form {

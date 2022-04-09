@@ -9,7 +9,7 @@ import MarkdownUI
 import SwiftUI
 
 struct RecipeDetailView: View {
-    @Environment(\.editMode) var editMode
+    @Environment(\.editMode) private var editMode
     
     let recipe: RecipeDetail
     

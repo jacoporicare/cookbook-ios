@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var authentication: Authentication
+    @EnvironmentObject private var authentication: Authentication
 
     var body: some View {
         NavigationView {

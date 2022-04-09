@@ -19,14 +19,14 @@ class RecipeEditViewModel: ObservableObject {
     @Published var saving = false
     @Published var error = false
 
+    var saveDisabled: Bool {
+        draftRecipe.title.isEmpty
+    }
+    
     func setRecipe(recipe: RecipeDetail?) {
         guard let recipe = recipe else { return }
         draftRecipe = RecipeEdit(from: recipe)
         originalRecipe = recipe
-    }
-
-    var saveDisabled: Bool {
-        draftRecipe.title.isEmpty
     }
 
     func save(success: @escaping () -> Void) {

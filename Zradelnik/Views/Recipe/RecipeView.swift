@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct RecipeView: View {
-    @Environment(\.editMode) var editMode
-    @EnvironmentObject var authentication: Authentication
-
+    @Environment(\.editMode) private var editMode
+    @EnvironmentObject private var authentication: Authentication
     @StateObject private var viewModel = RecipeViewModel()
 
     let id: String

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RecipeEditView: View {
-    @Environment(\.editMode) var editMode
-
+    @Environment(\.editMode) private var editMode
     @StateObject private var viewModel = RecipeEditViewModel()
 
     let recipe: RecipeDetail?
@@ -58,6 +57,7 @@ struct RecipeEditView: View {
                             editMode?.animation().wrappedValue = .inactive
                         }
                     }
+                    .disabled(viewModel.saveDisabled)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Zrušit") {

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var authentication: Authentication
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var authentication: Authentication
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = LoginViewModel()
     
     var body: some View {
