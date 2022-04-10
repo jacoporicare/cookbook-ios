@@ -19,8 +19,21 @@ class RecipeEditViewModel: ObservableObject {
     @Published var saving = false
     @Published var error = false
 
-    var saveDisabled: Bool {
-        draftRecipe.title.isEmpty
+//    var isTitleValid: Bool {
+//        !draftRecipe.title.isEmpty
+//    }
+//    
+//    var isPreparationTimeValid: Bool {
+//        draftRecipe.preparationTime.isEmpty || Int(draftRecipe.preparationTime) != nil
+//    }
+//
+//    var isServingCountValid: Bool {
+//        draftRecipe.servingCount.isEmpty || Int(draftRecipe.servingCount) != nil
+//    }
+    
+    var isValid: Bool {
+        !draftRecipe.title.isEmpty
+//        isTitleValid && isPreparationTimeValid && isServingCountValid
     }
     
     func setRecipe(recipe: RecipeDetail?) {
