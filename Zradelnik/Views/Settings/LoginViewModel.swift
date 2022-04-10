@@ -18,7 +18,7 @@ class LoginViewModel: ObservableObject {
     @Published var password = ""
     
     var loginDisabled: Bool {
-        username.isEmpty || password.isEmpty
+        username.isEmpty || password.isEmpty || loggingIn
     }
     
     func login(success: @escaping (String) -> Void) {

@@ -11,8 +11,20 @@ struct ContentView: View {
     @EnvironmentObject private var authentication: Authentication
 
     var body: some View {
-        NavigationView {
-            RecipeList()
+        TabView {
+            NavigationView {
+                RecipeList()
+            }
+            .tabItem {
+                Label("Recepty", systemImage: "fork.knife")
+            }
+
+            NavigationView {
+                SettingsHost()
+            }
+            .tabItem {
+                Label("Nastavení", systemImage: "gearshape")
+            }
         }
     }
 }

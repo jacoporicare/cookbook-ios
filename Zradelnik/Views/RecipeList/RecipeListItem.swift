@@ -43,7 +43,7 @@ struct RecipeListItem: View {
             .resizable()
             .scaledToFit()
             .modifier(ImageModifier(recipe: recipe))
-            .background(.gray)
+            .background(Color(.lightGray))
     }
     
     struct ImageModifier: ViewModifier {

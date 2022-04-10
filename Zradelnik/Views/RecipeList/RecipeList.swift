@@ -10,7 +10,6 @@ import SwiftUI
 struct RecipeList: View {
     @EnvironmentObject private var authentication: Authentication
     @StateObject private var viewModel = RecipeListViewModel()
-    @State private var showingSettings = false
 
     let columnLayout = Array(repeating: GridItem(), count: 2)
 
@@ -24,15 +23,9 @@ struct RecipeList: View {
         }
         .toolbar {
             Button {
-                showingSettings.toggle()
+//                showingSettings.toggle()
             } label: {
-                Label("Nastavení", systemImage: "gear")
-            }
-        }
-        .sheet(isPresented: $showingSettings) {
-            NavigationView {
-                SettingsHost()
-                    .environmentObject(authentication)
+                Label("Nový recept", systemImage: "plus")
             }
         }
     }

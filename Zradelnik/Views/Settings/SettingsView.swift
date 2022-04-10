@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var authentication: Authentication
+    @State private var showingLoginSheet = false
 
     var body: some View {
         Form {
@@ -19,10 +20,15 @@ struct SettingsView: View {
                         authentication.updateAccessToken(accessToken: nil)
                     }
                 } else {
-                    NavigationLink("Přihlásit") {
-                        LoginView()
+                    Button("Přihlásit") {
+                        showingLoginSheet = true
                     }
                 }
+            }
+        }
+        .sheet(isPresented: $showingLoginSheet) {
+            NavigationView {
+                LoginView()
             }
         }
     }
