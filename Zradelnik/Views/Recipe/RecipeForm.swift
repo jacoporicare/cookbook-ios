@@ -17,31 +17,34 @@ struct RecipeForm: View {
 
     var body: some View {
         Form {
-            HStack {
-                Spacer()
-                VStack {
-                    VStack {
-                        if let image = viewModel.inputImage {
-                            Image(uiImage: image).centerCropped()
-                        } else if let imageUrl = viewModel.originalRecipe?.fullImageUrl {
-                            AsyncImage(url: URL(string: imageUrl)) { image in
-                                image.centerCropped()
-                            } placeholder: {
-                                ProgressView()
-                            }
-                        }
-                    }
-                    // .frame(height: 390)
+            if let image = viewModel.inputImage {
+                Image(uiImage: image)
+                    .centerCropped()
+                    .listRowInsets(EdgeInsets())
+                    .frame(height: 390)
                     .onTapGesture {
                         viewModel.showingImagePicker = true
                     }
-
-                    Button("Změnit fotku") {
-                        viewModel.showingImagePicker = true
+            } else if let imageUrl = viewModel.originalRecipe?.fullImageUrl {
+                ZStack {
+                    AsyncImage(url: URL(string: imageUrl)) { image in
+                        image.centerCropped()
+                    } placeholder: {
+                        ProgressView()
                     }
                 }
-                Spacer()
+                .listRowInsets(EdgeInsets())
+                .frame(height: 390)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .onTapGesture {
+                    viewModel.showingImagePicker = true
+                }
             }
+
+            Button(viewModel.inputImage == nil && viewModel.originalRecipe?.fullImageUrl == nil ? "Vybrat fotku" : "Změnit fotku") {
+                viewModel.showingImagePicker = true
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
 
             Section("Základní informace") {
                 TextField("Název", text: $viewModel.draftRecipe.title)
@@ -75,7 +78,7 @@ struct RecipeForm: View {
                 }
             }
         }
-        // .buttonStyle(BorderlessButtonStyle()) // Fix non-clickable buttons in Form
+        .buttonStyle(BorderlessButtonStyle()) // Fix non-clickable buttons in Form
         .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.setRecipe(recipe: recipe)
