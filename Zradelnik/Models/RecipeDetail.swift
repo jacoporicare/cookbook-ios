@@ -13,8 +13,8 @@ struct RecipeDetail: Identifiable, Decodable {
     var fullImageUrl: String?
     var directions: String?
     var sideDish: String?
-    var preparationTime: Int?
-    var servingCount: Int?
+    var preparationTime: String?
+    var servingCount: String?
     var ingredients: [Ingredient]?
 
     init(_ recipe: RecipeDetailQuery.Data.Recipe) {
@@ -23,8 +23,8 @@ struct RecipeDetail: Identifiable, Decodable {
         self.fullImageUrl = recipe.fullImageUrl
         self.directions = recipe.directions
         self.sideDish = recipe.sideDish
-        self.preparationTime = recipe.preparationTime
-        self.servingCount = recipe.servingCount
+        self.preparationTime = recipe.preparationTime?.formatted()
+        self.servingCount = recipe.servingCount?.formatted()
         self.ingredients = recipe.ingredients?.map { Ingredient($0) }
     }
 

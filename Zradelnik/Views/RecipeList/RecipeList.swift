@@ -10,6 +10,8 @@ import SwiftUI
 struct RecipeList: View {
     @EnvironmentObject private var authentication: Authentication
     @StateObject private var viewModel = RecipeListViewModel()
+    @State private var showingRecipeForm = false
+    @State private var activeRecipeId: String?
 
     let columnLayout = Array(repeating: GridItem(), count: 2)
 
@@ -23,9 +25,23 @@ struct RecipeList: View {
         }
         .toolbar {
             Button {
-//                showingSettings.toggle()
+                showingRecipeForm = true
             } label: {
                 Label("Nový recept", systemImage: "plus")
+            }
+        }
+        .sheet(isPresented: $showingRecipeForm) {
+            NavigationView {
+                RecipeForm {
+                    viewModel.fetch()
+                } onSave: { id in
+                    showingRecipeForm = false
+                    activeRecipeId = id
+                } onCancel: {
+                    showingRecipeForm = false
+                }
+                .navigationTitle("Nový recept")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
@@ -34,7 +50,12 @@ struct RecipeList: View {
         ScrollView(.vertical) {
             LazyVGrid(columns: columnLayout) {
                 ForEach(recipes) { recipe in
-                    NavigationLink {
+                    let isActive = Binding<Bool>(
+                        get: { activeRecipeId == recipe.id },
+                        set: { if !$0 { activeRecipeId = nil } }
+                    )
+
+                    NavigationLink(isActive: isActive) {
                         RecipeView(id: recipe.id, title: recipe.title)
                     } label: {
                         RecipeListItem(recipe: recipe)
