@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RecipeForm: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeFormViewModel()
+    @State private var showingDeleteConfirmation = false
 
     var recipe: RecipeDetail? = nil
     let refetch: () -> Void
@@ -77,6 +79,13 @@ struct RecipeForm: View {
                         }
                 }
             }
+
+            if viewModel.originalRecipe != nil {
+                Button("Smazat recept") {
+                    showingDeleteConfirmation = true
+                }
+                .foregroundColor(.red)
+            }
         }
         .buttonStyle(BorderlessButtonStyle()) // Fix non-clickable buttons in Form
         .navigationBarBackButtonHidden(true)
@@ -105,7 +114,14 @@ struct RecipeForm: View {
             ImagePicker(image: $viewModel.inputImage)
         }
         .disabled(viewModel.saving)
-        .alert("Při ukládání nastala chyba.", isPresented: $viewModel.error) {}
+        .alert("Nastala chyba.", isPresented: $viewModel.error) {}
+        .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
+            Button("Smazat recept", role: .destructive) {
+                viewModel.delete {
+                    dismiss()
+                }
+            }
+        }
     }
 }
 

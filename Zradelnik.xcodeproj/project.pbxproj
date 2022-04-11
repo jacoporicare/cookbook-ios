@@ -35,6 +35,7 @@
 		098BD2B027FC8A50006D9C7B /* RecipeIngredientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */; };
 		099185B727F9C2B30057FC2F /* recipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0900083227F359AE00D5A746 /* recipeData.json */; };
 		099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247527F31C9300BC6208 /* Preview Assets.xcassets */; };
+		099A12952804C9550036AD9C /* DeleteRecipe.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 099A12942804C9550036AD9C /* DeleteRecipe.graphql */; };
 		09A7A3EC27F64E5B00E62123 /* LoadingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */; };
 		09A7A3F027F6622700E62123 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EF27F6622700E62123 /* RecipeViewModel.swift */; };
 		09A7A3F227F6627500E62123 /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3F127F6627500E62123 /* RecipeDetail.swift */; };
@@ -74,6 +75,7 @@
 		098BD2AA27FC85BD006D9C7B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* LoginMutation.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = LoginMutation.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientListView.swift; sourceTree = "<group>"; };
+		099A12942804C9550036AD9C /* DeleteRecipe.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteRecipe.graphql; sourceTree = "<group>"; };
 		09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContent.swift; sourceTree = "<group>"; };
 		09A7A3ED27F6618500E62123 /* RecipeDetailQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = RecipeDetailQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
 		09A7A3EF27F6622700E62123 /* RecipeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				09A7A3ED27F6618500E62123 /* RecipeDetailQuery.graphql */,
 				0960A1B52802205A00D339DC /* CreateRecipeMutation.graphql */,
 				0960A1B32802203800D339DC /* UpdateRecipeMutation.graphql */,
+				099A12942804C9550036AD9C /* DeleteRecipe.graphql */,
 				098BD2AC27FC8608006D9C7B /* LoginMutation.graphql */,
 				0946D79027FF2C8D00F81F18 /* MeQuery.graphql */,
 			);
@@ -341,6 +344,7 @@
 				0960A1B62802205A00D339DC /* CreateRecipeMutation.graphql in Resources */,
 				09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */,
 				099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */,
+				099A12952804C9550036AD9C /* DeleteRecipe.graphql in Resources */,
 				099185B727F9C2B30057FC2F /* recipeData.json in Resources */,
 				0960A1B42802203800D339DC /* UpdateRecipeMutation.graphql in Resources */,
 			);

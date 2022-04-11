@@ -31,7 +31,6 @@ class RecipeFormViewModel: ObservableObject {
 
     func save(success: @escaping (String) -> Void) {
         saving = true
-        error = false
 
         var files: [GraphQLFile] = []
         if let data = inputImage?.jpegData(compressionQuality: 80) {
@@ -50,8 +49,8 @@ class RecipeFormViewModel: ObservableObject {
 
                 switch result {
                 case .success(let result):
-                    guard let recipe = result.data else { fallthrough }
-                    success(recipe.updateRecipe.id)
+                    guard let recipe = result.data?.updateRecipe else { fallthrough }
+                    success(recipe.id)
                 case .failure:
                     self?.error = true
                 }
@@ -67,11 +66,33 @@ class RecipeFormViewModel: ObservableObject {
 
                 switch result {
                 case .success(let result):
-                    guard let recipe = result.data else { fallthrough }
-                    success(recipe.createRecipe.id)
+                    guard let recipe = result.data?.createRecipe else { fallthrough }
+                    success(recipe.id)
                 case .failure:
                     self?.error = true
                 }
+            }
+        }
+    }
+
+    func delete(success: @escaping () -> Void) {
+        guard let originalRecipe = originalRecipe else {
+            return
+        }
+
+        saving = true
+
+        let mutation = DeleteRecipeMutation(id: originalRecipe.id)
+
+        request = Network.shared.apollo.perform(mutation: mutation) { [weak self] result in
+            self?.saving = false
+
+            switch result {
+            case .success(let result):
+                guard let _ = result.data?.deleteRecipe else { fallthrough }
+                success()
+            case .failure:
+                self?.error = true
             }
         }
     }

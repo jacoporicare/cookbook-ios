@@ -390,6 +390,57 @@ public final class CreateRecipeMutation: GraphQLMutation {
   }
 }
 
+public final class DeleteRecipeMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation DeleteRecipe($id: ID!) {
+      deleteRecipe(id: $id)
+    }
+    """
+
+  public let operationName: String = "DeleteRecipe"
+
+  public var id: GraphQLID
+
+  public init(id: GraphQLID) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("deleteRecipe", arguments: ["id": GraphQLVariable("id")], type: .nonNull(.scalar(Bool.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(deleteRecipe: Bool) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "deleteRecipe": deleteRecipe])
+    }
+
+    public var deleteRecipe: Bool {
+      get {
+        return resultMap["deleteRecipe"]! as! Bool
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "deleteRecipe")
+      }
+    }
+  }
+}
+
 public final class LoginMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
