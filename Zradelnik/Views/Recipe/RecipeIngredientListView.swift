@@ -23,7 +23,7 @@ struct RecipeIngredientListView: View {
                         if ingredient.amount != nil || ingredient.amountUnit != nil {
                             HStack {
                                 if let amount = ingredient.amount {
-                                    Text(amount.formatted())
+                                    Text(amount)
                                 }
                                 if let amountUnit = ingredient.amountUnit {
                                     Text(amountUnit)
@@ -43,6 +43,6 @@ struct RecipeIngredientListView: View {
 
 struct RecipeDetailIngredients_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeIngredientListView(ingredients: recipeDetailPreviewData[0].ingredients!)
+        RecipeIngredientListView(ingredients: recipeDetailPreviewData[0].ingredients?.map { RecipeDetail.Ingredient(from: $0) } ?? [])
     }
 }

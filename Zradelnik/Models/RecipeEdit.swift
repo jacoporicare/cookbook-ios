@@ -16,21 +16,16 @@ struct RecipeEdit {
     var ingredients: [Ingredient] = []
     var tags: [String] = []
 
-    static let `default` = RecipeEdit()
-
     struct Ingredient {
         var name: String = ""
         var isGroup: Bool = false
         var amount: String = ""
         var amountUnit: String = ""
-
-        init(_ ingredient: RecipeDetail.Ingredient) {
-            name = ingredient.name
-            isGroup = ingredient.isGroup
-            amount = ingredient.amount?.formatted() ?? ""
-            amountUnit = ingredient.amountUnit ?? ""
-        }
     }
+}
+
+extension RecipeEdit {
+    static let `default` = RecipeEdit()
 }
 
 extension RecipeEdit {
@@ -40,7 +35,16 @@ extension RecipeEdit {
         sideDish = recipe.sideDish ?? ""
         preparationTime = recipe.preparationTime ?? ""
         servingCount = recipe.servingCount ?? ""
-        ingredients = recipe.ingredients?.map { Ingredient($0) } ?? []
+        ingredients = recipe.ingredients.map { Ingredient(from: $0) }
+    }
+}
+
+extension RecipeEdit.Ingredient {
+    init(from ingredient: RecipeDetail.Ingredient) {
+        name = ingredient.name
+        isGroup = ingredient.isGroup
+        amount = ingredient.amount ?? ""
+        amountUnit = ingredient.amountUnit ?? ""
     }
 }
 

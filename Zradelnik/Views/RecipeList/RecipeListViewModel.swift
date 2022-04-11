@@ -23,7 +23,7 @@ class RecipeListViewModel: ObservableObject {
             switch result {
             case .success(let result):
                 guard let data = result.data else { fallthrough }
-                self?.recipes = .data(data.recipes.map { Recipe($0) })
+                self?.recipes = .data(data.recipes.map { Recipe(from: $0) })
             case .failure:
                 self?.recipes = .error
             }

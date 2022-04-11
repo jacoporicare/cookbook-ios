@@ -59,6 +59,7 @@ struct RecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeDetailView(recipe: recipeDetailPreviewData[0])
+        RecipeDetailView(recipe: RecipeDetail(from: recipeDetailPreviewData[0]))
+            .environmentObject(Authentication())
     }
 }

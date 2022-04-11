@@ -110,7 +110,7 @@ struct RecipeForm: View {
 struct RecipeForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeForm(recipe: recipeDetailPreviewData[0]) {} onSave: { _ in } onCancel: {}
+            RecipeForm(recipe: RecipeDetail(from: recipeDetailPreviewData[0])) {} onSave: { _ in } onCancel: {}
             RecipeForm {} onSave: { _ in } onCancel: {}
         }
     }

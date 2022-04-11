@@ -26,7 +26,7 @@ struct RecipeEditView: View {
 struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeEditView(recipe: recipeDetailPreviewData[0]) {}
+            RecipeEditView(recipe: RecipeDetail(from: recipeDetailPreviewData[0])) {}
         }
     }
 }

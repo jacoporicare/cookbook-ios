@@ -15,9 +15,19 @@ struct RecipeDetail: Identifiable, Decodable {
     var sideDish: String?
     var preparationTime: String?
     var servingCount: String?
-    var ingredients: [Ingredient]?
+    var ingredients: [Ingredient]
 
-    init(_ recipe: RecipeDetailQuery.Data.Recipe) {
+    struct Ingredient: Identifiable, Decodable {
+        var id: String
+        var name: String
+        var isGroup: Bool
+        var amount: String?
+        var amountUnit: String?
+    }
+}
+
+extension RecipeDetail {
+    init(from recipe: RecipeDetailQuery.Data.Recipe) {
         self.id = recipe.id
         self.title = recipe.title
         self.fullImageUrl = recipe.fullImageUrl
@@ -25,22 +35,16 @@ struct RecipeDetail: Identifiable, Decodable {
         self.sideDish = recipe.sideDish
         self.preparationTime = recipe.preparationTime?.formatted()
         self.servingCount = recipe.servingCount?.formatted()
-        self.ingredients = recipe.ingredients?.map { Ingredient($0) }
+        self.ingredients = recipe.ingredients?.map { Ingredient(from: $0) } ?? []
     }
+}
 
-    struct Ingredient: Identifiable, Decodable {
-        var id: String
-        var name: String
-        var isGroup: Bool
-        var amount: Double?
-        var amountUnit: String?
-
-        init(_ ingredient: RecipeDetailQuery.Data.Recipe.Ingredient) {
-            self.id = ingredient.id
-            self.name = ingredient.name
-            self.isGroup = ingredient.isGroup
-            self.amount = ingredient.amount
-            self.amountUnit = ingredient.amountUnit
-        }
+extension RecipeDetail.Ingredient {
+    init(from ingredient: RecipeDetailQuery.Data.Recipe.Ingredient) {
+        self.id = ingredient.id
+        self.name = ingredient.name
+        self.isGroup = ingredient.isGroup
+        self.amount = ingredient.amount?.formatted(.number)
+        self.amountUnit = ingredient.amountUnit
     }
 }

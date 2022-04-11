@@ -74,7 +74,7 @@ struct RecipeList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             RecipeList()
-                .loadedView(recipes: recipePreviewData)
+                .loadedView(recipes: recipePreviewData.map { Recipe(from: $0) })
                 .navigationTitle("Žrádelník")
                 .toolbar {
                     Button {} label: {

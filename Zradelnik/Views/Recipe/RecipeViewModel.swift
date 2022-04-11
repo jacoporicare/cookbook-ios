@@ -23,7 +23,7 @@ class RecipeViewModel: ObservableObject {
             switch result {
             case .success(let result):
                 guard let recipe = result.data?.recipe else { fallthrough }
-                self?.recipe = .data(RecipeDetail(recipe))
+                self?.recipe = .data(RecipeDetail(from: recipe))
             case .failure:
                 self?.recipe = .error
             }
