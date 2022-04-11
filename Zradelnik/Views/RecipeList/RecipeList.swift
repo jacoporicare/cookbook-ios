@@ -24,10 +24,12 @@ struct RecipeList: View {
             viewModel.fetch()
         }
         .toolbar {
-            Button {
-                showingRecipeForm = true
-            } label: {
-                Label("Nový recept", systemImage: "plus")
+            if authentication.isLoggedIn {
+                Button {
+                    showingRecipeForm = true
+                } label: {
+                    Label("Nový recept", systemImage: "plus")
+                }
             }
         }
         .sheet(isPresented: $showingRecipeForm) {
@@ -52,7 +54,7 @@ struct RecipeList: View {
                 ForEach(recipes) { recipe in
                     let isActive = Binding<Bool>(
                         get: { activeRecipeId == recipe.id },
-                        set: { if !$0 { activeRecipeId = nil } }
+                        set: { activeRecipeId = $0 ? recipe.id : nil }
                     )
 
                     NavigationLink(isActive: isActive) {

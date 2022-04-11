@@ -9,6 +9,7 @@ import MarkdownUI
 import SwiftUI
 
 struct RecipeDetailView: View {
+    @EnvironmentObject private var authentication: Authentication
     @Environment(\.editMode) private var editMode
     
     let recipe: RecipeDetail
@@ -47,8 +48,10 @@ struct RecipeDetailView: View {
             }
         }
         .toolbar {
-            Button("Upravit") {
-                editMode?.animation().wrappedValue = .active
+            if authentication.isLoggedIn {
+                Button("Upravit") {
+                    editMode?.animation().wrappedValue = .active
+                }
             }
         }
     }
