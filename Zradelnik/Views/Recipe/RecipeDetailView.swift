@@ -26,7 +26,40 @@ struct RecipeDetailView: View {
                     .frame(height: 390)
                 }
                 
-                VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
+                    if recipe.preparationTime != nil || recipe.servingCount != nil {
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 20) {
+                                if let preparationTime = recipe.preparationTime {
+                                    HStack {
+                                        Text("Doba přípravy:")
+                                            .foregroundColor(.gray)
+                                        Text(preparationTime)
+                                    }
+                                }
+                        
+                                if let servingCount = recipe.servingCount {
+                                    HStack {
+                                        Text("Počet porcí:")
+                                            .foregroundColor(.gray)
+                                        Text(servingCount)
+                                    }
+                                }
+                            
+                                if let sideDish = recipe.sideDish {
+                                    HStack {
+                                        Text("Příloha:")
+                                            .foregroundColor(.gray)
+                                        Text(sideDish)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.bottom, 10)
+                            .font(.callout)
+                        }
+                    }
+                    
                     if let ingredients = recipe.ingredients, ingredients.count > 0 {
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Ingredience")
@@ -35,6 +68,7 @@ struct RecipeDetailView: View {
                             RecipeIngredientListView(ingredients: ingredients)
                                 .padding(.horizontal)
                         }
+                        .padding(.horizontal)
                     }
                     
                     VStack(alignment: .leading) {
@@ -43,8 +77,9 @@ struct RecipeDetailView: View {
                         
                         Markdown(recipe.directions ?? "Kde nic tu nic.")
                     }
+                    .padding(.horizontal)
                 }
-                .padding()
+                .padding(.vertical)
             }
         }
         .toolbar {
