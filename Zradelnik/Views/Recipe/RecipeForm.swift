@@ -43,10 +43,14 @@ struct RecipeForm: View {
                 }
             }
 
-            Button(viewModel.inputImage == nil && viewModel.originalRecipe?.fullImageUrl == nil ? "Vybrat fotku" : "Změnit fotku") {
+            Button {
                 viewModel.showingImagePicker = true
+            } label: {
+                Spacer()
+                Text(viewModel.inputImage == nil && viewModel.originalRecipe?.fullImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                Spacer()
             }
-            .frame(maxWidth: .infinity, alignment: .center)
+            // .frame(maxWidth: .infinity, alignment: .center)
 
             Section("Základní informace") {
                 TextField("Název", text: $viewModel.draftRecipe.title)
@@ -81,13 +85,16 @@ struct RecipeForm: View {
             }
 
             if viewModel.originalRecipe != nil {
-                Button("Smazat recept") {
+                Button {
                     showingDeleteConfirmation = true
+                } label: {
+                    Text("Smazat recept")
+                    Spacer()
                 }
                 .foregroundColor(.red)
             }
         }
-        .buttonStyle(BorderlessButtonStyle()) // Fix non-clickable buttons in Form
+        .buttonStyle(.borderless) // Fix non-clickable buttons in Form
         .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.setRecipe(recipe: recipe)
