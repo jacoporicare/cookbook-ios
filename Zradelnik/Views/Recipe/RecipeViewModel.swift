@@ -18,7 +18,7 @@ class RecipeViewModel: ObservableObject {
             watcher.refetch()
             return
         }
-        
+
         watcher = Network.shared.apollo.watch(query: RecipeDetailQuery(id: id), cachePolicy: .returnCacheDataAndFetch) { [weak self] result in
             switch result {
             case .success(let result):

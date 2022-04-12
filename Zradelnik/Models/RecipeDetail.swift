@@ -14,7 +14,9 @@ struct RecipeDetail: Identifiable, Decodable {
     var directions: String?
     var sideDish: String?
     var preparationTime: String?
+    var preparationTimeRaw: Int?
     var servingCount: String?
+    var servingCountRaw: Int?
     var ingredients: [Ingredient]
 
     struct Ingredient: Identifiable, Decodable {
@@ -22,6 +24,7 @@ struct RecipeDetail: Identifiable, Decodable {
         var name: String
         var isGroup: Bool
         var amount: String?
+        var amountRaw: Double?
         var amountUnit: String?
     }
 }
@@ -34,7 +37,9 @@ extension RecipeDetail {
         self.directions = recipe.directions
         self.sideDish = recipe.sideDish
         self.preparationTime = recipe.preparationTime?.formattedTime()
+        self.preparationTimeRaw = recipe.preparationTime
         self.servingCount = recipe.servingCount?.formatted()
+        self.servingCountRaw = recipe.servingCount
         self.ingredients = recipe.ingredients?.map { Ingredient(from: $0) } ?? []
     }
 }
@@ -45,6 +50,7 @@ extension RecipeDetail.Ingredient {
         self.name = ingredient.name
         self.isGroup = ingredient.isGroup
         self.amount = ingredient.amount?.formatted()
+        self.amountRaw = ingredient.amount
         self.amountUnit = ingredient.amountUnit
     }
 }

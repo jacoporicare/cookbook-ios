@@ -33,8 +33,8 @@ extension RecipeEdit {
         title = recipe.title
         directions = recipe.directions ?? ""
         sideDish = recipe.sideDish ?? ""
-        preparationTime = recipe.preparationTime ?? ""
-        servingCount = recipe.servingCount ?? ""
+        preparationTime = recipe.preparationTimeRaw?.formatted() ?? ""
+        servingCount = recipe.servingCountRaw?.formatted() ?? ""
         ingredients = recipe.ingredients.map { Ingredient(from: $0) }
     }
 }
@@ -43,7 +43,7 @@ extension RecipeEdit.Ingredient {
     init(from ingredient: RecipeDetail.Ingredient) {
         name = ingredient.name
         isGroup = ingredient.isGroup
-        amount = ingredient.amount ?? ""
+        amount = ingredient.amountRaw?.formatted() ?? ""
         amountUnit = ingredient.amountUnit ?? ""
     }
 }
