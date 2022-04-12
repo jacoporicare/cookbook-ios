@@ -121,6 +121,7 @@ struct RecipeForm: View {
                     dismiss()
                 }
             }
+            Button("Zrušit", role: .cancel) {}
         }
     }
 }
