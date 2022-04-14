@@ -17,7 +17,7 @@ struct RecipeList: View {
 
     var body: some View {
         LoadingContent(status: viewModel.recipes) { recipes in
-            loadedView(recipes: recipes)
+            loadedView(recipes: viewModel.filteredRecipes ?? recipes)
         }
         .navigationTitle("Žrádelník")
         .onAppear {
@@ -65,6 +65,10 @@ struct RecipeList: View {
                 }
             }
             .padding()
+        }
+        .searchable(text: $viewModel.searchText, prompt: "Hledat recept")
+        .onReceive(viewModel.$searchText) { _ in
+            viewModel.submitSearchQuery()
         }
     }
 }

@@ -12,6 +12,8 @@ class RecipeListViewModel: ObservableObject {
     private var watcher: GraphQLQueryWatcher<RecipeListQuery>?
 
     @Published var recipes: LoadingStatus<[Recipe]> = .loading
+    @Published var searchText = ""
+    @Published var filteredRecipes: [Recipe]?
 
     func fetch() {
         if let watcher = watcher {
@@ -26,6 +28,18 @@ class RecipeListViewModel: ObservableObject {
                 self?.recipes = .data(data.recipes.map { Recipe(from: $0) })
             case .failure:
                 self?.recipes = .error
+            }
+        }
+    }
+
+    func submitSearchQuery() {
+        if searchText.isEmpty {
+            filteredRecipes = nil
+        } else if case .data(let recipes) = recipes {
+            filteredRecipes = recipes.filter {
+                $0.title
+                    .folding(options: .diacriticInsensitive, locale: .current)
+                    .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
             }
         }
     }
