@@ -14,7 +14,6 @@ struct RecipeForm: View {
     var onCancel: () -> Void
 
     @EnvironmentObject private var model: Model
-    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
 
@@ -126,7 +125,7 @@ struct RecipeForm: View {
             Button("Smazat recept", role: .destructive) {
                 viewModel.delete {
                     model.refetchRecipes()
-                    dismiss()
+                    // No need to call dismiss() - refetchRecipes creates new recipes array which forces navigation back automatically
                 }
             }
             Button("Zrušit", role: .cancel) {}
