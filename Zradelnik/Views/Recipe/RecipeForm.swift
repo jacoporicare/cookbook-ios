@@ -5,14 +5,14 @@
 //  Created by Jakub Řičař on 11.04.2022.
 //
 
+import CachedAsyncImage
 import SwiftUI
 
 struct RecipeForm: View {
     var recipe: Recipe? = nil
-    var refetch: () -> Void
     var onSave: (String) -> Void
     var onCancel: () -> Void
-    
+
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
@@ -29,7 +29,7 @@ struct RecipeForm: View {
                     }
             } else if let imageUrl = viewModel.originalRecipe?.imageUrl {
                 ZStack {
-                    AsyncImage(url: URL(string: imageUrl)) { image in
+                    CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
                         image.centerCropped()
                     } placeholder: {
                         ProgressView()
@@ -104,7 +104,6 @@ struct RecipeForm: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Uložit") {
                         viewModel.save { id in
-                            refetch()
                             onSave(id)
                         }
                     }
@@ -137,8 +136,8 @@ struct RecipeForm: View {
 struct RecipeForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeForm(recipe: Recipe(from: recipePreviewData[0])) {} onSave: { _ in } onCancel: {}
-            RecipeForm {} onSave: { _ in } onCancel: {}
+            RecipeForm(recipe: Recipe(from: recipePreviewData[0])) { _ in } onCancel: {}
+            RecipeForm { _ in } onCancel: {}
         }
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
+import CachedAsyncImage
 import SwiftUI
 
 struct RecipeListItem: View {
@@ -13,7 +14,7 @@ struct RecipeListItem: View {
     var body: some View {
         VStack(spacing: 0) {
             if let imageUrl = recipe.imageUrl {
-                AsyncImage(url: URL(string: imageUrl)) { phase in
+                CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { phase in
                     switch phase {
                     case .success(let image):
                         GeometryReader { geo in

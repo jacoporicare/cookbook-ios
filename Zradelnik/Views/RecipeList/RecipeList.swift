@@ -30,9 +30,8 @@ struct RecipeList: View {
         }
         .sheet(isPresented: $showingRecipeForm) {
             NavigationView {
-                RecipeForm {
+                RecipeForm { id in
                     model.refetchRecipes()
-                } onSave: { id in
                     showingRecipeForm = false
                     activeRecipeId = id
                 } onCancel: {

@@ -36,6 +36,8 @@
 		099A12952804C9550036AD9C /* DeleteRecipe.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 099A12942804C9550036AD9C /* DeleteRecipe.graphql */; };
 		09A068222809562C0008563A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A068212809562C0008563A /* Model.swift */; };
 		09A06824280957F30008563A /* RecipesQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 09A06823280957F30008563A /* RecipesQuery.graphql */; };
+		09A06829280970A70008563A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 09A06828280970A70008563A /* CachedAsyncImage */; };
+		09A0682B280974D10008563A /* URLCache+imageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A0682A280974D10008563A /* URLCache+imageCache.swift */; };
 		09A7A3EC27F64E5B00E62123 /* LoadingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */; };
 		09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3F327F6642500E62123 /* RecipeView.swift */; };
 		09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */; };
@@ -74,6 +76,7 @@
 		099A12942804C9550036AD9C /* DeleteRecipe.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteRecipe.graphql; sourceTree = "<group>"; };
 		09A068212809562C0008563A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		09A06823280957F30008563A /* RecipesQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = RecipesQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
+		09A0682A280974D10008563A /* URLCache+imageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLCache+imageCache.swift"; sourceTree = "<group>"; };
 		09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContent.swift; sourceTree = "<group>"; };
 		09A7A3F327F6642500E62123 /* RecipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		09AE246B27F31C9200BC6208 /* Žrádelník.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Žrádelník.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				091815FA27FDF836003A2250 /* KeychainAccess in Frameworks */,
+				09A06829280970A70008563A /* CachedAsyncImage in Frameworks */,
 				0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */,
 				09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */,
 				09FE90E127FA36BD005C6AE3 /* ApolloSQLite in Frameworks */,
@@ -108,6 +112,7 @@
 			children = (
 				092DC67127FB6F9C00A1B0D6 /* API.swift */,
 				0989F8E527F32D45009CB6BD /* Network.swift */,
+				09A0682A280974D10008563A /* URLCache+imageCache.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -166,10 +171,10 @@
 			children = (
 				09A7A3F327F6642500E62123 /* RecipeView.swift */,
 				09395F892800959F00AACAA3 /* RecipeDetailView.swift */,
+				09395F872800953200AACAA3 /* RecipeEditView.swift */,
 				098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */,
 				0905C3B028048B41005E3949 /* RecipeForm.swift */,
 				0960A1B128020D8700D339DC /* RecipeFormViewModel.swift */,
-				09395F872800953200AACAA3 /* RecipeEditView.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				09DC1F9D27F9DED200F01BBC /* MarkdownUI */,
 				09FE90E027FA36BD005C6AE3 /* ApolloSQLite */,
 				091815F927FDF836003A2250 /* KeychainAccess */,
+				09A06828280970A70008563A /* CachedAsyncImage */,
 			);
 			productName = Zradelnik;
 			productReference = 09AE246B27F31C9200BC6208 /* Žrádelník.app */;
@@ -315,6 +321,7 @@
 				0989F8E027F32CBA009CB6BD /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				091815F827FDF836003A2250 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				09A06827280970A70008563A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = 09AE246C27F31C9200BC6208 /* Products */;
 			projectDirPath = "";
@@ -382,6 +389,7 @@
 				09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */,
 				098BD2AB27FC85BD006D9C7B /* LoginViewModel.swift in Sources */,
 				0900083B27F3A45800D5A746 /* RecipeListItem.swift in Sources */,
+				09A0682B280974D10008563A /* URLCache+imageCache.swift in Sources */,
 				091815FE27FDFF68003A2250 /* LoginView.swift in Sources */,
 				09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */,
 				09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */,
@@ -624,6 +632,14 @@
 				minimumVersion = 0.51.2;
 			};
 		};
+		09A06827280970A70008563A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
@@ -644,6 +660,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0989F8E027F32CBA009CB6BD /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		09A06828280970A70008563A /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 09A06827280970A70008563A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
 		};
 		09DC1F9D27F9DED200F01BBC /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

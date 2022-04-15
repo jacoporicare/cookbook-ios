@@ -18,9 +18,7 @@ struct RecipeView: View {
             if editMode?.wrappedValue == .inactive {
                 RecipeDetailView(recipe: recipe)
             } else {
-                RecipeEditView(recipe: recipe) {
-                    model.refetchRecipes()
-                }
+                RecipeEditView(recipe: recipe)
             }
         }
         .navigationTitle(recipe.title)

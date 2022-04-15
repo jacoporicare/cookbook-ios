@@ -9,16 +9,15 @@ import SwiftUI
 
 struct RecipeEditView: View {
     var recipe: Recipe
-    var refetch: () -> Void
 
     @Environment(\.editMode) private var editMode
 
     var body: some View {
-        RecipeForm(recipe: recipe, refetch: refetch, onSave: { _ in
+        RecipeForm(recipe: recipe) { _ in
             editMode?.animation().wrappedValue = .inactive
-        }, onCancel: {
+        } onCancel: {
             editMode?.animation().wrappedValue = .inactive
-        })
+        }
     }
 }
 
@@ -26,7 +25,7 @@ struct RecipeEditView: View {
 struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeEditView(recipe: Recipe(from: recipePreviewData[0])) {}
+            RecipeEditView(recipe: Recipe(from: recipePreviewData[0]))
         }
     }
 }

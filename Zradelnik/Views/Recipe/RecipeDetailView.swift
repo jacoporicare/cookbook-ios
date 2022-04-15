@@ -5,6 +5,7 @@
 //  Created by Jakub Řičař on 08.04.2022.
 //
 
+import CachedAsyncImage
 import MarkdownUI
 import SwiftUI
 
@@ -18,7 +19,7 @@ struct RecipeDetailView: View {
         ScrollView {
             VStack {
                 if let imageUrl = recipe.imageUrl {
-                    AsyncImage(url: URL(string: imageUrl)) { image in
+                    CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
                         image.centerCropped()
                     } placeholder: {
                         ProgressView()
