@@ -13,6 +13,7 @@ struct RecipeForm: View {
     var onSave: (String) -> Void
     var onCancel: () -> Void
 
+    @EnvironmentObject private var model: Model
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
@@ -124,6 +125,7 @@ struct RecipeForm: View {
         .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
             Button("Smazat recept", role: .destructive) {
                 viewModel.delete {
+                    model.refetchRecipes()
                     dismiss()
                 }
             }
