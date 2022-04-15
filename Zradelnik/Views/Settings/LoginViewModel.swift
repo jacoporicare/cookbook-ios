@@ -10,8 +10,6 @@ import Foundation
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-    private var request: Cancellable?
-    
     @Published var loggingIn = false
     @Published var error = false
     @Published var username = ""
@@ -20,6 +18,8 @@ class LoginViewModel: ObservableObject {
     var loginDisabled: Bool {
         username.isEmpty || password.isEmpty || loggingIn
     }
+    
+    private var request: Cancellable?
     
     func login(success: @escaping (String) -> Void) {
         loggingIn = true

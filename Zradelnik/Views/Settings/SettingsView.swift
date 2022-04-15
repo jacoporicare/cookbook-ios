@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject private var authentication: Authentication
+    @EnvironmentObject private var model: Model
     @State private var showingLoginSheet = false
 
     var body: some View {
         Form {
             Section("Účet") {
-                if authentication.isLoggedIn {
-                    Text(authentication.userDisplayName ?? "Chyba")
+                if model.isLoggedIn {
+                    Text(model.userDisplayName ?? "Chyba")
                     Button("Odhlásit") {
-                        authentication.updateAccessToken(accessToken: nil)
+                        model.updateAccessToken(accessToken: nil)
                     }
                 } else {
                     Button("Přihlásit") {
@@ -37,6 +37,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
-            .environmentObject(Authentication())
+            .environmentObject(Model())
     }
 }

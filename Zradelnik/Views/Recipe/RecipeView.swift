@@ -8,30 +8,22 @@
 import SwiftUI
 
 struct RecipeView: View {
-    @Environment(\.editMode) private var editMode
-    @EnvironmentObject private var authentication: Authentication
-    @StateObject private var viewModel = RecipeViewModel()
+    var recipe: Recipe
 
-    let id: String
-    let title: String
+    @EnvironmentObject private var model: Model
+    @Environment(\.editMode) private var editMode
 
     var body: some View {
-        LoadingContent(status: viewModel.recipe) { recipe in
-            Group {
-                if editMode?.wrappedValue == .inactive {
-                    RecipeDetailView(recipe: recipe)
-                } else {
-                    RecipeEditView(recipe: recipe) {
-                        viewModel.fetch(id: id)
-                    }
+        Group {
+            if editMode?.wrappedValue == .inactive {
+                RecipeDetailView(recipe: recipe)
+            } else {
+                RecipeEditView(recipe: recipe) {
+                    model.refetchRecipes()
                 }
             }
-            .navigationTitle(recipe.title)
         }
-        .navigationTitle(title)
+        .navigationTitle(recipe.title)
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            viewModel.fetch(id: id)
-        }
     }
 }

@@ -9,15 +9,15 @@ import MarkdownUI
 import SwiftUI
 
 struct RecipeDetailView: View {
-    @EnvironmentObject private var authentication: Authentication
-    @Environment(\.editMode) private var editMode
+    var recipe: Recipe
     
-    let recipe: RecipeDetail
+    @EnvironmentObject private var model: Model
+    @Environment(\.editMode) private var editMode
     
     var body: some View {
         ScrollView {
             VStack {
-                if let imageUrl = recipe.fullImageUrl {
+                if let imageUrl = recipe.imageUrl {
                     AsyncImage(url: URL(string: imageUrl)) { image in
                         image.centerCropped()
                     } placeholder: {
@@ -83,7 +83,7 @@ struct RecipeDetailView: View {
             }
         }
         .toolbar {
-            if authentication.isLoggedIn {
+            if model.isLoggedIn {
                 Button("Upravit") {
                     editMode?.animation().wrappedValue = .active
                 }
@@ -94,7 +94,7 @@ struct RecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeDetailView(recipe: RecipeDetail(from: recipeDetailPreviewData[0]))
-            .environmentObject(Authentication())
+        RecipeDetailView(recipe: Recipe(from: recipePreviewData[0]))
+            .environmentObject(Model())
     }
 }

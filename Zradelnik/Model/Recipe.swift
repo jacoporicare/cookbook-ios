@@ -1,5 +1,5 @@
 //
-//  RecipeDetail.swift
+//  Recipe.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 29.03.2022.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct RecipeDetail: Identifiable, Decodable {
+struct Recipe: Identifiable, Decodable {
     var id: String
     var title: String
-    var fullImageUrl: String?
+    var imageUrl: String?
     var directions: String?
     var sideDish: String?
     var preparationTime: String?
@@ -18,7 +18,7 @@ struct RecipeDetail: Identifiable, Decodable {
     var servingCount: String?
     var servingCountRaw: Int?
     var ingredients: [Ingredient]
-
+    
     struct Ingredient: Identifiable, Decodable {
         var id: String
         var name: String
@@ -29,11 +29,11 @@ struct RecipeDetail: Identifiable, Decodable {
     }
 }
 
-extension RecipeDetail {
-    init(from recipe: RecipeDetailQuery.Data.Recipe) {
+extension Recipe {
+    init(from recipe: RecipesQuery.Data.Recipe) {
         self.id = recipe.id
         self.title = recipe.title
-        self.fullImageUrl = recipe.fullImageUrl
+        self.imageUrl = recipe.imageUrl
         self.directions = recipe.directions
         self.sideDish = recipe.sideDish
         self.preparationTime = recipe.preparationTime?.formattedTime()
@@ -44,8 +44,8 @@ extension RecipeDetail {
     }
 }
 
-extension RecipeDetail.Ingredient {
-    init(from ingredient: RecipeDetailQuery.Data.Recipe.Ingredient) {
+extension Recipe.Ingredient {
+    init(from ingredient: RecipesQuery.Data.Recipe.Ingredient) {
         self.id = ingredient.id
         self.name = ingredient.name
         self.isGroup = ingredient.isGroup
@@ -55,19 +55,29 @@ extension RecipeDetail.Ingredient {
     }
 }
 
+extension Recipe {
+    func matches(_ string: String) -> Bool {
+        string.isEmpty ||
+        title.localizedCaseInsensitiveContains(string) ||
+        ingredients.contains {
+            $0.name.localizedCaseInsensitiveContains(string)
+        }
+    }
+}
+
 private extension Int {
     func formattedTime() -> String {
         let hours = Int(Double(self) / 60.0)
         let minutes = self % 60
-
+        
         if hours > 0, minutes == 0 {
             return "\(hours) h"
         }
-
+        
         if hours > 0, minutes > 0 {
             return "\(hours) h \(minutes) min"
         }
-
+        
         return "\(minutes) min"
     }
 }

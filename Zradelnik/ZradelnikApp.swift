@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct ZradelnikApp: App {
-    @StateObject private var authentication = Authentication()
+    @StateObject private var model = Model()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(authentication)
+                .environmentObject(model)
         }
     }
 }

@@ -29,7 +29,7 @@ extension RecipeEdit {
 }
 
 extension RecipeEdit {
-    init(from recipe: RecipeDetail) {
+    init(from recipe: Recipe) {
         title = recipe.title
         directions = recipe.directions ?? ""
         sideDish = recipe.sideDish ?? ""
@@ -40,7 +40,7 @@ extension RecipeEdit {
 }
 
 extension RecipeEdit.Ingredient {
-    init(from ingredient: RecipeDetail.Ingredient) {
+    init(from ingredient: Recipe.Ingredient) {
         name = ingredient.name
         isGroup = ingredient.isGroup
         amount = ingredient.amountRaw?.formatted() ?? ""

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct RecipeForm: View {
+    var recipe: Recipe? = nil
+    var refetch: () -> Void
+    var onSave: (String) -> Void
+    var onCancel: () -> Void
+    
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
-
-    var recipe: RecipeDetail? = nil
-    let refetch: () -> Void
-    let onSave: (String) -> Void
-    let onCancel: () -> Void
 
     var body: some View {
         Form {
@@ -27,7 +27,7 @@ struct RecipeForm: View {
                     .onTapGesture {
                         viewModel.showingImagePicker = true
                     }
-            } else if let imageUrl = viewModel.originalRecipe?.fullImageUrl {
+            } else if let imageUrl = viewModel.originalRecipe?.imageUrl {
                 ZStack {
                     AsyncImage(url: URL(string: imageUrl)) { image in
                         image.centerCropped()
@@ -47,7 +47,7 @@ struct RecipeForm: View {
                 viewModel.showingImagePicker = true
             } label: {
                 Spacer()
-                Text(viewModel.inputImage == nil && viewModel.originalRecipe?.fullImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                Text(viewModel.inputImage == nil && viewModel.originalRecipe?.imageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
             }
             // .frame(maxWidth: .infinity, alignment: .center)
@@ -137,7 +137,7 @@ struct RecipeForm: View {
 struct RecipeForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeForm(recipe: RecipeDetail(from: recipeDetailPreviewData[0])) {} onSave: { _ in } onCancel: {}
+            RecipeForm(recipe: Recipe(from: recipePreviewData[0])) {} onSave: { _ in } onCancel: {}
             RecipeForm {} onSave: { _ in } onCancel: {}
         }
     }

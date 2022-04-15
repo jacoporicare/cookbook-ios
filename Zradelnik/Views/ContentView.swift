@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var authentication: Authentication
-
     var body: some View {
         TabView {
             NavigationView {

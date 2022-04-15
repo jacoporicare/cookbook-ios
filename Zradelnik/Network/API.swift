@@ -622,16 +622,16 @@ public final class MeQuery: GraphQLQuery {
   }
 }
 
-public final class RecipeDetailQuery: GraphQLQuery {
+public final class RecipesQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query RecipeDetail($id: ID!) {
-      recipe(id: $id) {
+    query Recipes {
+      recipes {
         __typename
         id
         title
-        fullImageUrl: imageUrl(size: {width: 1080, height: 1080}, format: WEBP)
+        imageUrl: imageUrl(size: {width: 1080, height: 1080}, format: WEBP)
         directions
         sideDish
         preparationTime
@@ -648,16 +648,9 @@ public final class RecipeDetailQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "RecipeDetail"
+  public let operationName: String = "Recipes"
 
-  public var id: GraphQLID
-
-  public init(id: GraphQLID) {
-    self.id = id
-  }
-
-  public var variables: GraphQLMap? {
-    return ["id": id]
+  public init() {
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -665,7 +658,7 @@ public final class RecipeDetailQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("recipe", arguments: ["id": GraphQLVariable("id")], type: .object(Recipe.selections)),
+        GraphQLField("recipes", type: .nonNull(.list(.nonNull(.object(Recipe.selections))))),
       ]
     }
 
@@ -675,16 +668,16 @@ public final class RecipeDetailQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(recipe: Recipe? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "recipe": recipe.flatMap { (value: Recipe) -> ResultMap in value.resultMap }])
+    public init(recipes: [Recipe]) {
+      self.init(unsafeResultMap: ["__typename": "Query", "recipes": recipes.map { (value: Recipe) -> ResultMap in value.resultMap }])
     }
 
-    public var recipe: Recipe? {
+    public var recipes: [Recipe] {
       get {
-        return (resultMap["recipe"] as? ResultMap).flatMap { Recipe(unsafeResultMap: $0) }
+        return (resultMap["recipes"] as! [ResultMap]).map { (value: ResultMap) -> Recipe in Recipe(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "recipe")
+        resultMap.updateValue(newValue.map { (value: Recipe) -> ResultMap in value.resultMap }, forKey: "recipes")
       }
     }
 
@@ -696,7 +689,7 @@ public final class RecipeDetailQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("title", type: .nonNull(.scalar(String.self))),
-          GraphQLField("imageUrl", alias: "fullImageUrl", arguments: ["size": ["width": 1080, "height": 1080], "format": "WEBP"], type: .scalar(String.self)),
+          GraphQLField("imageUrl", alias: "imageUrl", arguments: ["size": ["width": 1080, "height": 1080], "format": "WEBP"], type: .scalar(String.self)),
           GraphQLField("directions", type: .scalar(String.self)),
           GraphQLField("sideDish", type: .scalar(String.self)),
           GraphQLField("preparationTime", type: .scalar(Int.self)),
@@ -711,8 +704,8 @@ public final class RecipeDetailQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, title: String, fullImageUrl: String? = nil, directions: String? = nil, sideDish: String? = nil, preparationTime: Int? = nil, servingCount: Int? = nil, ingredients: [Ingredient]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "fullImageUrl": fullImageUrl, "directions": directions, "sideDish": sideDish, "preparationTime": preparationTime, "servingCount": servingCount, "ingredients": ingredients.flatMap { (value: [Ingredient]) -> [ResultMap] in value.map { (value: Ingredient) -> ResultMap in value.resultMap } }])
+      public init(id: GraphQLID, title: String, imageUrl: String? = nil, directions: String? = nil, sideDish: String? = nil, preparationTime: Int? = nil, servingCount: Int? = nil, ingredients: [Ingredient]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "imageUrl": imageUrl, "directions": directions, "sideDish": sideDish, "preparationTime": preparationTime, "servingCount": servingCount, "ingredients": ingredients.flatMap { (value: [Ingredient]) -> [ResultMap] in value.map { (value: Ingredient) -> ResultMap in value.resultMap } }])
       }
 
       public var __typename: String {
@@ -742,12 +735,12 @@ public final class RecipeDetailQuery: GraphQLQuery {
         }
       }
 
-      public var fullImageUrl: String? {
+      public var imageUrl: String? {
         get {
-          return resultMap["fullImageUrl"] as? String
+          return resultMap["imageUrl"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "fullImageUrl")
+          resultMap.updateValue(newValue, forKey: "imageUrl")
         }
       }
 
@@ -872,114 +865,6 @@ public final class RecipeDetailQuery: GraphQLQuery {
           set {
             resultMap.updateValue(newValue, forKey: "amountUnit")
           }
-        }
-      }
-    }
-  }
-}
-
-public final class RecipeListQuery: GraphQLQuery {
-  /// The raw GraphQL definition of this operation.
-  public let operationDefinition: String =
-    """
-    query RecipeList {
-      recipes {
-        __typename
-        id
-        title
-        thumbImageUrl: imageUrl(size: {width: 640, height: 640}, format: WEBP)
-      }
-    }
-    """
-
-  public let operationName: String = "RecipeList"
-
-  public init() {
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["Query"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("recipes", type: .nonNull(.list(.nonNull(.object(Recipe.selections))))),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(recipes: [Recipe]) {
-      self.init(unsafeResultMap: ["__typename": "Query", "recipes": recipes.map { (value: Recipe) -> ResultMap in value.resultMap }])
-    }
-
-    public var recipes: [Recipe] {
-      get {
-        return (resultMap["recipes"] as! [ResultMap]).map { (value: ResultMap) -> Recipe in Recipe(unsafeResultMap: value) }
-      }
-      set {
-        resultMap.updateValue(newValue.map { (value: Recipe) -> ResultMap in value.resultMap }, forKey: "recipes")
-      }
-    }
-
-    public struct Recipe: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["Recipe"]
-
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("title", type: .nonNull(.scalar(String.self))),
-          GraphQLField("imageUrl", alias: "thumbImageUrl", arguments: ["size": ["width": 640, "height": 640], "format": "WEBP"], type: .scalar(String.self)),
-        ]
-      }
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(id: GraphQLID, title: String, thumbImageUrl: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "thumbImageUrl": thumbImageUrl])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var id: GraphQLID {
-        get {
-          return resultMap["id"]! as! GraphQLID
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "id")
-        }
-      }
-
-      public var title: String {
-        get {
-          return resultMap["title"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "title")
-        }
-      }
-
-      public var thumbImageUrl: String? {
-        get {
-          return resultMap["thumbImageUrl"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "thumbImageUrl")
         }
       }
     }

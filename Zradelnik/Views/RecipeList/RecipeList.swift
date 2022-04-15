@@ -8,23 +8,19 @@
 import SwiftUI
 
 struct RecipeList: View {
-    @EnvironmentObject private var authentication: Authentication
-    @StateObject private var viewModel = RecipeListViewModel()
+    @EnvironmentObject private var model: Model
     @State private var showingRecipeForm = false
     @State private var activeRecipeId: String?
 
-    let columnLayout = Array(repeating: GridItem(), count: 2)
+    private let columnLayout = Array(repeating: GridItem(), count: 2)
 
     var body: some View {
-        LoadingContent(status: viewModel.recipes) { recipes in
-            loadedView(recipes: viewModel.filteredRecipes ?? recipes)
+        LoadingContent(status: model.loadingStatus) {
+            loadedView(recipes: model.filteredRecipes ?? model.recipes)
         }
         .navigationTitle("Žrádelník")
-        .onAppear {
-            viewModel.fetch()
-        }
         .toolbar {
-            if authentication.isLoggedIn {
+            if model.isLoggedIn {
                 Button {
                     showingRecipeForm = true
                 } label: {
@@ -35,7 +31,7 @@ struct RecipeList: View {
         .sheet(isPresented: $showingRecipeForm) {
             NavigationView {
                 RecipeForm {
-                    viewModel.fetch()
+                    model.refetchRecipes()
                 } onSave: { id in
                     showingRecipeForm = false
                     activeRecipeId = id
@@ -58,7 +54,7 @@ struct RecipeList: View {
                     )
 
                     NavigationLink(isActive: isActive) {
-                        RecipeView(id: recipe.id, title: recipe.title)
+                        RecipeView(recipe: recipe)
                     } label: {
                         RecipeListItem(recipe: recipe)
                     }
@@ -66,9 +62,9 @@ struct RecipeList: View {
             }
             .padding()
         }
-        .searchable(text: $viewModel.searchText, prompt: "Hledat recept")
-        .onReceive(viewModel.$searchText) { _ in
-            viewModel.submitSearchQuery()
+        .searchable(text: $model.searchText, prompt: "Hledat recept")
+        .onReceive(model.$searchText) { _ in
+            model.submitSearchQuery()
         }
     }
 }

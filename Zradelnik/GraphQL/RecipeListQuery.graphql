@@ -1,7 +1,0 @@
-query RecipeList {
-	recipes {
-		id
-		title
-		thumbImageUrl: imageUrl(size: { width: 640, height: 640 }, format: WEBP)
-	}
-}

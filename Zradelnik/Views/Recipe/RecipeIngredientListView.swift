@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeIngredientListView: View {
-    let ingredients: [RecipeDetail.Ingredient]
+    var ingredients: [Recipe.Ingredient]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -43,6 +43,6 @@ struct RecipeIngredientListView: View {
 
 struct RecipeDetailIngredients_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeIngredientListView(ingredients: recipeDetailPreviewData[0].ingredients?.map { RecipeDetail.Ingredient(from: $0) } ?? [])
+        RecipeIngredientListView(ingredients: recipePreviewData[0].ingredients?.map { Recipe.Ingredient(from: $0) } ?? [])
     }
 }

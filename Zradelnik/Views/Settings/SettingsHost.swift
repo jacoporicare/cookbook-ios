@@ -19,6 +19,6 @@ struct SettingsHost: View {
 struct SettingsHost_Previews: PreviewProvider {
     static var previews: some View {
         SettingsHost()
-            .environmentObject(Authentication())
+            .environmentObject(Model())
     }
 }

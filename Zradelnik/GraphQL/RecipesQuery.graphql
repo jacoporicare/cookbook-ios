@@ -1,8 +1,8 @@
-query RecipeDetail($id: ID!) {
-	recipe(id: $id) {
+query Recipes {
+	recipes {
 		id
 		title
-		fullImageUrl: imageUrl(size: { width: 1080, height: 1080 }, format: WEBP)
+		imageUrl: imageUrl(size: { width: 1080, height: 1080 }, format: WEBP)
 		directions
 		sideDish
 		preparationTime

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct RecipeListItem: View {
-    let recipe: Recipe
+    var recipe: Recipe
     
     var body: some View {
         VStack(spacing: 0) {
-            if let imageUrl = recipe.thumbImageUrl {
+            if let imageUrl = recipe.imageUrl {
                 AsyncImage(url: URL(string: imageUrl)) { phase in
                     switch phase {
                     case .success(let image):

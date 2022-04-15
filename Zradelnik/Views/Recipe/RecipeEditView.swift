@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct RecipeEditView: View {
-    @Environment(\.editMode) private var editMode
+    var recipe: Recipe
+    var refetch: () -> Void
 
-    var recipe: RecipeDetail
-    let refetch: () -> Void
+    @Environment(\.editMode) private var editMode
 
     var body: some View {
         RecipeForm(recipe: recipe, refetch: refetch, onSave: { _ in
@@ -26,7 +26,7 @@ struct RecipeEditView: View {
 struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeEditView(recipe: RecipeDetail(from: recipeDetailPreviewData[0])) {}
+            RecipeEditView(recipe: Recipe(from: recipePreviewData[0])) {}
         }
     }
 }

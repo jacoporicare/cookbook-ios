@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject private var authentication: Authentication
+    @EnvironmentObject private var model: Model
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = LoginViewModel()
 
@@ -33,7 +33,7 @@ struct LoginView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Přihlásit") {
                     viewModel.login { accessToken in
-                        authentication.updateAccessToken(accessToken: accessToken)
+                        model.updateAccessToken(accessToken: accessToken)
                         dismiss()
                     }
                 }

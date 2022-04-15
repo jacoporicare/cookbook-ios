@@ -10,10 +10,8 @@ import Foundation
 import SwiftUI
 
 class RecipeFormViewModel: ObservableObject {
-    private var request: Cancellable?
-
     @Published var draftRecipe = RecipeEdit.default
-    @Published var originalRecipe: RecipeDetail?
+    @Published var originalRecipe: Recipe?
     @Published var showingImagePicker = false
     @Published var inputImage: UIImage?
     @Published var saving = false
@@ -23,7 +21,9 @@ class RecipeFormViewModel: ObservableObject {
         !draftRecipe.title.isEmpty
     }
 
-    func setRecipe(recipe: RecipeDetail?) {
+    private var request: Cancellable?
+
+    func setRecipe(recipe: Recipe?) {
         guard let recipe = recipe else { return }
         draftRecipe = RecipeEdit(from: recipe)
         originalRecipe = recipe

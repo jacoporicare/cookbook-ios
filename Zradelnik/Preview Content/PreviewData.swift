@@ -7,8 +7,7 @@
 
 import Foundation
 
-var recipePreviewData: [RecipeListQuery.Data.Recipe] = load("recipeData.json")
-var recipeDetailPreviewData: [RecipeDetailQuery.Data.Recipe] = load("recipeData.json")
+var recipePreviewData: [RecipesQuery.Data.Recipe] = load("recipeData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
@@ -31,29 +30,11 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
-extension RecipeListQuery.Data.Recipe: Decodable {
+extension RecipesQuery.Data.Recipe: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case thumbImageUrl
-    }
-
-    public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.init(
-            id: try values.decode(String.self, forKey: .id),
-            title: try values.decode(String.self, forKey: .title),
-            thumbImageUrl: try values.decode(Optional<String>.self, forKey: .thumbImageUrl)
-        )
-    }
-}
-
-extension RecipeDetailQuery.Data.Recipe: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case fullImageUrl
+        case imageUrl
         case directions
         case sideDish
         case preparationTime
@@ -67,17 +48,17 @@ extension RecipeDetailQuery.Data.Recipe: Decodable {
         self.init(
             id: try values.decode(String.self, forKey: .id),
             title: try values.decode(String.self, forKey: .title),
-            fullImageUrl: try values.decode(Optional<String>.self, forKey: .fullImageUrl),
+            imageUrl: try values.decode(Optional<String>.self, forKey: .imageUrl),
             directions: try values.decode(Optional<String>.self, forKey: .directions),
             sideDish: try values.decode(Optional<String>.self, forKey: .sideDish),
             preparationTime: try values.decode(Optional<Int>.self, forKey: .preparationTime),
             servingCount: try values.decode(Optional<Int>.self, forKey: .servingCount),
-            ingredients: try values.decode(Optional<[RecipeDetailQuery.Data.Recipe.Ingredient]>.self, forKey: .ingredients)
+            ingredients: try values.decode(Optional<[RecipesQuery.Data.Recipe.Ingredient]>.self, forKey: .ingredients)
         )
     }
 }
 
-extension RecipeDetailQuery.Data.Recipe.Ingredient: Decodable {
+extension RecipesQuery.Data.Recipe.Ingredient: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case name

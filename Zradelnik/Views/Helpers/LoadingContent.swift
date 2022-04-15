@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct LoadingContent<Data, Content>: View where Content: View {
-    let status: LoadingStatus<Data>
-    let content: (_ data: Data) -> Content
+struct LoadingContent<Content>: View where Content: View {
+    var status: LoadingStatus
+    var content: () -> Content
 
     var body: some View {
         switch status {
@@ -17,15 +17,15 @@ struct LoadingContent<Data, Content>: View where Content: View {
             ProgressView()
         case .error:
             Text("Chyba")
-        case .data(let data):
-            content(data)
+        case .data:
+            content()
         }
     }
 }
 
-enum LoadingStatus<Data> {
+enum LoadingStatus {
     case loading
-    case data(Data)
+    case data
     case error
 }
 
@@ -40,8 +40,8 @@ struct LoadingContent_Previews: PreviewProvider {
                 Text("OK")
             }
 
-            LoadingContent(status: .data("Hello")) { data in
-                Text(data)
+            LoadingContent(status: .data) {
+                Text("Data")
             }
         }
     }
