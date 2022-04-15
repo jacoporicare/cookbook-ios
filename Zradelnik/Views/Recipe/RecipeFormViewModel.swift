@@ -33,7 +33,7 @@ class RecipeFormViewModel: ObservableObject {
         saving = true
 
         var files: [GraphQLFile] = []
-        if let data = inputImage?.jpegData(compressionQuality: 80) {
+        if let data = inputImage?.jpegData(compressionQuality: 100) {
             files.append(GraphQLFile(fieldName: "image", originalName: "image", data: data))
         }
 
