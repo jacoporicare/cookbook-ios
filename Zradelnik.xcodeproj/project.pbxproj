@@ -19,25 +19,21 @@
 		09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */; };
 		0946D78D27FF265E00F81F18 /* SettingsHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78C27FF265E00F81F18 /* SettingsHost.swift */; };
 		0946D78F27FF276B00F81F18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78E27FF276B00F81F18 /* SettingsView.swift */; };
-		0946D79127FF2C8D00F81F18 /* MeQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0946D79027FF2C8D00F81F18 /* MeQuery.graphql */; };
 		0946D79327FF325300F81F18 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D79227FF325300F81F18 /* Keychain.swift */; };
 		0955941B27F332AA00E270E4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955941A27F332AA00E270E4 /* Recipe.swift */; };
 		095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */; };
 		095C1D612801B5FF0074AA70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D602801B5FF0074AA70 /* Extensions.swift */; };
 		0960A1B228020D8700D339DC /* RecipeFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0960A1B128020D8700D339DC /* RecipeFormViewModel.swift */; };
-		0960A1B42802203800D339DC /* UpdateRecipeMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0960A1B32802203800D339DC /* UpdateRecipeMutation.graphql */; };
-		0960A1B62802205A00D339DC /* CreateRecipeMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0960A1B52802205A00D339DC /* CreateRecipeMutation.graphql */; };
 		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; settings = {ATTRIBUTES = (Required, ); }; };
 		0989F8E627F32D45009CB6BD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E527F32D45009CB6BD /* Network.swift */; };
 		098BD2AB27FC85BD006D9C7B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BD2AA27FC85BD006D9C7B /* LoginViewModel.swift */; };
 		098BD2B027FC8A50006D9C7B /* RecipeIngredientListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */; };
 		099185B727F9C2B30057FC2F /* recipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0900083227F359AE00D5A746 /* recipeData.json */; };
 		099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247527F31C9300BC6208 /* Preview Assets.xcassets */; };
-		099A12952804C9550036AD9C /* DeleteRecipe.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 099A12942804C9550036AD9C /* DeleteRecipe.graphql */; };
 		09A068222809562C0008563A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A068212809562C0008563A /* Model.swift */; };
-		09A06824280957F30008563A /* RecipesQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 09A06823280957F30008563A /* RecipesQuery.graphql */; };
 		09A06829280970A70008563A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 09A06828280970A70008563A /* CachedAsyncImage */; };
 		09A0682B280974D10008563A /* URLCache+imageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A0682A280974D10008563A /* URLCache+imageCache.swift */; };
+		09A0682D2809F3120008563A /* Recipe.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 09A0682C2809F3120008563A /* Recipe.graphql */; };
 		09A7A3EC27F64E5B00E62123 /* LoadingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */; };
 		09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3F327F6642500E62123 /* RecipeView.swift */; };
 		09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */; };
@@ -61,22 +57,18 @@
 		09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEdit.swift; sourceTree = "<group>"; };
 		0946D78C27FF265E00F81F18 /* SettingsHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHost.swift; sourceTree = "<group>"; };
 		0946D78E27FF276B00F81F18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		0946D79027FF2C8D00F81F18 /* MeQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = MeQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
 		0946D79227FF325300F81F18 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		0955941A27F332AA00E270E4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		095C1D602801B5FF0074AA70 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0960A1B128020D8700D339DC /* RecipeFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeFormViewModel.swift; sourceTree = "<group>"; };
-		0960A1B32802203800D339DC /* UpdateRecipeMutation.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UpdateRecipeMutation.graphql; sourceTree = "<group>"; };
-		0960A1B52802205A00D339DC /* CreateRecipeMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreateRecipeMutation.graphql; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		098BD2AA27FC85BD006D9C7B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		098BD2AC27FC8608006D9C7B /* LoginMutation.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = LoginMutation.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientListView.swift; sourceTree = "<group>"; };
-		099A12942804C9550036AD9C /* DeleteRecipe.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteRecipe.graphql; sourceTree = "<group>"; };
 		09A068212809562C0008563A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		09A06823280957F30008563A /* RecipesQuery.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = RecipesQuery.graphql; sourceTree = "<group>"; tabWidth = 2; };
 		09A0682A280974D10008563A /* URLCache+imageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLCache+imageCache.swift"; sourceTree = "<group>"; };
+		09A0682C2809F3120008563A /* Recipe.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Recipe.graphql; sourceTree = "<group>"; tabWidth = 2; };
 		09A7A3EB27F64E5B00E62123 /* LoadingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContent.swift; sourceTree = "<group>"; };
 		09A7A3F327F6642500E62123 /* RecipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		09AE246B27F31C9200BC6208 /* Žrádelník.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Žrádelník.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,8 +196,8 @@
 				09FE90E827FA48A9005C6AE3 /* Configuration.swift */,
 				0946D79227FF325300F81F18 /* Keychain.swift */,
 				092DC67027FB6F6000A1B0D6 /* Network */,
-				09AE247C27F31CBB00BC6208 /* Views */,
 				09A068202809561F0008563A /* Model */,
+				09AE247C27F31CBB00BC6208 /* Views */,
 				09AE248327F324A400BC6208 /* Resources */,
 				09AE248627F3284200BC6208 /* GraphQL */,
 				09AE247227F31C9300BC6208 /* Assets.xcassets */,
@@ -248,12 +240,8 @@
 		09AE248627F3284200BC6208 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
-				09A06823280957F30008563A /* RecipesQuery.graphql */,
-				0960A1B52802205A00D339DC /* CreateRecipeMutation.graphql */,
-				0960A1B32802203800D339DC /* UpdateRecipeMutation.graphql */,
-				099A12942804C9550036AD9C /* DeleteRecipe.graphql */,
-				098BD2AC27FC8608006D9C7B /* LoginMutation.graphql */,
-				0946D79027FF2C8D00F81F18 /* MeQuery.graphql */,
+				09A0682C2809F3120008563A /* Recipe.graphql */,
+				098BD2AC27FC8608006D9C7B /* Auth.graphql */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -337,14 +325,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0946D79127FF2C8D00F81F18 /* MeQuery.graphql in Resources */,
-				0960A1B62802205A00D339DC /* CreateRecipeMutation.graphql in Resources */,
-				09A06824280957F30008563A /* RecipesQuery.graphql in Resources */,
 				09AE247327F31C9300BC6208 /* Assets.xcassets in Resources */,
 				099185BA27F9C2B30057FC2F /* Preview Assets.xcassets in Resources */,
-				099A12952804C9550036AD9C /* DeleteRecipe.graphql in Resources */,
+				09A0682D2809F3120008563A /* Recipe.graphql in Resources */,
 				099185B727F9C2B30057FC2F /* recipeData.json in Resources */,
-				0960A1B42802203800D339DC /* UpdateRecipeMutation.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

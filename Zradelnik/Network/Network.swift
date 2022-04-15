@@ -28,7 +28,10 @@ class Network {
         let baseUrl: String = try! Configuration.value(for: "API_BASE_URL")
         let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: URL(string: "https://\(baseUrl)/graphql")!)
         
-        return ApolloClient(networkTransport: transport, store: store)
+        let apollo = ApolloClient(networkTransport: transport, store: store)
+        apollo.cacheKeyForObject = { $0["id"] }
+        
+        return apollo
     }
 }
 

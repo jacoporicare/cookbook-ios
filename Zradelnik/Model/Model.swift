@@ -69,7 +69,7 @@ extension Model {
             switch result {
             case .success(let result):
                 guard let data = result.data else { fallthrough }
-                self?.recipes = data.recipes.map { Recipe(from: $0) }
+                self?.recipes = data.recipes.map { Recipe(from: $0.fragments.recipeDetails) }
                 self?.loadingStatus = .data
             case .failure:
                 self?.loadingStatus = .error

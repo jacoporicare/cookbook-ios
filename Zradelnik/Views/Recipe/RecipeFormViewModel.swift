@@ -50,7 +50,7 @@ class RecipeFormViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     guard let recipe = result.data?.updateRecipe else { fallthrough }
-                    success(recipe.id)
+                    success(recipe.fragments.recipeDetails.id)
                 case .failure:
                     self?.error = true
                 }
@@ -67,7 +67,7 @@ class RecipeFormViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     guard let recipe = result.data?.createRecipe else { fallthrough }
-                    success(recipe.id)
+                    success(recipe.fragments.recipeDetails.id)
                 case .failure:
                     self?.error = true
                 }

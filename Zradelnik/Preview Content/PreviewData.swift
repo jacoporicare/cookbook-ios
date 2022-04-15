@@ -7,7 +7,7 @@
 
 import Foundation
 
-var recipePreviewData: [RecipesQuery.Data.Recipe] = load("recipeData.json")
+var recipePreviewData: [RecipeDetails] = load("recipeData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
@@ -30,7 +30,7 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
-extension RecipesQuery.Data.Recipe: Decodable {
+extension RecipeDetails: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -53,12 +53,12 @@ extension RecipesQuery.Data.Recipe: Decodable {
             sideDish: try values.decode(Optional<String>.self, forKey: .sideDish),
             preparationTime: try values.decode(Optional<Int>.self, forKey: .preparationTime),
             servingCount: try values.decode(Optional<Int>.self, forKey: .servingCount),
-            ingredients: try values.decode(Optional<[RecipesQuery.Data.Recipe.Ingredient]>.self, forKey: .ingredients)
+            ingredients: try values.decode(Optional<[RecipeDetails.Ingredient]>.self, forKey: .ingredients)
         )
     }
 }
 
-extension RecipesQuery.Data.Recipe.Ingredient: Decodable {
+extension RecipeDetails.Ingredient: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case name

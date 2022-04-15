@@ -1,0 +1,38 @@
+query Recipes {
+	recipes {
+		...RecipeDetails
+	}
+}
+
+mutation CreateRecipe($recipe: RecipeInput!, $image: Upload) {
+	createRecipe(recipe: $recipe, image: $image) {
+		...RecipeDetails
+	}
+}
+
+mutation UpdateRecipe($id: ID!, $recipe: RecipeInput!, $image: Upload) {
+	updateRecipe(id: $id, recipe: $recipe, image: $image) {
+		...RecipeDetails
+	}
+}
+
+mutation DeleteRecipe($id: ID!) {
+	deleteRecipe(id: $id)
+}
+
+fragment RecipeDetails on Recipe {
+	id
+	title
+	imageUrl(size: { width: 1080, height: 1080 }, format: WEBP)
+	directions
+	sideDish
+	preparationTime
+	servingCount
+	ingredients {
+		id
+		name
+		isGroup
+		amount
+		amountUnit
+	}
+}

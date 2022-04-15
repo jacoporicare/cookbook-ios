@@ -30,7 +30,7 @@ struct Recipe: Identifiable, Decodable {
 }
 
 extension Recipe {
-    init(from recipe: RecipesQuery.Data.Recipe) {
+    init(from recipe: RecipeDetails) {
         self.id = recipe.id
         self.title = recipe.title
         self.imageUrl = recipe.imageUrl
@@ -45,7 +45,7 @@ extension Recipe {
 }
 
 extension Recipe.Ingredient {
-    init(from ingredient: RecipesQuery.Data.Recipe.Ingredient) {
+    init(from ingredient: RecipeDetails.Ingredient) {
         self.id = ingredient.id
         self.name = ingredient.name
         self.isGroup = ingredient.isGroup
