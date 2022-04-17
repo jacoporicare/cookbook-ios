@@ -16,7 +16,7 @@ struct RecipeList: View {
 
     var body: some View {
         LoadingContent(status: model.loadingStatus) {
-            loadedView(recipes: model.filteredRecipes ?? model.recipes)
+            loadedView(recipes: model.filteredRecipes)
         }
         .navigationTitle("Žrádelník")
         .toolbar {
@@ -44,7 +44,7 @@ struct RecipeList: View {
     }
 
     func loadedView(recipes: [Recipe]) -> some View {
-        ScrollView(.vertical) {
+        ScrollView {
             LazyVGrid(columns: columnLayout) {
                 ForEach(recipes) { recipe in
                     let isActive = Binding<Bool>(
@@ -62,9 +62,6 @@ struct RecipeList: View {
             .padding()
         }
         .searchable(text: $model.searchText, prompt: "Hledat recept")
-        .onReceive(model.$searchText) { _ in
-            model.submitSearchQuery()
-        }
     }
 }
 

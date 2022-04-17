@@ -12,14 +12,23 @@ class Model: ObservableObject {
     @Published var userDisplayName: String?
     
     @Published var loadingStatus: LoadingStatus = .loading
-    @Published var recipes: [Recipe] = []
     @Published var searchText = ""
-    @Published var filteredRecipes: [Recipe]?
     
     var isLoggedIn: Bool {
         (try? ZKeychain.shared.contains(ZKeychain.Keys.accessToken)) ?? false
     }
     
+    var filteredRecipes: [Recipe] {
+        searchText.isEmpty
+            ? recipes
+            : recipes.filter {
+                $0.title
+                    .folding(options: .diacriticInsensitive, locale: .current)
+                    .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
+            }
+    }
+    
+    private var recipes: [Recipe] = []
     private var recipesWatcher: GraphQLQueryWatcher<RecipesQuery>?
 
     init() {
@@ -81,17 +90,5 @@ extension Model {
         guard let watcher = recipesWatcher else { return }
         loadingStatus = .loading
         watcher.refetch()
-    }
-    
-    func submitSearchQuery() {
-        if searchText.isEmpty {
-            filteredRecipes = nil
-        } else {
-            filteredRecipes = recipes.filter {
-                $0.title
-                    .folding(options: .diacriticInsensitive, locale: .current)
-                    .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
-            }
-        }
     }
 }
