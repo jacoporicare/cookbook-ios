@@ -47,12 +47,7 @@ struct RecipeList: View {
         ScrollView {
             LazyVGrid(columns: columnLayout) {
                 ForEach(recipes) { recipe in
-                    let isActive = Binding<Bool>(
-                        get: { activeRecipeId == recipe.id },
-                        set: { activeRecipeId = $0 ? recipe.id : nil }
-                    )
-
-                    NavigationLink(isActive: isActive) {
+                    NavigationLink(tag: recipe.id, selection: $activeRecipeId) {
                         RecipeView(recipe: recipe)
                     } label: {
                         RecipeListItem(recipe: recipe)
