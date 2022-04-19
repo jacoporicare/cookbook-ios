@@ -82,6 +82,18 @@ struct RecipeForm: View {
                             }
                         }
                 }
+
+                HStack {
+                    Text("Příloha")
+                    Spacer()
+                    TextField("", text: $viewModel.draftRecipe.sideDish)
+                        .textInputAutocapitalization(.never)
+                        .multilineTextAlignment(.trailing)
+                }
+            }
+
+            Section("Postup") {
+                TextEditor(text: $viewModel.draftRecipe.directions)
             }
 
             if viewModel.originalRecipe != nil {
