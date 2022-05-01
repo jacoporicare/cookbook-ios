@@ -21,7 +21,7 @@ struct ContentView: View {
                 SettingsHost()
             }
             .tabItem {
-                Label("Nastavení", systemImage: "gearshape")
+                Label("Nastavení", systemImage: "gear")
             }
         }
     }
