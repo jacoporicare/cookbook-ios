@@ -21,6 +21,11 @@ class RecipeFormViewModel: ObservableObject {
         !draftRecipe.title.isEmpty
     }
 
+    var isDirty: Bool {
+        (originalRecipe == nil && draftRecipe != RecipeEdit.default) ||
+            (originalRecipe != nil && draftRecipe != RecipeEdit(from: originalRecipe!))
+    }
+
     private var request: Cancellable?
 
     func setRecipe(recipe: Recipe?) {

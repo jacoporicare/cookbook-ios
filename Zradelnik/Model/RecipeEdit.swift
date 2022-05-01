@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeEdit {
+struct RecipeEdit: Equatable {
     var title: String = ""
     var directions: String = ""
     var sideDish: String = ""
@@ -16,7 +16,7 @@ struct RecipeEdit {
     var ingredients: [Ingredient] = []
     var tags: [String] = []
 
-    struct Ingredient {
+    struct Ingredient: Equatable {
         var name: String = ""
         var isGroup: Bool = false
         var amount: String = ""

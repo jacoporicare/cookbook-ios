@@ -16,6 +16,7 @@ struct RecipeForm: View {
     @EnvironmentObject private var model: Model
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
+    @State private var showingCancelConfirmation = false
 
     var body: some View {
         Form {
@@ -50,7 +51,6 @@ struct RecipeForm: View {
                 Text(viewModel.inputImage == nil && viewModel.originalRecipe?.imageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
             }
-            // .frame(maxWidth: .infinity, alignment: .center)
 
             Section("Základní informace") {
                 TextField("Název", text: $viewModel.draftRecipe.title)
@@ -123,7 +123,11 @@ struct RecipeForm: View {
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Zrušit") {
-                        onCancel()
+                        if viewModel.isDirty {
+                            showingCancelConfirmation = true
+                        } else {
+                            onCancel()
+                        }
                     }
                 }
             }
@@ -132,6 +136,7 @@ struct RecipeForm: View {
             ImagePicker(image: $viewModel.inputImage)
         }
         .disabled(viewModel.saving)
+        .interactiveDismissDisabled(viewModel.isDirty)
         .alert("Nastala chyba.", isPresented: $viewModel.error) {}
         .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
             Button("Smazat recept", role: .destructive) {
@@ -141,6 +146,12 @@ struct RecipeForm: View {
                 }
             }
             Button("Zrušit", role: .cancel) {}
+        }
+        .confirmationDialog(viewModel.originalRecipe == nil ? "Opravdu zahodit nový recept?" : "Opravdu zahodit změny?", isPresented: $showingCancelConfirmation, titleVisibility: .visible) {
+            Button("Zahodit změny", role: .destructive) {
+                onCancel()
+            }
+            Button("Pokračovat v úpravách", role: .cancel) {}
         }
     }
 }
