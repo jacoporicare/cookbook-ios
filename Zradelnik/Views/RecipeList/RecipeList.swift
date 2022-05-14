@@ -16,7 +16,11 @@ struct RecipeList: View {
 
     var body: some View {
         LoadingContent(status: model.loadingStatus) {
-            RecipeListView(recipes: model.filteredRecipes, activeRecipeId: $activeRecipeId)
+            RecipeListView(
+                recipes: model.filteredRecipes,
+                searchText: $model.searchText,
+                activeRecipeId: $activeRecipeId
+            )
         }
         .navigationTitle("Žrádelník")
         .toolbar {
@@ -46,9 +50,8 @@ struct RecipeList: View {
 
 struct RecipeListView: View {
     var recipes: [Recipe]
+    @Binding var searchText: String
     @Binding var activeRecipeId: String?
-
-    @EnvironmentObject private var model: Model
 
     private let columnLayout = Array(repeating: GridItem(), count: 2)
 
@@ -90,7 +93,7 @@ struct RecipeListView: View {
                 .padding()
                 .padding(.trailing, 25)
             }
-            .searchable(text: $model.searchText, prompt: "Hledat recept")
+            .searchable(text: $searchText, prompt: "Hledat recept")
             .overlay {
                 SectionLettersView(groupedRecipes: groupedRecipes, scrollViewProxy: proxy)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -153,9 +156,13 @@ struct SectionLettersView: View {
 struct RecipeList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RecipeListView(recipes: recipePreviewData.map { r in Recipe(from: r) }, activeRecipeId: .constant(nil))
-                .environmentObject(Model())
-                .navigationTitle("Žrádelník")
+            RecipeListView(
+                recipes: recipePreviewData.map { r in Recipe(from: r) },
+                searchText: .constant(""),
+                activeRecipeId: .constant(nil)
+            )
+            .environmentObject(Model())
+            .navigationTitle("Žrádelník")
         }
     }
 }
