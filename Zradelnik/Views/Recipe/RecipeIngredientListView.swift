@@ -41,8 +41,10 @@ struct RecipeIngredientListView: View {
     }
 }
 
+#if DEBUG
 struct RecipeDetailIngredients_Previews: PreviewProvider {
     static var previews: some View {
         RecipeIngredientListView(ingredients: recipePreviewData[0].ingredients?.map { Recipe.Ingredient(from: $0) } ?? [])
     }
 }
+#endif

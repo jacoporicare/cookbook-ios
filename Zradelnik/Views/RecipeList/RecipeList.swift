@@ -7,27 +7,16 @@
 
 import SwiftUI
 
+private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
+
 struct RecipeList: View {
     @EnvironmentObject private var model: Model
     @State private var showingRecipeForm = false
     @State private var activeRecipeId: String?
 
-    private let columnLayout = Array(repeating: GridItem(), count: 2)
-    private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
-
-    private var groupedRecipes: [String: [Recipe]] {
-        Dictionary(grouping: model.filteredRecipes, by: { recipe in
-            alphabet.contains(String(recipe.title.uppercased().prefix(2)))
-                ? String(recipe.title.uppercased().prefix(2))
-                : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
-                ? String(recipe.title.uppercased().prefix(1))
-                : "#"
-        })
-    }
-
     var body: some View {
         LoadingContent(status: model.loadingStatus) {
-            loadedView()
+            RecipeListView(recipes: model.filteredRecipes, activeRecipeId: $activeRecipeId)
         }
         .navigationTitle("Žrádelník")
         .toolbar {
@@ -53,8 +42,27 @@ struct RecipeList: View {
             }
         }
     }
+}
 
-    func loadedView() -> some View {
+struct RecipeListView: View {
+    var recipes: [Recipe]
+    @Binding var activeRecipeId: String?
+
+    @EnvironmentObject private var model: Model
+
+    private let columnLayout = Array(repeating: GridItem(), count: 2)
+
+    private var groupedRecipes: [String: [Recipe]] {
+        Dictionary(grouping: recipes, by: { recipe in
+            alphabet.contains(String(recipe.title.uppercased().prefix(2)))
+                ? String(recipe.title.uppercased().prefix(2))
+                : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
+                ? String(recipe.title.uppercased().prefix(1))
+                : "#"
+        })
+    }
+
+    var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVGrid(columns: columnLayout) {
@@ -117,7 +125,7 @@ struct SectionLettersView: View {
         )
     }
 
-    func dragObserver(letter: String) -> some View {
+    private func dragObserver(letter: String) -> some View {
         GeometryReader { geometry in
             dragObserver(geometry: geometry, letter: letter)
         }
@@ -145,9 +153,8 @@ struct SectionLettersView: View {
 struct RecipeList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RecipeList()
-//                .loadedView(recipes: recipePreviewData.map { Recipe(from: $0) })
-                .loadedView()
+            RecipeListView(recipes: recipePreviewData.map { r in Recipe(from: r) }, activeRecipeId: .constant(nil))
+                .environmentObject(Model())
                 .navigationTitle("Žrádelník")
         }
     }
