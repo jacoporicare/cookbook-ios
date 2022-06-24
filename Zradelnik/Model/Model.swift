@@ -47,14 +47,14 @@ class Model: ObservableObject {
 // MARK: - Authentication
 
 extension Model {
-    func updateAccessToken(accessToken: String?) {
+    func setAccessToken(accessToken: String) {
         ZKeychain.shared[ZKeychain.Keys.accessToken] = accessToken
-        
-        if accessToken != nil {
-            fetchCurrentUser()
-        } else {
-            userDisplayName = nil
-        }
+        fetchCurrentUser()
+    }
+    
+    func resetAccessToken() {
+        ZKeychain.shared[ZKeychain.Keys.accessToken] = nil
+        userDisplayName = nil
     }
     
     private func fetchCurrentUser() {

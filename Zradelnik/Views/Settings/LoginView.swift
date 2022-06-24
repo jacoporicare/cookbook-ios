@@ -33,7 +33,7 @@ struct LoginView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Přihlásit") {
                     viewModel.login { accessToken in
-                        model.updateAccessToken(accessToken: accessToken)
+                        model.setAccessToken(accessToken: accessToken)
                         dismiss()
                     }
                 }
