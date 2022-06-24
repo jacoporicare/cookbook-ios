@@ -92,8 +92,13 @@ struct RecipeForm: View {
                 }
             }
 
-            Section("Postup") {
-                TextEditor(text: $viewModel.draftRecipe.directions)
+            Section {
+                TextField("Zde napište postup receptu.", text: $viewModel.draftRecipe.directions, axis: .vertical)
+                    .lineLimit(3...)
+            } header: {
+                Text("Postup")
+            } footer: {
+                Text("Formátovat můžete pomocí [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).")
             }
 
             if viewModel.originalRecipe != nil {
