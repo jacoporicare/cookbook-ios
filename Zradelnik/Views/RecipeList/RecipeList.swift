@@ -10,16 +10,16 @@ import SwiftUI
 private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
 
 struct RecipeList: View {
+    @Binding var recipesStack: [Recipe]
+    
     @EnvironmentObject private var model: Model
     @State private var showingRecipeForm = false
-    @State private var activeRecipeId: String?
 
     var body: some View {
         LoadingContent(status: model.loadingStatus) {
             RecipeListView(
                 recipes: model.filteredRecipes,
-                searchText: $model.searchText,
-                activeRecipeId: $activeRecipeId
+                searchText: $model.searchText
             )
         }
         .navigationTitle("Žrádelník")
@@ -33,11 +33,11 @@ struct RecipeList: View {
             }
         }
         .sheet(isPresented: $showingRecipeForm) {
-            NavigationView {
-                RecipeForm { id in
+            NavigationStack {
+                RecipeForm { recipe in
                     model.refetchRecipes()
                     showingRecipeForm = false
-                    activeRecipeId = id
+                    recipesStack.append(recipe)
                 } onCancel: {
                     showingRecipeForm = false
                 }
@@ -51,7 +51,6 @@ struct RecipeList: View {
 struct RecipeListView: View {
     var recipes: [Recipe]
     @Binding var searchText: String
-    @Binding var activeRecipeId: String?
 
     private let columnLayout = Array(repeating: GridItem(), count: 2)
 
@@ -73,9 +72,7 @@ struct RecipeListView: View {
                         if let recipeGroup = groupedRecipes[letter] {
                             Section {
                                 ForEach(recipeGroup) { recipe in
-                                    NavigationLink(tag: recipe.id, selection: $activeRecipeId) {
-                                        RecipeView(recipe: recipe)
-                                    } label: {
+                                    NavigationLink(value: recipe) {
                                         RecipeListItem(recipe: recipe)
                                     }
                                 }
@@ -92,6 +89,9 @@ struct RecipeListView: View {
                 }
                 .padding()
                 .padding(.trailing, 25)
+            }
+            .navigationDestination(for: Recipe.self) { recipe in
+                RecipeView(recipe: recipe)
             }
             .searchable(text: $searchText, prompt: "Hledat recept")
             .overlay {
@@ -155,11 +155,10 @@ struct SectionLettersView: View {
 #if DEBUG
 struct RecipeList_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             RecipeListView(
                 recipes: recipePreviewData.map { r in Recipe(from: r) },
-                searchText: .constant(""),
-                activeRecipeId: .constant(nil)
+                searchText: .constant("")
             )
             .environmentObject(Model())
             .navigationTitle("Žrádelník")

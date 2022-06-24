@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecipeForm: View {
     var recipe: Recipe? = nil
-    var onSave: (String) -> Void
+    var onSave: (Recipe) -> Void
     var onCancel: () -> Void
 
     @EnvironmentObject private var model: Model
@@ -115,8 +115,8 @@ struct RecipeForm: View {
             Group {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Uložit") {
-                        viewModel.save { id in
-                            onSave(id)
+                        viewModel.save { recipe in
+                            onSave(recipe)
                         }
                     }
                     .disabled(!viewModel.isValid)

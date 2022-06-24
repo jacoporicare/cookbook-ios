@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recipe: Identifiable, Decodable {
+struct Recipe: Identifiable, Decodable, Hashable {
     var id: String
     var title: String
     var imageUrl: String?
@@ -26,6 +26,14 @@ struct Recipe: Identifiable, Decodable {
         var amount: String?
         var amountRaw: Double?
         var amountUnit: String?
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: Recipe, rhs: Recipe) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

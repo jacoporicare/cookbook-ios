@@ -34,7 +34,7 @@ class RecipeFormViewModel: ObservableObject {
         originalRecipe = recipe
     }
 
-    func save(success: @escaping (String) -> Void) {
+    func save(success: @escaping (Recipe) -> Void) {
         saving = true
 
         var files: [GraphQLFile] = []
@@ -55,7 +55,7 @@ class RecipeFormViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     guard let recipe = result.data?.updateRecipe else { fallthrough }
-                    success(recipe.fragments.recipeDetails.id)
+                    success(Recipe(from: recipe.fragments.recipeDetails))
                 case .failure:
                     self?.error = true
                 }
@@ -72,7 +72,7 @@ class RecipeFormViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     guard let recipe = result.data?.createRecipe else { fallthrough }
-                    success(recipe.fragments.recipeDetails.id)
+                    success(Recipe(from: recipe.fragments.recipeDetails))
                 case .failure:
                     self?.error = true
                 }

@@ -27,7 +27,7 @@ struct SettingsView: View {
             }
         }
         .sheet(isPresented: $showingLoginSheet) {
-            NavigationView {
+            NavigationStack {
                 LoginView()
             }
         }
