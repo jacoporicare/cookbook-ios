@@ -26,44 +26,6 @@ struct Recipe: Identifiable, Decodable, Hashable {
         var amount: String?
         var amountRaw: Double?
         var amountUnit: String?
-
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(id)
-            hasher.combine(name)
-            hasher.combine(isGroup)
-            hasher.combine(amountRaw)
-            hasher.combine(amountUnit)
-        }
-
-        static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
-            return lhs.id == rhs.id
-                && lhs.name == rhs.name
-                && lhs.isGroup == rhs.isGroup
-                && lhs.amountRaw == rhs.amountRaw
-                && lhs.amountUnit == rhs.amountUnit
-        }
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(title)
-        hasher.combine(imageUrl)
-        hasher.combine(directions)
-        hasher.combine(sideDish)
-        hasher.combine(preparationTimeRaw)
-        hasher.combine(servingCountRaw)
-        hasher.combine(ingredients)
-    }
-
-    static func == (lhs: Recipe, rhs: Recipe) -> Bool {
-        return lhs.id == rhs.id
-            && lhs.title == rhs.title
-            && lhs.imageUrl == rhs.imageUrl
-            && lhs.directions == rhs.directions
-            && lhs.sideDish == rhs.sideDish
-            && lhs.preparationTimeRaw == rhs.preparationTimeRaw
-            && lhs.servingCountRaw == rhs.servingCountRaw
-            && lhs.ingredients == rhs.ingredients
     }
 }
 
