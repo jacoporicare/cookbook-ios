@@ -12,8 +12,8 @@ struct RecipeForm: View {
     var recipe: Recipe? = nil
     var onSave: (Recipe) -> Void
     var onCancel: () -> Void
+    var onDelete: (() -> Void)? = nil
 
-    @EnvironmentObject private var model: Model
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
     @State private var showingCancelConfirmation = false
@@ -146,8 +146,7 @@ struct RecipeForm: View {
         .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
             Button("Smazat recept", role: .destructive) {
                 viewModel.delete {
-                    model.refetchRecipes()
-                    // No need to call dismiss() - refetchRecipes creates new recipes array which forces navigation back automatically
+                    onDelete?()
                 }
             }
             Button("Zrušit", role: .cancel) {}

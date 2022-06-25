@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoadingContent<Content>: View where Content: View {
     var status: LoadingStatus
-    var content: () -> Content
+    @ViewBuilder var content: () -> Content
 
     var body: some View {
         switch status {

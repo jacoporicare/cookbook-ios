@@ -12,7 +12,9 @@ class Model: ObservableObject {
     @Published var userDisplayName: String?
     
     @Published var loadingStatus: LoadingStatus = .loading
+    @Published var recipes: [Recipe] = []
     @Published var searchText = ""
+    @Published var recipeListStack: [Recipe] = []
     
     var isLoggedIn: Bool {
         (try? ZKeychain.shared.contains(ZKeychain.Keys.accessToken)) ?? false
@@ -28,7 +30,6 @@ class Model: ObservableObject {
             }
     }
     
-    private var recipes: [Recipe] = []
     private var recipesWatcher: GraphQLQueryWatcher<RecipesQuery>?
 
     init() {

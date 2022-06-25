@@ -10,8 +10,6 @@ import SwiftUI
 private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
 
 struct RecipeList: View {
-    @Binding var recipesStack: [Recipe]
-    
     @EnvironmentObject private var model: Model
     @State private var showingRecipeForm = false
 
@@ -23,6 +21,9 @@ struct RecipeList: View {
             )
         }
         .navigationTitle("Žrádelník")
+        .navigationDestination(for: Recipe.self) { recipe in
+            RecipeView(recipe: recipe)
+        }
         .toolbar {
             if model.isLoggedIn {
                 Button {
@@ -37,7 +38,7 @@ struct RecipeList: View {
                 RecipeForm { recipe in
                     model.refetchRecipes()
                     showingRecipeForm = false
-                    recipesStack.append(recipe)
+                    model.recipeListStack.append(recipe)
                 } onCancel: {
                     showingRecipeForm = false
                 }
@@ -89,9 +90,6 @@ struct RecipeListView: View {
                 }
                 .padding()
                 .padding(.trailing, 25)
-            }
-            .navigationDestination(for: Recipe.self) { recipe in
-                RecipeView(recipe: recipe)
             }
             .searchable(text: $searchText, prompt: "Hledat recept")
             .overlay {

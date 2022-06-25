@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var recipesStack: [Recipe] = []
-    
+    @EnvironmentObject private var model: Model
+
     var body: some View {
         TabView {
-            NavigationStack {
-                RecipeList(recipesStack: $recipesStack)
+            NavigationStack(path: $model.recipeListStack) {
+                RecipeList()
             }
             .tabItem {
                 Label("Recepty", systemImage: "fork.knife")
