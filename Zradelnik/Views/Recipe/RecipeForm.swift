@@ -53,12 +53,17 @@ struct RecipeForm: View {
             }
 
             Section("Základní informace") {
-                TextField("Název", text: $viewModel.draftRecipe.title)
+                HStack {
+                    Text("Název")
+                    Spacer()
+                    TextField("nezadáno", text: $viewModel.draftRecipe.title)
+                        .multilineTextAlignment(.trailing)
+                }
 
                 HStack {
-                    Text("Doba přípravy")
+                    Text("Doba přípravy (min)")
                     Spacer()
-                    TextField("", text: $viewModel.draftRecipe.preparationTime)
+                    TextField("nezadáno", text: $viewModel.draftRecipe.preparationTime)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
                         .onChange(of: viewModel.draftRecipe.preparationTime) { newValue in
@@ -66,14 +71,12 @@ struct RecipeForm: View {
                                 viewModel.draftRecipe.preparationTime = newValue.filter { $0.isNumber }
                             }
                         }
-                    Divider()
-                    Text("min")
                 }
 
                 HStack {
                     Text("Počet porcí")
                     Spacer()
-                    TextField("", text: $viewModel.draftRecipe.servingCount)
+                    TextField("nezadáno", text: $viewModel.draftRecipe.servingCount)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
                         .onChange(of: viewModel.draftRecipe.servingCount) { newValue in
@@ -86,7 +89,7 @@ struct RecipeForm: View {
                 HStack {
                     Text("Příloha")
                     Spacer()
-                    TextField("", text: $viewModel.draftRecipe.sideDish)
+                    TextField("nezadáno", text: $viewModel.draftRecipe.sideDish)
                         .textInputAutocapitalization(.never)
                         .multilineTextAlignment(.trailing)
                 }
