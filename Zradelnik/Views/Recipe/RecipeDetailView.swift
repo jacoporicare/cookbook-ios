@@ -15,6 +15,8 @@ struct RecipeDetailView: View {
     @EnvironmentObject private var model: Model
     @Environment(\.editMode) private var editMode
     
+    @State private var isIdleTimerDisabled = UIApplication.shared.isIdleTimerDisabled
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -28,6 +30,17 @@ struct RecipeDetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 20) {
+                    HStack {
+                        Spacer()
+                        Button {
+                            isIdleTimerDisabled.toggle()
+                            UIApplication.shared.isIdleTimerDisabled = isIdleTimerDisabled
+                        } label: {
+                            Label("Nezhasínat displej", systemImage: isIdleTimerDisabled ? "sun.max.fill" : "sun.max")
+                        }
+                        Spacer()
+                    }
+                    
                     if recipe.preparationTime != nil || recipe.servingCount != nil {
                         ScrollView(.horizontal) {
                             HStack(spacing: 20) {
@@ -89,6 +102,9 @@ struct RecipeDetailView: View {
                     editMode?.animation().wrappedValue = .active
                 }
             }
+        }
+        .onDisappear {
+            UIApplication.shared.isIdleTimerDisabled = false
         }
     }
 }
