@@ -113,7 +113,7 @@ struct RecipeForm: View {
                         HStack(alignment: VerticalAlignment.center) {
                             if !$ingredient.isGroup.wrappedValue {
                                 TextField("Množství", text: $ingredient.amount)
-                                    .keyboardType(.numberPad)
+                                    .keyboardType(.decimalPad)
                                     .multilineTextAlignment(.trailing)
                                     .frame(maxWidth: geo.size.width * 0.2)
                                     .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .black)

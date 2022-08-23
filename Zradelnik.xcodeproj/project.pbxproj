@@ -298,12 +298,10 @@
 			};
 			buildConfigurationList = 09AE246627F31C9200BC6208 /* Build configuration list for PBXProject "Zradelnik" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = cs;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				cs,
-				Base,
 			);
 			mainGroup = 09AE246227F31C9200BC6208;
 			packageReferences = (
