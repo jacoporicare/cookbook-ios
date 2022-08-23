@@ -18,7 +18,9 @@ class RecipeFormViewModel: ObservableObject {
     @Published var error = false
 
     var isValid: Bool {
-        !draftRecipe.title.isEmpty
+        !draftRecipe.title.isEmpty && !draftRecipe.ingredients.contains(where: { ingredient in
+            !ingredient.amount.isEmpty && Double(ingredient.amount.replacingOccurrences(of: ",", with: ".")) == nil
+        })
     }
 
     var isDirty: Bool {

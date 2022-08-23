@@ -92,6 +92,66 @@ struct RecipeForm: View {
                 }
             }
 
+            ForEach($viewModel.draftRecipe.ingredients) { $ingredient in
+                Section {
+                    HStack {
+                        TextField("Název", text: $ingredient.name)
+                            .textInputAutocapitalization(.never)
+
+                        Divider()
+
+                        Button {
+                            viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { i in i.id != $ingredient.id }
+                        } label: {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                        }
+                        .frame(width: 24)
+                    }
+
+                    GeometryReader { geo in
+                        HStack(alignment: VerticalAlignment.center) {
+                            if !$ingredient.isGroup.wrappedValue {
+                                TextField("Množství", text: $ingredient.amount)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .frame(maxWidth: geo.size.width * 0.2)
+                                    .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .black)
+
+                                Divider()
+
+                                TextField("Jednotka", text: $ingredient.amountUnit)
+                                    .textInputAutocapitalization(.never)
+                            } else {
+                                Text("Skupina")
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }
+
+                            Divider()
+
+                            Button {
+                                $ingredient.isGroup.wrappedValue.toggle()
+                            } label: {
+                                Image(systemName: $ingredient.isGroup.wrappedValue ? "folder.fill" : "folder")
+                            }
+                            .frame(width: 24)
+                        }
+                    }
+                } header: {
+                    if viewModel.draftRecipe.ingredients.first == $ingredient.wrappedValue {
+                        Text("Ingredience")
+                    }
+                }
+            }
+
+            Button {
+                viewModel.draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
+            } label: {
+                Text("Přidat ingredienci")
+                Spacer()
+            }
+
             Section("Postup") {
                 TextEditor(text: $viewModel.draftRecipe.directions)
             }

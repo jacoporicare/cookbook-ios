@@ -16,7 +16,8 @@ struct RecipeEdit: Equatable {
     var ingredients: [Ingredient] = []
     var tags: [String] = []
 
-    struct Ingredient: Equatable {
+    struct Ingredient: Equatable, Identifiable {
+        let id = UUID().uuidString
         var name: String = ""
         var isGroup: Bool = false
         var amount: String = ""
@@ -57,9 +58,11 @@ extension RecipeEdit {
             preparationTime: Int(preparationTime),
             servingCount: Int(servingCount),
             ingredients: !ingredients.isEmpty
-                ? ingredients.map { ingredient in
+                ? ingredients.filter { ingredient in
+                    !ingredient.name.isEmpty
+                }.map { ingredient in
                     IngredientInput(
-                        amount: Double(ingredient.amount),
+                        amount: Double(ingredient.amount.replacingOccurrences(of: ",", with: ".")),
                         amountUnit: !ingredient.amountUnit.isEmpty ? ingredient.amountUnit : nil,
                         name: ingredient.name,
                         isGroup: ingredient.isGroup ? true : false
