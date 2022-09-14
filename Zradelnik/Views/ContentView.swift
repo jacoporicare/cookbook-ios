@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var model: Model
+
     var body: some View {
         TabView {
-            NavigationView {
+            NavigationStack(path: $model.recipeListStack) {
                 RecipeList()
             }
             .tabItem {
                 Label("Recepty", systemImage: "fork.knife")
             }
 
-            NavigationView {
+            NavigationStack {
                 SettingsHost()
             }
             .tabItem {

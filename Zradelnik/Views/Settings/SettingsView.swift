@@ -17,7 +17,7 @@ struct SettingsView: View {
                 if model.isLoggedIn {
                     Text(model.userDisplayName ?? "Chyba")
                     Button("Odhlásit") {
-                        model.updateAccessToken(accessToken: nil)
+                        model.resetAccessToken()
                     }
                 } else {
                     Button("Přihlásit") {
@@ -27,7 +27,7 @@ struct SettingsView: View {
             }
         }
         .sheet(isPresented: $showingLoginSheet) {
-            NavigationView {
+            NavigationStack {
                 LoginView()
             }
         }

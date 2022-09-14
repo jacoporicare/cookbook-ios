@@ -10,10 +10,10 @@ import SwiftUI
 
 struct RecipeForm: View {
     var recipe: Recipe? = nil
-    var onSave: (String) -> Void
+    var onSave: (Recipe) -> Void
     var onCancel: () -> Void
+    var onDelete: (() -> Void)? = nil
 
-    @EnvironmentObject private var model: Model
     @StateObject private var viewModel = RecipeFormViewModel()
     @State private var showingDeleteConfirmation = false
     @State private var showingCancelConfirmation = false
@@ -53,12 +53,17 @@ struct RecipeForm: View {
             }
 
             Section("Základní informace") {
-                TextField("Název", text: $viewModel.draftRecipe.title)
+                HStack {
+                    Text("Název")
+                    Spacer()
+                    TextField("nezadáno", text: $viewModel.draftRecipe.title)
+                        .multilineTextAlignment(.trailing)
+                }
 
                 HStack {
-                    Text("Doba přípravy")
+                    Text("Doba přípravy (min)")
                     Spacer()
-                    TextField("", text: $viewModel.draftRecipe.preparationTime)
+                    TextField("nezadáno", text: $viewModel.draftRecipe.preparationTime)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
                         .onChange(of: viewModel.draftRecipe.preparationTime) { newValue in
@@ -66,14 +71,12 @@ struct RecipeForm: View {
                                 viewModel.draftRecipe.preparationTime = newValue.filter { $0.isNumber }
                             }
                         }
-                    Divider()
-                    Text("min")
                 }
 
                 HStack {
                     Text("Počet porcí")
                     Spacer()
-                    TextField("", text: $viewModel.draftRecipe.servingCount)
+                    TextField("nezadáno", text: $viewModel.draftRecipe.servingCount)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
                         .onChange(of: viewModel.draftRecipe.servingCount) { newValue in
@@ -86,7 +89,7 @@ struct RecipeForm: View {
                 HStack {
                     Text("Příloha")
                     Spacer()
-                    TextField("", text: $viewModel.draftRecipe.sideDish)
+                    TextField("nezadáno", text: $viewModel.draftRecipe.sideDish)
                         .textInputAutocapitalization(.never)
                         .multilineTextAlignment(.trailing)
                 }
@@ -152,8 +155,13 @@ struct RecipeForm: View {
                 Spacer()
             }
 
-            Section("Postup") {
-                TextEditor(text: $viewModel.draftRecipe.directions)
+            Section {
+                TextField("Zde napište postup receptu.", text: $viewModel.draftRecipe.directions, axis: .vertical)
+                    .lineLimit(3...)
+            } header: {
+                Text("Postup")
+            } footer: {
+                Text("Formátovat můžete pomocí [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).")
             }
 
             if viewModel.originalRecipe != nil {
@@ -175,8 +183,8 @@ struct RecipeForm: View {
             Group {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Uložit") {
-                        viewModel.save { id in
-                            onSave(id)
+                        viewModel.save { recipe in
+                            onSave(recipe)
                         }
                     }
                     .disabled(!viewModel.isValid)
@@ -201,8 +209,7 @@ struct RecipeForm: View {
         .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
             Button("Smazat recept", role: .destructive) {
                 viewModel.delete {
-                    model.refetchRecipes()
-                    // No need to call dismiss() - refetchRecipes creates new recipes array which forces navigation back automatically
+                    onDelete?()
                 }
             }
             Button("Zrušit", role: .cancel) {}

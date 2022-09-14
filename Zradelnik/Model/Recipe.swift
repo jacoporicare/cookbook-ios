@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Recipe: Identifiable, Decodable {
+struct Recipe: Identifiable, Decodable, Hashable {
     var id: String
     var title: String
     var imageUrl: String?
@@ -18,8 +18,8 @@ struct Recipe: Identifiable, Decodable {
     var servingCount: String?
     var servingCountRaw: Int?
     var ingredients: [Ingredient]
-    
-    struct Ingredient: Identifiable, Decodable {
+
+    struct Ingredient: Identifiable, Decodable, Hashable {
         var id: String
         var name: String
         var isGroup: Bool
@@ -58,10 +58,10 @@ extension Recipe.Ingredient {
 extension Recipe {
     func matches(_ string: String) -> Bool {
         string.isEmpty ||
-        title.localizedCaseInsensitiveContains(string) ||
-        ingredients.contains {
-            $0.name.localizedCaseInsensitiveContains(string)
-        }
+            title.localizedCaseInsensitiveContains(string) ||
+            ingredients.contains {
+                $0.name.localizedCaseInsensitiveContains(string)
+            }
     }
 }
 
@@ -69,15 +69,15 @@ private extension Int {
     func formattedTime() -> String {
         let hours = Int(Double(self) / 60.0)
         let minutes = self % 60
-        
+
         if hours > 0, minutes == 0 {
             return "\(hours) h"
         }
-        
+
         if hours > 0, minutes > 0 {
             return "\(hours) h \(minutes) min"
         }
-        
+
         return "\(minutes) min"
     }
 }

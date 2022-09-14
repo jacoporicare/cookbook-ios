@@ -10,13 +10,19 @@ import SwiftUI
 struct RecipeEditView: View {
     var recipe: Recipe
 
+    @EnvironmentObject private var model: Model
     @Environment(\.editMode) private var editMode
 
     var body: some View {
-        RecipeForm(recipe: recipe) { _ in
+        RecipeForm(recipe: recipe) { newRecipe in
+            // No need to refetch, Apollo does it automatically after mutation based on ID
+            model.recipeListStack[model.recipeListStack.endIndex - 1] = newRecipe
             editMode?.animation().wrappedValue = .inactive
         } onCancel: {
             editMode?.animation().wrappedValue = .inactive
+        } onDelete: {
+            model.refetchRecipes()
+            model.recipeListStack.removeAll()
         }
     }
 }
