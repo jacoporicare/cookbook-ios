@@ -118,7 +118,7 @@ struct RecipeForm: View {
                                 TextField("Množství", text: $ingredient.amount)
                                     .keyboardType(.decimalPad)
                                     .multilineTextAlignment(.trailing)
-                                    .frame(maxWidth: geo.size.width * 0.2)
+                                    .frame(maxWidth: geo.size.width * 0.25)
                                     .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .black)
 
                                 Divider()
