@@ -14,7 +14,7 @@ struct RecipeList: View {
     @State private var showingRecipeForm = false
 
     var body: some View {
-        LoadingContent(status: model.loadingStatus) {
+        LoadingContent(status: model.loadingStatus, onRetry: { model.refetchRecipes() }) {
             RecipeListView(
                 recipes: model.filteredRecipes,
                 searchText: $model.searchText
@@ -31,6 +31,12 @@ struct RecipeList: View {
                 } label: {
                     Label("Nový recept", systemImage: "plus")
                 }
+            }
+
+            Button {
+                model.refetchRecipes()
+            } label: {
+                Label("Obnovit", systemImage: "arrow.clockwise")
             }
         }
         .sheet(isPresented: $showingRecipeForm) {

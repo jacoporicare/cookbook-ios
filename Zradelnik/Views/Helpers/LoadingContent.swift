@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoadingContent<Content>: View where Content: View {
     var status: LoadingStatus
+    var onRetry: () -> Void
     @ViewBuilder var content: () -> Content
 
     var body: some View {
@@ -17,6 +18,14 @@ struct LoadingContent<Content>: View where Content: View {
             ProgressView()
         case .error:
             Text("Chyba")
+                .font(.title)
+            Text("Recepty se nepodařilo načíst.")
+            Button {
+                onRetry()
+            } label: {
+                Label("Zkusit znovu", systemImage: "arrow.clockwise")
+            }
+            .padding(.top)
         case .data:
             content()
         }
@@ -32,15 +41,15 @@ enum LoadingStatus {
 struct LoadingContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LoadingContent(status: .loading) {
+            LoadingContent(status: .loading, onRetry: {}) {
                 Text("OK")
             }
 
-            LoadingContent(status: .error) {
-                Text("OK")
+            LoadingContent(status: .error, onRetry: {}) {
+                Text("Error")
             }
 
-            LoadingContent(status: .data) {
+            LoadingContent(status: .data, onRetry: {}) {
                 Text("Data")
             }
         }

@@ -119,7 +119,7 @@ struct RecipeForm: View {
                                     .keyboardType(.decimalPad)
                                     .multilineTextAlignment(.trailing)
                                     .frame(maxWidth: geo.size.width * 0.25)
-                                    .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .black)
+                                    .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .none)
 
                                 Divider()
 
