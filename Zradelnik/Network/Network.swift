@@ -52,10 +52,28 @@ class TokenAddingInterceptor: ApolloInterceptor {
     }
 }
 
+class UnauthenticatedInterceptor: ApolloInterceptor {
+    func interceptAsync<Operation: GraphQLOperation>(
+        chain: RequestChain,
+        request: HTTPRequest<Operation>,
+        response: HTTPResponse<Operation>?,
+        completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void)
+    {
+        if response?.parsedResponse?.errors?.contains(where: { $0.message == "Unauthenticated" }) == true {
+            ZKeychain.shared[ZKeychain.Keys.accessToken] = nil
+        }
+        
+        chain.proceedAsync(request: request,
+                           response: response,
+                           completion: completion)
+    }
+}
+
 class NetworkInterceptorProvider: DefaultInterceptorProvider {
     override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
         var interceptors = super.interceptors(for: operation)
         interceptors.insert(TokenAddingInterceptor(), at: 0)
+        interceptors.append(UnauthenticatedInterceptor())
         return interceptors
     }
 }

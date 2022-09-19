@@ -59,13 +59,13 @@ extension Model {
     }
     
     private func fetchCurrentUser() {
-        Network.shared.apollo.fetch(query: MeQuery()) { result in
+        Network.shared.apollo.fetch(query: MeQuery(), cachePolicy: .returnCacheDataAndFetch) { [weak self] result in
             switch result {
             case .success(let result):
                 guard let displayName = result.data?.me.displayName else { fallthrough }
-                self.userDisplayName = displayName
+                self?.userDisplayName = displayName
             case .failure:
-                self.userDisplayName = "Chyba"
+                self?.userDisplayName = "Chyba"
             }
         }
     }
