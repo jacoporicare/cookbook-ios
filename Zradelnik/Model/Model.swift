@@ -74,7 +74,17 @@ extension Model {
 // MARK: - Recipes
 
 extension Model {
+    var lastFetchDate: Date? {
+        get {
+            return UserDefaults.standard.object(forKey: "lastFetchDate") as? Date
+        }
+        set(date) {
+            UserDefaults.standard.set(date, forKey: "lastFetchDate")
+        }
+    }
+    
     private func fetchRecipes() {
+        lastFetchDate = Date()
         recipesWatcher = Network.shared.apollo.watch(query: RecipesQuery(), cachePolicy: .returnCacheDataAndFetch) { [weak self] result in
             switch result {
             case .success(let result):
@@ -89,6 +99,7 @@ extension Model {
     
     func refetchRecipes() {
         guard let watcher = recipesWatcher else { return }
+        lastFetchDate = Date()
         loadingStatus = .loading
         watcher.refetch()
     }
