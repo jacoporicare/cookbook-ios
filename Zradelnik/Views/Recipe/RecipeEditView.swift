@@ -21,7 +21,7 @@ struct RecipeEditView: View {
         } onCancel: {
             editMode?.animation().wrappedValue = .inactive
         } onDelete: {
-            model.refetchRecipes()
+            model.fetchRecipes()
             model.recipeListStack.removeAll()
         }
     }

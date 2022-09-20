@@ -14,7 +14,7 @@ struct RecipeList: View {
     @State private var showingRecipeForm = false
 
     var body: some View {
-        LoadingContent(status: model.loadingStatus, onRetry: { model.refetchRecipes() }) {
+        LoadingContent(status: model.loadingStatus, onRetry: { model.fetchRecipes() }) {
             RecipeListView(
                 recipes: model.filteredRecipes,
                 searchText: $model.searchText
@@ -34,7 +34,7 @@ struct RecipeList: View {
             }
 
             Button {
-                model.refetchRecipes()
+                model.fetchRecipes()
             } label: {
                 Label("Obnovit", systemImage: "arrow.clockwise")
             }
@@ -42,7 +42,7 @@ struct RecipeList: View {
         .sheet(isPresented: $showingRecipeForm) {
             NavigationStack {
                 RecipeForm { recipe in
-                    model.refetchRecipes()
+                    model.fetchRecipes()
                     showingRecipeForm = false
                     model.recipeListStack.append(recipe)
                 } onCancel: {

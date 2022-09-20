@@ -16,16 +16,24 @@ struct LoadingContent<Content>: View where Content: View {
         switch status {
         case .loading:
             ProgressView()
-        case .error:
-            Text("Chyba")
-                .font(.title)
-            Text("Recepty se nepodařilo načíst.")
-            Button {
-                onRetry()
-            } label: {
-                Label("Zkusit znovu", systemImage: "arrow.clockwise")
+        case .error(let err):
+            VStack {
+                Text("Chyba")
+                    .font(.title)
+
+                Text("Recepty se nepodařilo načíst.")
+
+                Button {
+                    onRetry()
+                } label: {
+                    Label("Zkusit znovu", systemImage: "arrow.clockwise")
+                }
+                .padding(.top)
+
+                Text(err)
+                    .font(.footnote.monospaced())
+                    .padding(.top)
             }
-            .padding(.top)
         case .data:
             content()
         }
@@ -35,7 +43,7 @@ struct LoadingContent<Content>: View where Content: View {
 enum LoadingStatus {
     case loading
     case data
-    case error
+    case error(String)
 }
 
 struct LoadingContent_Previews: PreviewProvider {
@@ -45,7 +53,7 @@ struct LoadingContent_Previews: PreviewProvider {
                 Text("OK")
             }
 
-            LoadingContent(status: .error, onRetry: {}) {
+            LoadingContent(status: .error("Some error here"), onRetry: {}) {
                 Text("Error")
             }
 

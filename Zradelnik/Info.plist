@@ -4,5 +4,13 @@
 <dict>
 	<key>API_BASE_URL</key>
 	<string>$(API_BASE_URL)</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>cz.jakubricar.Zradelnik.refresh</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 </dict>
 </plist>
