@@ -108,11 +108,16 @@ extension Model {
         }
     }
 
-    // Called from background app refresh - Apollo updates the cache and the watcher above is triggered automatically (the function result itself is currently not used)
-    func fetchRecipesAsync() async throws -> GraphQLResult<RecipesQuery.Data> {
+    // Called from background app refresh - Apollo updates the cache and the watcher above is triggered automatically
+    func fetchRecipesAsync() async throws {
         return try await withCheckedThrowingContinuation { continuation in
             Network.shared.apollo.fetch(query: RecipesQuery(), cachePolicy: .fetchIgnoringCacheData) { result in
-                continuation.resume(with: result)
+                switch result {
+                case .success:
+                    continuation.resume()
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
             }
         }
     }

@@ -24,11 +24,11 @@ struct RecipeFormView: View {
                 Image(uiImage: image)
                     .centerCropped()
                     .listRowInsets(EdgeInsets())
-                    .frame(height: 390)
+                    .frame(height: 320)
                     .onTapGesture {
                         viewModel.showingImagePicker = true
                     }
-            } else if let imageUrl = viewModel.originalRecipe?.imageUrl {
+            } else if let imageUrl = viewModel.originalRecipe?.fullImageUrl {
                 ZStack {
                     CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
                         image.centerCropped()
@@ -37,7 +37,7 @@ struct RecipeFormView: View {
                     }
                 }
                 .listRowInsets(EdgeInsets())
-                .frame(height: 390)
+                .frame(height: 320)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .onTapGesture {
                     viewModel.showingImagePicker = true
@@ -48,7 +48,7 @@ struct RecipeFormView: View {
                 viewModel.showingImagePicker = true
             } label: {
                 Spacer()
-                Text(viewModel.inputImage == nil && viewModel.originalRecipe?.imageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                Text(viewModel.inputImage == nil && viewModel.originalRecipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
             }
 

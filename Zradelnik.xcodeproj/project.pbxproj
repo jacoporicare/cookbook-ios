@@ -10,6 +10,7 @@
 		0900083527F35AFC00D5A746 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083427F35AFC00D5A746 /* PreviewData.swift */; };
 		0900083727F35B9A00D5A746 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083627F35B9A00D5A746 /* RecipesView.swift */; };
 		0905C3B128048B41005E3949 /* RecipeFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905C3B028048B41005E3949 /* RecipeFormView.swift */; };
+		0905EF2C28DF55D500C65B11 /* RecipesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905EF2B28DF55D500C65B11 /* RecipesListView.swift */; };
 		091815FA27FDF836003A2250 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 091815F927FDF836003A2250 /* KeychainAccess */; };
 		091815FE27FDFF68003A2250 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FD27FDFF68003A2250 /* LoginView.swift */; };
 		092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC67127FB6F9C00A1B0D6 /* API.swift */; };
@@ -49,6 +50,7 @@
 		0900083427F35AFC00D5A746 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		0900083627F35B9A00D5A746 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
 		0905C3B028048B41005E3949 /* RecipeFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeFormView.swift; sourceTree = "<group>"; };
+		0905EF2B28DF55D500C65B11 /* RecipesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListView.swift; sourceTree = "<group>"; };
 		091815FD27FDFF68003A2250 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		092DC67127FB6F9C00A1B0D6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0934E7F028DF27E0003C8C0B /* RecipesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesGridView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				0900083627F35B9A00D5A746 /* RecipesView.swift */,
 				0934E7F028DF27E0003C8C0B /* RecipesGridView.swift */,
+				0905EF2B28DF55D500C65B11 /* RecipesListView.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */,
 				0989F8E627F32D45009CB6BD /* Network.swift in Sources */,
 				0955941B27F332AA00E270E4 /* Recipe.swift in Sources */,
+				0905EF2C28DF55D500C65B11 /* RecipesListView.swift in Sources */,
 				0905C3B128048B41005E3949 /* RecipeFormView.swift in Sources */,
 				092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */,
 				0946D78F27FF276B00F81F18 /* SettingsFormView.swift in Sources */,

@@ -25,7 +25,7 @@ struct ZradelnikApp: App {
             scheduleAppRefresh()
 
             do {
-                _ = try await model.fetchRecipesAsync()
+                try await model.fetchRecipesAsync()
             } catch {
                 NSLog(error.localizedDescription)
             }
@@ -56,3 +56,5 @@ func scheduleAppRefresh() {
 
     try? BGTaskScheduler.shared.submit(request)
 }
+
+let zradelnikLocale = Locale(identifier: "cs")

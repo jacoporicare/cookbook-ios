@@ -34,7 +34,9 @@ extension RecipeDetails: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case imageUrl
+        case gridImageUrl
+        case listImageUrl
+        case fullImageUrl
         case directions
         case sideDish
         case preparationTime
@@ -48,7 +50,9 @@ extension RecipeDetails: Decodable {
         self.init(
             id: try values.decode(String.self, forKey: .id),
             title: try values.decode(String.self, forKey: .title),
-            imageUrl: try values.decode(Optional<String>.self, forKey: .imageUrl),
+            gridImageUrl: try values.decode(Optional<String>.self, forKey: .gridImageUrl),
+            listImageUrl: try values.decode(Optional<String>.self, forKey: .listImageUrl),
+            fullImageUrl: try values.decode(Optional<String>.self, forKey: .fullImageUrl),
             directions: try values.decode(Optional<String>.self, forKey: .directions),
             sideDish: try values.decode(Optional<String>.self, forKey: .sideDish),
             preparationTime: try values.decode(Optional<Int>.self, forKey: .preparationTime),

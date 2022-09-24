@@ -20,13 +20,13 @@ struct RecipeDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if let imageUrl = recipe.imageUrl {
+                if let imageUrl = recipe.fullImageUrl {
                     CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
                         image.centerCropped()
                     } placeholder: {
                         ProgressView()
                     }
-                    .frame(height: 390)
+                    .frame(height: 320)
                 }
                 
                 VStack(alignment: .leading, spacing: 20) {

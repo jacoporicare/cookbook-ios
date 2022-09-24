@@ -12,49 +12,63 @@ private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F
 
 struct RecipesGridView: View {
     var recipes: [Recipe]
-    @Binding var searchText: String
-    
+    var searchText: Binding<String>
+
+    private var recipeGroups: [RecipeGroup]
+    private var letters: [String]
+
     private let columnLayout = Array(repeating: GridItem(), count: 2)
-    
-    private var groupedRecipes: [String: [Recipe]] {
-        Dictionary(grouping: recipes, by: { recipe in
+
+    init(recipes: [Recipe], searchText: Binding<String>) {
+        self.recipes = recipes
+        self.searchText = searchText
+
+        let dict = Dictionary(grouping: recipes) { recipe in
             alphabet.contains(String(recipe.title.uppercased().prefix(2)))
                 ? String(recipe.title.uppercased().prefix(2))
                 : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
                 ? String(recipe.title.uppercased().prefix(1))
                 : "#"
-        })
+        }
+
+        self.recipeGroups = dict
+            .map { key, value in
+                RecipeGroup(id: key, recipes: value)
+            }
+            .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
+
+        self.letters = dict.keys.sorted { $0.compare($1, locale: zradelnikLocale) == .orderedAscending }
     }
-    
+
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVGrid(columns: columnLayout) {
-                    ForEach(alphabet, id: \.self) { letter in
-                        if let recipeGroup = groupedRecipes[letter] {
-                            Section {
-                                ForEach(recipeGroup) { recipe in
-                                    NavigationLink(value: recipe) {
-                                        RecipesGridItemView(recipe: recipe)
-                                    }
+                    ForEach(recipeGroups) { recipeGroup in
+                        Section {
+                            ForEach(recipeGroup.recipes) { recipe in
+                                NavigationLink {
+                                    RecipeView(recipe: recipe)
+                                } label: {
+                                    RecipesGridItemView(recipe: recipe)
                                 }
-                            } header: {
-                                HStack {
-                                    Text(letter)
-                                        .foregroundColor(.gray)
-                                    Spacer()
-                                }
-                                .padding(.top)
                             }
+                        } header: {
+                            HStack {
+                                Text(recipeGroup.id)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }
+                            .padding(.top)
                         }
                     }
                 }
                 .padding()
                 .padding(.trailing, 25)
             }
-            .searchable(text: $searchText, prompt: "Hledat recept")
+            .searchable(text: searchText, prompt: "Hledat recept")
             .overlay {
-                SectionLettersView(groupedRecipes: groupedRecipes, scrollViewProxy: proxy)
+                SectionLettersView(letters: letters, scrollViewProxy: proxy)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.trailing, 10)
             }
@@ -63,16 +77,14 @@ struct RecipesGridView: View {
 }
 
 struct SectionLettersView: View {
-    var groupedRecipes: [String: [Recipe]]
+    var letters: [String]
     var scrollViewProxy: ScrollViewProxy
-    
+
     @GestureState private var dragLocation: CGPoint = .zero
-    
-    private let locale = Locale(identifier: "cs")
-    
+
     var body: some View {
         VStack(spacing: 2) {
-            ForEach(groupedRecipes.keys.sorted { $0.compare($1, locale: locale) == .orderedAscending }, id: \.self) { letter in
+            ForEach(letters, id: \.self) { letter in
                 Text(letter)
                     .font(.caption)
                     .foregroundColor(.blue)
@@ -86,13 +98,13 @@ struct SectionLettersView: View {
                 }
         )
     }
-    
+
     private func dragObserver(letter: String) -> some View {
         GeometryReader { geometry in
             dragObserver(geometry: geometry, letter: letter)
         }
     }
-    
+
     // This function is needed as view builders don't allow to have
     // pure logic in their body.
     private func dragObserver(geometry: GeometryProxy, letter: String) -> some View {
@@ -102,21 +114,21 @@ struct SectionLettersView: View {
             DispatchQueue.main.async {
                 let feedbackGenerator = UISelectionFeedbackGenerator()
                 feedbackGenerator.selectionChanged()
-                
+
                 scrollViewProxy.scrollTo(letter, anchor: .top)
             }
         }
-        
+
         return Rectangle().fill(Color.clear)
     }
 }
 
 struct RecipesGridItemView: View {
     var recipe: Recipe
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            if let imageUrl = recipe.imageUrl {
+            if let imageUrl = recipe.gridImageUrl {
                 CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { phase in
                     switch phase {
                     case .success(let image):
@@ -141,7 +153,7 @@ struct RecipesGridItemView: View {
         .cornerRadius(8)
         .shadow(radius: 8)
     }
-    
+
     var placeholder: some View {
         Image("placeholder")
             .resizable()
@@ -149,10 +161,10 @@ struct RecipesGridItemView: View {
             .modifier(ImageModifier(recipe: recipe))
             .background(Color(.lightGray))
     }
-    
+
     struct ImageModifier: ViewModifier {
         let recipe: Recipe
-        
+
         func body(content: Content) -> some View {
             content
                 .frame(height: 200)
@@ -167,7 +179,7 @@ struct RecipesGridItemView: View {
 
 struct TextOverlay: View {
     var recipe: Recipe
-    
+
     var gradient: LinearGradient {
         .linearGradient(
             Gradient(colors: [.black.opacity(0.6), .black.opacity(0)]),
@@ -175,7 +187,7 @@ struct TextOverlay: View {
             endPoint: .center
         )
     }
-    
+
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             gradient
@@ -198,7 +210,7 @@ struct RecipesGridView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             RecipesGridView(
-                recipes: recipePreviewData.map { r in Recipe(from: r) },
+                recipes: recipePreviewData.map { Recipe(from: $0) },
                 searchText: .constant("")
             )
             .environmentObject(Model())

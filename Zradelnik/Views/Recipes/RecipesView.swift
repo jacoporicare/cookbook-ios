@@ -7,16 +7,31 @@
 
 import SwiftUI
 
+enum RecipesDisplayMode: String {
+    case grid
+    case list
+}
+
 struct RecipesView: View {
     @EnvironmentObject private var model: Model
+    // AppStorage works weirdly - only the first change triggers render then it's stuck
+//    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
+    @State private var displayMode = RecipesDisplayMode(rawValue: UserDefaults.standard.string(forKey: "displayMode") ?? RecipesDisplayMode.grid.rawValue) ?? RecipesDisplayMode.grid
     @State private var showingRecipeForm = false
 
     var body: some View {
         LoadingContentView(status: model.loadingStatus, loadingText: "Načítání receptů...") {
-            RecipesGridView(
-                recipes: model.filteredRecipes,
-                searchText: $model.searchText
-            )
+            if displayMode == .grid {
+                RecipesGridView(
+                    recipes: model.filteredRecipes,
+                    searchText: $model.searchText
+                )
+            } else {
+                RecipesListView(
+                    recipes: model.filteredRecipes,
+                    searchText: $model.searchText
+                )
+            }
         } errorContent: { err in
             VStack {
                 Text("Chyba")
@@ -49,10 +64,24 @@ struct RecipesView: View {
                 }
             }
 
-            Button {
-                model.fetchRecipes()
+            Menu {
+                Button {
+                    model.fetchRecipes()
+                } label: {
+                    Label("Aktualizovat", systemImage: "arrow.clockwise")
+                }
+
+                Divider()
+
+                Picker("Zobrazit jako", selection: $displayMode) {
+                    Label("Mřížka", systemImage: "square.grid.2x2")
+                        .tag(RecipesDisplayMode.grid)
+
+                    Label("Seznam", systemImage: "list.bullet")
+                        .tag(RecipesDisplayMode.list)
+                }
             } label: {
-                Label("Obnovit", systemImage: "arrow.clockwise")
+                Label("Možnosti", systemImage: "ellipsis.circle")
             }
         }
         .sheet(isPresented: $showingRecipeForm) {
@@ -67,6 +96,9 @@ struct RecipesView: View {
                 .navigationTitle("Nový recept")
                 .navigationBarTitleDisplayMode(.inline)
             }
+        }
+        .onChange(of: displayMode) { newValue in
+            UserDefaults.standard.set(newValue.rawValue, forKey: "displayMode")
         }
     }
 }

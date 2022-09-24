@@ -10,7 +10,9 @@ import Foundation
 struct Recipe: Identifiable, Decodable, Hashable {
     var id: String
     var title: String
-    var imageUrl: String?
+    var gridImageUrl: String?
+    var listImageUrl: String?
+    var fullImageUrl: String?
     var directions: String?
     var sideDish: String?
     var preparationTime: String?
@@ -33,7 +35,9 @@ extension Recipe {
     init(from recipe: RecipeDetails) {
         self.id = recipe.id
         self.title = recipe.title
-        self.imageUrl = recipe.imageUrl
+        self.gridImageUrl = recipe.gridImageUrl
+        self.listImageUrl = recipe.listImageUrl
+        self.fullImageUrl = recipe.fullImageUrl
         self.directions = recipe.directions
         self.sideDish = recipe.sideDish
         self.preparationTime = recipe.preparationTime?.formattedTime()

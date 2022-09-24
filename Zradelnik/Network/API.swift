@@ -707,7 +707,9 @@ public struct RecipeDetails: GraphQLFragment {
       __typename
       id
       title
-      imageUrl(size: {width: 1080, height: 1080}, format: WEBP)
+      gridImageUrl: imageUrl(size: {width: 640, height: 640}, format: WEBP)
+      listImageUrl: imageUrl(size: {width: 240, height: 180}, format: WEBP)
+      fullImageUrl: imageUrl(size: {width: 1280, height: 960}, format: WEBP)
       directions
       sideDish
       preparationTime
@@ -730,7 +732,9 @@ public struct RecipeDetails: GraphQLFragment {
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
       GraphQLField("title", type: .nonNull(.scalar(String.self))),
-      GraphQLField("imageUrl", arguments: ["size": ["width": 1080, "height": 1080], "format": "WEBP"], type: .scalar(String.self)),
+      GraphQLField("imageUrl", alias: "gridImageUrl", arguments: ["size": ["width": 640, "height": 640], "format": "WEBP"], type: .scalar(String.self)),
+      GraphQLField("imageUrl", alias: "listImageUrl", arguments: ["size": ["width": 240, "height": 180], "format": "WEBP"], type: .scalar(String.self)),
+      GraphQLField("imageUrl", alias: "fullImageUrl", arguments: ["size": ["width": 1280, "height": 960], "format": "WEBP"], type: .scalar(String.self)),
       GraphQLField("directions", type: .scalar(String.self)),
       GraphQLField("sideDish", type: .scalar(String.self)),
       GraphQLField("preparationTime", type: .scalar(Int.self)),
@@ -745,8 +749,8 @@ public struct RecipeDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, title: String, imageUrl: String? = nil, directions: String? = nil, sideDish: String? = nil, preparationTime: Int? = nil, servingCount: Int? = nil, ingredients: [Ingredient]? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "imageUrl": imageUrl, "directions": directions, "sideDish": sideDish, "preparationTime": preparationTime, "servingCount": servingCount, "ingredients": ingredients.flatMap { (value: [Ingredient]) -> [ResultMap] in value.map { (value: Ingredient) -> ResultMap in value.resultMap } }])
+  public init(id: GraphQLID, title: String, gridImageUrl: String? = nil, listImageUrl: String? = nil, fullImageUrl: String? = nil, directions: String? = nil, sideDish: String? = nil, preparationTime: Int? = nil, servingCount: Int? = nil, ingredients: [Ingredient]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Recipe", "id": id, "title": title, "gridImageUrl": gridImageUrl, "listImageUrl": listImageUrl, "fullImageUrl": fullImageUrl, "directions": directions, "sideDish": sideDish, "preparationTime": preparationTime, "servingCount": servingCount, "ingredients": ingredients.flatMap { (value: [Ingredient]) -> [ResultMap] in value.map { (value: Ingredient) -> ResultMap in value.resultMap } }])
   }
 
   public var __typename: String {
@@ -776,12 +780,30 @@ public struct RecipeDetails: GraphQLFragment {
     }
   }
 
-  public var imageUrl: String? {
+  public var gridImageUrl: String? {
     get {
-      return resultMap["imageUrl"] as? String
+      return resultMap["gridImageUrl"] as? String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "imageUrl")
+      resultMap.updateValue(newValue, forKey: "gridImageUrl")
+    }
+  }
+
+  public var listImageUrl: String? {
+    get {
+      return resultMap["listImageUrl"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "listImageUrl")
+    }
+  }
+
+  public var fullImageUrl: String? {
+    get {
+      return resultMap["fullImageUrl"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "fullImageUrl")
     }
   }
 

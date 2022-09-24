@@ -23,7 +23,9 @@ mutation DeleteRecipe($id: ID!) {
 fragment RecipeDetails on Recipe {
 	id
 	title
-	imageUrl(size: { width: 1080, height: 1080 }, format: WEBP)
+	gridImageUrl: imageUrl(size: { width: 640, height: 640 }, format: WEBP)
+  listImageUrl: imageUrl(size: { width: 240, height: 180 }, format: WEBP)
+	fullImageUrl: imageUrl(size: { width: 1280, height: 960 }, format: WEBP)
 	directions
 	sideDish
 	preparationTime
