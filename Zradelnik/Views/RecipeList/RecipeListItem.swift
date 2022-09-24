@@ -81,6 +81,8 @@ struct TextOverlay: View {
                     .font(.title3)
                     .bold()
                     .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.75)
             }
             .padding()
         }

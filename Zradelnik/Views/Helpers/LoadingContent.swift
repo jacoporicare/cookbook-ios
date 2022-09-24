@@ -7,33 +7,23 @@
 
 import SwiftUI
 
-struct LoadingContent<Content>: View where Content: View {
+struct LoadingContent<Content: View, ErrorContent: View>: View {
     var status: LoadingStatus
-    var onRetry: () -> Void
+    var loadingText: String = "Načítání..."
     @ViewBuilder var content: () -> Content
+    @ViewBuilder var errorContent: (String) -> ErrorContent
 
     var body: some View {
         switch status {
         case .loading:
-            ProgressView()
-        case .error(let err):
-            VStack {
-                Text("Chyba")
-                    .font(.title)
+            VStack(spacing: 8) {
+                ProgressView()
 
-                Text("Recepty se nepodařilo načíst.")
-
-                Button {
-                    onRetry()
-                } label: {
-                    Label("Zkusit znovu", systemImage: "arrow.clockwise")
-                }
-                .padding(.top)
-
-                Text(err)
-                    .font(.footnote.monospaced())
-                    .padding(.top)
+                Text(loadingText)
+                    .foregroundColor(.secondary)
             }
+        case .error(let err):
+            errorContent(err)
         case .data:
             content()
         }
@@ -49,16 +39,22 @@ enum LoadingStatus {
 struct LoadingContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LoadingContent(status: .loading, onRetry: {}) {
+            LoadingContent(status: .loading) {
                 Text("OK")
-            }
-
-            LoadingContent(status: .error("Some error here"), onRetry: {}) {
+            } errorContent: { _ in
                 Text("Error")
             }
 
-            LoadingContent(status: .data, onRetry: {}) {
+            LoadingContent(status: .error("Some error here")) {
+                Text("OK")
+            } errorContent: { err in
+                Text("Error: \(err)")
+            }
+
+            LoadingContent(status: .data) {
                 Text("Data")
+            } errorContent: { _ in
+                Text("Error")
             }
         }
     }

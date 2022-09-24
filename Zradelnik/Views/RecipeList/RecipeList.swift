@@ -14,11 +14,29 @@ struct RecipeList: View {
     @State private var showingRecipeForm = false
 
     var body: some View {
-        LoadingContent(status: model.loadingStatus, onRetry: { model.fetchRecipes() }) {
+        LoadingContent(status: model.loadingStatus, loadingText: "Načítání receptů...") {
             RecipeListView(
                 recipes: model.filteredRecipes,
                 searchText: $model.searchText
             )
+        } errorContent: { err in
+            VStack {
+                Text("Chyba")
+                    .font(.title)
+
+                Text("Recepty se nepodařilo načíst.")
+
+                Button {
+                    model.fetchRecipes()
+                } label: {
+                    Label("Zkusit znovu", systemImage: "arrow.clockwise")
+                }
+                .padding(.top)
+
+                Text(err)
+                    .font(.footnote.monospaced())
+                    .padding(.top)
+            }
         }
         .navigationTitle("Žrádelník")
         .navigationDestination(for: Recipe.self) { recipe in
