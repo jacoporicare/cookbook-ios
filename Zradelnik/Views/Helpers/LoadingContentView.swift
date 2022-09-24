@@ -1,5 +1,5 @@
 //
-//  LoadingContent.swift
+//  LoadingContentView.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 31.03.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoadingContent<Content: View, ErrorContent: View>: View {
+struct LoadingContentView<Content: View, ErrorContent: View>: View {
     var status: LoadingStatus
     var loadingText: String = "Načítání..."
     @ViewBuilder var content: () -> Content
@@ -39,19 +39,19 @@ enum LoadingStatus {
 struct LoadingContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LoadingContent(status: .loading) {
+            LoadingContentView(status: .loading) {
                 Text("OK")
             } errorContent: { _ in
                 Text("Error")
             }
 
-            LoadingContent(status: .error("Some error here")) {
+            LoadingContentView(status: .error("Some error here")) {
                 Text("OK")
             } errorContent: { err in
                 Text("Error: \(err)")
             }
 
-            LoadingContent(status: .data) {
+            LoadingContentView(status: .data) {
                 Text("Data")
             } errorContent: { _ in
                 Text("Error")

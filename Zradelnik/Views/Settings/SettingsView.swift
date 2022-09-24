@@ -8,33 +8,15 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject private var model: Model
-    @State private var showingLoginSheet = false
+    @State private var showingLogin = false
 
     var body: some View {
-        Form {
-            Section("Účet") {
-                if model.isLoggedIn {
-                    Text(model.userDisplayName ?? "Chyba")
-                    Button("Odhlásit") {
-                        model.resetAccessToken()
-                    }
-                } else {
-                    Button("Přihlásit") {
-                        showingLoginSheet = true
-                    }
-                }
-            }
-        }
-        .sheet(isPresented: $showingLoginSheet) {
-            NavigationStack {
-                LoginView()
-            }
-        }
+        SettingsFormView()
+            .navigationTitle("Nastavení")
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
+struct SettingsHost_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
             .environmentObject(Model())

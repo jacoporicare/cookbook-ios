@@ -1,5 +1,5 @@
 //
-//  RecipeForm.swift
+//  RecipeFormView.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 11.04.2022.
@@ -8,7 +8,7 @@
 import CachedAsyncImage
 import SwiftUI
 
-struct RecipeForm: View {
+struct RecipeFormView: View {
     var recipe: Recipe? = nil
     var onSave: (Recipe) -> Void
     var onCancel: () -> Void
@@ -227,8 +227,8 @@ struct RecipeForm: View {
 struct RecipeForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeForm(recipe: Recipe(from: recipePreviewData[0])) { _ in } onCancel: {}
-            RecipeForm { _ in } onCancel: {}
+            RecipeFormView(recipe: Recipe(from: recipePreviewData[0])) { _ in } onCancel: {}
+            RecipeFormView { _ in } onCancel: {}
         }
     }
 }

@@ -13,14 +13,14 @@ struct ContentView: View {
     var body: some View {
         TabView {
             NavigationStack(path: $model.recipeListStack) {
-                RecipeList()
+                RecipesView()
             }
             .tabItem {
                 Label("Recepty", systemImage: "fork.knife")
             }
 
             NavigationStack {
-                SettingsHost()
+                SettingsView()
             }
             .tabItem {
                 Label("Nastavení", systemImage: "gear")

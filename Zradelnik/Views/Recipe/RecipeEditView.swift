@@ -14,7 +14,7 @@ struct RecipeEditView: View {
     @Environment(\.editMode) private var editMode
 
     var body: some View {
-        RecipeForm(recipe: recipe) { newRecipe in
+        RecipeFormView(recipe: recipe) { newRecipe in
             // No need to refetch, Apollo does it automatically after mutation based on ID
             model.recipeListStack[model.recipeListStack.endIndex - 1] = newRecipe
             editMode?.animation().wrappedValue = .inactive
