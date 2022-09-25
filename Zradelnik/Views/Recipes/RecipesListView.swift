@@ -86,9 +86,17 @@ struct RecipesListItemView: View {
             .frame(width: 80, height: 60)
             .cornerRadius(4)
 
-            Text(recipe.title)
-                .lineLimit(2)
-                .minimumScaleFactor(0.75)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(recipe.title)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.75)
+
+                if let preparationTime = recipe.preparationTime {
+                    Text(preparationTime)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+            }
         }
     }
 
@@ -112,7 +120,10 @@ struct RecipesListView_Previews: PreviewProvider {
 
 struct RecipesListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesListItemView(recipe: Recipe(from: recipePreviewData[4]))
+        List {
+            RecipesListItemView(recipe: Recipe(from: recipePreviewData[3]))
+            RecipesListItemView(recipe: Recipe(from: recipePreviewData[114]))
+        }
     }
 }
 #endif

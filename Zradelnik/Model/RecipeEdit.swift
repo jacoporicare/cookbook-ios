@@ -17,7 +17,7 @@ struct RecipeEdit: Equatable {
     var tags: [String] = []
 
     struct Ingredient: Equatable, Identifiable {
-        let id = UUID().uuidString
+        var id = UUID().uuidString
         var name: String = ""
         var isGroup: Bool = false
         var amount: String = ""
@@ -42,6 +42,7 @@ extension RecipeEdit {
 
 extension RecipeEdit.Ingredient {
     init(from ingredient: Recipe.Ingredient) {
+        id = ingredient.id
         name = ingredient.name
         isGroup = ingredient.isGroup
         amount = ingredient.amountRaw?.formatted() ?? ""
