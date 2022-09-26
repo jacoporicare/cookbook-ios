@@ -627,7 +627,7 @@
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.51.2;
+				minimumVersion = 0.53.0;
 			};
 		};
 		09A06827280970A70008563A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
