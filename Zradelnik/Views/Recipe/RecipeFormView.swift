@@ -5,6 +5,7 @@
 //  Created by Jakub Řičař on 11.04.2022.
 //
 
+import Apollo
 import CachedAsyncImage
 import SwiftUI
 
@@ -14,21 +15,37 @@ struct RecipeFormView: View {
     var onCancel: () -> Void
     var onDelete: (() -> Void)? = nil
 
-    @StateObject private var viewModel = ViewModel()
+    @State private var draftRecipe = RecipeEdit.default
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+    @State private var saving = false
+    @State private var error = false
     @State private var showingDeleteConfirmation = false
     @State private var showingCancelConfirmation = false
 
+    private var isValid: Bool {
+        !draftRecipe.title.isEmpty && !draftRecipe.ingredients.contains(where: { ingredient in
+            !ingredient.amount.isEmpty && Double(ingredient.amount.replacingOccurrences(of: ",", with: ".")) == nil
+        })
+    }
+
+    private var isDirty: Bool {
+        (recipe == nil && draftRecipe != RecipeEdit.default)
+            || (recipe != nil && draftRecipe != RecipeEdit(from: recipe!))
+            || inputImage != nil
+    }
+
     var body: some View {
         Form {
-            if let image = viewModel.inputImage {
-                Image(uiImage: image)
+            if let inputImage {
+                Image(uiImage: inputImage)
                     .centerCropped()
                     .listRowInsets(EdgeInsets())
                     .frame(height: 320)
                     .onTapGesture {
-                        viewModel.showingImagePicker = true
+                        showingImagePicker = true
                     }
-            } else if let imageUrl = viewModel.originalRecipe?.fullImageUrl {
+            } else if let imageUrl = recipe?.fullImageUrl {
                 ZStack {
                     CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
                         image.centerCropped()
@@ -40,33 +57,45 @@ struct RecipeFormView: View {
                 .frame(height: 320)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .onTapGesture {
-                    viewModel.showingImagePicker = true
+                    showingImagePicker = true
                 }
             }
 
-            Button(action: { viewModel.showingImagePicker = true }) {
-                Spacer()
-                Text(viewModel.inputImage == nil && viewModel.originalRecipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
-                Spacer()
+            HStack {
+                Button(action: { showingImagePicker = true }) {
+                    Spacer()
+                    Text(inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                    Spacer()
+                }
+
+                if inputImage != nil {
+                    Divider()
+
+                    Button(role: .destructive, action: { inputImage = nil }) {
+                        Spacer()
+                        Text("Zrušit změnu")
+                        Spacer()
+                    }
+                }
             }
 
             Section("Základní informace") {
                 HStack {
                     Text("Název")
                     Spacer()
-                    TextField("nezadáno", text: $viewModel.draftRecipe.title)
+                    TextField("nezadáno", text: $draftRecipe.title)
                         .multilineTextAlignment(.trailing)
                 }
 
                 HStack {
                     Text("Doba přípravy (min)")
                     Spacer()
-                    TextField("nezadáno", text: $viewModel.draftRecipe.preparationTime)
+                    TextField("nezadáno", text: $draftRecipe.preparationTime)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
-                        .onChange(of: viewModel.draftRecipe.preparationTime) { newValue in
+                        .onChange(of: draftRecipe.preparationTime) { newValue in
                             if !newValue.isEmpty, Int(newValue) == nil {
-                                viewModel.draftRecipe.preparationTime = newValue.filter { $0.isNumber }
+                                draftRecipe.preparationTime = newValue.filter { $0.isNumber }
                             }
                         }
                 }
@@ -74,12 +103,12 @@ struct RecipeFormView: View {
                 HStack {
                     Text("Počet porcí")
                     Spacer()
-                    TextField("nezadáno", text: $viewModel.draftRecipe.servingCount)
+                    TextField("nezadáno", text: $draftRecipe.servingCount)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.trailing)
-                        .onChange(of: viewModel.draftRecipe.servingCount) { newValue in
+                        .onChange(of: draftRecipe.servingCount) { newValue in
                             if !newValue.isEmpty, Int(newValue) == nil {
-                                viewModel.draftRecipe.servingCount = newValue.filter { $0.isNumber }
+                                draftRecipe.servingCount = newValue.filter { $0.isNumber }
                             }
                         }
                 }
@@ -87,13 +116,13 @@ struct RecipeFormView: View {
                 HStack {
                     Text("Příloha")
                     Spacer()
-                    TextField("nezadáno", text: $viewModel.draftRecipe.sideDish)
+                    TextField("nezadáno", text: $draftRecipe.sideDish)
                         .textInputAutocapitalization(.never)
                         .multilineTextAlignment(.trailing)
                 }
             }
 
-            ForEach($viewModel.draftRecipe.ingredients) { $ingredient in
+            ForEach($draftRecipe.ingredients) { $ingredient in
                 Section {
                     HStack {
                         TextField("Název", text: $ingredient.name)
@@ -102,7 +131,7 @@ struct RecipeFormView: View {
                         Divider()
 
                         Button(action: {
-                            viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { $0.id != $ingredient.id }
+                            draftRecipe.ingredients = draftRecipe.ingredients.filter { $0.id != $ingredient.id }
                         }) {
                             Image(systemName: "trash")
                                 .foregroundColor(.red)
@@ -138,21 +167,21 @@ struct RecipeFormView: View {
                         }
                     }
                 } header: {
-                    if viewModel.draftRecipe.ingredients.first == $ingredient.wrappedValue {
+                    if draftRecipe.ingredients.first == $ingredient.wrappedValue {
                         Text("Ingredience")
                     }
                 }
             }
 
             Button(action: {
-                viewModel.draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
+                draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
             }) {
                 Text("Přidat ingredienci")
                 Spacer()
             }
 
             Section {
-                TextField("Zde napište postup receptu.", text: $viewModel.draftRecipe.directions, axis: .vertical)
+                TextField("Zde napište postup receptu.", text: $draftRecipe.directions, axis: .vertical)
                     .lineLimit(3...)
             } header: {
                 Text("Postup")
@@ -160,7 +189,7 @@ struct RecipeFormView: View {
                 Text("Formátovat můžete pomocí [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).")
             }
 
-            if viewModel.originalRecipe != nil {
+            if recipe != nil {
                 Button(action: { showingDeleteConfirmation = true }) {
                     Text("Smazat recept")
                     Spacer()
@@ -168,24 +197,21 @@ struct RecipeFormView: View {
                 .foregroundColor(.red)
             }
         }
+        .onAppear {
+            guard let recipe else { return }
+            draftRecipe = RecipeEdit(from: recipe)
+        }
         .buttonStyle(.borderless) // Fix non-clickable buttons in Form
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            viewModel.setRecipe(recipe: recipe)
-        }
         .toolbar {
             Group {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Uložit") {
-                        viewModel.save { recipe in
-                            onSave(recipe)
-                        }
-                    }
-                    .disabled(!viewModel.isValid)
+                    Button("Uložit", action: save)
+                        .disabled(!isValid)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Zrušit") {
-                        if viewModel.isDirty {
+                        if isDirty {
                             showingCancelConfirmation = true
                         } else {
                             onCancel()
@@ -194,25 +220,85 @@ struct RecipeFormView: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.showingImagePicker) {
-            ImagePicker(image: $viewModel.inputImage)
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
         }
-        .disabled(viewModel.saving)
-        .interactiveDismissDisabled(viewModel.isDirty)
-        .alert("Nastala chyba.", isPresented: $viewModel.error) {}
+        .disabled(saving)
+        .interactiveDismissDisabled(isDirty)
+        .alert("Nastala chyba.", isPresented: $error) {}
         .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
-            Button("Smazat recept", role: .destructive) {
-                viewModel.delete {
-                    onDelete?()
+            Button("Smazat recept", role: .destructive, action: delete)
+            Button("Zrušit", role: .cancel, action: {})
+        }
+        .confirmationDialog(recipe == nil ? "Opravdu zahodit nový recept?" : "Opravdu zahodit změny?", isPresented: $showingCancelConfirmation, titleVisibility: .visible) {
+            Button("Zahodit změny", role: .destructive, action: onCancel)
+            Button("Pokračovat v úpravách", role: .cancel) {}
+        }
+    }
+
+    func save() {
+        saving = true
+
+        var files: [GraphQLFile] = []
+        if let data = inputImage?.jpegData(compressionQuality: 100) {
+            files.append(.init(fieldName: "image", originalName: "image", data: data))
+        }
+
+        if let recipe {
+            let mutation = UpdateRecipeMutation(
+                id: recipe.id,
+                recipe: draftRecipe.toRecipeInput(),
+                image: inputImage != nil ? "image" : nil
+            )
+
+            Network.shared.apollo.upload(operation: mutation, files: files) { result in
+                self.saving = false
+
+                switch result {
+                case .success(let result):
+                    guard let recipe = result.data?.updateRecipe else { fallthrough }
+                    onSave(Recipe(from: recipe.fragments.recipeDetails))
+                case .failure:
+                    self.error = true
                 }
             }
-            Button("Zrušit", role: .cancel) {}
-        }
-        .confirmationDialog(viewModel.originalRecipe == nil ? "Opravdu zahodit nový recept?" : "Opravdu zahodit změny?", isPresented: $showingCancelConfirmation, titleVisibility: .visible) {
-            Button("Zahodit změny", role: .destructive) {
-                onCancel()
+        } else {
+            let mutation = CreateRecipeMutation(
+                recipe: draftRecipe.toRecipeInput(),
+                image: inputImage != nil ? "image" : nil
+            )
+
+            Network.shared.apollo.upload(operation: mutation, files: files) { result in
+                self.saving = false
+
+                switch result {
+                case .success(let result):
+                    guard let recipe = result.data?.createRecipe else { fallthrough }
+                    onSave(Recipe(from: recipe.fragments.recipeDetails))
+                case .failure:
+                    self.error = true
+                }
             }
-            Button("Pokračovat v úpravách", role: .cancel) {}
+        }
+    }
+
+    func delete() {
+        guard let recipe else { return }
+
+        saving = true
+
+        let mutation = DeleteRecipeMutation(id: recipe.id)
+
+        Network.shared.apollo.perform(mutation: mutation) { result in
+            self.saving = false
+
+            switch result {
+            case .success(let result):
+                guard let _ = result.data?.deleteRecipe else { fallthrough }
+                onDelete?()
+            case .failure:
+                self.error = true
+            }
         }
     }
 }
