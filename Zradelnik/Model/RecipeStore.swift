@@ -19,12 +19,8 @@ class RecipeStore: ObservableObject {
     }
 
     var lastFetchDate: Date? {
-        get {
-            return UserDefaults.standard.object(forKey: "lastFetchDate") as? Date
-        }
-        set(date) {
-            UserDefaults.standard.set(date, forKey: "lastFetchDate")
-        }
+        get { UserDefaults.standard.object(forKey: "lastFetchDate") as? Date }
+        set { UserDefaults.standard.set(newValue, forKey: "lastFetchDate") }
     }
 
     func watch() {
