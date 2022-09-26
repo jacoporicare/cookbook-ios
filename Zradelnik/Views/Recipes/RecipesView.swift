@@ -13,23 +13,36 @@ enum RecipesDisplayMode: String {
 }
 
 struct RecipesView: View {
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var routing: Routing
+    @EnvironmentObject private var currentUserStore: CurrentUserStore
+    @EnvironmentObject private var recipeStore: RecipeStore
     // AppStorage works weirdly - only the first change triggers render then it's stuck
 //    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
     @State private var displayMode = RecipesDisplayMode(rawValue: UserDefaults.standard.string(forKey: "displayMode") ?? RecipesDisplayMode.grid.rawValue) ?? RecipesDisplayMode.grid
     @State private var showingRecipeForm = false
+    @State private var searchText = ""
+
+    var filteredRecipes: [Recipe] {
+        searchText.isEmpty
+            ? recipeStore.recipes
+            : recipeStore.recipes.filter {
+                $0.title
+                    .folding(options: .diacriticInsensitive, locale: .current)
+                    .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
+            }
+    }
 
     var body: some View {
-        LoadingContentView(status: model.loadingStatus, loadingText: "Načítání receptů...") {
+        LoadingContentView(status: recipeStore.loadingStatus, loadingText: "Načítání receptů...") {
             if displayMode == .grid {
                 RecipesGridView(
-                    recipes: model.filteredRecipes,
-                    searchText: $model.searchText
+                    recipes: filteredRecipes,
+                    searchText: $searchText
                 )
             } else {
                 RecipesListView(
-                    recipes: model.filteredRecipes,
-                    searchText: $model.searchText
+                    recipes: filteredRecipes,
+                    searchText: $searchText
                 )
             }
         } errorContent: { err in
@@ -39,9 +52,7 @@ struct RecipesView: View {
 
                 Text("Recepty se nepodařilo načíst.")
 
-                Button {
-                    model.fetchRecipes()
-                } label: {
+                Button(action: { recipeStore.reload() }) {
                     Label("Zkusit znovu", systemImage: "arrow.clockwise")
                 }
                 .padding(.top)
@@ -51,23 +62,22 @@ struct RecipesView: View {
                     .padding(.top)
             }
         }
+        .onAppear {
+            recipeStore.watch()
+        }
         .navigationTitle("Žrádelník")
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeView(recipe: recipe)
         }
         .toolbar {
-            if model.isLoggedIn {
-                Button {
-                    showingRecipeForm = true
-                } label: {
+            if currentUserStore.isLoggedIn {
+                Button(action: { showingRecipeForm = true }) {
                     Label("Nový recept", systemImage: "plus")
                 }
             }
 
             Menu {
-                Button {
-                    model.fetchRecipes()
-                } label: {
+                Button(action: { recipeStore.reload() }) {
                     Label("Aktualizovat", systemImage: "arrow.clockwise")
                 }
 
@@ -87,9 +97,9 @@ struct RecipesView: View {
         .sheet(isPresented: $showingRecipeForm) {
             NavigationStack {
                 RecipeFormView { recipe in
-                    model.fetchRecipes()
+                    recipeStore.reload()
                     showingRecipeForm = false
-                    model.recipeListStack.append(recipe)
+                    routing.recipeListStack.append(recipe)
                 } onCancel: {
                     showingRecipeForm = false
                 }

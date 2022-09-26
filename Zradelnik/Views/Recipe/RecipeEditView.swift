@@ -10,19 +10,20 @@ import SwiftUI
 struct RecipeEditView: View {
     var recipe: Recipe
 
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var routing: Routing
+    @EnvironmentObject private var recipeStore: RecipeStore
     @Environment(\.editMode) private var editMode
 
     var body: some View {
         RecipeFormView(recipe: recipe) { newRecipe in
             // No need to refetch, Apollo does it automatically after mutation based on ID
-            model.recipeListStack[model.recipeListStack.endIndex - 1] = newRecipe
+            routing.recipeListStack[routing.recipeListStack.endIndex - 1] = newRecipe
             editMode?.animation().wrappedValue = .inactive
         } onCancel: {
             editMode?.animation().wrappedValue = .inactive
         } onDelete: {
-            model.fetchRecipes()
-            model.recipeListStack.removeAll()
+            recipeStore.reload()
+            routing.recipeListStack.removeAll()
         }
     }
 }

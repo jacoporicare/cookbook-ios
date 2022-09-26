@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var routing: Routing
 
     var body: some View {
         TabView {
-            NavigationStack(path: $model.recipeListStack) {
+            NavigationStack(path: $routing.recipeListStack) {
                 RecipesView()
             }
             .tabItem {

@@ -12,7 +12,7 @@ import SwiftUI
 struct RecipeDetailView: View {
     var recipe: Recipe
     
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var currentUserStore: CurrentUserStore
     @Environment(\.editMode) private var editMode
     
     @State private var isIdleTimerDisabled = UIApplication.shared.isIdleTimerDisabled
@@ -32,10 +32,10 @@ struct RecipeDetailView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
                         Spacer()
-                        Button {
+                        Button(action: {
                             isIdleTimerDisabled.toggle()
                             UIApplication.shared.isIdleTimerDisabled = isIdleTimerDisabled
-                        } label: {
+                        }) {
                             Label("Nezhasínat displej", systemImage: isIdleTimerDisabled ? "sun.max.fill" : "sun.max")
                         }
                         Spacer()
@@ -97,7 +97,7 @@ struct RecipeDetailView: View {
             }
         }
         .toolbar {
-            if model.isLoggedIn {
+            if currentUserStore.isLoggedIn {
                 Button("Upravit") {
                     editMode?.animation().wrappedValue = .active
                 }
@@ -112,6 +112,6 @@ struct RecipeDetailView: View {
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         RecipeDetailView(recipe: Recipe(from: recipePreviewData[0]))
-            .environmentObject(Model())
+            .environmentObject(CurrentUserStore())
     }
 }

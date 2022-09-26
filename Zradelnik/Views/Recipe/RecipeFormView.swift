@@ -14,7 +14,7 @@ struct RecipeFormView: View {
     var onCancel: () -> Void
     var onDelete: (() -> Void)? = nil
 
-    @StateObject private var viewModel = RecipeFormViewModel()
+    @StateObject private var viewModel = ViewModel()
     @State private var showingDeleteConfirmation = false
     @State private var showingCancelConfirmation = false
 
@@ -44,9 +44,7 @@ struct RecipeFormView: View {
                 }
             }
 
-            Button {
-                viewModel.showingImagePicker = true
-            } label: {
+            Button(action: { viewModel.showingImagePicker = true }) {
                 Spacer()
                 Text(viewModel.inputImage == nil && viewModel.originalRecipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
@@ -103,9 +101,9 @@ struct RecipeFormView: View {
 
                         Divider()
 
-                        Button {
-                            viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { i in i.id != $ingredient.id }
-                        } label: {
+                        Button(action: {
+                            viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { $0.id != $ingredient.id }
+                        }) {
                             Image(systemName: "trash")
                                 .foregroundColor(.red)
                         }
@@ -133,9 +131,7 @@ struct RecipeFormView: View {
 
                             Divider()
 
-                            Button {
-                                $ingredient.isGroup.wrappedValue.toggle()
-                            } label: {
+                            Button(action: { $ingredient.isGroup.wrappedValue.toggle() }) {
                                 Image(systemName: $ingredient.isGroup.wrappedValue ? "folder.fill" : "folder")
                             }
                             .frame(width: 24)
@@ -148,9 +144,9 @@ struct RecipeFormView: View {
                 }
             }
 
-            Button {
+            Button(action: {
                 viewModel.draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
-            } label: {
+            }) {
                 Text("Přidat ingredienci")
                 Spacer()
             }
@@ -165,9 +161,7 @@ struct RecipeFormView: View {
             }
 
             if viewModel.originalRecipe != nil {
-                Button {
-                    showingDeleteConfirmation = true
-                } label: {
+                Button(action: { showingDeleteConfirmation = true }) {
                     Text("Smazat recept")
                     Spacer()
                 }

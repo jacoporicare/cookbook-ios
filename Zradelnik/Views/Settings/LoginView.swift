@@ -5,20 +5,29 @@
 //  Created by Jakub Řičař on 06.04.2022.
 //
 
+import Apollo
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var currentUserStore: CurrentUserStore
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = LoginViewModel()
+
+    @State private var loggingIn = false
+    @State private var error = false
+    @State private var username = ""
+    @State private var password = ""
+
+    private var loginDisabled: Bool {
+        username.isEmpty || password.isEmpty || loggingIn
+    }
 
     var body: some View {
         Form {
-            TextField("Uživatel", text: $viewModel.username)
+            TextField("Uživatel", text: $username)
             HStack {
-                SecureField("Heslo", text: $viewModel.password)
+                SecureField("Heslo", text: $password)
 
-                if viewModel.loggingIn {
+                if loggingIn {
                     ProgressView()
                 }
             }
@@ -27,23 +36,36 @@ struct LoginView: View {
         .navigationBarTitleDisplayMode(.inline)
         .textInputAutocapitalization(.never)
         .disableAutocorrection(true)
-        .disabled(viewModel.loggingIn)
-        .alert("Neplatný uživatel nebo heslo.", isPresented: $viewModel.error) {}
+        .disabled(loggingIn)
+        .alert("Neplatný uživatel nebo heslo.", isPresented: $error) {}
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Přihlásit") {
-                    viewModel.login { accessToken in
-                        model.setAccessToken(accessToken: accessToken)
-                        dismiss()
-                    }
-                }
-                .disabled(viewModel.loginDisabled)
+                Button("Přihlásit", action: login)
+                    .disabled(loginDisabled)
             }
 
             ToolbarItem(placement: .cancellationAction) {
                 Button("Zrušit") {
                     dismiss()
                 }
+            }
+        }
+    }
+
+    func login() {
+        loggingIn = true
+        error = false
+
+        Network.shared.apollo.perform(mutation: LoginMutation(username: username, password: password)) { result in
+            self.loggingIn = false
+
+            switch result {
+            case .success(let result):
+                guard let token = result.data?.login.token else { fallthrough }
+                currentUserStore.setAccessToken(accessToken: token)
+                dismiss()
+            case .failure:
+                self.error = true
             }
         }
     }

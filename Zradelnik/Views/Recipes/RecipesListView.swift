@@ -16,7 +16,7 @@ struct RecipeGroup: Identifiable {
 }
 
 struct RecipesListView: View {
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var recipeStore: RecipeStore
 
     var recipes: [Recipe]
     var searchText: Binding<String>
@@ -55,7 +55,7 @@ struct RecipesListView: View {
         .listStyle(.insetGrouped)
         .searchable(text: searchText, prompt: "Hledat recept")
         .refreshable {
-            try? await model.fetchRecipesAsync()
+            try? await recipeStore.loadAsync()
         }
     }
 }

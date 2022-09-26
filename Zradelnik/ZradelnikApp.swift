@@ -11,21 +11,25 @@ import SwiftUI
 @main
 struct ZradelnikApp: App {
     @Environment(\.scenePhase) private var phase
-    @StateObject private var model = Model()
+    @StateObject private var routing = Routing()
+    @StateObject private var recipeStore = RecipeStore()
+    @StateObject private var currentUserStore = CurrentUserStore()
 
     var body: some Scene {
         WindowGroup {
             // Remove AnyView in Xcode 14.1 (hopefully)
             AnyView(
                 ContentView()
-                    .environmentObject(model)
+                    .environmentObject(routing)
+                    .environmentObject(recipeStore)
+                    .environmentObject(currentUserStore)
             )
         }
         .backgroundTask(.appRefresh("cz.jakubricar.Zradelnik.refresh")) {
             scheduleAppRefresh()
 
             do {
-                try await model.fetchRecipesAsync()
+                try await recipeStore.loadAsync()
             } catch {
                 NSLog(error.localizedDescription)
             }
@@ -34,8 +38,8 @@ struct ZradelnikApp: App {
             switch newPhase {
             case .active:
                 // In case of disabled background app refresh we want to get fresh data every 24h
-                if let lastFetchDate = model.lastFetchDate, lastFetchDate < Date(timeIntervalSinceNow: -24 * 3600) {
-                    model.fetchRecipes(silent: true)
+                if let lastFetchDate = recipeStore.lastFetchDate, lastFetchDate < Date(timeIntervalSinceNow: -24 * 3600) {
+                    recipeStore.reload(silent: true)
                 }
 
                 BGTaskScheduler.shared.getPendingTaskRequests { requests in

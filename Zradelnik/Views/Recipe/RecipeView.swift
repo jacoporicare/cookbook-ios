@@ -10,7 +10,6 @@ import SwiftUI
 struct RecipeView: View {
     var recipe: Recipe
 
-    @EnvironmentObject private var model: Model
     @Environment(\.editMode) private var editMode
 
     var body: some View {

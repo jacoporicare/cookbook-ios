@@ -8,22 +8,39 @@
 import SwiftUI
 
 struct SettingsFormView: View {
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var currentUserStore: CurrentUserStore
     @State private var showingLoginSheet = false
 
     var body: some View {
         Form {
             Section("Účet") {
-                if model.isLoggedIn {
-                    Text(model.userDisplayName ?? "Chyba")
+                if currentUserStore.isLoggedIn {
+                    switch currentUserStore.loadingStatus {
+                    case .loading:
+                        HStack(spacing: 4) {
+                            Text("Načítání...")
+                                .foregroundColor(.secondary)
+                            ProgressView()
+                        }
+                    case .error(let error):
+                        Text(error)
+                    case .data:
+                        Text(currentUserStore.userDisplayName ?? "Chyba")
+                    }
+
                     Button("Odhlásit") {
-                        model.resetAccessToken()
+                        currentUserStore.resetAccessToken()
                     }
                 } else {
                     Button("Přihlásit") {
                         showingLoginSheet = true
                     }
                 }
+            }
+        }
+        .onAppear {
+            if currentUserStore.isLoggedIn && currentUserStore.userDisplayName == nil {
+                currentUserStore.load()
             }
         }
         .sheet(isPresented: $showingLoginSheet) {
@@ -37,6 +54,6 @@ struct SettingsFormView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsFormView()
-            .environmentObject(Model())
+            .environmentObject(CurrentUserStore())
     }
 }

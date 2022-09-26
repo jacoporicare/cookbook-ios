@@ -64,14 +64,13 @@ struct RecipesGridView: View {
                     }
                 }
                 .padding()
-                .padding(.trailing, 25)
             }
             .searchable(text: searchText, prompt: "Hledat recept")
-            .overlay {
-                SectionLettersView(letters: letters, scrollViewProxy: proxy)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, 10)
-            }
+//            .overlay {
+//                SectionLettersView(letters: letters, scrollViewProxy: proxy)
+//                    .frame(maxWidth: .infinity, alignment: .trailing)
+//                    .padding(.trailing, 10)
+//            }
         }
     }
 }
@@ -206,19 +205,6 @@ struct TextOverlay: View {
 }
 
 #if DEBUG
-struct RecipesGridView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            RecipesGridView(
-                recipes: recipePreviewData.map { Recipe(from: $0) },
-                searchText: .constant("")
-            )
-            .environmentObject(Model())
-            .navigationTitle("Žrádelník")
-        }
-    }
-}
-
 struct RecipesGridItemView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
