@@ -63,9 +63,7 @@ extension Recipe {
     func matches(_ string: String) -> Bool {
         string.isEmpty
             || title.localizedCaseInsensitiveContains(string)
-            || ingredients.contains {
-                $0.name.localizedCaseInsensitiveContains(string)
-            }
+            || ingredients.contains { $0.name.localizedCaseInsensitiveContains(string) }
     }
 }
 
