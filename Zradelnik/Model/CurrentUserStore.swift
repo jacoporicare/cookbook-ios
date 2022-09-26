@@ -13,16 +13,16 @@ class CurrentUserStore: ObservableObject {
     @Published var userDisplayName: String?
 
     var isLoggedIn: Bool {
-        (try? ZKeychain.shared.contains(ZKeychain.Keys.accessToken)) ?? false
+        ZKeychain.accessToken != nil
     }
 
     func setAccessToken(accessToken: String) {
-        ZKeychain.shared[ZKeychain.Keys.accessToken] = accessToken
+        ZKeychain.accessToken = accessToken
         load()
     }
 
     func resetAccessToken() {
-        ZKeychain.shared[ZKeychain.Keys.accessToken] = nil
+        ZKeychain.accessToken = nil
         userDisplayName = nil
     }
 

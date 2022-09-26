@@ -42,7 +42,7 @@ class TokenAddingInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void)
     {
-        if let token = ZKeychain.shared[ZKeychain.Keys.accessToken] {
+        if let token = ZKeychain.accessToken {
             request.addHeader(name: "Authorization", value: "Bearer \(token)")
         }
             
@@ -60,7 +60,7 @@ class UnauthenticatedInterceptor: ApolloInterceptor {
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void)
     {
         if response?.parsedResponse?.errors?.contains(where: { $0.message == "Unauthenticated" }) == true {
-            ZKeychain.shared[ZKeychain.Keys.accessToken] = nil
+            ZKeychain.accessToken = nil
         }
         
         chain.proceedAsync(request: request,
