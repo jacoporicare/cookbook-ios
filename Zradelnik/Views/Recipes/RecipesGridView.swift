@@ -41,15 +41,13 @@ struct RecipesGridView: View {
     }
 
     var body: some View {
-        ScrollViewReader { proxy in
+        ScrollViewReader { _ in
             ScrollView {
                 LazyVGrid(columns: columnLayout) {
                     ForEach(recipeGroups) { recipeGroup in
                         Section {
                             ForEach(recipeGroup.recipes) { recipe in
-                                NavigationLink {
-                                    RecipeView(recipe: recipe)
-                                } label: {
+                                NavigationLink(value: recipe) {
                                     RecipesGridItemView(recipe: recipe)
                                 }
                             }

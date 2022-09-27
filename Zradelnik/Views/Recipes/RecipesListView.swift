@@ -44,9 +44,7 @@ struct RecipesListView: View {
         List(recipeGroups) { recipeGroup in
             Section(header: Text(recipeGroup.id)) {
                 ForEach(recipeGroup.recipes) { recipe in
-                    NavigationLink {
-                        RecipeView(recipe: recipe)
-                    } label: {
+                    NavigationLink(value: recipe) {
                         RecipesListItemView(recipe: recipe)
                     }
                 }
