@@ -16,10 +16,7 @@ class Network {
     private(set) lazy var apollo = Network.createApollo()
     
     private static func createApollo() -> ApolloClient {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let documentsURL = URL(fileURLWithPath: documentsPath)
-        let sqliteFileURL = documentsURL.appendingPathComponent("zradelnik_apollo_db.sqlite")
-        
+        let sqliteFileURL = URL.cachesDirectory.appending(path: "zradelnik_apollo_db.sqlite")
         let sqliteCache = try? SQLiteNormalizedCache(fileURL: sqliteFileURL)
         
         let store = ApolloStore(cache: sqliteCache ?? InMemoryNormalizedCache())
