@@ -32,7 +32,7 @@ class Network {
     }
 }
 
-class TokenAddingInterceptor: ApolloInterceptor {
+class TokenAddInterceptor: ApolloInterceptor {
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,
@@ -69,7 +69,7 @@ class UnauthenticatedInterceptor: ApolloInterceptor {
 class NetworkInterceptorProvider: DefaultInterceptorProvider {
     override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
         var interceptors = super.interceptors(for: operation)
-        interceptors.insert(TokenAddingInterceptor(), at: 0)
+        interceptors.insert(TokenAddInterceptor(), at: 0)
         interceptors.append(UnauthenticatedInterceptor())
         return interceptors
     }

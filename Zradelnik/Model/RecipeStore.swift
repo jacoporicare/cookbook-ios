@@ -58,7 +58,11 @@ class RecipeStore: ObservableObject {
     // Apollo updates the cache and the watcher above is triggered automatically
     func loadAsync() async throws {
         return try await withCheckedThrowingContinuation { continuation in
-            Network.shared.apollo.fetch(query: RecipesQuery(), cachePolicy: .fetchIgnoringCacheData) { result in
+            Network.shared.apollo.fetch(
+                query: RecipesQuery(),
+                cachePolicy: .fetchIgnoringCacheData,
+                queue: .global(qos: .background)
+            ) { result in
                 switch result {
                 case .success:
                     continuation.resume()
