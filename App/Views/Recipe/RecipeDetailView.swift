@@ -41,57 +41,9 @@ struct RecipeDetailView: View {
                         Spacer()
                     }
                     
-                    if recipe.preparationTime != nil || recipe.servingCount != nil {
-                        ScrollView(.horizontal) {
-                            HStack(spacing: 20) {
-                                if let preparationTime = recipe.preparationTime {
-                                    HStack {
-                                        Text("Doba přípravy:")
-                                            .foregroundColor(.gray)
-                                        Text(preparationTime)
-                                    }
-                                }
-                        
-                                if let servingCount = recipe.servingCount {
-                                    HStack {
-                                        Text("Počet porcí:")
-                                            .foregroundColor(.gray)
-                                        Text(servingCount)
-                                    }
-                                }
-                            
-                                if let sideDish = recipe.sideDish {
-                                    HStack {
-                                        Text("Příloha:")
-                                            .foregroundColor(.gray)
-                                        Text(sideDish)
-                                    }
-                                }
-                            }
-                            .padding(.horizontal)
-                            .padding(.bottom, 10)
-                            .font(.callout)
-                        }
-                    }
-                    
-                    if let ingredients = recipe.ingredients, ingredients.count > 0 {
-                        VStack(alignment: .leading, spacing: 20) {
-                            Text("Ingredience")
-                                .font(.title2)
-                            
-                            RecipeIngredientListView(ingredients: ingredients)
-                                .padding(.horizontal)
-                        }
-                        .padding(.horizontal)
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text("Postup")
-                            .font(.title2)
-                        
-                        Markdown(recipe.directions ?? "Kde nic tu nic.")
-                    }
-                    .padding(.horizontal)
+                    basicInfo
+                    ingredients
+                    directions
                 }
                 .padding(.vertical)
             }
@@ -106,6 +58,93 @@ struct RecipeDetailView: View {
         .onDisappear {
             UIApplication.shared.isIdleTimerDisabled = false
         }
+    }
+    
+    @ViewBuilder
+    var basicInfo: some View {
+        if recipe.preparationTime != nil || recipe.servingCount != nil {
+            ScrollView(.horizontal) {
+                HStack(spacing: 20) {
+                    if let preparationTime = recipe.preparationTime {
+                        HStack {
+                            Text("Doba přípravy:")
+                                .foregroundColor(.gray)
+                            Text(preparationTime)
+                        }
+                    }
+                    
+                    if let servingCount = recipe.servingCount {
+                        HStack {
+                            Text("Počet porcí:")
+                                .foregroundColor(.gray)
+                            Text(servingCount)
+                        }
+                    }
+                    
+                    if let sideDish = recipe.sideDish {
+                        HStack {
+                            Text("Příloha:")
+                                .foregroundColor(.gray)
+                            Text(sideDish)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
+                .font(.callout)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var ingredients: some View {
+        if recipe.ingredients.count > 0 {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("Ingredience")
+                    .font(.title2)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(recipe.ingredients) { ingredient in
+                        if ingredient.isGroup {
+                            Text(ingredient.name)
+                                .bold()
+                        } else {
+                            VStack(alignment: .leading) {
+                                Text(ingredient.name)
+                                
+                                if ingredient.amount != nil || ingredient.amountUnit != nil {
+                                    HStack {
+                                        if let amount = ingredient.amount {
+                                            Text(amount)
+                                        }
+                                        if let amountUnit = ingredient.amountUnit {
+                                            Text(amountUnit)
+                                        }
+                                    }
+                                    .font(.callout)
+                                    .foregroundColor(.gray)
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    @ViewBuilder
+    var directions: some View {
+        VStack(alignment: .leading) {
+            Text("Postup")
+                .font(.title2)
+            
+            Markdown(recipe.directions ?? "Kde nic tu nic.")
+        }
+        .padding(.horizontal)
     }
 }
 
