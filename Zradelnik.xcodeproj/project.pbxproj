@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -65,6 +65,7 @@
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		098BD2AF27FC8A50006D9C7B /* RecipeIngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientListView.swift; sourceTree = "<group>"; };
+		099AAE9228F466B40063466F /* Zradelnik-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zradelnik-Info.plist"; sourceTree = "<group>"; };
 		09A068212809562C0008563A /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
 		09A0682A280974D10008563A /* URLCache+imageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLCache+imageCache.swift"; sourceTree = "<group>"; };
 		09A0682C2809F3120008563A /* Recipe.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Recipe.graphql; sourceTree = "<group>"; tabWidth = 2; };
@@ -80,7 +81,6 @@
 		09FE90E327FA4753005C6AE3 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		09FE90E427FA47D6005C6AE3 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		09FE90E827FA48A9005C6AE3 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		09FE90EC27FA4B54005C6AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,7 +202,7 @@
 				09AE248327F324A400BC6208 /* Resources */,
 				09AE248627F3284200BC6208 /* GraphQL */,
 				09AE247427F31C9300BC6208 /* Preview Content */,
-				09FE90EC27FA4B54005C6AE3 /* Info.plist */,
+				099AAE9228F466B40063466F /* Zradelnik-Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 				};
 			};
 			buildConfigurationList = 09AE246627F31C9200BC6208 /* Build configuration list for PBXProject "Zradelnik" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = cs;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -528,13 +528,12 @@
 				DEVELOPMENT_TEAM = LVQ73P9V59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_FILE = "App/Zradelnik-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -563,13 +562,12 @@
 				DEVELOPMENT_TEAM = LVQ73P9V59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_FILE = "App/Zradelnik-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

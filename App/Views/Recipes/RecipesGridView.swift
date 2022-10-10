@@ -152,11 +152,13 @@ struct RecipesGridItemView: View {
     }
 
     var placeholder: some View {
-        Image("placeholder")
+        Image(systemName: "fork.knife.circle")
             .resizable()
             .scaledToFit()
+            .symbolRenderingMode(.hierarchical)
+            .foregroundColor(.black)
+            .padding()
             .modifier(ImageModifier(recipe: recipe))
-            .background(Color(.lightGray))
     }
 
     struct ImageModifier: ViewModifier {
