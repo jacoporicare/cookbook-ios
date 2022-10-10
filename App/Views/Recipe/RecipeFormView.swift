@@ -37,91 +37,153 @@ struct RecipeFormView: View {
 
     var body: some View {
         Form {
-            if let inputImage {
-                Image(uiImage: inputImage)
-                    .centerCropped()
-                    .listRowInsets(EdgeInsets())
-                    .frame(height: 320)
-                    .onTapGesture {
-                        showingImagePicker = true
-                    }
-            } else if let imageUrl = recipe?.fullImageUrl {
-                ZStack {
-                    CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
-                        image.centerCropped()
-                    } placeholder: {
-                        ProgressView()
+            image
+            basicInfo
+            ingredients
+            directions
+
+            if recipe != nil {
+                Button(action: { showingDeleteConfirmation = true }) {
+                    Text("Smazat recept")
+                    Spacer()
+                }
+                .foregroundColor(.red)
+            }
+        }
+        .onAppear {
+            guard let recipe else { return }
+            draftRecipe = RecipeEdit(from: recipe)
+        }
+        .buttonStyle(.borderless) // Fix non-clickable buttons in Form
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Uložit", action: save)
+                    .disabled(!isValid)
+            }
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Zrušit") {
+                    if isDirty {
+                        showingCancelConfirmation = true
+                    } else {
+                        onCancel()
                     }
                 }
+            }
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
+        }
+        .disabled(saving)
+        .interactiveDismissDisabled(isDirty)
+        .alert("Nastala chyba.", isPresented: $error) {}
+        .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
+            Button("Smazat recept", role: .destructive, action: delete)
+            Button("Zrušit", role: .cancel, action: {})
+        }
+        .confirmationDialog(
+            recipe == nil ? "Opravdu zahodit nový recept?" : "Opravdu zahodit změny?",
+            isPresented: $showingCancelConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Zahodit změny", role: .destructive, action: onCancel)
+            Button("Pokračovat v úpravách", role: .cancel) {}
+        }
+    }
+
+    @ViewBuilder
+    var image: some View {
+        if let inputImage {
+            Image(uiImage: inputImage)
+                .centerCropped()
                 .listRowInsets(EdgeInsets())
                 .frame(height: 320)
-                .frame(maxWidth: .infinity, alignment: .center)
                 .onTapGesture {
                     showingImagePicker = true
                 }
+        } else if let imageUrl = recipe?.fullImageUrl {
+            ZStack {
+                CachedAsyncImage(url: URL(string: imageUrl), urlCache: .imageCache) { image in
+                    image.centerCropped()
+                } placeholder: {
+                    ProgressView()
+                }
+            }
+            .listRowInsets(EdgeInsets())
+            .frame(height: 320)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .onTapGesture {
+                showingImagePicker = true
+            }
+        }
+
+        HStack {
+            Button(action: { showingImagePicker = true }) {
+                Spacer()
+                Text(inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                Spacer()
+            }
+
+            if inputImage != nil {
+                Divider()
+
+                Button(role: .destructive, action: { inputImage = nil }) {
+                    Spacer()
+                    Text("Zrušit změnu")
+                    Spacer()
+                }
+            }
+        }
+    }
+
+    var basicInfo: some View {
+        Section("Základní informace") {
+            HStack {
+                Text("Název")
+                Spacer()
+                TextField("nezadáno", text: $draftRecipe.title)
+                    .multilineTextAlignment(.trailing)
             }
 
             HStack {
-                Button(action: { showingImagePicker = true }) {
-                    Spacer()
-                    Text(inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
-                    Spacer()
-                }
-
-                if inputImage != nil {
-                    Divider()
-
-                    Button(role: .destructive, action: { inputImage = nil }) {
-                        Spacer()
-                        Text("Zrušit změnu")
-                        Spacer()
+                Text("Doba přípravy (min)")
+                Spacer()
+                TextField("nezadáno", text: $draftRecipe.preparationTime)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
+                    .onChange(of: draftRecipe.preparationTime) { newValue in
+                        if !newValue.isEmpty, Int(newValue) == nil {
+                            draftRecipe.preparationTime = newValue.filter { $0.isNumber }
+                        }
                     }
-                }
             }
 
-            Section("Základní informace") {
-                HStack {
-                    Text("Název")
-                    Spacer()
-                    TextField("nezadáno", text: $draftRecipe.title)
-                        .multilineTextAlignment(.trailing)
-                }
-
-                HStack {
-                    Text("Doba přípravy (min)")
-                    Spacer()
-                    TextField("nezadáno", text: $draftRecipe.preparationTime)
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.trailing)
-                        .onChange(of: draftRecipe.preparationTime) { newValue in
-                            if !newValue.isEmpty, Int(newValue) == nil {
-                                draftRecipe.preparationTime = newValue.filter { $0.isNumber }
-                            }
+            HStack {
+                Text("Počet porcí")
+                Spacer()
+                TextField("nezadáno", text: $draftRecipe.servingCount)
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
+                    .onChange(of: draftRecipe.servingCount) { newValue in
+                        if !newValue.isEmpty, Int(newValue) == nil {
+                            draftRecipe.servingCount = newValue.filter { $0.isNumber }
                         }
-                }
-
-                HStack {
-                    Text("Počet porcí")
-                    Spacer()
-                    TextField("nezadáno", text: $draftRecipe.servingCount)
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.trailing)
-                        .onChange(of: draftRecipe.servingCount) { newValue in
-                            if !newValue.isEmpty, Int(newValue) == nil {
-                                draftRecipe.servingCount = newValue.filter { $0.isNumber }
-                            }
-                        }
-                }
-
-                HStack {
-                    Text("Příloha")
-                    Spacer()
-                    TextField("nezadáno", text: $draftRecipe.sideDish)
-                        .textInputAutocapitalization(.never)
-                        .multilineTextAlignment(.trailing)
-                }
+                    }
             }
 
+            HStack {
+                Text("Příloha")
+                Spacer()
+                TextField("nezadáno", text: $draftRecipe.sideDish)
+                    .textInputAutocapitalization(.never)
+                    .multilineTextAlignment(.trailing)
+            }
+        }
+    }
+
+    @ViewBuilder
+    var ingredients: some View {
+        List {
             ForEach($draftRecipe.ingredients) { $ingredient in
                 Section {
                     HStack {
@@ -172,67 +234,25 @@ struct RecipeFormView: View {
                     }
                 }
             }
+        }
 
-            Button(action: {
-                draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
-            }) {
-                Text("Přidat ingredienci")
-                Spacer()
-            }
+        Button(action: {
+            draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
+        }) {
+            Text("Přidat ingredienci")
+            Spacer()
+        }
+    }
 
-            Section {
-                TextField("Zde napište postup receptu.", text: $draftRecipe.directions, axis: .vertical)
-                    .lineLimit(3...)
-            } header: {
-                Text("Postup")
-            } footer: {
-                Text("Formátovat můžete pomocí [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).")
-            }
-
-            if recipe != nil {
-                Button(action: { showingDeleteConfirmation = true }) {
-                    Text("Smazat recept")
-                    Spacer()
-                }
-                .foregroundColor(.red)
-            }
-        }
-        .onAppear {
-            guard let recipe else { return }
-            draftRecipe = RecipeEdit(from: recipe)
-        }
-        .buttonStyle(.borderless) // Fix non-clickable buttons in Form
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            Group {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Uložit", action: save)
-                        .disabled(!isValid)
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Zrušit") {
-                        if isDirty {
-                            showingCancelConfirmation = true
-                        } else {
-                            onCancel()
-                        }
-                    }
-                }
-            }
-        }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $inputImage)
-        }
-        .disabled(saving)
-        .interactiveDismissDisabled(isDirty)
-        .alert("Nastala chyba.", isPresented: $error) {}
-        .confirmationDialog("Opravdu smazat recept?", isPresented: $showingDeleteConfirmation) {
-            Button("Smazat recept", role: .destructive, action: delete)
-            Button("Zrušit", role: .cancel, action: {})
-        }
-        .confirmationDialog(recipe == nil ? "Opravdu zahodit nový recept?" : "Opravdu zahodit změny?", isPresented: $showingCancelConfirmation, titleVisibility: .visible) {
-            Button("Zahodit změny", role: .destructive, action: onCancel)
-            Button("Pokračovat v úpravách", role: .cancel) {}
+    @ViewBuilder
+    var directions: some View {
+        Section {
+            TextField("Zde napište postup receptu.", text: $draftRecipe.directions, axis: .vertical)
+                .lineLimit(3...)
+        } header: {
+            Text("Postup")
+        } footer: {
+            Text("Formátovat můžete pomocí [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).")
         }
     }
 
