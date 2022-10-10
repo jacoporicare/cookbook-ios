@@ -52,7 +52,9 @@ struct RecipesView: View {
 
                 Text("Recepty se nepodařilo načíst.")
 
-                Button(action: { recipeStore.reload() }) {
+                Button {
+                    recipeStore.reload()
+                } label: {
                     Label("Zkusit znovu", systemImage: "arrow.clockwise")
                 }
                 .padding(.top)
@@ -71,13 +73,17 @@ struct RecipesView: View {
         }
         .toolbar {
             if currentUserStore.isLoggedIn {
-                Button(action: { showingRecipeForm = true }) {
+                Button {
+                    showingRecipeForm = true
+                } label: {
                     Label("Nový recept", systemImage: "plus")
                 }
             }
 
             Menu {
-                Button(action: { recipeStore.reload() }) {
+                Button {
+                    recipeStore.reload()
+                } label: {
                     Label("Aktualizovat", systemImage: "arrow.clockwise")
                 }
 

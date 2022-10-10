@@ -43,7 +43,9 @@ struct RecipeFormView: View {
             directions
 
             if recipe != nil {
-                Button(action: { showingDeleteConfirmation = true }) {
+                Button {
+                    showingDeleteConfirmation = true
+                } label: {
                     Text("Smazat recept")
                     Spacer()
                 }
@@ -118,7 +120,9 @@ struct RecipeFormView: View {
         }
 
         HStack {
-            Button(action: { showingImagePicker = true }) {
+            Button {
+                showingImagePicker = true
+            } label: {
                 Spacer()
                 Text(inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
@@ -127,7 +131,9 @@ struct RecipeFormView: View {
             if inputImage != nil {
                 Divider()
 
-                Button(role: .destructive, action: { inputImage = nil }) {
+                Button(role: .destructive) {
+                    inputImage = nil
+                } label: {
                     Spacer()
                     Text("Zrušit změnu")
                     Spacer()
@@ -199,7 +205,7 @@ struct RecipeFormView: View {
                                 if !$ingredient.isGroup.wrappedValue {
                                     TextField("Množství", text: $ingredient.amount)
                                         .keyboardType(.decimalPad)
-                                        .frame(maxWidth: geo.size.width * 0.25)
+                                        .frame(maxWidth: geo.size.width * 0.5)
                                         .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .none)
 
                                     Divider()
@@ -239,9 +245,9 @@ struct RecipeFormView: View {
                 }
             }
 
-            Button(action: {
+            Button {
                 draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
-            }) {
+            } label: {
                 Text("Přidat ingredienci")
                 Spacer()
             }

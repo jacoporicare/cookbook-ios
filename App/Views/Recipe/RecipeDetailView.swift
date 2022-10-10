@@ -32,10 +32,10 @@ struct RecipeDetailView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
                         Spacer()
-                        Button(action: {
+                        Button {
                             isIdleTimerDisabled.toggle()
                             UIApplication.shared.isIdleTimerDisabled = isIdleTimerDisabled
-                        }) {
+                        } label: {
                             Label("Nezhasínat displej", systemImage: isIdleTimerDisabled ? "sun.max.fill" : "sun.max")
                         }
                         Spacer()
