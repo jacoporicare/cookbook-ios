@@ -183,64 +183,70 @@ struct RecipeFormView: View {
 
     @ViewBuilder
     var ingredients: some View {
-        List {
-            ForEach($draftRecipe.ingredients) { $ingredient in
-                Section {
-                    HStack {
+        Section {
+            List {
+                ForEach($draftRecipe.ingredients) { $ingredient in
+                    VStack {
                         TextField("Název", text: $ingredient.name)
                             .textInputAutocapitalization(.never)
+                            .fontWeight($ingredient.isGroup.wrappedValue ? .bold : nil)
+                            .frame(height: 24)
 
                         Divider()
 
-                        Button(action: {
+                        GeometryReader { geo in
+                            HStack(alignment: .center) {
+                                if !$ingredient.isGroup.wrappedValue {
+                                    TextField("Množství", text: $ingredient.amount)
+                                        .keyboardType(.decimalPad)
+                                        .frame(maxWidth: geo.size.width * 0.25)
+                                        .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .none)
+
+                                    Divider()
+
+                                    TextField("Jednotka", text: $ingredient.amountUnit)
+                                        .textInputAutocapitalization(.never)
+                                        .autocorrectionDisabled()
+                                } else {
+                                    Text("Skupina")
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .frame(height: 24)
+                    }
+                    .listRowBackground($ingredient.isGroup.wrappedValue ? Color("IngredientGroupBackground") : nil)
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
                             draftRecipe.ingredients = draftRecipe.ingredients.filter { $0.id != $ingredient.id }
-                        }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
+                        } label: {
+                            Label("Smazat", systemImage: "trash")
                         }
-                        .frame(width: 24)
-                    }
 
-                    GeometryReader { geo in
-                        HStack(alignment: VerticalAlignment.center) {
-                            if !$ingredient.isGroup.wrappedValue {
-                                TextField("Množství", text: $ingredient.amount)
-                                    .keyboardType(.decimalPad)
-                                    .multilineTextAlignment(.trailing)
-                                    .frame(maxWidth: geo.size.width * 0.25)
-                                    .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .none)
-
-                                Divider()
-
-                                TextField("Jednotka", text: $ingredient.amountUnit)
-                                    .textInputAutocapitalization(.never)
-                            } else {
-                                Text("Skupina")
-                                    .foregroundColor(.gray)
-                                Spacer()
-                            }
-
-                            Divider()
-
-                            Button(action: { $ingredient.isGroup.wrappedValue.toggle() }) {
-                                Image(systemName: $ingredient.isGroup.wrappedValue ? "folder.fill" : "folder")
-                            }
-                            .frame(width: 24)
+                        Button {
+                            $ingredient.isGroup.wrappedValue.toggle()
+                        } label: {
+                            Label("Skupina", systemImage: "folder")
                         }
-                    }
-                } header: {
-                    if draftRecipe.ingredients.first == $ingredient.wrappedValue {
-                        Text("Ingredience")
                     }
                 }
+                .onMove { source, destination in
+                    draftRecipe.ingredients.move(fromOffsets: source, toOffset: destination)
+                }
+                .onDelete { offsets in
+                    draftRecipe.ingredients.remove(atOffsets: offsets)
+                }
             }
-        }
 
-        Button(action: {
-            draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
-        }) {
-            Text("Přidat ingredienci")
-            Spacer()
+            Button(action: {
+                draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
+            }) {
+                Text("Přidat ingredienci")
+                Spacer()
+            }
+        } header: {
+            Text("Ingredience")
         }
     }
 
@@ -327,7 +333,7 @@ struct RecipeFormView: View {
 struct RecipeForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeFormView(recipe: Recipe(from: recipePreviewData[0])) { _ in } onCancel: {}
+            RecipeFormView(recipe: Recipe(from: recipePreviewData[1])) { _ in } onCancel: {}
             RecipeFormView { _ in } onCancel: {}
         }
     }

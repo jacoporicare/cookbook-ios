@@ -30,6 +30,7 @@
 		099AAE5828F42F5F0063466F /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083427F35AFC00D5A746 /* PreviewData.swift */; };
 		099AAE5928F42F930063466F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247227F31C9300BC6208 /* Assets.xcassets */; };
 		099AAE8F28F430510063466F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09AE247527F31C9300BC6208 /* Preview Assets.xcassets */; };
+		099AAE9928F4BA2D0063466F /* recipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0900083227F359AE00D5A746 /* recipeData.json */; };
 		09A068222809562C0008563A /* RecipeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A068212809562C0008563A /* RecipeStore.swift */; };
 		09A06829280970A70008563A /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 09A06828280970A70008563A /* CachedAsyncImage */; };
 		09A0682B280974D10008563A /* URLCache+imageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A0682A280974D10008563A /* URLCache+imageCache.swift */; };
@@ -326,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099AAE9928F4BA2D0063466F /* recipeData.json in Resources */,
 				099AAE8F28F430510063466F /* Preview Assets.xcassets in Resources */,
 				099AAE5928F42F930063466F /* Assets.xcassets in Resources */,
 			);
