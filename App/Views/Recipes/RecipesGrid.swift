@@ -1,5 +1,5 @@
 //
-//  RecipesGridView.swift
+//  RecipesGrid.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 24.09.2022.
@@ -10,7 +10,7 @@ import SwiftUI
 
 private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
 
-struct RecipesGridView: View {
+struct RecipesGrid: View {
     var recipes: [Recipe]
     var searchText: Binding<String>
 
@@ -32,9 +32,7 @@ struct RecipesGridView: View {
         }
 
         self.recipeGroups = dict
-            .map { key, value in
-                RecipeGroup(id: key, recipes: value)
-            }
+            .map { key, value in RecipeGroup(id: key, recipes: value) }
             .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
 
         self.letters = dict.keys.sorted { $0.compare($1, locale: zradelnikLocale) == .orderedAscending }

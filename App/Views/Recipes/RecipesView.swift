@@ -19,7 +19,7 @@ struct RecipesView: View {
     // AppStorage works weirdly - only the first change triggers render then it's stuck
 //    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
     @State private var displayMode = RecipesDisplayMode(rawValue: UserDefaults.standard.string(forKey: "displayMode") ?? RecipesDisplayMode.grid.rawValue) ?? RecipesDisplayMode.grid
-    @State private var showingRecipeForm = false
+    @State private var isRecipeFormPresented = false
     @State private var searchText = ""
 
     var filteredRecipes: [Recipe] {
@@ -35,12 +35,12 @@ struct RecipesView: View {
     var body: some View {
         LoadingContentView(status: recipeStore.loadingStatus, loadingText: "Načítání receptů...") {
             if displayMode == .grid {
-                RecipesGridView(
+                RecipesGrid(
                     recipes: filteredRecipes,
                     searchText: $searchText
                 )
             } else {
-                RecipesListView(
+                RecipesList(
                     recipes: filteredRecipes,
                     searchText: $searchText
                 )
@@ -74,7 +74,7 @@ struct RecipesView: View {
         .toolbar {
             if currentUserStore.isLoggedIn {
                 Button {
-                    showingRecipeForm = true
+                    isRecipeFormPresented = true
                 } label: {
                     Label("Nový recept", systemImage: "plus")
                 }
@@ -100,14 +100,14 @@ struct RecipesView: View {
                 Label("Možnosti", systemImage: "ellipsis.circle")
             }
         }
-        .sheet(isPresented: $showingRecipeForm) {
+        .sheet(isPresented: $isRecipeFormPresented) {
             NavigationStack {
-                RecipeFormView { recipe in
+                RecipeForm { recipe in
                     recipeStore.reload()
-                    showingRecipeForm = false
+                    isRecipeFormPresented = false
                     routing.recipeListStack.append(recipe)
                 } onCancel: {
-                    showingRecipeForm = false
+                    isRecipeFormPresented = false
                 }
                 .navigationTitle("Nový recept")
                 .navigationBarTitleDisplayMode(.inline)

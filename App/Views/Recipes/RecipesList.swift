@@ -1,5 +1,5 @@
 //
-//  RecipesListView.swift
+//  RecipesList.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 24.09.2022.
@@ -15,7 +15,7 @@ struct RecipeGroup: Identifiable {
     let recipes: [Recipe]
 }
 
-struct RecipesListView: View {
+struct RecipesList: View {
     @EnvironmentObject private var recipeStore: RecipeStore
 
     var recipes: [Recipe]
@@ -109,7 +109,7 @@ struct RecipesListItemView: View {
 #if DEBUG
 struct RecipesListView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesListView(
+        RecipesList(
             recipes: recipePreviewData.map { Recipe(from: $0) },
             searchText: .constant("")
         )
