@@ -15,12 +15,13 @@ struct RecipeForm: View {
     var onDelete: (() -> Void)? = nil
 
     @StateObject private var viewModel = ViewModel()
+    @State private var ingredientEditMode = EditMode.inactive
     @State private var isImagePickerPresented = false
     @State private var isDeleteConfirmationPresented = false
     @State private var isCancelConfirmationPresented = false
 
     var body: some View {
-        Form {
+        List {
             image
             basicInfo
             ingredients
@@ -36,6 +37,7 @@ struct RecipeForm: View {
                 .foregroundColor(.red)
             }
         }
+        .environment(\.editMode, $ingredientEditMode)
         .onAppear {
             guard let recipe else { return }
             viewModel.recipe = recipe
@@ -177,59 +179,54 @@ struct RecipeForm: View {
     @ViewBuilder
     var ingredients: some View {
         Section {
-            List {
-                ForEach($viewModel.draftRecipe.ingredients) { $ingredient in
-                    VStack {
-                        TextField("Název", text: $ingredient.name)
-                            .textInputAutocapitalization(.never)
-                            .fontWeight($ingredient.isGroup.wrappedValue ? .bold : nil)
-                            .frame(height: 24)
+            ForEach($viewModel.draftRecipe.ingredients) { $ingredient in
+                VStack {
+                    TextField("Název", text: $ingredient.name)
+                        .textInputAutocapitalization(.never)
+                        .fontWeight($ingredient.isGroup.wrappedValue ? .bold : nil)
+                        .frame(height: 24)
 
-                        Divider()
+                    Divider()
 
-                        GeometryReader { geo in
-                            HStack(alignment: .center) {
-                                if !$ingredient.isGroup.wrappedValue {
-                                    TextField("Množství", text: $ingredient.amount)
-                                        .keyboardType(.decimalPad)
-                                        .frame(maxWidth: geo.size.width * 0.5)
-                                        .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .none)
+                    GeometryReader { geo in
+                        HStack(alignment: .center) {
+                            if !$ingredient.isGroup.wrappedValue {
+                                TextField("Množství", text: $ingredient.amount)
+                                    .keyboardType(.decimalPad)
+                                    .frame(maxWidth: geo.size.width * 0.5)
+                                    .foregroundColor(Double($ingredient.amount.wrappedValue.replacingOccurrences(of: ",", with: ".")) == nil ? .red : .none)
 
-                                    Divider()
+                                Divider()
 
-                                    TextField("Jednotka", text: $ingredient.amountUnit)
-                                        .textInputAutocapitalization(.never)
-                                        .autocorrectionDisabled()
-                                } else {
-                                    Text("Skupina")
-                                        .foregroundColor(.gray)
-                                    Spacer()
-                                }
+                                TextField("Jednotka", text: $ingredient.amountUnit)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                            } else {
+                                Text("Skupina")
+                                    .foregroundColor(.gray)
+                                Spacer()
                             }
                         }
-                        .frame(height: 24)
                     }
-                    .listRowBackground($ingredient.isGroup.wrappedValue ? Color("IngredientGroupBackground") : nil)
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { $0.id != $ingredient.id }
-                        } label: {
-                            Label("Smazat", systemImage: "trash")
-                        }
+                    .frame(height: 24)
+                }
+                .listRowBackground($ingredient.isGroup.wrappedValue ? Color("IngredientGroupBackground") : nil)
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { $0.id != $ingredient.id }
+                    } label: {
+                        Label("Smazat", systemImage: "trash")
+                    }
 
-                        Button {
-                            $ingredient.isGroup.wrappedValue.toggle()
-                        } label: {
-                            Label("Skupina", systemImage: "folder")
-                        }
+                    Button {
+                        $ingredient.isGroup.wrappedValue.toggle()
+                    } label: {
+                        Label("Skupina", systemImage: "folder")
                     }
                 }
-                .onMove { source, destination in
-                    viewModel.draftRecipe.ingredients.move(fromOffsets: source, toOffset: destination)
-                }
-                .onDelete { offsets in
-                    viewModel.draftRecipe.ingredients.remove(atOffsets: offsets)
-                }
+            }
+            .onMove { source, destination in
+                viewModel.draftRecipe.ingredients.move(fromOffsets: source, toOffset: destination)
             }
 
             Button {
@@ -239,7 +236,20 @@ struct RecipeForm: View {
                 Spacer()
             }
         } header: {
-            Text("Ingredience")
+            HStack {
+                Text("Ingredience")
+
+                Spacer()
+
+                Button {
+                    withAnimation {
+                        ingredientEditMode = ingredientEditMode == .inactive ? .active : .inactive
+                    }
+                } label: {
+                    Text(ingredientEditMode == .inactive ? "Řadit" : "Hotovo")
+                        .font(.footnote)
+                }
+            }
         }
     }
 
