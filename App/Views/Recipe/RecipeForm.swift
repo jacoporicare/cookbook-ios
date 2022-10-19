@@ -46,7 +46,7 @@ struct RecipeForm: View {
             viewModel.recipe = recipe
             viewModel.draftRecipe = RecipeEdit(from: recipe)
         }
-        .buttonStyle(.borderless) // Fix non-clickable buttons in Form
+        .buttonStyle(.borderless) // Fix non-clickable buttons in Form (and centers text in List)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
@@ -63,11 +63,11 @@ struct RecipeForm: View {
                 }
             }
         }
+        .disabled(viewModel.isSaving) // Must be after .toolbar to disable those buttons
+        .interactiveDismissDisabled(viewModel.isDirty)
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(image: $viewModel.inputImage)
         }
-        .disabled(viewModel.isSaving)
-        .interactiveDismissDisabled(viewModel.isDirty)
         .alert("Nastala chyba.", isPresented: $viewModel.isError) {}
         .confirmationDialog("Opravdu smazat recept?", isPresented: $isDeleteConfirmationPresented) {
             Button("Smazat recept", role: .destructive, action: viewModel.delete)
@@ -80,6 +80,16 @@ struct RecipeForm: View {
         ) {
             Button("Zahodit změny", role: .destructive, action: onCancel)
             Button("Pokračovat v úpravách", role: .cancel) {}
+        }
+        .overlay {
+            Group {
+                if viewModel.isSaving {
+                    ZStack {
+                        Color("ProgressOverlayColor")
+                        ProgressView()
+                    }
+                }
+            }
         }
     }
 
