@@ -39,11 +39,12 @@ struct RecipeForm: View {
         }
         .environment(\.editMode, $ingredientEditMode)
         .onAppear {
+            viewModel.onSave = onSave
+            viewModel.onDelete = onDelete
+
             guard let recipe else { return }
             viewModel.recipe = recipe
             viewModel.draftRecipe = RecipeEdit(from: recipe)
-            viewModel.onSave = onSave
-            viewModel.onDelete = onDelete
         }
         .buttonStyle(.borderless) // Fix non-clickable buttons in Form
         .navigationBarBackButtonHidden(true)
