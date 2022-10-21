@@ -10,9 +10,9 @@
 		0900083727F35B9A00D5A746 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083627F35B9A00D5A746 /* RecipesView.swift */; };
 		0905C3B128048B41005E3949 /* RecipeForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905C3B028048B41005E3949 /* RecipeForm.swift */; };
 		0905EF2C28DF55D500C65B11 /* RecipesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905EF2B28DF55D500C65B11 /* RecipesList.swift */; };
+		090690932903448800BBA052 /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 090690922903448800BBA052 /* API */; };
 		091815FA27FDF836003A2250 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 091815F927FDF836003A2250 /* KeychainAccess */; };
 		091815FE27FDFF68003A2250 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FD27FDFF68003A2250 /* LoginView.swift */; };
-		092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092DC67127FB6F9C00A1B0D6 /* API.swift */; };
 		0934E7F128DF27E0003C8C0B /* RecipesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934E7F028DF27E0003C8C0B /* RecipesGrid.swift */; };
 		09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F872800953200AACAA3 /* RecipeEditView.swift */; };
 		09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F892800959F00AACAA3 /* RecipeDetailView.swift */; };
@@ -42,6 +42,15 @@
 		09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 09DC1F9D27F9DED200F01BBC /* MarkdownUI */; };
 		09FE90E127FA36BD005C6AE3 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 09FE90E027FA36BD005C6AE3 /* ApolloSQLite */; };
 		09FE90E927FA48A9005C6AE3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FE90E827FA48A9005C6AE3 /* Configuration.swift */; };
+		09FF048C2903354F009FA412 /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 09FF048B2903354F009FA412 /* apollo-codegen-config.json */; };
+		09FF048E29033919009FA412 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 09FF048D29033919009FA412 /* schema.graphqls */; };
+		09FF049829033A09009FA412 /* CreateRecipeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049129033A09009FA412 /* CreateRecipeMutation.graphql.swift */; };
+		09FF049929033A09009FA412 /* RecipeDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049229033A09009FA412 /* RecipeDetails.graphql.swift */; };
+		09FF049A29033A09009FA412 /* DeleteRecipeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049329033A09009FA412 /* DeleteRecipeMutation.graphql.swift */; };
+		09FF049B29033A09009FA412 /* MeQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049429033A09009FA412 /* MeQuery.graphql.swift */; };
+		09FF049C29033A09009FA412 /* LoginMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049529033A09009FA412 /* LoginMutation.graphql.swift */; };
+		09FF049D29033A09009FA412 /* UpdateRecipeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049629033A09009FA412 /* UpdateRecipeMutation.graphql.swift */; };
+		09FF049E29033A09009FA412 /* RecipesQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF049729033A09009FA412 /* RecipesQuery.graphql.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +59,8 @@
 		0900083627F35B9A00D5A746 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
 		0905C3B028048B41005E3949 /* RecipeForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeForm.swift; sourceTree = "<group>"; };
 		0905EF2B28DF55D500C65B11 /* RecipesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesList.swift; sourceTree = "<group>"; };
+		090690912903447E00BBA052 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
 		091815FD27FDFF68003A2250 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		092DC67127FB6F9C00A1B0D6 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0934E7F028DF27E0003C8C0B /* RecipesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesGrid.swift; sourceTree = "<group>"; };
 		09395F872800953200AACAA3 /* RecipeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditView.swift; sourceTree = "<group>"; };
 		09395F892800959F00AACAA3 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
@@ -76,12 +85,20 @@
 		09AE247027F31C9200BC6208 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		09AE247227F31C9300BC6208 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09AE247527F31C9300BC6208 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		09AE248427F326D900BC6208 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		09CD9EBE28E1CB65006D4EA9 /* CurrentUserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserStore.swift; sourceTree = "<group>"; };
 		09CFF8C128F8A89400117107 /* RecipeForm+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeForm+ViewModel.swift"; sourceTree = "<group>"; };
 		09FE90E327FA4753005C6AE3 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		09FE90E427FA47D6005C6AE3 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		09FE90E827FA48A9005C6AE3 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		09FF048B2903354F009FA412 /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; tabWidth = 2; };
+		09FF048D29033919009FA412 /* schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
+		09FF049129033A09009FA412 /* CreateRecipeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateRecipeMutation.graphql.swift; sourceTree = "<group>"; };
+		09FF049229033A09009FA412 /* RecipeDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetails.graphql.swift; sourceTree = "<group>"; };
+		09FF049329033A09009FA412 /* DeleteRecipeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteRecipeMutation.graphql.swift; sourceTree = "<group>"; };
+		09FF049429033A09009FA412 /* MeQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeQuery.graphql.swift; sourceTree = "<group>"; };
+		09FF049529033A09009FA412 /* LoginMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginMutation.graphql.swift; sourceTree = "<group>"; };
+		09FF049629033A09009FA412 /* UpdateRecipeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRecipeMutation.graphql.swift; sourceTree = "<group>"; };
+		09FF049729033A09009FA412 /* RecipesQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesQuery.graphql.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +109,7 @@
 				091815FA27FDF836003A2250 /* KeychainAccess in Frameworks */,
 				09A06829280970A70008563A /* CachedAsyncImage in Frameworks */,
 				0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */,
+				090690932903448800BBA052 /* API in Frameworks */,
 				09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */,
 				09FE90E127FA36BD005C6AE3 /* ApolloSQLite in Frameworks */,
 			);
@@ -103,7 +121,6 @@
 		092DC67027FB6F6000A1B0D6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				092DC67127FB6F9C00A1B0D6 /* API.swift */,
 				0989F8E527F32D45009CB6BD /* Network.swift */,
 				09A0682A280974D10008563A /* URLCache+imageCache.swift */,
 			);
@@ -177,6 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				09AE246D27F31C9200BC6208 /* App */,
+				09FF048B2903354F009FA412 /* apollo-codegen-config.json */,
+				09FF048F290339AB009FA412 /* Packages */,
 				092DC68D27FC4CFB00A1B0D6 /* Configuration */,
 				09AE246C27F31C9200BC6208 /* Products */,
 				09FE90DF27FA36BD005C6AE3 /* Frameworks */,
@@ -234,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				09AE247227F31C9300BC6208 /* Assets.xcassets */,
-				09AE248427F326D900BC6208 /* schema.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -242,8 +260,16 @@
 		09AE248627F3284200BC6208 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
+				09FF048D29033919009FA412 /* schema.graphqls */,
 				09A0682C2809F3120008563A /* Recipe.graphql */,
 				098BD2AC27FC8608006D9C7B /* Auth.graphql */,
+				09FF049129033A09009FA412 /* CreateRecipeMutation.graphql.swift */,
+				09FF049329033A09009FA412 /* DeleteRecipeMutation.graphql.swift */,
+				09FF049529033A09009FA412 /* LoginMutation.graphql.swift */,
+				09FF049429033A09009FA412 /* MeQuery.graphql.swift */,
+				09FF049229033A09009FA412 /* RecipeDetails.graphql.swift */,
+				09FF049729033A09009FA412 /* RecipesQuery.graphql.swift */,
+				09FF049629033A09009FA412 /* UpdateRecipeMutation.graphql.swift */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -255,6 +281,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		09FF048F290339AB009FA412 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				090690912903447E00BBA052 /* API */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,7 +296,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09AE247927F31C9300BC6208 /* Build configuration list for PBXNativeTarget "Zradelnik" */;
 			buildPhases = (
-				0989F8DC27F329E6009CB6BD /* Apollo */,
 				09AE246727F31C9200BC6208 /* Sources */,
 				09AE246827F31C9200BC6208 /* Frameworks */,
 				09AE246927F31C9200BC6208 /* Resources */,
@@ -278,6 +311,7 @@
 				09FE90E027FA36BD005C6AE3 /* ApolloSQLite */,
 				091815F927FDF836003A2250 /* KeychainAccess */,
 				09A06828280970A70008563A /* CachedAsyncImage */,
+				090690922903448800BBA052 /* API */,
 			);
 			productName = Zradelnik;
 			productReference = 09AE246B27F31C9200BC6208 /* Žrádelník.app */;
@@ -328,33 +362,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				099AAE9928F4BA2D0063466F /* recipeData.json in Resources */,
+				09FF048E29033919009FA412 /* schema.graphqls in Resources */,
 				099AAE8F28F430510063466F /* Preview Assets.xcassets in Resources */,
+				09FF048C2903354F009FA412 /* apollo-codegen-config.json in Resources */,
 				099AAE5928F42F930063466F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0989F8DC27F329E6009CB6BD /* Apollo */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Apollo;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "# Don't run this during index builds\nif [ $ACTION = \"indexbuild\" ]; then exit 0; fi\n\n# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Resources/schema.json\" Network/API.swift\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		09AE246727F31C9200BC6208 /* Sources */ = {
@@ -367,11 +382,13 @@
 				09CFF8C228F8A89400117107 /* RecipeForm+ViewModel.swift in Sources */,
 				0955941B27F332AA00E270E4 /* Recipe.swift in Sources */,
 				0905EF2C28DF55D500C65B11 /* RecipesList.swift in Sources */,
+				09FF049B29033A09009FA412 /* MeQuery.graphql.swift in Sources */,
+				09FF049929033A09009FA412 /* RecipeDetails.graphql.swift in Sources */,
 				0905C3B128048B41005E3949 /* RecipeForm.swift in Sources */,
-				092DC67227FB6F9C00A1B0D6 /* API.swift in Sources */,
 				0946D78F27FF276B00F81F18 /* SettingsFormView.swift in Sources */,
 				09CD9EBF28E1CB65006D4EA9 /* CurrentUserStore.swift in Sources */,
 				09FE90E927FA48A9005C6AE3 /* Configuration.swift in Sources */,
+				09FF049E29033A09009FA412 /* RecipesQuery.graphql.swift in Sources */,
 				09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */,
 				09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */,
 				09A0682B280974D10008563A /* URLCache+imageCache.swift in Sources */,
@@ -380,6 +397,7 @@
 				094763BF28E1D24F00521ADF /* Routing.swift in Sources */,
 				09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */,
 				0946D78D27FF265E00F81F18 /* SettingsView.swift in Sources */,
+				09FF049A29033A09009FA412 /* DeleteRecipeMutation.graphql.swift in Sources */,
 				09A7A3EC27F64E5B00E62123 /* LoadingContentView.swift in Sources */,
 				095C1D612801B5FF0074AA70 /* Extensions.swift in Sources */,
 				09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */,
@@ -387,7 +405,10 @@
 				09A068222809562C0008563A /* RecipeStore.swift in Sources */,
 				099AAE5828F42F5F0063466F /* PreviewData.swift in Sources */,
 				0934E7F128DF27E0003C8C0B /* RecipesGrid.swift in Sources */,
+				09FF049C29033A09009FA412 /* LoginMutation.graphql.swift in Sources */,
 				0946D79327FF325300F81F18 /* Keychain.swift in Sources */,
+				09FF049D29033A09009FA412 /* UpdateRecipeMutation.graphql.swift in Sources */,
+				09FF049829033A09009FA412 /* CreateRecipeMutation.graphql.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,8 +643,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.53.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		09A06827280970A70008563A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
@@ -645,6 +666,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		090690922903448800BBA052 /* API */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = API;
+		};
 		091815F927FDF836003A2250 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 091815F827FDF836003A2250 /* XCRemoteSwiftPackageReference "KeychainAccess" */;

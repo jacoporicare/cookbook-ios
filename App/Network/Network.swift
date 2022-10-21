@@ -6,29 +6,27 @@
 //
 
 import Apollo
+import ApolloAPI
 import ApolloSQLite
 import Foundation
 import KeychainAccess
 
 class Network {
     static let shared = Network()
-    
+
     private(set) lazy var apollo = Network.createApollo()
-    
+
     private static func createApollo() -> ApolloClient {
         let sqliteFileURL = URL.cachesDirectory.appending(path: "zradelnik_apollo_db.sqlite")
         let sqliteCache = try? SQLiteNormalizedCache(fileURL: sqliteFileURL)
-        
+
         let store = ApolloStore(cache: sqliteCache ?? InMemoryNormalizedCache())
-        
+
         let provider = NetworkInterceptorProvider(store: store)
         let baseUrl: String = try! Configuration.value(for: "API_BASE_URL")
         let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: URL(string: "https://\(baseUrl)/graphql")!)
-        
-        let apollo = ApolloClient(networkTransport: transport, store: store)
-        apollo.cacheKeyForObject = { $0["id"] }
-        
-        return apollo
+
+        return ApolloClient(networkTransport: transport, store: store)
     }
 }
 
@@ -42,7 +40,7 @@ class TokenAddInterceptor: ApolloInterceptor {
         if let token = ZKeychain.accessToken {
             request.addHeader(name: "Authorization", value: "Bearer \(token)")
         }
-            
+
         chain.proceedAsync(request: request,
                            response: response,
                            completion: completion)
@@ -59,7 +57,7 @@ class UnauthenticatedInterceptor: ApolloInterceptor {
         if response?.parsedResponse?.errors?.contains(where: { $0.message == "Unauthenticated" }) == true {
             ZKeychain.accessToken = nil
         }
-        
+
         chain.proceedAsync(request: request,
                            response: response,
                            completion: completion)

@@ -5,6 +5,7 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
+import ApolloAPI
 import Foundation
 
 var recipePreviewData: [RecipeDetails] = load("recipeData.json")
@@ -47,18 +48,18 @@ extension RecipeDetails: Decodable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.init(
-            id: try values.decode(String.self, forKey: .id),
-            title: try values.decode(String.self, forKey: .title),
-            gridImageUrl: try values.decode(Optional<String>.self, forKey: .gridImageUrl),
-            listImageUrl: try values.decode(Optional<String>.self, forKey: .listImageUrl),
-            fullImageUrl: try values.decode(Optional<String>.self, forKey: .fullImageUrl),
-            directions: try values.decode(Optional<String>.self, forKey: .directions),
-            sideDish: try values.decode(Optional<String>.self, forKey: .sideDish),
-            preparationTime: try values.decode(Optional<Int>.self, forKey: .preparationTime),
-            servingCount: try values.decode(Optional<Int>.self, forKey: .servingCount),
-            ingredients: try values.decode(Optional<[RecipeDetails.Ingredient]>.self, forKey: .ingredients)
-        )
+        self.init(data: DataDict([
+            "id": try values.decode(String.self, forKey: .id),
+            "title": try values.decode(String.self, forKey: .title),
+            "gridImageUrl": try values.decode(String?.self, forKey: .gridImageUrl),
+            "listImageUrl": try values.decode(String?.self, forKey: .listImageUrl),
+            "fullImageUrl": try values.decode(String?.self, forKey: .fullImageUrl),
+            "directions": try values.decode(String?.self, forKey: .directions),
+            "sideDish": try values.decode(String?.self, forKey: .sideDish),
+            "preparationTime": try values.decode(Int?.self, forKey: .preparationTime),
+            "servingCount": try values.decode(Int?.self, forKey: .servingCount),
+            "ingredients": try values.decode([RecipeDetails.Ingredient]?.self, forKey: .ingredients)
+        ], variables: nil))
     }
 }
 
@@ -70,16 +71,16 @@ extension RecipeDetails.Ingredient: Decodable {
         case amount
         case amountUnit
     }
-    
+
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.init(
-            id: try values.decode(String.self, forKey: .id),
-            name: try values.decode(String.self, forKey: .name),
-            isGroup: try values.decode(Bool.self, forKey: .isGroup),
-            amount: try values.decode(Optional<Double>.self, forKey: .amount),
-            amountUnit: try values.decode(Optional<String>.self, forKey: .amountUnit)
-        )
+
+        self.init(data: DataDict([
+            "id": try values.decode(String.self, forKey: .id),
+            "name": try values.decode(String.self, forKey: .name),
+            "isGroup": try values.decode(Bool.self, forKey: .isGroup),
+            "amount": try values.decode(Double?.self, forKey: .amount),
+            "amountUnit": try values.decode(String?.self, forKey: .amountUnit)
+        ], variables: nil))
     }
 }
