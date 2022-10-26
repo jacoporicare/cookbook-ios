@@ -9,16 +9,47 @@ import CachedAsyncImage
 import SwiftUI
 
 struct RecipeForm: View {
-    var recipe: Recipe? = nil
-    var onSave: (Recipe) -> Void
-    var onCancel: () -> Void
-    var onDelete: (() -> Void)? = nil
+    let recipe: Recipe?
+    let onSave: (Recipe) -> Void
+    let onCancel: () -> Void
+    let onDelete: (() -> Void)?
+
+    init(
+        recipe: Recipe? = nil,
+        onSave: @escaping (Recipe) -> Void,
+        onCancel: @escaping () -> Void,
+        onDelete: (() -> Void)? = nil
+    ) {
+        self.recipe = recipe
+        self.onSave = onSave
+        self.onCancel = onCancel
+        self.onDelete = onDelete
+
+        if let recipe {
+            _draftRecipe = .init(wrappedValue: RecipeEdit(from: recipe))
+        }
+    }
 
     @StateObject private var viewModel = ViewModel()
+
+    @State private var draftRecipe = RecipeEdit.default
+    @State private var inputImage: UIImage?
     @State private var ingredientEditMode = EditMode.inactive
     @State private var isImagePickerPresented = false
     @State private var isDeleteConfirmationPresented = false
     @State private var isCancelConfirmationPresented = false
+
+    var isValid: Bool {
+        !draftRecipe.title.isEmpty && !draftRecipe.ingredients.contains { ingredient in
+            !ingredient.amount.isEmpty && Double(ingredient.amount.replacingOccurrences(of: ",", with: ".")) == nil
+        }
+    }
+
+    var isDirty: Bool {
+        (recipe == nil && draftRecipe != RecipeEdit.default)
+            || (recipe != nil && draftRecipe != RecipeEdit(from: recipe!))
+            || inputImage != nil
+    }
 
     var body: some View {
         List {
@@ -38,24 +69,23 @@ struct RecipeForm: View {
             }
         }
         .environment(\.editMode, $ingredientEditMode)
-        .onAppear {
-            viewModel.onSave = onSave
-            viewModel.onDelete = onDelete
-
-            guard let recipe else { return }
-            viewModel.recipe = recipe
-            viewModel.draftRecipe = RecipeEdit(from: recipe)
-        }
         .buttonStyle(.borderless) // Fix non-clickable buttons in Form (and centers text in List)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Uložit", action: viewModel.save)
-                    .disabled(!viewModel.isValid)
+                Button("Uložit") {
+                    viewModel.save(
+                        id: recipe?.id,
+                        data: draftRecipe,
+                        image: inputImage,
+                        completionHandler: onSave
+                    )
+                }
+                .disabled(!isValid)
             }
             ToolbarItem(placement: .cancellationAction) {
                 Button("Zrušit") {
-                    if viewModel.isDirty {
+                    if isDirty {
                         isCancelConfirmationPresented = true
                     } else {
                         onCancel()
@@ -64,13 +94,16 @@ struct RecipeForm: View {
             }
         }
         .disabled(viewModel.isSaving) // Must be after .toolbar to disable those buttons
-        .interactiveDismissDisabled(viewModel.isDirty)
+        .interactiveDismissDisabled(isDirty)
         .sheet(isPresented: $isImagePickerPresented) {
-            ImagePicker(image: $viewModel.inputImage)
+            ImagePicker(image: $inputImage)
         }
         .alert("Nastala chyba.", isPresented: $viewModel.isError) {}
         .confirmationDialog("Opravdu smazat recept?", isPresented: $isDeleteConfirmationPresented) {
-            Button("Smazat recept", role: .destructive, action: viewModel.delete)
+            Button("Smazat recept", role: .destructive) {
+                guard let id = recipe?.id else { return }
+                viewModel.delete(id: id, completionHandler: onDelete ?? {})
+            }
             Button("Zrušit", role: .cancel) {}
         }
         .confirmationDialog(
@@ -95,7 +128,7 @@ struct RecipeForm: View {
 
     @ViewBuilder
     var image: some View {
-        if let inputImage = viewModel.inputImage {
+        if let inputImage {
             Image(uiImage: inputImage)
                 .centerCropped()
                 .listRowInsets(EdgeInsets())
@@ -124,15 +157,15 @@ struct RecipeForm: View {
                 isImagePickerPresented = true
             } label: {
                 Spacer()
-                Text(viewModel.inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                Text(inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
             }
 
-            if viewModel.inputImage != nil {
+            if inputImage != nil {
                 Divider()
 
                 Button(role: .destructive) {
-                    viewModel.inputImage = nil
+                    inputImage = nil
                 } label: {
                     Spacer()
                     Text("Zrušit změnu")
@@ -147,19 +180,19 @@ struct RecipeForm: View {
             HStack {
                 Text("Název")
                 Spacer()
-                TextField("nezadáno", text: $viewModel.draftRecipe.title)
+                TextField("nezadáno", text: $draftRecipe.title)
                     .multilineTextAlignment(.trailing)
             }
 
             HStack {
                 Text("Doba přípravy (min)")
                 Spacer()
-                TextField("nezadáno", text: $viewModel.draftRecipe.preparationTime)
+                TextField("nezadáno", text: $draftRecipe.preparationTime)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
-                    .onChange(of: viewModel.draftRecipe.preparationTime) { newValue in
+                    .onChange(of: draftRecipe.preparationTime) { newValue in
                         if !newValue.isEmpty, Int(newValue) == nil {
-                            viewModel.draftRecipe.preparationTime = newValue.filter { $0.isNumber }
+                            draftRecipe.preparationTime = newValue.filter { $0.isNumber }
                         }
                     }
             }
@@ -167,12 +200,12 @@ struct RecipeForm: View {
             HStack {
                 Text("Počet porcí")
                 Spacer()
-                TextField("nezadáno", text: $viewModel.draftRecipe.servingCount)
+                TextField("nezadáno", text: $draftRecipe.servingCount)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
-                    .onChange(of: viewModel.draftRecipe.servingCount) { newValue in
+                    .onChange(of: draftRecipe.servingCount) { newValue in
                         if !newValue.isEmpty, Int(newValue) == nil {
-                            viewModel.draftRecipe.servingCount = newValue.filter { $0.isNumber }
+                            draftRecipe.servingCount = newValue.filter { $0.isNumber }
                         }
                     }
             }
@@ -180,7 +213,7 @@ struct RecipeForm: View {
             HStack {
                 Text("Příloha")
                 Spacer()
-                TextField("nezadáno", text: $viewModel.draftRecipe.sideDish)
+                TextField("nezadáno", text: $draftRecipe.sideDish)
                     .textInputAutocapitalization(.never)
                     .multilineTextAlignment(.trailing)
             }
@@ -190,7 +223,7 @@ struct RecipeForm: View {
     @ViewBuilder
     var ingredients: some View {
         Section {
-            ForEach($viewModel.draftRecipe.ingredients) { $ingredient in
+            ForEach($draftRecipe.ingredients) { $ingredient in
                 VStack {
                     TextField("Název", text: $ingredient.name)
                         .textInputAutocapitalization(.never)
@@ -224,7 +257,7 @@ struct RecipeForm: View {
                 .listRowBackground($ingredient.isGroup.wrappedValue ? Color("IngredientGroupBackground") : nil)
                 .swipeActions(edge: .trailing) {
                     Button(role: .destructive) {
-                        viewModel.draftRecipe.ingredients = viewModel.draftRecipe.ingredients.filter { $0.id != $ingredient.id }
+                        draftRecipe.ingredients = draftRecipe.ingredients.filter { $0.id != $ingredient.id }
                     } label: {
                         Label("Smazat", systemImage: "trash")
                     }
@@ -237,11 +270,11 @@ struct RecipeForm: View {
                 }
             }
             .onMove { source, destination in
-                viewModel.draftRecipe.ingredients.move(fromOffsets: source, toOffset: destination)
+                draftRecipe.ingredients.move(fromOffsets: source, toOffset: destination)
             }
 
             Button {
-                viewModel.draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
+                draftRecipe.ingredients.append(.init(name: "", isGroup: false, amount: "", amountUnit: ""))
             } label: {
                 Text("Přidat ingredienci")
                 Spacer()
@@ -267,7 +300,7 @@ struct RecipeForm: View {
     @ViewBuilder
     var directions: some View {
         Section {
-            TextField("Zde napište postup receptu.", text: $viewModel.draftRecipe.directions, axis: .vertical)
+            TextField("Zde napište postup receptu.", text: $draftRecipe.directions, axis: .vertical)
                 .lineLimit(3...)
         } header: {
             Text("Postup")

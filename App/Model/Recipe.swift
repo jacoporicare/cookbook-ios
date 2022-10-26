@@ -8,26 +8,26 @@
 import Foundation
 
 struct Recipe: Identifiable, Decodable, Hashable {
-    var id: String
-    var title: String
-    var gridImageUrl: String?
-    var listImageUrl: String?
-    var fullImageUrl: String?
-    var directions: String?
-    var sideDish: String?
-    var preparationTime: String?
-    var preparationTimeRaw: Int?
-    var servingCount: String?
-    var servingCountRaw: Int?
-    var ingredients: [Ingredient]
+    let id: String
+    let title: String
+    let gridImageUrl: String?
+    let listImageUrl: String?
+    let fullImageUrl: String?
+    let directions: String?
+    let sideDish: String?
+    let preparationTime: String?
+    let preparationTimeRaw: Int?
+    let servingCount: String?
+    let servingCountRaw: Int?
+    let ingredients: [Ingredient]
 
     struct Ingredient: Identifiable, Decodable, Hashable {
-        var id: String
-        var name: String
-        var isGroup: Bool
-        var amount: String?
-        var amountRaw: Double?
-        var amountUnit: String?
+        let id: String
+        let name: String
+        let isGroup: Bool
+        let amount: String?
+        let amountRaw: Double?
+        let amountUnit: String?
     }
 }
 
