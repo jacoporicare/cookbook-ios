@@ -8,36 +8,13 @@
 import CachedAsyncImage
 import SwiftUI
 
-private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
 
 struct RecipesGrid: View {
-    var recipes: [Recipe]
+    var recipeGroups: [RecipeGroup]
     var searchText: Binding<String>
 
-    private var recipeGroups: [RecipeGroup]
-    private var letters: [String]
-
     private let columnLayout = Array(repeating: GridItem(), count: 2)
-
-    init(recipes: [Recipe], searchText: Binding<String>) {
-        self.recipes = recipes
-        self.searchText = searchText
-
-        let dict = Dictionary(grouping: recipes) { recipe in
-            alphabet.contains(String(recipe.title.uppercased().prefix(2)))
-                ? String(recipe.title.uppercased().prefix(2))
-                : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
-                ? String(recipe.title.uppercased().prefix(1))
-                : "#"
-        }
-
-        self.recipeGroups = dict
-            .map { key, value in RecipeGroup(id: key, recipes: value) }
-            .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
-
-        self.letters = dict.keys.sorted { $0.compare($1, locale: zradelnikLocale) == .orderedAscending }
-    }
-
+    
     var body: some View {
         ScrollViewReader { _ in
             ScrollView {

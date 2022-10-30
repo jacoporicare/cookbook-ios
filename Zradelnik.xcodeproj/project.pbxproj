@@ -36,7 +36,6 @@
 		09A7A3EC27F64E5B00E62123 /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3EB27F64E5B00E62123 /* LoadingContentView.swift */; };
 		09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A3F327F6642500E62123 /* RecipeView.swift */; };
 		09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */; };
-		09AE247127F31C9200BC6208 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AE247027F31C9200BC6208 /* ContentView.swift */; };
 		09CD9EBF28E1CB65006D4EA9 /* CurrentUserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CD9EBE28E1CB65006D4EA9 /* CurrentUserStore.swift */; };
 		09CFF8C228F8A89400117107 /* RecipeForm+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CFF8C128F8A89400117107 /* RecipeForm+ViewModel.swift */; };
 		09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 09DC1F9D27F9DED200F01BBC /* MarkdownUI */; };
@@ -82,7 +81,6 @@
 		09A7A3F327F6642500E62123 /* RecipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		09AE246B27F31C9200BC6208 /* Žrádelník.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Žrádelník.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09AE246E27F31C9200BC6208 /* ZradelnikApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZradelnikApp.swift; sourceTree = "<group>"; };
-		09AE247027F31C9200BC6208 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		09AE247227F31C9300BC6208 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09AE247527F31C9300BC6208 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09CD9EBE28E1CB65006D4EA9 /* CurrentUserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserStore.swift; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 		09AE247C27F31CBB00BC6208 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				09AE247027F31C9200BC6208 /* ContentView.swift */,
 				0989F8E727F32E7F009CB6BD /* Recipes */,
 				09A7A3E627F63CFC00E62123 /* Recipe */,
 				0946D78B27FF25FA00F81F18 /* Settings */,
@@ -376,7 +373,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09AE247127F31C9200BC6208 /* ContentView.swift in Sources */,
 				095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */,
 				0989F8E627F32D45009CB6BD /* Network.swift in Sources */,
 				09CFF8C228F8A89400117107 /* RecipeForm+ViewModel.swift in Sources */,

@@ -8,37 +8,11 @@
 import CachedAsyncImage
 import SwiftUI
 
-private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
-
-struct RecipeGroup: Identifiable {
-    let id: String
-    let recipes: [Recipe]
-}
-
 struct RecipesList: View {
     @EnvironmentObject private var recipeStore: RecipeStore
 
-    var recipes: [Recipe]
+    var recipeGroups: [RecipeGroup]
     var searchText: Binding<String>
-
-    private var recipeGroups: [RecipeGroup]
-
-    init(recipes: [Recipe], searchText: Binding<String>) {
-        self.recipes = recipes
-        self.searchText = searchText
-
-        self.recipeGroups = Dictionary(grouping: recipes) { recipe in
-            alphabet.contains(String(recipe.title.uppercased().prefix(2)))
-                ? String(recipe.title.uppercased().prefix(2))
-                : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
-                ? String(recipe.title.uppercased().prefix(1))
-                : "#"
-        }
-        .map { key, value in
-            RecipeGroup(id: key, recipes: value)
-        }
-        .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
-    }
 
     var body: some View {
         List(recipeGroups) { recipeGroup in
@@ -107,14 +81,14 @@ struct RecipesListItemView: View {
 }
 
 #if DEBUG
-struct RecipesListView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipesList(
-            recipes: recipePreviewData.map { Recipe(from: $0) },
-            searchText: .constant("")
-        )
-    }
-}
+//struct RecipesListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecipesList(
+//            recipeGroups: recipePreviewData.map { Recipe(from: $0) },
+//            searchText: .constant("")
+//        )
+//    }
+//}
 
 struct RecipesListItemView_Previews: PreviewProvider {
     static var previews: some View {

@@ -12,6 +12,13 @@ enum RecipesDisplayMode: String {
     case list
 }
 
+struct RecipeGroup: Identifiable {
+    let id: String
+    let recipes: [Recipe]
+}
+
+private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
+
 struct RecipesView: View {
     @EnvironmentObject private var routing: Routing
     @EnvironmentObject private var currentUserStore: CurrentUserStore
@@ -22,26 +29,36 @@ struct RecipesView: View {
     @State private var isRecipeFormPresented = false
     @State private var searchText = ""
 
-    var filteredRecipes: [Recipe] {
-        searchText.isEmpty
+    var recipeGroups: [RecipeGroup] {
+        let filteredRecipes = searchText.isEmpty
             ? recipeStore.recipes
             : recipeStore.recipes.filter {
                 $0.title
                     .folding(options: .diacriticInsensitive, locale: .current)
                     .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
             }
+
+        return Dictionary(grouping: filteredRecipes) { recipe in
+            alphabet.contains(String(recipe.title.uppercased().prefix(2)))
+                ? String(recipe.title.uppercased().prefix(2))
+                : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
+                ? String(recipe.title.uppercased().prefix(1))
+                : "#"
+        }
+        .map { key, value in RecipeGroup(id: key, recipes: value) }
+        .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
     }
 
     var body: some View {
         LoadingContentView(status: recipeStore.loadingStatus, loadingText: "Načítání receptů...") {
             if displayMode == .grid {
                 RecipesGrid(
-                    recipes: filteredRecipes,
+                    recipeGroups: recipeGroups,
                     searchText: $searchText
                 )
             } else {
                 RecipesList(
-                    recipes: filteredRecipes,
+                    recipeGroups: recipeGroups,
                     searchText: $searchText
                 )
             }

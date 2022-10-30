@@ -19,10 +19,24 @@ struct ZradelnikApp: App {
         WindowGroup {
             // Remove AnyView in Xcode 14.1 (hopefully)
             AnyView(
-                ContentView()
-                    .environmentObject(routing)
-                    .environmentObject(recipeStore)
-                    .environmentObject(currentUserStore)
+                TabView {
+                    NavigationStack(path: $routing.recipeListStack) {
+                        RecipesView()
+                    }
+                    .tabItem {
+                        Label("Recepty", systemImage: "fork.knife")
+                    }
+
+                    NavigationStack {
+                        SettingsView()
+                    }
+                    .tabItem {
+                        Label("Nastavení", systemImage: "gear")
+                    }
+                }
+                .environmentObject(routing)
+                .environmentObject(recipeStore)
+                .environmentObject(currentUserStore)
             )
         }
         .backgroundTask(.appRefresh("cz.jakubricar.Zradelnik.refresh")) {
