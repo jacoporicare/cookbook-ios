@@ -5,6 +5,7 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
+import API
 import ApolloAPI
 import Foundation
 
@@ -43,6 +44,7 @@ extension RecipeDetails: Decodable {
         case preparationTime
         case servingCount
         case ingredients
+        case cookedHistory
     }
 
     public init(from decoder: Decoder) throws {
@@ -58,7 +60,8 @@ extension RecipeDetails: Decodable {
             "sideDish": try values.decode(String?.self, forKey: .sideDish),
             "preparationTime": try values.decode(Int?.self, forKey: .preparationTime),
             "servingCount": try values.decode(Int?.self, forKey: .servingCount),
-            "ingredients": try values.decode([RecipeDetails.Ingredient]?.self, forKey: .ingredients)
+            "ingredients": try values.decode([Ingredient].self, forKey: .ingredients),
+            "cookedHistory": try values.decode([CookedHistory].self, forKey: .cookedHistory)
         ], variables: nil))
     }
 }
@@ -84,3 +87,36 @@ extension RecipeDetails.Ingredient: Decodable {
         ], variables: nil))
     }
 }
+
+extension RecipeDetails.CookedHistory: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case date
+        case user
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.init(data: DataDict([
+            "date": try values.decode(API.Date.self, forKey: .date),
+            "user": try values.decode(User.self, forKey: .user),
+        ], variables: nil))
+    }
+}
+
+extension RecipeDetails.CookedHistory.User: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case displayName
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.init(data: DataDict([
+            "id": try values.decode(String.self, forKey: .id),
+            "displayName": try values.decode(String.self, forKey: .displayName)
+        ], variables: nil))
+    }
+}
+

@@ -28,15 +28,15 @@ extension RecipeForm {
                     image: image != nil ? "image" : nil
                 )
                 
-                Network.shared.apollo.upload(operation: mutation, files: files) { result in
-                    self.isSaving = false
+                Network.shared.apollo.upload(operation: mutation, files: files) { [weak self] result in
+                    self?.isSaving = false
                     
                     switch result {
                     case .success(let result):
                         guard let recipe = result.data?.updateRecipe else { fallthrough }
                         completionHandler(Recipe(from: recipe.fragments.recipeDetails))
                     case .failure:
-                        self.isError = true
+                        self?.isError = true
                     }
                 }
             } else {
@@ -45,15 +45,15 @@ extension RecipeForm {
                     image: image != nil ? "image" : nil
                 )
                 
-                Network.shared.apollo.upload(operation: mutation, files: files) { result in
-                    self.isSaving = false
+                Network.shared.apollo.upload(operation: mutation, files: files) { [weak self] result in
+                    self?.isSaving = false
                     
                     switch result {
                     case .success(let result):
                         guard let recipe = result.data?.createRecipe else { fallthrough }
                         completionHandler(Recipe(from: recipe.fragments.recipeDetails))
                     case .failure:
-                        self.isError = true
+                        self?.isError = true
                     }
                 }
             }
@@ -64,15 +64,15 @@ extension RecipeForm {
             
             let mutation = DeleteRecipeMutation(id: id)
             
-            Network.shared.apollo.perform(mutation: mutation) { result in
-                self.isSaving = false
+            Network.shared.apollo.perform(mutation: mutation) { [weak self] result in
+                self?.isSaving = false
                 
                 switch result {
                 case .success(let result):
                     guard let _ = result.data?.deleteRecipe else { fallthrough }
                     completionHandler()
                 case .failure:
-                    self.isError = true
+                    self?.isError = true
                 }
             }
         }

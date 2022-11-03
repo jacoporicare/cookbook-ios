@@ -13,6 +13,13 @@
 		090690932903448800BBA052 /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 090690922903448800BBA052 /* API */; };
 		091815FA27FDF836003A2250 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 091815F927FDF836003A2250 /* KeychainAccess */; };
 		091815FE27FDFF68003A2250 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091815FD27FDFF68003A2250 /* LoginView.swift */; };
+		092A9553291316E30041638C /* RecipeDetailView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A9552291316E30041638C /* RecipeDetailView+ViewModel.swift */; };
+		092A9555291317D30041638C /* RecipeCookedMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A9554291317D30041638C /* RecipeCookedMutation.graphql.swift */; };
+		0934CC282914439B00150F19 /* RecipeCookedDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934CC272914439B00150F19 /* RecipeCookedDatePicker.swift */; };
+		0934CC2A2914443000150F19 /* RecipeDetailIngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934CC292914443000150F19 /* RecipeDetailIngredientsView.swift */; };
+		0934CC2C2914459300150F19 /* RecipeDetailBasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934CC2B2914459300150F19 /* RecipeDetailBasicInfoView.swift */; };
+		0934CC2E291446D900150F19 /* RecipeDetailLastCookedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934CC2D291446D900150F19 /* RecipeDetailLastCookedDate.swift */; };
+		0934CC3229145BD800150F19 /* RecipeDetailActionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934CC3129145BD800150F19 /* RecipeDetailActionButtonsView.swift */; };
 		0934E7F128DF27E0003C8C0B /* RecipesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0934E7F028DF27E0003C8C0B /* RecipesGrid.swift */; };
 		09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F872800953200AACAA3 /* RecipeEditView.swift */; };
 		09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F892800959F00AACAA3 /* RecipeDetailView.swift */; };
@@ -60,6 +67,13 @@
 		0905EF2B28DF55D500C65B11 /* RecipesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesList.swift; sourceTree = "<group>"; };
 		090690912903447E00BBA052 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
 		091815FD27FDFF68003A2250 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		092A9552291316E30041638C /* RecipeDetailView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeDetailView+ViewModel.swift"; sourceTree = "<group>"; };
+		092A9554291317D30041638C /* RecipeCookedMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCookedMutation.graphql.swift; sourceTree = "<group>"; };
+		0934CC272914439B00150F19 /* RecipeCookedDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCookedDatePicker.swift; sourceTree = "<group>"; };
+		0934CC292914443000150F19 /* RecipeDetailIngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailIngredientsView.swift; sourceTree = "<group>"; };
+		0934CC2B2914459300150F19 /* RecipeDetailBasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailBasicInfoView.swift; sourceTree = "<group>"; };
+		0934CC2D291446D900150F19 /* RecipeDetailLastCookedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailLastCookedDate.swift; sourceTree = "<group>"; };
+		0934CC3129145BD800150F19 /* RecipeDetailActionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailActionButtonsView.swift; sourceTree = "<group>"; };
 		0934E7F028DF27E0003C8C0B /* RecipesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesGrid.swift; sourceTree = "<group>"; };
 		09395F872800953200AACAA3 /* RecipeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditView.swift; sourceTree = "<group>"; };
 		09395F892800959F00AACAA3 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
@@ -144,6 +158,30 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		0934CC2F2914535500150F19 /* RecipeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				09395F892800959F00AACAA3 /* RecipeDetailView.swift */,
+				092A9552291316E30041638C /* RecipeDetailView+ViewModel.swift */,
+				0934CC3129145BD800150F19 /* RecipeDetailActionButtonsView.swift */,
+				0934CC272914439B00150F19 /* RecipeCookedDatePicker.swift */,
+				0934CC2D291446D900150F19 /* RecipeDetailLastCookedDate.swift */,
+				0934CC2B2914459300150F19 /* RecipeDetailBasicInfoView.swift */,
+				0934CC292914443000150F19 /* RecipeDetailIngredientsView.swift */,
+			);
+			path = RecipeDetail;
+			sourceTree = "<group>";
+		};
+		0934CC30291453B700150F19 /* RecipeEdit */ = {
+			isa = PBXGroup;
+			children = (
+				09395F872800953200AACAA3 /* RecipeEditView.swift */,
+				0905C3B028048B41005E3949 /* RecipeForm.swift */,
+				09CFF8C128F8A89400117107 /* RecipeForm+ViewModel.swift */,
+			);
+			path = RecipeEdit;
+			sourceTree = "<group>";
+		};
 		0946D78B27FF25FA00F81F18 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,10 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				09A7A3F327F6642500E62123 /* RecipeView.swift */,
-				09395F892800959F00AACAA3 /* RecipeDetailView.swift */,
-				09395F872800953200AACAA3 /* RecipeEditView.swift */,
-				0905C3B028048B41005E3949 /* RecipeForm.swift */,
-				09CFF8C128F8A89400117107 /* RecipeForm+ViewModel.swift */,
+				0934CC30291453B700150F19 /* RecipeEdit */,
+				0934CC2F2914535500150F19 /* RecipeDetail */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -264,6 +300,7 @@
 				09FF049329033A09009FA412 /* DeleteRecipeMutation.graphql.swift */,
 				09FF049529033A09009FA412 /* LoginMutation.graphql.swift */,
 				09FF049429033A09009FA412 /* MeQuery.graphql.swift */,
+				092A9554291317D30041638C /* RecipeCookedMutation.graphql.swift */,
 				09FF049229033A09009FA412 /* RecipeDetails.graphql.swift */,
 				09FF049729033A09009FA412 /* RecipesQuery.graphql.swift */,
 				09FF049629033A09009FA412 /* UpdateRecipeMutation.graphql.swift */,
@@ -377,6 +414,7 @@
 				0989F8E627F32D45009CB6BD /* Network.swift in Sources */,
 				09CFF8C228F8A89400117107 /* RecipeForm+ViewModel.swift in Sources */,
 				0955941B27F332AA00E270E4 /* Recipe.swift in Sources */,
+				0934CC2E291446D900150F19 /* RecipeDetailLastCookedDate.swift in Sources */,
 				0905EF2C28DF55D500C65B11 /* RecipesList.swift in Sources */,
 				09FF049B29033A09009FA412 /* MeQuery.graphql.swift in Sources */,
 				09FF049929033A09009FA412 /* RecipeDetails.graphql.swift in Sources */,
@@ -385,25 +423,31 @@
 				09CD9EBF28E1CB65006D4EA9 /* CurrentUserStore.swift in Sources */,
 				09FE90E927FA48A9005C6AE3 /* Configuration.swift in Sources */,
 				09FF049E29033A09009FA412 /* RecipesQuery.graphql.swift in Sources */,
+				0934CC282914439B00150F19 /* RecipeCookedDatePicker.swift in Sources */,
 				09A7A3F427F6642500E62123 /* RecipeView.swift in Sources */,
 				09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */,
 				09A0682B280974D10008563A /* URLCache+imageCache.swift in Sources */,
 				091815FE27FDFF68003A2250 /* LoginView.swift in Sources */,
 				09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */,
 				094763BF28E1D24F00521ADF /* Routing.swift in Sources */,
+				092A9555291317D30041638C /* RecipeCookedMutation.graphql.swift in Sources */,
 				09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */,
 				0946D78D27FF265E00F81F18 /* SettingsView.swift in Sources */,
 				09FF049A29033A09009FA412 /* DeleteRecipeMutation.graphql.swift in Sources */,
 				09A7A3EC27F64E5B00E62123 /* LoadingContentView.swift in Sources */,
 				095C1D612801B5FF0074AA70 /* Extensions.swift in Sources */,
 				09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */,
+				0934CC2C2914459300150F19 /* RecipeDetailBasicInfoView.swift in Sources */,
 				0900083727F35B9A00D5A746 /* RecipesView.swift in Sources */,
+				0934CC3229145BD800150F19 /* RecipeDetailActionButtonsView.swift in Sources */,
 				09A068222809562C0008563A /* RecipeStore.swift in Sources */,
+				092A9553291316E30041638C /* RecipeDetailView+ViewModel.swift in Sources */,
 				099AAE5828F42F5F0063466F /* PreviewData.swift in Sources */,
 				0934E7F128DF27E0003C8C0B /* RecipesGrid.swift in Sources */,
 				09FF049C29033A09009FA412 /* LoginMutation.graphql.swift in Sources */,
 				0946D79327FF325300F81F18 /* Keychain.swift in Sources */,
 				09FF049D29033A09009FA412 /* UpdateRecipeMutation.graphql.swift in Sources */,
+				0934CC2A2914443000150F19 /* RecipeDetailIngredientsView.swift in Sources */,
 				09FF049829033A09009FA412 /* CreateRecipeMutation.graphql.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

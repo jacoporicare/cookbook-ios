@@ -6,13 +6,13 @@ import ApolloAPI
 @_exported import enum ApolloAPI.GraphQLNullable
 import API
 
-public class UpdateRecipeMutation: GraphQLMutation {
-  public static let operationName: String = "UpdateRecipe"
+public class RecipeCookedMutation: GraphQLMutation {
+  public static let operationName: String = "RecipeCooked"
   public static let document: DocumentType = .notPersisted(
     definition: .init(
       """
-      mutation UpdateRecipe($id: ID!, $recipe: RecipeInput!, $image: Upload) {
-        updateRecipe(id: $id, recipe: $recipe, image: $image) {
+      mutation RecipeCooked($id: ID!, $date: Date!) {
+        recipeCooked(id: $id, date: $date) {
           __typename
           ...RecipeDetails
         }
@@ -22,23 +22,19 @@ public class UpdateRecipeMutation: GraphQLMutation {
     ))
 
   public var id: API.ID
-  public var recipe: API.RecipeInput
-  public var image: GraphQLNullable<API.Upload>
+  public var date: API.Date
 
   public init(
     id: API.ID,
-    recipe: API.RecipeInput,
-    image: GraphQLNullable<API.Upload>
+    date: API.Date
   ) {
     self.id = id
-    self.recipe = recipe
-    self.image = image
+    self.date = date
   }
 
   public var __variables: Variables? { [
     "id": id,
-    "recipe": recipe,
-    "image": image
+    "date": date
   ] }
 
   public struct Data: API.SelectionSet {
@@ -47,19 +43,18 @@ public class UpdateRecipeMutation: GraphQLMutation {
 
     public static var __parentType: ParentType { API.Objects.Mutation }
     public static var __selections: [Selection] { [
-      .field("updateRecipe", UpdateRecipe.self, arguments: [
+      .field("recipeCooked", RecipeCooked.self, arguments: [
         "id": .variable("id"),
-        "recipe": .variable("recipe"),
-        "image": .variable("image")
+        "date": .variable("date")
       ]),
     ] }
 
-    public var updateRecipe: UpdateRecipe { __data["updateRecipe"] }
+    public var recipeCooked: RecipeCooked { __data["recipeCooked"] }
 
-    /// UpdateRecipe
+    /// RecipeCooked
     ///
     /// Parent Type: `Recipe`
-    public struct UpdateRecipe: API.SelectionSet {
+    public struct RecipeCooked: API.SelectionSet {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 

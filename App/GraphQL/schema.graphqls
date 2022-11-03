@@ -25,8 +25,9 @@ type Recipe {
   imageUrl(size: ImageSize, format: ImageFormat): String
   creationDate: Date!
   lastModifiedDate: Date!
-  ingredients: [Ingredient!]
-  tags: [String!]
+  ingredients: [Ingredient!]!
+  tags: [String!]!
+  cookedHistory: [RecipeCooked!]!
   deleted: Boolean!
 }
 
@@ -36,6 +37,11 @@ type Ingredient {
   amountUnit: String
   name: String!
   isGroup: Boolean!
+}
+
+type RecipeCooked {
+  user: User!
+  date: Date!
 }
 
 type User {
@@ -88,6 +94,7 @@ type Mutation {
   createRecipe(recipe: RecipeInput!, image: Upload): Recipe!
   updateRecipe(id: ID!, recipe: RecipeInput!, image: Upload): Recipe!
   deleteRecipe(id: ID!): Boolean!
+  recipeCooked(id: ID!, date: Date!, delete: Boolean): Recipe!
   updateUserLastActivity: Boolean!
   createUser(user: UserInput!): User!
   updateUser(id: ID!, user: UserInput!): User!

@@ -27,6 +27,15 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
         amount
         amountUnit
       }
+      cookedHistory {
+        __typename
+        date
+        user {
+          __typename
+          id
+          displayName
+        }
+      }
     }
     """ }
 
@@ -62,7 +71,8 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
     .field("sideDish", String?.self),
     .field("preparationTime", Int?.self),
     .field("servingCount", Int?.self),
-    .field("ingredients", [Ingredient]?.self),
+    .field("ingredients", [Ingredient].self),
+    .field("cookedHistory", [CookedHistory].self),
   ] }
 
   public var id: API.ID { __data["id"] }
@@ -74,7 +84,8 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
   public var sideDish: String? { __data["sideDish"] }
   public var preparationTime: Int? { __data["preparationTime"] }
   public var servingCount: Int? { __data["servingCount"] }
-  public var ingredients: [Ingredient]? { __data["ingredients"] }
+  public var ingredients: [Ingredient] { __data["ingredients"] }
+  public var cookedHistory: [CookedHistory] { __data["cookedHistory"] }
 
   /// Ingredient
   ///
@@ -97,5 +108,39 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
     public var isGroup: Bool { __data["isGroup"] }
     public var amount: Double? { __data["amount"] }
     public var amountUnit: String? { __data["amountUnit"] }
+  }
+
+  /// CookedHistory
+  ///
+  /// Parent Type: `RecipeCooked`
+  public struct CookedHistory: API.SelectionSet {
+    public let __data: DataDict
+    public init(data: DataDict) { __data = data }
+
+    public static var __parentType: ParentType { API.Objects.RecipeCooked }
+    public static var __selections: [Selection] { [
+      .field("date", API.Date.self),
+      .field("user", User.self),
+    ] }
+
+    public var date: API.Date { __data["date"] }
+    public var user: User { __data["user"] }
+
+    /// CookedHistory.User
+    ///
+    /// Parent Type: `User`
+    public struct User: API.SelectionSet {
+      public let __data: DataDict
+      public init(data: DataDict) { __data = data }
+
+      public static var __parentType: ParentType { API.Objects.User }
+      public static var __selections: [Selection] { [
+        .field("id", API.ID.self),
+        .field("displayName", String.self),
+      ] }
+
+      public var id: API.ID { __data["id"] }
+      public var displayName: String { __data["displayName"] }
+    }
   }
 }

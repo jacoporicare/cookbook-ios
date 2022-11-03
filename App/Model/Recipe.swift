@@ -20,6 +20,7 @@ struct Recipe: Identifiable, Decodable, Hashable {
     let servingCount: String?
     let servingCountRaw: Int?
     let ingredients: [Ingredient]
+    let cookedHistory: [Cooked]
 
     struct Ingredient: Identifiable, Decodable, Hashable {
         let id: String
@@ -28,6 +29,17 @@ struct Recipe: Identifiable, Decodable, Hashable {
         let amount: String?
         let amountRaw: Double?
         let amountUnit: String?
+    }
+    
+    struct Cooked: Identifiable, Decodable, Hashable {
+        var id: String { "\(date.description)_\(user.id)" }
+        let date: Date
+        let user: User
+        
+        struct User: Identifiable, Decodable, Hashable {
+            let id: String
+            let displayName: String
+        }
     }
 }
 
@@ -44,7 +56,8 @@ extension Recipe {
         self.preparationTimeRaw = recipe.preparationTime
         self.servingCount = recipe.servingCount?.formatted()
         self.servingCountRaw = recipe.servingCount
-        self.ingredients = recipe.ingredients?.map { Ingredient(from: $0) } ?? []
+        self.ingredients = recipe.ingredients.map { Ingredient(from: $0) }
+        self.cookedHistory = recipe.cookedHistory.map { Cooked(from: $0) }
     }
 }
 
@@ -56,6 +69,20 @@ extension Recipe.Ingredient {
         self.amount = ingredient.amount?.formatted()
         self.amountRaw = ingredient.amount
         self.amountUnit = ingredient.amountUnit
+    }
+}
+
+extension Recipe.Cooked {
+    init(from cooked: RecipeDetails.CookedHistory) {
+        self.date = cooked.date
+        self.user = User(from: cooked.user)
+    }
+}
+
+extension Recipe.Cooked.User {
+    init(from user: RecipeDetails.CookedHistory.User) {
+        self.id = user.id
+        self.displayName = user.displayName
     }
 }
 

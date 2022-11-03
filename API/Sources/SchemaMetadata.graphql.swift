@@ -28,6 +28,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "AuthPayload": return API.Objects.AuthPayload
     case "Recipe": return API.Objects.Recipe
     case "Ingredient": return API.Objects.Ingredient
+    case "RecipeCooked": return API.Objects.RecipeCooked
     default: return nil
     }
   }

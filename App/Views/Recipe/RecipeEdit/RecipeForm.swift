@@ -30,7 +30,7 @@ struct RecipeForm: View {
         }
     }
 
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var vm = ViewModel()
 
     @State private var draftRecipe = RecipeEdit.default
     @State private var inputImage: UIImage?
@@ -74,7 +74,7 @@ struct RecipeForm: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Uložit") {
-                    viewModel.save(
+                    vm.save(
                         id: recipe?.id,
                         data: draftRecipe,
                         image: inputImage,
@@ -93,16 +93,16 @@ struct RecipeForm: View {
                 }
             }
         }
-        .disabled(viewModel.isSaving) // Must be after .toolbar to disable those buttons
+        .disabled(vm.isSaving) // Must be after .toolbar to disable those buttons
         .interactiveDismissDisabled(isDirty)
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(image: $inputImage)
         }
-        .alert("Nastala chyba.", isPresented: $viewModel.isError) {}
+        .alert("Nastala chyba.", isPresented: $vm.isError) {}
         .confirmationDialog("Opravdu smazat recept?", isPresented: $isDeleteConfirmationPresented) {
             Button("Smazat recept", role: .destructive) {
                 guard let id = recipe?.id else { return }
-                viewModel.delete(id: id, completionHandler: onDelete ?? {})
+                vm.delete(id: id, completionHandler: onDelete ?? {})
             }
             Button("Zrušit", role: .cancel) {}
         }
@@ -116,7 +116,7 @@ struct RecipeForm: View {
         }
         .overlay {
             Group {
-                if viewModel.isSaving {
+                if vm.isSaving {
                     ZStack {
                         Color("ProgressOverlayColor")
                         ProgressView()
