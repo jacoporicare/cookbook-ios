@@ -183,8 +183,8 @@ struct TextOverlay: View {
 struct RecipesGridItemView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            RecipesGridItemView(recipe: Recipe(from: recipePreviewData[4]))
-            RecipesGridItemView(recipe: Recipe(from: recipePreviewData[2]))
+            RecipesGridItemView(recipe: Recipe(from: recipePreviewData[3].fragments.recipeDetails))
+            RecipesGridItemView(recipe: Recipe(from: recipePreviewData[2].fragments.recipeDetails))
         }
         .padding()
     }

@@ -6,117 +6,163 @@
 //
 
 import API
+import Apollo
 import ApolloAPI
 import Foundation
 
-var recipePreviewData: [RecipeDetails] = load("recipeData.json")
+private let recipe1: JSONObject = [
+    "__typename": "Recipe",
+    "id": "63506df6f463890829ae047b",
+    "title": "With all details",
+    "gridImageUrl": "https://api-test.zradelnik.eu/image/newx_63530d7af463890829ae04ed?size=640x640&format=webp",
+    "listImageUrl": "https://api-test.zradelnik.eu/image/newx_63530d7af463890829ae04ed?size=240x180&format=webp",
+    "fullImageUrl": "https://api-test.zradelnik.eu/image/newx_63530d7af463890829ae04ed?size=1280x960&format=webp",
+    "directions": "Fsdfsdf",
+    "sideDish": "sss",
+    "preparationTime": 12,
+    "servingCount": 22,
+    "ingredients": [
+        [
+            "__typename": "Ingredient",
+            "id": "63599979345b99a0f87f9d19",
+            "name": "xxx",
+            "isGroup": false
+        ] as JSONObject
+    ],
+    "cookedHistory": [
+        [
+            "__typename": "RecipeCooked",
+            "date": try! Date(_jsonValue: "2022-11-01T21:58:00.000Z"),
+            "user": [
+                "__typename": "User",
+                "id": "5cfbe70e4309d1001b800400",
+                "displayName": "Kubík"
+            ]
+        ] as JSONObject
+    ]
+]
 
-func load<T: Decodable>(_ filename: String) -> T {
-    let data: Data
+private let recipe2: JSONObject = [
+    "__typename": "Recipe",
+    "id": "6320a3c94e2b78b722e5325d",
+    "title": "Some long title and without any details",
+    "ingredients": [JSONObject](),
+    "cookedHistory": [JSONObject]()
+]
 
-    guard let file = Bundle.main.url(forResource: filename, withExtension: nil) else {
-        fatalError("Couldn't find \(filename) in main bundle.")
-    }
+private let recipe3: JSONObject = [
+    "__typename": "Recipe",
+    "id": "5b4f00f4f275000019d0c3b6",
+    "title": "Bábovka",
+    "gridImageUrl": "https://api-test.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=640x640&format=webp",
+    "listImageUrl": "https://api-test.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=240x180&format=webp",
+    "fullImageUrl": "https://api-test.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=1280x960&format=webp",
+    "directions": "1. Vejce rozklepneme a oddělíme žloutky od bílků, žloutky vyšleháme s 1/3 cukru, z bílků ušleháme sníh s 1/3 cukru\n1. Všechny sypké ingredience smícháme v míse a přisypeme ke žloutkům\n1. Přidáme olej a vodu\n1. Opatrně vmícháme sníh\n1. Asi 2/3 těsta nalijeme do vymazané a moukou vysypané formy. Do zbylé třetiny těsta přidáme 2 lžíce kakaa, zamícháme a nalijeme na světlé těsto do formy.\n1. Bábovku vkládáme do předehřáté trouby a pečeme asi 60 minut na 160 °C (horkovzduch 140 °C). Zkusíme špejlí, jestli je uvnitř hotová\n1. Upečenou bábovku vyklopíme, pocukrujeme a můžeme servírovat",
+    "preparationTime": 90,
+    "ingredients": [
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9af",
+            "name": "polohrubá mouka",
+            "isGroup": false,
+            "amount": 2,
+            "amountUnit": "hrnky"
+        ] as JSONObject,
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b0",
+            "name": "cukr",
+            "isGroup": false,
+            "amount": 1,
+            "amountUnit": "hrnek"
+        ],
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b1",
+            "name": "řepkový olej",
+            "isGroup": false,
+            "amount": 1,
+            "amountUnit": "sklenka"
+        ],
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b2",
+            "name": "teplá voda",
+            "isGroup": false,
+            "amount": 1,
+            "amountUnit": "sklenka"
+        ],
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b3",
+            "name": "vejce",
+            "isGroup": false,
+            "amount": 3,
+            "amountUnit": "ks"
+        ],
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b4",
+            "name": "prášek do pečiva",
+            "isGroup": false,
+            "amount": 1,
+            "amountUnit": "ks"
+        ],
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b5",
+            "name": "vanilkový cukr",
+            "isGroup": false,
+            "amount": 1,
+            "amountUnit": "ks"
+        ],
+        [
+            "__typename": "Ingredient",
+            "id": "6043e32822d1620018b0c9b6",
+            "name": "kakao",
+            "isGroup": false,
+            "amount": 2,
+            "amountUnit": "lžíce"
+        ]
+    ],
+    "cookedHistory": [
+        [
+            "__typename": "RecipeCooked",
+            "date": try! Date(_jsonValue: "2022-10-21T20:44:00.000Z"),
+            "user": [
+                "__typename": "User",
+                "id": "5cfbe70e4309d1001b800400",
+                "displayName": "Kubík"
+            ]
+        ] as JSONObject,
+        [
+            "__typename": "RecipeCooked",
+            "date": try! Date(_jsonValue: "2022-10-22T20:44:00.000Z"),
+            "user": [
+                "__typename": "User",
+                "id": "5cfbe70e4309d1001b800400",
+                "displayName": "Kubík"
+            ]
+        ]
+    ]
+]
 
-    do {
-        data = try Data(contentsOf: file)
-    } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-    }
+private let recipe4: JSONObject = [
+    "__typename": "Recipe",
+    "id": "6320a3c94e2b78b722e5324d",
+    "title": "Some long title with preparation for list test",
+    "preparationTime": 185,
+    "ingredients": [JSONObject](),
+    "cookedHistory": [JSONObject]()
+]
 
-    do {
-        let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
-    } catch {
-        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
-    }
-}
+private let data: JSONObject = [
+    "recipes": [
+        recipe1,
+        recipe2,
+        recipe3,
+        recipe4
+    ]
+]
 
-extension RecipeDetails: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case gridImageUrl
-        case listImageUrl
-        case fullImageUrl
-        case directions
-        case sideDish
-        case preparationTime
-        case servingCount
-        case ingredients
-        case cookedHistory
-    }
-
-    public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.init(data: DataDict([
-            "id": try values.decode(String.self, forKey: .id),
-            "title": try values.decode(String.self, forKey: .title),
-            "gridImageUrl": try values.decode(String?.self, forKey: .gridImageUrl),
-            "listImageUrl": try values.decode(String?.self, forKey: .listImageUrl),
-            "fullImageUrl": try values.decode(String?.self, forKey: .fullImageUrl),
-            "directions": try values.decode(String?.self, forKey: .directions),
-            "sideDish": try values.decode(String?.self, forKey: .sideDish),
-            "preparationTime": try values.decode(Int?.self, forKey: .preparationTime),
-            "servingCount": try values.decode(Int?.self, forKey: .servingCount),
-            "ingredients": try values.decode([Ingredient].self, forKey: .ingredients),
-            "cookedHistory": try values.decode([CookedHistory].self, forKey: .cookedHistory)
-        ], variables: nil))
-    }
-}
-
-extension RecipeDetails.Ingredient: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case isGroup
-        case amount
-        case amountUnit
-    }
-
-    public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.init(data: DataDict([
-            "id": try values.decode(String.self, forKey: .id),
-            "name": try values.decode(String.self, forKey: .name),
-            "isGroup": try values.decode(Bool.self, forKey: .isGroup),
-            "amount": try values.decode(Double?.self, forKey: .amount),
-            "amountUnit": try values.decode(String?.self, forKey: .amountUnit)
-        ], variables: nil))
-    }
-}
-
-extension RecipeDetails.CookedHistory: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case date
-        case user
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.init(data: DataDict([
-            "date": try values.decode(API.Date.self, forKey: .date),
-            "user": try values.decode(User.self, forKey: .user),
-        ], variables: nil))
-    }
-}
-
-extension RecipeDetails.CookedHistory.User: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case displayName
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.init(data: DataDict([
-            "id": try values.decode(String.self, forKey: .id),
-            "displayName": try values.decode(String.self, forKey: .displayName)
-        ], variables: nil))
-    }
-}
-
+let recipePreviewData: [RecipesQuery.Data.Recipe] = RecipesQuery.Data(data: DataDict(data, variables: nil)).recipes

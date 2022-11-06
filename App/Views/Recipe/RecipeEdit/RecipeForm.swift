@@ -314,7 +314,7 @@ struct RecipeForm: View {
 struct RecipeForm_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeForm(recipe: Recipe(from: recipePreviewData[1])) { _ in } onCancel: {}
+            RecipeForm(recipe: Recipe(from: recipePreviewData[1].fragments.recipeDetails)) { _ in } onCancel: {}
             RecipeForm { _ in } onCancel: {}
         }
     }

@@ -32,7 +32,7 @@ struct RecipeEditView: View {
 struct RecipeEditView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            RecipeEditView(recipe: Recipe(from: recipePreviewData[0]))
+            RecipeEditView(recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails))
         }
     }
 }

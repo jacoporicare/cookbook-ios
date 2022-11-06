@@ -81,20 +81,21 @@ struct RecipesListItemView: View {
 }
 
 #if DEBUG
-//struct RecipesListView_Previews: PreviewProvider {
+// struct RecipesListView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        RecipesList(
 //            recipeGroups: recipePreviewData.map { Recipe(from: $0) },
 //            searchText: .constant("")
 //        )
 //    }
-//}
+// }
 
 struct RecipesListItemView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            RecipesListItemView(recipe: Recipe(from: recipePreviewData[3]))
-            RecipesListItemView(recipe: Recipe(from: recipePreviewData[114]))
+            ForEach(recipePreviewData, id: \.id) { recipe in
+                RecipesListItemView(recipe: Recipe(from: recipe.fragments.recipeDetails))
+            }
         }
     }
 }
