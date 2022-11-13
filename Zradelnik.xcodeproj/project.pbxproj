@@ -24,6 +24,7 @@
 		09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F872800953200AACAA3 /* RecipeEditView.swift */; };
 		09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F892800959F00AACAA3 /* RecipeDetailView.swift */; };
 		09395F8C2800B77C00AACAA3 /* RecipeEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */; };
+		0944AC5E292197AF003E40FE /* DeleteRecipeCookedMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0944AC5D292197AF003E40FE /* DeleteRecipeCookedMutation.graphql.swift */; };
 		0946D78D27FF265E00F81F18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78C27FF265E00F81F18 /* SettingsView.swift */; };
 		0946D78F27FF276B00F81F18 /* SettingsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D78E27FF276B00F81F18 /* SettingsFormView.swift */; };
 		0946D79327FF325300F81F18 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946D79227FF325300F81F18 /* Keychain.swift */; };
@@ -76,6 +77,7 @@
 		09395F872800953200AACAA3 /* RecipeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEditView.swift; sourceTree = "<group>"; };
 		09395F892800959F00AACAA3 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		09395F8B2800B77C00AACAA3 /* RecipeEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeEdit.swift; sourceTree = "<group>"; };
+		0944AC5D292197AF003E40FE /* DeleteRecipeCookedMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteRecipeCookedMutation.graphql.swift; sourceTree = "<group>"; };
 		0946D78C27FF265E00F81F18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0946D78E27FF276B00F81F18 /* SettingsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFormView.swift; sourceTree = "<group>"; };
 		0946D79227FF325300F81F18 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				09FF049529033A09009FA412 /* LoginMutation.graphql.swift */,
 				09FF049429033A09009FA412 /* MeQuery.graphql.swift */,
 				092A9554291317D30041638C /* RecipeCookedMutation.graphql.swift */,
+				0944AC5D292197AF003E40FE /* DeleteRecipeCookedMutation.graphql.swift */,
 				09FF049229033A09009FA412 /* RecipeDetails.graphql.swift */,
 				09FF049729033A09009FA412 /* RecipesQuery.graphql.swift */,
 				09FF049629033A09009FA412 /* UpdateRecipeMutation.graphql.swift */,
@@ -441,6 +444,7 @@
 				099AAE5828F42F5F0063466F /* PreviewData.swift in Sources */,
 				0934E7F128DF27E0003C8C0B /* RecipesGrid.swift in Sources */,
 				09FF049C29033A09009FA412 /* LoginMutation.graphql.swift in Sources */,
+				0944AC5E292197AF003E40FE /* DeleteRecipeCookedMutation.graphql.swift in Sources */,
 				0946D79327FF325300F81F18 /* Keychain.swift in Sources */,
 				09FF049D29033A09009FA412 /* UpdateRecipeMutation.graphql.swift in Sources */,
 				0934CC2A2914443000150F19 /* RecipeDetailIngredientsView.swift in Sources */,

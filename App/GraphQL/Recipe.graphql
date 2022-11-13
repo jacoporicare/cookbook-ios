@@ -26,6 +26,12 @@ mutation RecipeCooked($id: ID!, $date: Date!) {
 	}
 }
 
+mutation DeleteRecipeCooked($recipeId: ID!, $cookedId: ID!) {
+  deleteRecipeCooked(recipeId: $recipeId, cookedId: $cookedId) {
+    ...RecipeDetails
+  }
+}
+
 fragment RecipeDetails on Recipe {
 	id
 	title
@@ -44,6 +50,7 @@ fragment RecipeDetails on Recipe {
 		amountUnit
 	}
 	cookedHistory {
+    id
 		date
 		user {
 			id

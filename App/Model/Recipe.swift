@@ -32,7 +32,7 @@ struct Recipe: Identifiable, Decodable, Hashable {
     }
     
     struct Cooked: Identifiable, Decodable, Hashable {
-        var id: String { "\(date.description)_\(user.id)" }
+        let id: String
         let date: Date
         let user: User
         
@@ -74,6 +74,7 @@ extension Recipe.Ingredient {
 
 extension Recipe.Cooked {
     init(from cooked: RecipeDetails.CookedHistory) {
+        self.id = cooked.id
         self.date = cooked.date
         self.user = User(from: cooked.user)
     }

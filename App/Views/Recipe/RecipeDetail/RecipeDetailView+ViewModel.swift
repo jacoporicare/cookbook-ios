@@ -36,5 +36,19 @@ extension RecipeDetailView {
                 }
             }
         }
+        
+        func deleteRecipeCooked(recipeId: String, cookedId: String, completionHandler: @escaping (Recipe?) -> Void) {
+            let mutation = DeleteRecipeCookedMutation(recipeId: recipeId, cookedId: cookedId)
+            
+            Network.shared.apollo.perform(mutation: mutation) { result in
+                switch result {
+                case .success(let result):
+                    guard let recipe = result.data?.deleteRecipeCooked else { fallthrough }
+                    completionHandler(Recipe(from: recipe.fragments.recipeDetails))
+                case .failure:
+                    completionHandler(nil)
+                }
+            }
+        }
     }
 }

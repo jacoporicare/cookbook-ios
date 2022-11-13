@@ -40,8 +40,9 @@ type Ingredient {
 }
 
 type RecipeCooked {
-  user: User!
+  id: ID!
   date: Date!
+  user: User!
 }
 
 type User {
@@ -94,7 +95,8 @@ type Mutation {
   createRecipe(recipe: RecipeInput!, image: Upload): Recipe!
   updateRecipe(id: ID!, recipe: RecipeInput!, image: Upload): Recipe!
   deleteRecipe(id: ID!): Boolean!
-  recipeCooked(id: ID!, date: Date!, delete: Boolean): Recipe!
+  recipeCooked(id: ID!, date: Date!): Recipe!
+  deleteRecipeCooked(recipeId: ID!, cookedId: ID!): Recipe!
   updateUserLastActivity: Boolean!
   createUser(user: UserInput!): User!
   updateUser(id: ID!, user: UserInput!): User!

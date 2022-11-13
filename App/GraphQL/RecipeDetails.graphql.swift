@@ -29,6 +29,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
       }
       cookedHistory {
         __typename
+        id
         date
         user {
           __typename
@@ -119,10 +120,12 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
 
     public static var __parentType: ParentType { API.Objects.RecipeCooked }
     public static var __selections: [Selection] { [
+      .field("id", API.ID.self),
       .field("date", API.Date.self),
       .field("user", User.self),
     ] }
 
+    public var id: API.ID { __data["id"] }
     public var date: API.Date { __data["date"] }
     public var user: User { __data["user"] }
 

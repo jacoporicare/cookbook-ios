@@ -43,7 +43,11 @@ struct RecipeDetailView: View {
                     }
                         
                     if let cooked = recipe.cookedHistory.last {
-                        RecipeDetailLastCookedDate(cooked: cooked)
+                        RecipeDetailLastCookedDate(
+                            cooked: cooked,
+                            history: recipe.cookedHistory,
+                            onRecipeCookedDelete: deleteRecipeCooked
+                        )
                     }
                 }
                 .padding(.horizontal)
@@ -98,9 +102,15 @@ struct RecipeDetailView: View {
                 cookedDatePickerVisible.toggle()
             }
             
-            if let newRecipe {
-                routing.recipeListStack[routing.recipeListStack.endIndex - 1] = newRecipe
-            }
+            guard let newRecipe else { return }
+            routing.recipeListStack[routing.recipeListStack.endIndex - 1] = newRecipe
+        }
+    }
+    
+    func deleteRecipeCooked(cookedId: String) {
+        vm.deleteRecipeCooked(recipeId: recipe.id, cookedId: cookedId) { newRecipe in
+            guard let newRecipe else { return }
+            routing.recipeListStack[routing.recipeListStack.endIndex - 1] = newRecipe
         }
     }
 }
