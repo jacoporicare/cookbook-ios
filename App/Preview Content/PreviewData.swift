@@ -32,6 +32,7 @@ private let recipe1: JSONObject = [
     "cookedHistory": [
         [
             "__typename": "RecipeCooked",
+            "id": "1",
             "date": try! Date(_jsonValue: "2022-11-01T21:58:00.000Z"),
             "user": [
                 "__typename": "User",
@@ -128,6 +129,7 @@ private let recipe3: JSONObject = [
     "cookedHistory": [
         [
             "__typename": "RecipeCooked",
+            "id": "1",
             "date": try! Date(_jsonValue: "2022-10-21T20:44:00.000Z"),
             "user": [
                 "__typename": "User",
@@ -137,6 +139,7 @@ private let recipe3: JSONObject = [
         ] as JSONObject,
         [
             "__typename": "RecipeCooked",
+            "id": "2",
             "date": try! Date(_jsonValue: "2022-10-22T20:44:00.000Z"),
             "user": [
                 "__typename": "User",

@@ -37,20 +37,17 @@ struct RecipeDetailView: View {
                     cookedDatePickerVisible: $cookedDatePickerVisible
                 )
                     
-                Group {
-                    if cookedDatePickerVisible {
-                        RecipeCookedDatePicker(confirmAction: recipeCooked)
-                    }
-                        
-                    if let cooked = recipe.cookedHistory.last {
-                        RecipeDetailLastCookedDate(
-                            cooked: cooked,
-                            history: recipe.cookedHistory,
-                            onRecipeCookedDelete: deleteRecipeCooked
-                        )
-                    }
+                if cookedDatePickerVisible {
+                    RecipeCookedDatePicker(confirmAction: recipeCooked)
                 }
-                .padding(.horizontal)
+                        
+                if let cooked = recipe.cookedHistory.last {
+                    RecipeDetailLastCookedDate(
+                        cooked: cooked,
+                        history: recipe.cookedHistory,
+                        onRecipeCookedDelete: deleteRecipeCooked
+                    )
+                }
                     
                 if recipe.preparationTime != nil || recipe.servingCount != nil || recipe.sideDish != nil {
                     RecipeDetailBasicInfoView(
@@ -60,21 +57,18 @@ struct RecipeDetailView: View {
                     )
                 }
                     
-                Group {
-                    if recipe.ingredients.count > 0 {
-                        RecipeDetailIngredientsView(ingredients: recipe.ingredients)
-                    }
-                        
-                    VStack(alignment: .leading) {
-                        Text("Postup")
-                            .font(.title2)
-                            
-                        Markdown(recipe.directions ?? "Kde nic tu nic.")
-                    }
+                if recipe.ingredients.count > 0 {
+                    RecipeDetailIngredientsView(ingredients: recipe.ingredients)
                 }
-                .padding(.horizontal)
+                        
+                VStack(alignment: .leading) {
+                    Text("Postup")
+                        .font(.title2)
+                            
+                    Markdown(recipe.directions ?? "Kde nic tu nic.")
+                }
             }
-            .padding(.vertical)
+            .padding()
         }
         .toolbar {
             if currentUserStore.isLoggedIn {

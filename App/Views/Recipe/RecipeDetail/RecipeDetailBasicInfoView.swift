@@ -13,35 +13,32 @@ struct RecipeDetailBasicInfoView: View {
     var sideDish: String?
 
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 20) {
-                if let preparationTime {
-                    HStack {
-                        Text("Doba přípravy:")
-                            .foregroundColor(.gray)
-                        Text(preparationTime)
-                    }
-                }
-
-                if let servingCount {
-                    HStack {
-                        Text("Počet porcí:")
-                            .foregroundColor(.gray)
-                        Text(servingCount)
-                    }
-                }
-
-                if let sideDish {
-                    HStack {
-                        Text("Příloha:")
-                            .foregroundColor(.gray)
-                        Text(sideDish)
-                    }
+        VStack(alignment: .leading, spacing: 8) {
+            if let preparationTime {
+                HStack {
+                    Text("Doba přípravy:")
+                        .foregroundColor(.gray)
+                    Text(preparationTime)
                 }
             }
-            .padding(.horizontal)
-            .font(.callout)
+
+            if let servingCount {
+                HStack {
+                    Text("Počet porcí:")
+                        .foregroundColor(.gray)
+                    Text(servingCount)
+                }
+            }
+
+            if let sideDish {
+                HStack {
+                    Text("Příloha:")
+                        .foregroundColor(.gray)
+                    Text(sideDish)
+                }
+            }
         }
+        .font(.callout)
     }
 }
 
