@@ -20,6 +20,8 @@ struct RecipeGroup: Identifiable {
 private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
 
 struct RecipesView: View {
+    var isInstantPotView = false
+
     @EnvironmentObject private var routing: Routing
     @EnvironmentObject private var currentUserStore: CurrentUserStore
     @EnvironmentObject private var recipeStore: RecipeStore
@@ -30,9 +32,10 @@ struct RecipesView: View {
     @State private var searchText = ""
 
     var recipeGroups: [RecipeGroup] {
+        let recipes = isInstantPotView ? recipeStore.instantPotRecipes : recipeStore.recipes
         let filteredRecipes = searchText.isEmpty
-            ? recipeStore.recipes
-            : recipeStore.recipes.filter {
+            ? recipes
+            : recipes.filter {
                 $0.title
                     .folding(options: .diacriticInsensitive, locale: .current)
                     .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
@@ -84,7 +87,7 @@ struct RecipesView: View {
         .onAppear {
             recipeStore.watch()
         }
-        .navigationTitle("Žrádelník")
+        .navigationTitle(isInstantPotView ? "Instant Pot recepty" : "Žrádelník")
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeView(recipe: recipe)
         }
@@ -119,7 +122,7 @@ struct RecipesView: View {
         }
         .sheet(isPresented: $isRecipeFormPresented) {
             NavigationStack {
-                RecipeForm { recipe in
+                RecipeForm(isInstantPotNewRecipe: isInstantPotView) { recipe in
                     recipeStore.reload()
                     isRecipeFormPresented = false
                     routing.recipeListStack.append(recipe)

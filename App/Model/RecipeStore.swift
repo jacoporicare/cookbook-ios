@@ -11,6 +11,10 @@ import Foundation
 class RecipeStore: ObservableObject {
     @Published var loadingStatus: LoadingStatus = .loading
     @Published var recipes: [Recipe] = []
+    
+    var instantPotRecipes: [Recipe] {
+        recipes.filter { $0.isForInstantPot }
+    }
 
     private var recipesWatcher: GraphQLQueryWatcher<RecipesQuery>?
 

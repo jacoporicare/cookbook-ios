@@ -40,6 +40,10 @@ struct RecipeDetailView: View {
                 if cookedDatePickerVisible {
                     RecipeCookedDatePicker(confirmAction: recipeCooked)
                 }
+                
+                if recipe.isForInstantPot {
+                    RecipeDetailInstantPotInfoView()
+                }
                         
                 if let cooked = recipe.cookedHistory.last {
                     RecipeDetailLastCookedDate(

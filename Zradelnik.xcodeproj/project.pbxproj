@@ -32,6 +32,7 @@
 		0955941B27F332AA00E270E4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955941A27F332AA00E270E4 /* Recipe.swift */; };
 		095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */; };
 		095C1D612801B5FF0074AA70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D602801B5FF0074AA70 /* Extensions.swift */; };
+		09761A25292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */; };
 		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; settings = {ATTRIBUTES = (Required, ); }; };
 		0989F8E627F32D45009CB6BD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E527F32D45009CB6BD /* Network.swift */; };
 		099AAE5828F42F5F0063466F /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083427F35AFC00D5A746 /* PreviewData.swift */; };
@@ -85,6 +86,7 @@
 		0955941A27F332AA00E270E4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		095C1D602801B5FF0074AA70 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInstantPotInfoView.swift; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		099AAE9228F466B40063466F /* Zradelnik-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zradelnik-Info.plist"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				092A9552291316E30041638C /* RecipeDetailView+ViewModel.swift */,
 				0934CC3129145BD800150F19 /* RecipeDetailActionButtonsView.swift */,
 				0934CC272914439B00150F19 /* RecipeCookedDatePicker.swift */,
+				09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */,
 				0934CC2D291446D900150F19 /* RecipeDetailLastCookedDate.swift */,
 				0934CC2B2914459300150F19 /* RecipeDetailBasicInfoView.swift */,
 				0934CC292914443000150F19 /* RecipeDetailIngredientsView.swift */,
@@ -429,6 +432,7 @@
 				091815FE27FDFF68003A2250 /* LoginView.swift in Sources */,
 				09395F8A2800959F00AACAA3 /* RecipeDetailView.swift in Sources */,
 				094763BF28E1D24F00521ADF /* Routing.swift in Sources */,
+				09761A25292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift in Sources */,
 				092A9555291317D30041638C /* RecipeCookedMutation.graphql.swift in Sources */,
 				09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */,
 				0946D78D27FF265E00F81F18 /* SettingsView.swift in Sources */,

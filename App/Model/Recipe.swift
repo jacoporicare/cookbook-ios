@@ -8,6 +8,8 @@
 import Foundation
 
 struct Recipe: Identifiable, Decodable, Hashable {
+    static let instantPotTag = "Instant Pot"
+
     let id: String
     let title: String
     let gridImageUrl: String?
@@ -19,8 +21,13 @@ struct Recipe: Identifiable, Decodable, Hashable {
     let preparationTimeRaw: Int?
     let servingCount: String?
     let servingCountRaw: Int?
+    let tags: [String]
     let ingredients: [Ingredient]
     let cookedHistory: [Cooked]
+
+    var isForInstantPot: Bool {
+        tags.contains(Recipe.instantPotTag)
+    }
 
     struct Ingredient: Identifiable, Decodable, Hashable {
         let id: String
@@ -30,12 +37,12 @@ struct Recipe: Identifiable, Decodable, Hashable {
         let amountRaw: Double?
         let amountUnit: String?
     }
-    
+
     struct Cooked: Identifiable, Decodable, Hashable {
         let id: String
         let date: Date
         let user: User
-        
+
         struct User: Identifiable, Decodable, Hashable {
             let id: String
             let displayName: String
@@ -56,6 +63,7 @@ extension Recipe {
         self.preparationTimeRaw = recipe.preparationTime
         self.servingCount = recipe.servingCount?.formatted()
         self.servingCountRaw = recipe.servingCount
+        self.tags = recipe.tags
         self.ingredients = recipe.ingredients.map { Ingredient(from: $0) }
         self.cookedHistory = recipe.cookedHistory.map { Cooked(from: $0) }
     }

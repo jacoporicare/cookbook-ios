@@ -9,26 +9,11 @@ import CachedAsyncImage
 import SwiftUI
 
 struct RecipeForm: View {
-    let recipe: Recipe?
-    let onSave: (Recipe) -> Void
-    let onCancel: () -> Void
-    let onDelete: (() -> Void)?
-
-    init(
-        recipe: Recipe? = nil,
-        onSave: @escaping (Recipe) -> Void,
-        onCancel: @escaping () -> Void,
-        onDelete: (() -> Void)? = nil
-    ) {
-        self.recipe = recipe
-        self.onSave = onSave
-        self.onCancel = onCancel
-        self.onDelete = onDelete
-
-        if let recipe {
-            _draftRecipe = .init(wrappedValue: RecipeEdit(from: recipe))
-        }
-    }
+    var recipe: Recipe?
+    var isInstantPotNewRecipe: Bool?
+    var onSave: (Recipe) -> Void
+    var onCancel: () -> Void
+    var onDelete: (() -> Void)?
 
     @StateObject private var vm = ViewModel()
 
@@ -46,7 +31,10 @@ struct RecipeForm: View {
     }
 
     var isDirty: Bool {
-        (recipe == nil && draftRecipe != RecipeEdit.default)
+        (recipe == nil && (
+            (isInstantPotNewRecipe != true && draftRecipe != RecipeEdit.default)
+                || (isInstantPotNewRecipe == true && draftRecipe != RecipeEdit.defaultInstantPot)
+        ))
             || (recipe != nil && draftRecipe != RecipeEdit(from: recipe!))
             || inputImage != nil
     }
@@ -71,6 +59,15 @@ struct RecipeForm: View {
         .environment(\.editMode, $ingredientEditMode)
         .buttonStyle(.borderless) // Fix non-clickable buttons in Form (and centers text in List)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if let recipe {
+                draftRecipe = RecipeEdit(from: recipe)
+            }
+
+            if isInstantPotNewRecipe == true {
+                draftRecipe.isForInstantPot = true
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Uložit") {
@@ -216,6 +213,13 @@ struct RecipeForm: View {
                 TextField("nezadáno", text: $draftRecipe.sideDish)
                     .textInputAutocapitalization(.never)
                     .multilineTextAlignment(.trailing)
+            }
+
+            HStack {
+                Text("Instant Pot recept")
+                Spacer()
+                Toggle("Instant Pot recept", isOn: $draftRecipe.isForInstantPot)
+                    .labelsHidden()
             }
         }
     }

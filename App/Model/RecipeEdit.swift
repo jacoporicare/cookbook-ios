@@ -17,6 +17,17 @@ struct RecipeEdit: Equatable {
     var ingredients: [Ingredient] = []
     var tags: [String] = []
 
+    var isForInstantPot: Bool {
+        get { tags.contains(Recipe.instantPotTag) }
+        set {
+            if newValue, !tags.contains(Recipe.instantPotTag) {
+                tags.append(Recipe.instantPotTag)
+            } else if !newValue, tags.contains(Recipe.instantPotTag) {
+                tags.removeAll { $0 == Recipe.instantPotTag }
+            }
+        }
+    }
+
     struct Ingredient: Equatable, Identifiable {
         var id = UUID().uuidString
         var name: String = ""
@@ -28,6 +39,7 @@ struct RecipeEdit: Equatable {
 
 extension RecipeEdit {
     static let `default` = RecipeEdit()
+    static let defaultInstantPot = RecipeEdit(tags: [Recipe.instantPotTag])
 }
 
 extension RecipeEdit {
@@ -38,6 +50,7 @@ extension RecipeEdit {
         preparationTime = recipe.preparationTimeRaw?.formatted() ?? ""
         servingCount = recipe.servingCountRaw?.formatted() ?? ""
         ingredients = recipe.ingredients.map { Ingredient(from: $0) }
+        tags = recipe.tags
     }
 }
 
@@ -67,7 +80,7 @@ extension RecipeEdit {
                     !ingredient.name.isEmpty
                 }.map { ingredient in
                     let amount = Double(ingredient.amount.replacingOccurrences(of: ",", with: "."))
-                    
+
                     return IngredientInput(
                         amount: amount != nil ? .some(amount!) : nil,
                         amountUnit: !ingredient.amountUnit.isEmpty ? .some(ingredient.amountUnit) : nil,
@@ -76,7 +89,7 @@ extension RecipeEdit {
                     )
                 })
                 : nil,
-            tags: nil
+            tags: .some(tags)
         )
     }
 }

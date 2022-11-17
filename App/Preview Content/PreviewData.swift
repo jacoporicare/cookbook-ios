@@ -21,6 +21,7 @@ private let recipe1: JSONObject = [
     "sideDish": "sss",
     "preparationTime": 12,
     "servingCount": 22,
+    "tags": ["Instant Pot"],
     "ingredients": [
         [
             "__typename": "Ingredient",
@@ -47,6 +48,7 @@ private let recipe2: JSONObject = [
     "__typename": "Recipe",
     "id": "6320a3c94e2b78b722e5325d",
     "title": "Some long title and without any details",
+    "tags": [String](),
     "ingredients": [JSONObject](),
     "cookedHistory": [JSONObject]()
 ]
@@ -60,6 +62,7 @@ private let recipe3: JSONObject = [
     "fullImageUrl": "https://api-test.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=1280x960&format=webp",
     "directions": "1. Vejce rozklepneme a oddělíme žloutky od bílků, žloutky vyšleháme s 1/3 cukru, z bílků ušleháme sníh s 1/3 cukru\n1. Všechny sypké ingredience smícháme v míse a přisypeme ke žloutkům\n1. Přidáme olej a vodu\n1. Opatrně vmícháme sníh\n1. Asi 2/3 těsta nalijeme do vymazané a moukou vysypané formy. Do zbylé třetiny těsta přidáme 2 lžíce kakaa, zamícháme a nalijeme na světlé těsto do formy.\n1. Bábovku vkládáme do předehřáté trouby a pečeme asi 60 minut na 160 °C (horkovzduch 140 °C). Zkusíme špejlí, jestli je uvnitř hotová\n1. Upečenou bábovku vyklopíme, pocukrujeme a můžeme servírovat",
     "preparationTime": 90,
+    "tags": [String](),
     "ingredients": [
         [
             "__typename": "Ingredient",
@@ -155,6 +158,7 @@ private let recipe4: JSONObject = [
     "id": "6320a3c94e2b78b722e5324d",
     "title": "Some long title with preparation for list test",
     "preparationTime": 185,
+    "tags": [String](),
     "ingredients": [JSONObject](),
     "cookedHistory": [JSONObject]()
 ]

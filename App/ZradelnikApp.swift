@@ -10,20 +10,53 @@ import SwiftUI
 
 @main
 struct ZradelnikApp: App {
+    enum Tab {
+        case recipes
+        case instantPotRecipes
+        case settings
+    }
+
     @Environment(\.scenePhase) private var phase
     @StateObject private var routing = Routing()
     @StateObject private var recipeStore = RecipeStore()
     @StateObject private var currentUserStore = CurrentUserStore()
 
+    @State private var tabSelectionValue: Tab = .recipes
+    @State private var resetRecipeListStack = false
+
+    var tabSelection: Binding<Tab> {
+        Binding(
+            get: { self.tabSelectionValue },
+            set: {
+                if $0 == .recipes || $0 == .instantPotRecipes,
+                   self.tabSelectionValue == .recipes || self.tabSelectionValue == .instantPotRecipes
+                {
+                    resetRecipeListStack = true
+                }
+
+                self.tabSelectionValue = $0
+            }
+        )
+    }
+
     var body: some Scene {
         WindowGroup {
-            TabView {
+            TabView(selection: tabSelection) {
                 NavigationStack(path: $routing.recipeListStack) {
                     RecipesView()
                 }
                 .tabItem {
                     Label("Recepty", systemImage: "fork.knife")
                 }
+                .tag(Tab.recipes)
+
+                NavigationStack(path: $routing.recipeListStack) {
+                    RecipesView(isInstantPotView: true)
+                }
+                .tabItem {
+                    Label("Instant Pot", systemImage: "cylinder.fill")
+                }
+                .tag(Tab.instantPotRecipes)
 
                 NavigationStack {
                     SettingsView()
@@ -31,6 +64,7 @@ struct ZradelnikApp: App {
                 .tabItem {
                     Label("Nastavení", systemImage: "gear")
                 }
+                .tag(Tab.settings)
             }
             .environmentObject(routing)
             .environmentObject(recipeStore)
@@ -61,6 +95,11 @@ struct ZradelnikApp: App {
             default:
                 break
             }
+        }
+        .onChange(of: resetRecipeListStack) { newValue in
+            guard newValue else { return }
+            routing.recipeListStack = []
+            resetRecipeListStack = false
         }
     }
 }

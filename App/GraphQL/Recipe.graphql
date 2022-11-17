@@ -42,6 +42,7 @@ fragment RecipeDetails on Recipe {
 	sideDish
 	preparationTime
 	servingCount
+	tags
 	ingredients {
 		id
 		name
