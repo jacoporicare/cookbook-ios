@@ -54,7 +54,7 @@ struct ZradelnikApp: App {
                     RecipesView(isInstantPotView: true)
                 }
                 .tabItem {
-                    Label("Instant Pot", systemImage: "cylinder.fill")
+                    Label("Instant Pot", image: "Multicooker")
                 }
                 .tag(Tab.instantPotRecipes)
 
