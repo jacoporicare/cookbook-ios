@@ -46,7 +46,7 @@ struct ZradelnikApp: App {
                     RecipesView()
                 }
                 .tabItem {
-                    Label("Recepty", systemImage: "fork.knife")
+                    Label("Recepty", systemImage: "menucard")
                 }
                 .tag(Tab.recipes)
 
@@ -54,7 +54,7 @@ struct ZradelnikApp: App {
                     RecipesView(isInstantPotView: true)
                 }
                 .tabItem {
-                    Label("Instant Pot", image: "Multicooker")
+                    Label("Instant Pot", image: "multicooker")
                 }
                 .tag(Tab.instantPotRecipes)
 
