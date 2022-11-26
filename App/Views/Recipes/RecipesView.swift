@@ -26,13 +26,16 @@ struct RecipesView: View {
     @EnvironmentObject private var currentUserStore: CurrentUserStore
     @EnvironmentObject private var recipeStore: RecipeStore
     // AppStorage works weirdly - only the first change triggers render then it's stuck
-//    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
+    //    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
     @State private var displayMode = RecipesDisplayMode(rawValue: UserDefaults.standard.string(forKey: "displayMode") ?? RecipesDisplayMode.grid.rawValue) ?? RecipesDisplayMode.grid
     @State private var isRecipeFormPresented = false
     @State private var searchText = ""
 
+    var recipes: [Recipe] {
+        isInstantPotView ? recipeStore.instantPotRecipes : recipeStore.recipes
+    }
+
     var recipeGroups: [RecipeGroup] {
-        let recipes = isInstantPotView ? recipeStore.instantPotRecipes : recipeStore.recipes
         let filteredRecipes = searchText.isEmpty
             ? recipes
             : recipes.filter {
@@ -52,6 +55,10 @@ struct RecipesView: View {
         .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
     }
 
+    var carouselRecipes: [Recipe] {
+        Array(recipes.filter { $0.fullImageUrl != nil }[...3])
+    }
+
     var body: some View {
         LoadingContentView(status: recipeStore.loadingStatus, loadingText: "Načítání receptů...") {
             if displayMode == .grid {
@@ -62,6 +69,7 @@ struct RecipesView: View {
             } else {
                 RecipesList(
                     recipeGroups: recipeGroups,
+                    carouselRecipes: carouselRecipes,
                     searchText: $searchText
                 )
             }

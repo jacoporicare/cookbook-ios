@@ -12,14 +12,17 @@ struct RecipesList: View {
     @EnvironmentObject private var recipeStore: RecipeStore
 
     var recipeGroups: [RecipeGroup]
+    var carouselRecipes: [Recipe]
     var searchText: Binding<String>
 
     var body: some View {
-        List(recipeGroups) { recipeGroup in
-            Section(header: Text(recipeGroup.id)) {
-                ForEach(recipeGroup.recipes) { recipe in
-                    NavigationLink(value: recipe) {
-                        RecipesListItemView(recipe: recipe)
+        List {
+            ForEach(recipeGroups) { recipeGroup in
+                Section(header: Text(recipeGroup.id)) {
+                    ForEach(recipeGroup.recipes) { recipe in
+                        NavigationLink(value: recipe) {
+                            RecipesListItemView(recipe: recipe)
+                        }
                     }
                 }
             }

@@ -32,6 +32,7 @@
 		0955941B27F332AA00E270E4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955941A27F332AA00E270E4 /* Recipe.swift */; };
 		095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */; };
 		095C1D612801B5FF0074AA70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D602801B5FF0074AA70 /* Extensions.swift */; };
+		096D99AE292D6A870021850D /* RecipeCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D99AD292D6A870021850D /* RecipeCarousel.swift */; };
 		09761A25292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */; };
 		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; settings = {ATTRIBUTES = (Required, ); }; };
 		0989F8E627F32D45009CB6BD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E527F32D45009CB6BD /* Network.swift */; };
@@ -86,6 +87,7 @@
 		0955941A27F332AA00E270E4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		095C1D602801B5FF0074AA70 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		096D99AD292D6A870021850D /* RecipeCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCarousel.swift; sourceTree = "<group>"; };
 		09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInstantPotInfoView.swift; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
@@ -201,6 +203,7 @@
 				0900083627F35B9A00D5A746 /* RecipesView.swift */,
 				0934E7F028DF27E0003C8C0B /* RecipesGrid.swift */,
 				0905EF2B28DF55D500C65B11 /* RecipesList.swift */,
+				096D99AD292D6A870021850D /* RecipeCarousel.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				0944AC5E292197AF003E40FE /* DeleteRecipeCookedMutation.graphql.swift in Sources */,
 				0946D79327FF325300F81F18 /* Keychain.swift in Sources */,
 				09FF049D29033A09009FA412 /* UpdateRecipeMutation.graphql.swift in Sources */,
+				096D99AE292D6A870021850D /* RecipeCarousel.swift in Sources */,
 				0934CC2A2914443000150F19 /* RecipeDetailIngredientsView.swift in Sources */,
 				09FF049829033A09009FA412 /* CreateRecipeMutation.graphql.swift in Sources */,
 			);
