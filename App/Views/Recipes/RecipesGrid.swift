@@ -8,15 +8,15 @@
 import CachedAsyncImage
 import SwiftUI
 
-
 struct RecipesGrid: View {
     var recipeGroups: [RecipeGroup]
-    var searchText: Binding<String>
+    @Binding var searchText: String
+    @Binding var shouldResetScrollPosition: Bool
 
     private let columnLayout = Array(repeating: GridItem(), count: 2)
-    
+
     var body: some View {
-        ScrollViewReader { _ in
+        ScrollViewReader { proxy in
             ScrollView {
                 LazyVGrid(columns: columnLayout) {
                     ForEach(recipeGroups) { recipeGroup in
@@ -33,18 +33,26 @@ struct RecipesGrid: View {
                                 Spacer()
                             }
                             .padding(.top)
+                            .id(recipeGroup.id)
                         }
                     }
                 }
                 .padding()
             }
-            .searchable(text: searchText, prompt: "Hledat recept")
+            .searchable(text: $searchText, prompt: "Hledat recept")
+            .onChange(of: shouldResetScrollPosition) { newValue in
+                guard newValue else { return }
+                withAnimation {
+                    proxy.scrollTo(recipeGroups.first?.id)
+                }
+                shouldResetScrollPosition = false
+            }
+        }
 //            .overlay {
 //                SectionLettersView(letters: letters, scrollViewProxy: proxy)
 //                    .frame(maxWidth: .infinity, alignment: .trailing)
 //                    .padding(.trailing, 10)
 //            }
-        }
     }
 }
 

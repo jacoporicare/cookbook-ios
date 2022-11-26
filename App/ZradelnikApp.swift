@@ -22,16 +22,22 @@ struct ZradelnikApp: App {
     @StateObject private var currentUserStore = CurrentUserStore()
 
     @State private var tabSelectionValue: Tab = .recipes
-    @State private var resetRecipeListStack = false
+    @State private var shouldResetRecipeListStack = false
+    @State private var shouldResetScrollPosition = false
 
     var tabSelection: Binding<Tab> {
         Binding(
             get: { self.tabSelectionValue },
             set: {
-                if $0 == .recipes || $0 == .instantPotRecipes,
-                   self.tabSelectionValue == .recipes || self.tabSelectionValue == .instantPotRecipes
+                if routing.recipeListStack.isEmpty,
+                   ($0 == .recipes && self.tabSelectionValue == .recipes) ||
+                   $0 == .instantPotRecipes && self.tabSelectionValue == .instantPotRecipes
                 {
-                    resetRecipeListStack = true
+                    shouldResetScrollPosition = true
+                } else if $0 == .recipes || $0 == .instantPotRecipes,
+                          self.tabSelectionValue == .recipes || self.tabSelectionValue == .instantPotRecipes
+                {
+                    shouldResetRecipeListStack = true
                 }
 
                 self.tabSelectionValue = $0
@@ -43,7 +49,7 @@ struct ZradelnikApp: App {
         WindowGroup {
             TabView(selection: tabSelection) {
                 NavigationStack(path: $routing.recipeListStack) {
-                    RecipesView()
+                    RecipesView(shouldResetScrollPosition: $shouldResetScrollPosition)
                 }
                 .tabItem {
                     Label("Recepty", systemImage: "menucard")
@@ -51,7 +57,7 @@ struct ZradelnikApp: App {
                 .tag(Tab.recipes)
 
                 NavigationStack(path: $routing.recipeListStack) {
-                    RecipesView(isInstantPotView: true)
+                    RecipesView(isInstantPotView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
                 }
                 .tabItem {
                     Label("Instant Pot", image: "multicooker")
@@ -96,10 +102,10 @@ struct ZradelnikApp: App {
                 break
             }
         }
-        .onChange(of: resetRecipeListStack) { newValue in
+        .onChange(of: shouldResetRecipeListStack) { newValue in
             guard newValue else { return }
             routing.recipeListStack = []
-            resetRecipeListStack = false
+            shouldResetRecipeListStack = false
         }
     }
 }
