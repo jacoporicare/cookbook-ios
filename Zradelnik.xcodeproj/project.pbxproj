@@ -48,6 +48,7 @@
 		09CD9EBF28E1CB65006D4EA9 /* CurrentUserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CD9EBE28E1CB65006D4EA9 /* CurrentUserStore.swift */; };
 		09CFF8C228F8A89400117107 /* RecipeForm+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CFF8C128F8A89400117107 /* RecipeForm+ViewModel.swift */; };
 		09DC1F9E27F9DED200F01BBC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 09DC1F9D27F9DED200F01BBC /* MarkdownUI */; };
+		09F4371D29ACC5D7008DB31D /* ScrollingHStackModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F4371C29ACC5D7008DB31D /* ScrollingHStackModifier.swift */; };
 		09FE90E127FA36BD005C6AE3 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 09FE90E027FA36BD005C6AE3 /* ApolloSQLite */; };
 		09FE90E927FA48A9005C6AE3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FE90E827FA48A9005C6AE3 /* Configuration.swift */; };
 		09FF048C2903354F009FA412 /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 09FF048B2903354F009FA412 /* apollo-codegen-config.json */; };
@@ -103,6 +104,7 @@
 		09AE247527F31C9300BC6208 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09CD9EBE28E1CB65006D4EA9 /* CurrentUserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserStore.swift; sourceTree = "<group>"; };
 		09CFF8C128F8A89400117107 /* RecipeForm+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeForm+ViewModel.swift"; sourceTree = "<group>"; };
+		09F4371C29ACC5D7008DB31D /* ScrollingHStackModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingHStackModifier.swift; sourceTree = "<group>"; };
 		09FE90E327FA4753005C6AE3 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		09FE90E427FA47D6005C6AE3 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		09FE90E827FA48A9005C6AE3 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				09A7A3EB27F64E5B00E62123 /* LoadingContentView.swift */,
 				095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */,
 				095C1D602801B5FF0074AA70 /* Extensions.swift */,
+				09F4371C29ACC5D7008DB31D /* ScrollingHStackModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				09AE246F27F31C9200BC6208 /* ZradelnikApp.swift in Sources */,
 				0934CC2C2914459300150F19 /* RecipeDetailBasicInfoView.swift in Sources */,
 				0900083727F35B9A00D5A746 /* RecipesView.swift in Sources */,
+				09F4371D29ACC5D7008DB31D /* ScrollingHStackModifier.swift in Sources */,
 				0934CC3229145BD800150F19 /* RecipeDetailActionButtonsView.swift in Sources */,
 				09A068222809562C0008563A /* RecipeStore.swift in Sources */,
 				092A9553291316E30041638C /* RecipeDetailView+ViewModel.swift in Sources */,

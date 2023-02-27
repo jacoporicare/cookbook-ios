@@ -21,6 +21,7 @@ struct Recipe: Identifiable, Decodable, Hashable {
     let preparationTimeRaw: Int?
     let servingCount: String?
     let servingCountRaw: Int?
+    let creationDate: Date
     let tags: [String]
     let ingredients: [Ingredient]
     let cookedHistory: [Cooked]
@@ -63,6 +64,7 @@ extension Recipe {
         self.preparationTimeRaw = recipe.preparationTime
         self.servingCount = recipe.servingCount?.formatted()
         self.servingCountRaw = recipe.servingCount
+        self.creationDate = recipe.creationDate
         self.tags = recipe.tags
         self.ingredients = recipe.ingredients.map { Ingredient(from: $0) }
         self.cookedHistory = recipe.cookedHistory.map { Cooked(from: $0) }

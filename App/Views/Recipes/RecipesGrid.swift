@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RecipesGrid: View {
     var recipeGroups: [RecipeGroup]
+    var carouselRecipes: [Recipe]
     @Binding var searchText: String
     @Binding var shouldResetScrollPosition: Bool
 
@@ -18,6 +19,16 @@ struct RecipesGrid: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
+                VStack(alignment: .leading) {
+                    Text("Nejnovější recepty")
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+
+                    RecipeCarousel(recipes: carouselRecipes, height: 250)
+                        .frame(height: 250)
+                }
+                .padding()
+
                 LazyVGrid(columns: columnLayout) {
                     ForEach(recipeGroups) { recipeGroup in
                         Section {

@@ -19,6 +19,8 @@ struct RecipeGroup: Identifiable {
 
 private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
 
+private let carouselRecipeCount = 5
+
 struct RecipesView: View {
     var isInstantPotView = false
     @Binding var shouldResetScrollPosition: Bool
@@ -57,9 +59,11 @@ struct RecipesView: View {
     }
 
     var carouselRecipes: [Recipe] {
-        let recipesWithImages = recipes.filter { $0.fullImageUrl != nil }
+        let recipesWithImages = recipes
+            .sorted { $0.creationDate.compare($1.creationDate) == .orderedDescending }
+            .filter { $0.fullImageUrl != nil }
 
-        return Array(recipesWithImages[0 ... min(2, recipesWithImages.count - 1)])
+        return Array(recipesWithImages[0 ... min(carouselRecipeCount - 1, recipesWithImages.count - 1)])
     }
 
     var body: some View {
@@ -67,6 +71,7 @@ struct RecipesView: View {
             if displayMode == .grid {
                 RecipesGrid(
                     recipeGroups: recipeGroups,
+                    carouselRecipes: carouselRecipes,
                     searchText: $searchText,
                     shouldResetScrollPosition: $shouldResetScrollPosition
                 )

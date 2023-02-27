@@ -21,6 +21,7 @@ private let recipe1: JSONObject = [
     "sideDish": "sss",
     "preparationTime": 12,
     "servingCount": 22,
+    "creationDate": try! Date(_jsonValue: "2022-10-22T20:44:00.000Z"),
     "tags": ["Instant Pot"],
     "ingredients": [
         [
@@ -48,6 +49,7 @@ private let recipe2: JSONObject = [
     "__typename": "Recipe",
     "id": "6320a3c94e2b78b722e5325d",
     "title": "Some long title and without any details",
+    "creationDate": try! Date(_jsonValue: "2022-09-22T20:44:00.000Z"),
     "tags": [String](),
     "ingredients": [JSONObject](),
     "cookedHistory": [JSONObject]()
@@ -62,6 +64,7 @@ private let recipe3: JSONObject = [
     "fullImageUrl": "https://api-test.zradelnik.eu/image/babovka_60b625c871cc4b28a638d3fb?size=1280x960&format=webp",
     "directions": "1. Vejce rozklepneme a oddělíme žloutky od bílků, žloutky vyšleháme s 1/3 cukru, z bílků ušleháme sníh s 1/3 cukru\n1. Všechny sypké ingredience smícháme v míse a přisypeme ke žloutkům\n1. Přidáme olej a vodu\n1. Opatrně vmícháme sníh\n1. Asi 2/3 těsta nalijeme do vymazané a moukou vysypané formy. Do zbylé třetiny těsta přidáme 2 lžíce kakaa, zamícháme a nalijeme na světlé těsto do formy.\n1. Bábovku vkládáme do předehřáté trouby a pečeme asi 60 minut na 160 °C (horkovzduch 140 °C). Zkusíme špejlí, jestli je uvnitř hotová\n1. Upečenou bábovku vyklopíme, pocukrujeme a můžeme servírovat",
     "preparationTime": 90,
+    "creationDate": try! Date(_jsonValue: "2022-08-22T20:44:00.000Z"),
     "tags": [String](),
     "ingredients": [
         [
@@ -161,6 +164,7 @@ private let recipe4: JSONObject = [
     "listImageUrl": "https://api-test.zradelnik.eu/image/bramborove-sisky-s-makem_60e1bcc3d7dccb3d074a9a7f?size=240x180&format=webp",
     "fullImageUrl": "https://api-test.zradelnik.eu/image/bramborove-sisky-s-makem_60e1bcc3d7dccb3d074a9a7f?size=1280x960&format=webp",
     "preparationTime": 185,
+    "creationDate": try! Date(_jsonValue: "2022-01-22T20:44:00.000Z"),
     "tags": [String](),
     "ingredients": [JSONObject](),
     "cookedHistory": [JSONObject]()

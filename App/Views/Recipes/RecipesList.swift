@@ -18,15 +18,32 @@ struct RecipesList: View {
 
     var body: some View {
         ScrollViewReader { proxy in
-            List(recipeGroups) { recipeGroup in
-                Section(header: Text(recipeGroup.id)) {
-                    ForEach(recipeGroup.recipes) { recipe in
-                        NavigationLink(value: recipe) {
-                            RecipesListItemView(recipe: recipe)
+            List {
+                Section {
+                    EmptyView()
+                } header: {
+                    VStack(alignment: .leading) {
+                        Text("Nejnovější recepty")
+                            .font(.title2)
+                            .foregroundColor(.secondary)
+                        
+                        RecipeCarousel(recipes: carouselRecipes, height: 250)
+                            .frame(height: 250)
+                    }
+                    .padding(.horizontal, -15)
+                    .textCase(.none)
+                }
+
+                ForEach(recipeGroups) { recipeGroup in
+                    Section(header: Text(recipeGroup.id)) {
+                        ForEach(recipeGroup.recipes) { recipe in
+                            NavigationLink(value: recipe) {
+                                RecipesListItemView(recipe: recipe)
+                            }
                         }
                     }
+                    .id(recipeGroup.id)
                 }
-                .id(recipeGroup.id)
             }
             .listStyle(.insetGrouped)
             .searchable(text: $searchText, prompt: "Hledat recept")

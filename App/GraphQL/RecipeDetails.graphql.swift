@@ -19,6 +19,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
       sideDish
       preparationTime
       servingCount
+      creationDate
       tags
       ingredients {
         __typename
@@ -73,6 +74,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
     .field("sideDish", String?.self),
     .field("preparationTime", Int?.self),
     .field("servingCount", Int?.self),
+    .field("creationDate", API.Date.self),
     .field("tags", [String].self),
     .field("ingredients", [Ingredient].self),
     .field("cookedHistory", [CookedHistory].self),
@@ -87,6 +89,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
   public var sideDish: String? { __data["sideDish"] }
   public var preparationTime: Int? { __data["preparationTime"] }
   public var servingCount: Int? { __data["servingCount"] }
+  public var creationDate: API.Date { __data["creationDate"] }
   public var tags: [String] { __data["tags"] }
   public var ingredients: [Ingredient] { __data["ingredients"] }
   public var cookedHistory: [CookedHistory] { __data["cookedHistory"] }

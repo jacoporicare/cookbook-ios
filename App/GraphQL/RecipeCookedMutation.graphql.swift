@@ -72,6 +72,7 @@ public class RecipeCookedMutation: GraphQLMutation {
       public var sideDish: String? { __data["sideDish"] }
       public var preparationTime: Int? { __data["preparationTime"] }
       public var servingCount: Int? { __data["servingCount"] }
+      public var creationDate: API.Date { __data["creationDate"] }
       public var tags: [String] { __data["tags"] }
       public var ingredients: [RecipeDetails.Ingredient] { __data["ingredients"] }
       public var cookedHistory: [RecipeDetails.CookedHistory] { __data["cookedHistory"] }
