@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScrollingHStackModifier: ViewModifier {
     @State private var scrollOffset = 0.0
-    @State private var dragOffset = 0.0
+    @GestureState private var gestureOffset = 0.0
     
     var items: Int
     var itemWidth: CGFloat
@@ -17,22 +17,19 @@ struct ScrollingHStackModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .offset(x: scrollOffset + dragOffset, y: 0)
+            .offset(x: scrollOffset + gestureOffset, y: 0)
             .gesture(DragGesture()
-                .onChanged { event in
-                    dragOffset = event.translation.width
+                .updating($gestureOffset) { currentState, gestureState, _ in
+                    gestureState = currentState.translation.width
                 }
                 .onEnded { event in
-                    // Scroll to where user dragged
                     scrollOffset += event.translation.width
-                    dragOffset = 0
                         
                     var index = (-scrollOffset / (itemWidth + itemSpacing)).rounded()
                     index = max(0, min(index, CGFloat(items) - 1))
                         
                     let newOffset = index * (itemWidth + itemSpacing) * -1
                         
-                    // Animate snapping
                     withAnimation {
                         scrollOffset = newOffset
                     }
