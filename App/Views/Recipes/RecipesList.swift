@@ -13,11 +13,12 @@ struct RecipesList: View {
 
     var recipeGroups: [RecipeGroup]
     var carouselRecipes: [Recipe]
-    var searchText: Binding<String>
+    @Binding var searchText: String
+    @Binding var shouldResetScrollPosition: Bool
 
     var body: some View {
-        List {
-            ForEach(recipeGroups) { recipeGroup in
+        ScrollViewReader { proxy in
+            List(recipeGroups) { recipeGroup in
                 Section(header: Text(recipeGroup.id)) {
                     ForEach(recipeGroup.recipes) { recipe in
                         NavigationLink(value: recipe) {
@@ -25,12 +26,20 @@ struct RecipesList: View {
                         }
                     }
                 }
+                .id(recipeGroup.id)
             }
-        }
-        .listStyle(.insetGrouped)
-        .searchable(text: searchText, prompt: "Hledat recept")
-        .refreshable {
-            try? await recipeStore.loadAsync()
+            .listStyle(.insetGrouped)
+            .searchable(text: $searchText, prompt: "Hledat recept")
+            .refreshable {
+                try? await recipeStore.loadAsync()
+            }
+            .onChange(of: shouldResetScrollPosition) { newValue in
+                guard newValue else { return }
+                withAnimation {
+                    proxy.scrollTo(recipeGroups.first?.id)
+                }
+                shouldResetScrollPosition = false
+            }
         }
     }
 }

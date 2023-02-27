@@ -21,6 +21,7 @@ private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F
 
 struct RecipesView: View {
     var isInstantPotView = false
+    @Binding var shouldResetScrollPosition: Bool
 
     @EnvironmentObject private var routing: Routing
     @EnvironmentObject private var currentUserStore: CurrentUserStore
@@ -56,7 +57,9 @@ struct RecipesView: View {
     }
 
     var carouselRecipes: [Recipe] {
-        Array(recipes.filter { $0.fullImageUrl != nil }[...3])
+        let recipesWithImages = recipes.filter { $0.fullImageUrl != nil }
+
+        return Array(recipesWithImages[0 ... min(2, recipesWithImages.count - 1)])
     }
 
     var body: some View {
@@ -64,13 +67,15 @@ struct RecipesView: View {
             if displayMode == .grid {
                 RecipesGrid(
                     recipeGroups: recipeGroups,
-                    searchText: $searchText
+                    searchText: $searchText,
+                    shouldResetScrollPosition: $shouldResetScrollPosition
                 )
             } else {
                 RecipesList(
                     recipeGroups: recipeGroups,
                     carouselRecipes: carouselRecipes,
-                    searchText: $searchText
+                    searchText: $searchText,
+                    shouldResetScrollPosition: $shouldResetScrollPosition
                 )
             }
         } errorContent: { err in
