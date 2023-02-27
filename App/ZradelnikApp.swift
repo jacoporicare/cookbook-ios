@@ -31,7 +31,7 @@ struct ZradelnikApp: App {
             set: {
                 if routing.recipeListStack.isEmpty,
                    ($0 == .recipes && self.tabSelectionValue == .recipes) ||
-                   $0 == .instantPotRecipes && self.tabSelectionValue == .instantPotRecipes
+                   ($0 == .instantPotRecipes && self.tabSelectionValue == .instantPotRecipes)
                 {
                     shouldResetScrollPosition = true
                 } else if $0 == .recipes || $0 == .instantPotRecipes,
