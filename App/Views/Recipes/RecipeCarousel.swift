@@ -47,13 +47,11 @@ struct RecipeCarousel: View {
                     }
                 }
             }
-            .modifier(
-                ScrollingHStackModifier(
-                    items: recipes.count,
-                    itemWidth: proxy.size.width,
-                    itemSpacing: spacing
-                )
-            )
+            .modifier(ScrollingHStackModifier(
+                items: recipes.count,
+                itemWidth: proxy.size.width,
+                itemSpacing: spacing
+            ))
         }
     }
 }
