@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecipeCarousel: View {
     var recipes: [Recipe]
-    var height: CGFloat
+    var height: Double
     var spacing = 8.0
 
     var body: some View {

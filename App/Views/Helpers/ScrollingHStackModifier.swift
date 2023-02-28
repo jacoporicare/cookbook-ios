@@ -12,8 +12,8 @@ struct ScrollingHStackModifier: ViewModifier {
     @GestureState private var gestureOffset = 0.0
     
     var items: Int
-    var itemWidth: CGFloat
-    var itemSpacing: CGFloat
+    var itemWidth: Double
+    var itemSpacing: Double
     
     func body(content: Content) -> some View {
         content
@@ -26,7 +26,7 @@ struct ScrollingHStackModifier: ViewModifier {
                     scrollOffset += event.translation.width
                         
                     var index = (-scrollOffset / (itemWidth + itemSpacing)).rounded()
-                    index = max(0, min(index, CGFloat(items) - 1))
+                    index = max(0, min(index, Double(items) - 1))
                         
                     let newOffset = index * (itemWidth + itemSpacing) * -1
                         
