@@ -14,9 +14,7 @@ import KeychainAccess
 class Network {
     static let shared = Network()
 
-    private(set) lazy var apollo = Network.createApollo()
-
-    private static func createApollo() -> ApolloClient {
+    private(set) lazy var apollo = {
         let sqliteFileURL = URL.cachesDirectory.appending(path: "zradelnik_apollo_db.sqlite")
         let sqliteCache = try? SQLiteNormalizedCache(fileURL: sqliteFileURL)
 
@@ -27,7 +25,7 @@ class Network {
         let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: URL(string: "https://\(baseUrl)/graphql")!)
 
         return ApolloClient(networkTransport: transport, store: store)
-    }
+    }()
 }
 
 class TokenAddInterceptor: ApolloInterceptor {

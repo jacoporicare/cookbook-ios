@@ -49,7 +49,7 @@ struct ZradelnikApp: App {
         WindowGroup {
             TabView(selection: tabSelection) {
                 NavigationStack(path: $routing.recipeListStack) {
-                    RecipesView(shouldResetScrollPosition: $shouldResetScrollPosition)
+                    RecipesScreenView(shouldResetScrollPosition: $shouldResetScrollPosition)
                 }
                 .tabItem {
                     Label("Recepty", systemImage: "menucard")
@@ -57,7 +57,7 @@ struct ZradelnikApp: App {
                 .tag(Tab.recipes)
 
                 NavigationStack(path: $routing.recipeListStack) {
-                    RecipesView(isInstantPotView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
+                    RecipesScreenView(isInstantPotView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
                 }
                 .tabItem {
                     Label("Instant Pot", image: "multicooker")
