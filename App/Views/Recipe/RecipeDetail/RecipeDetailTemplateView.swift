@@ -1,25 +1,26 @@
 //
-//  RecipeDetailView.swift
+//  RecipeDetailTemplateView.swift
 //  Zradelnik
 //
-//  Created by Jakub Řičař on 08.04.2022.
+//  Created by Jakub Řičař on 10.06.2023.
 //
 
 import CachedAsyncImage
 import MarkdownUI
 import SwiftUI
 
-struct RecipeDetailView: View {
-    var recipe: Recipe
+struct RecipeDetailTemplateView: View {
+    @Binding var cookedDatePickerVisible: Bool
     
-    @EnvironmentObject private var routing: Routing
-    @EnvironmentObject private var currentUserStore: CurrentUserStore
+    let recipe: Recipe
+    let isUserLoggedIn: Bool
+    let isSaving: Bool
+    
+    let onRecipeCook: (Date) -> Void
+    let onCookedRecipeDelete: (String) -> Void
+    
     @Environment(\.editMode) private var editMode
-    
-    @StateObject private var vm = ViewModel()
-    
-    @State private var cookedDatePickerVisible = false
-    
+
     var body: some View {
         ScrollView {
             if let imageUrl = recipe.fullImageUrl {
@@ -33,12 +34,12 @@ struct RecipeDetailView: View {
                 
             VStack(alignment: .leading, spacing: 30) {
                 RecipeDetailActionButtonsView(
-                    isUserLoggedIn: currentUserStore.isLoggedIn,
+                    isUserLoggedIn: isUserLoggedIn,
                     cookedDatePickerVisible: $cookedDatePickerVisible
                 )
                     
                 if cookedDatePickerVisible {
-                    RecipeCookedDatePicker(confirmAction: recipeCooked)
+                    RecipeCookedDatePicker(confirmAction: onRecipeCook)
                 }
                 
                 if recipe.isForInstantPot {
@@ -49,7 +50,7 @@ struct RecipeDetailView: View {
                     RecipeDetailLastCookedDate(
                         cooked: cooked,
                         history: recipe.cookedHistory,
-                        onRecipeCookedDelete: deleteRecipeCooked
+                        onRecipeCookedDelete: onCookedRecipeDelete
                     )
                 }
                     
@@ -75,16 +76,16 @@ struct RecipeDetailView: View {
             .padding()
         }
         .toolbar {
-            if currentUserStore.isLoggedIn {
+            if isUserLoggedIn {
                 Button("Upravit") {
                     editMode?.animation().wrappedValue = .active
                 }
             }
         }
-        .disabled(vm.isSaving)
+        .disabled(isSaving)
         .overlay {
             Group {
-                if vm.isSaving {
+                if isSaving {
                     ZStack {
                         Color("ProgressOverlayColor")
                         ProgressView()
@@ -93,41 +94,23 @@ struct RecipeDetailView: View {
             }
         }
     }
-   
-    func recipeCooked(cookedDate: Date) {
-        vm.recipeCooked(id: recipe.id, date: cookedDate) { newRecipe in
-            withAnimation {
-                cookedDatePickerVisible.toggle()
-            }
-            
-            guard let newRecipe else { return }
-            routing.recipeListStack[routing.recipeListStack.endIndex - 1] = newRecipe
-        }
-    }
-    
-    func deleteRecipeCooked(cookedId: String) {
-        vm.deleteRecipeCooked(recipeId: recipe.id, cookedId: cookedId) { newRecipe in
-            guard let newRecipe else { return }
-            routing.recipeListStack[routing.recipeListStack.endIndex - 1] = newRecipe
-        }
-    }
 }
 
-struct RecipeDetailView_Previews: PreviewProvider {
+struct RecipeDetailTemplateView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                RecipeDetailView(recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails))
+                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails))
                     .navigationTitle(recipePreviewData[0].title)
             }
                 
             NavigationView {
-                RecipeDetailView(recipe: Recipe(from: recipePreviewData[1].fragments.recipeDetails))
+                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[1].fragments.recipeDetails))
                     .navigationTitle(recipePreviewData[1].title)
             }
                 
             NavigationView {
-                RecipeDetailView(recipe: Recipe(from: recipePreviewData[2].fragments.recipeDetails))
+                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[2].fragments.recipeDetails))
                     .navigationTitle(recipePreviewData[2].title)
             }
         }

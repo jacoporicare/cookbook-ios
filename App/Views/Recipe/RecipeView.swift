@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct RecipeView: View {
-    var recipe: Recipe
+    let recipe: Recipe
 
     @Environment(\.editMode) private var editMode
 
     var body: some View {
         Group {
             if editMode?.wrappedValue == .inactive {
-                RecipeDetailView(recipe: recipe)
+                RecipeDetailScreenView(recipe: recipe)
             } else {
                 RecipeEditView(recipe: recipe)
             }
