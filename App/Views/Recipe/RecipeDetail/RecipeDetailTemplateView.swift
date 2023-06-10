@@ -75,6 +75,8 @@ struct RecipeDetailTemplateView: View {
             }
             .padding()
         }
+        .navigationTitle(recipe.title)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if isUserLoggedIn {
                 Button("Upravit") {
@@ -99,21 +101,64 @@ struct RecipeDetailTemplateView: View {
 struct RecipeDetailTemplateView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NavigationView {
-                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails))
-                    .navigationTitle(recipePreviewData[0].title)
+            NavigationStack {
+                RecipeDetailTemplateView(
+                    cookedDatePickerVisible: .constant(false),
+                    recipe: Recipe(from: recipePreviewData[2].fragments.recipeDetails),
+                    isUserLoggedIn: false,
+                    isSaving: false,
+                    onRecipeCook: { _ in },
+                    onCookedRecipeDelete: { _ in }
+                )
             }
-                
-            NavigationView {
-                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[1].fragments.recipeDetails))
-                    .navigationTitle(recipePreviewData[1].title)
+            
+            NavigationStack {
+                RecipeDetailTemplateView(
+                    cookedDatePickerVisible: .constant(false),
+                    recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails),
+                    isUserLoggedIn: false,
+                    isSaving: false,
+                    onRecipeCook: { _ in },
+                    onCookedRecipeDelete: { _ in }
+                )
             }
-                
-            NavigationView {
-                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[2].fragments.recipeDetails))
-                    .navigationTitle(recipePreviewData[2].title)
+            .previewDisplayName("Instant Pot")
+            
+            NavigationStack {
+                RecipeDetailTemplateView(
+                    cookedDatePickerVisible: .constant(false),
+                    recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails),
+                    isUserLoggedIn: true,
+                    isSaving: false,
+                    onRecipeCook: { _ in },
+                    onCookedRecipeDelete: { _ in }
+                )
             }
+            .previewDisplayName("Logged In")
+            
+            NavigationStack {
+                RecipeDetailTemplateView(
+                    cookedDatePickerVisible: .constant(false),
+                    recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails),
+                    isUserLoggedIn: true,
+                    isSaving: true,
+                    onRecipeCook: { _ in },
+                    onCookedRecipeDelete: { _ in }
+                )
+            }
+            .previewDisplayName("Saving")
+            
+            NavigationStack {
+                RecipeDetailTemplateView(
+                    cookedDatePickerVisible: .constant(true),
+                    recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails),
+                    isUserLoggedIn: true,
+                    isSaving: false,
+                    onRecipeCook: { _ in },
+                    onCookedRecipeDelete: { _ in }
+                )
+            }
+            .previewDisplayName("Date Picker")
         }
-        .environmentObject(CurrentUserStore())
     }
 }

@@ -47,25 +47,3 @@ struct RecipeDetailScreenView: View {
         }
     }
 }
-
-struct RecipeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationView {
-                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[0].fragments.recipeDetails))
-                    .navigationTitle(recipePreviewData[0].title)
-            }
-                
-            NavigationView {
-                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[1].fragments.recipeDetails))
-                    .navigationTitle(recipePreviewData[1].title)
-            }
-                
-            NavigationView {
-                RecipeDetailScreenView(recipe: Recipe(from: recipePreviewData[2].fragments.recipeDetails))
-                    .navigationTitle(recipePreviewData[2].title)
-            }
-        }
-        .environmentObject(CurrentUserStore())
-    }
-}
