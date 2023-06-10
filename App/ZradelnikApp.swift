@@ -65,7 +65,7 @@ struct ZradelnikApp: App {
                 .tag(Tab.instantPotRecipes)
 
                 NavigationStack {
-                    SettingsView()
+                    SettingsScreenView()
                 }
                 .tabItem {
                     Label("Nastavení", systemImage: "gear")
