@@ -12,8 +12,8 @@ struct RecipeForm: View {
     var recipe: Recipe?
     var isInstantPotNewRecipe: Bool?
     var onSave: (Recipe) -> Void
-    var onCancel: () -> Void
-    var onDelete: (() -> Void)?
+    var onCancel: Callback
+    var onDelete: Callback?
 
     @StateObject private var vm = ViewModel()
 

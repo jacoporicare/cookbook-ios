@@ -59,7 +59,7 @@ extension RecipeForm {
             }
         }
         
-        func delete(id: String, completionHandler: @escaping () -> Void) {
+        func delete(id: String, completionHandler: @escaping Callback) {
             isSaving = true
             
             let mutation = DeleteRecipeMutation(id: id)

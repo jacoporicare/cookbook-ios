@@ -17,7 +17,7 @@ struct LoginTemplateView: View {
     let loggingIn: Bool
     let loginDisabled: Bool
 
-    let onLogin: () -> Void
+    let onLogin: Callback
 
     var body: some View {
         Form {

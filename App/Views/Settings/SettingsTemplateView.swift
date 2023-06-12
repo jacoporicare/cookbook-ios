@@ -14,7 +14,7 @@ struct SettingsTemplateView: View {
     let userLoadingStatus: LoadingStatus
     let userDisplayName: String?
 
-    let onLogout: () -> Void
+    let onLogout: Callback
 
     var body: some View {
         Form {

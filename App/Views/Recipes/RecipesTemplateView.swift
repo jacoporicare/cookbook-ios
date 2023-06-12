@@ -27,7 +27,7 @@ struct RecipesTemplateView: View {
     let loadingStatus: LoadingStatus
     let isUserLoggedIn: Bool
 
-    let onReload: () -> Void
+    let onReload: Callback
     let onRecipeAdd: (Recipe) -> Void
 
     @State private var isRecipeFormPresented = false
