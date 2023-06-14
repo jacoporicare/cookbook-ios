@@ -98,7 +98,7 @@ struct RecipesTemplateView: View {
         }
         .sheet(isPresented: $isRecipeFormPresented) {
             NavigationStack {
-                RecipeForm(isInstantPotNewRecipe: isInstantPotView) { recipe in
+                RecipeFormScreenView(isInstantPotNewRecipe: isInstantPotView) { recipe in
                     isRecipeFormPresented = false
                     onRecipeAdd(recipe)
                 } onCancel: {

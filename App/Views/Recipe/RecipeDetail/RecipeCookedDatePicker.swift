@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeCookedDatePicker: View {
-    var confirmAction: (Date) -> Void
+    let confirmAction: (Date) -> Void
     
     @State private var cookedDate = Date.now
     

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct RecipeDetailLastCookedDate: View {
-    var cooked: Recipe.Cooked
-    var history: [Recipe.Cooked]
-    var onRecipeCookedDelete: (String) -> Void
-
     @EnvironmentObject private var currentUserStore: CurrentUserStore
+
+    let cooked: Recipe.Cooked
+    let history: [Recipe.Cooked]
+    let onRecipeCookedDelete: (String) -> Void
 
     @State private var isHistorySheetPresented = false
 

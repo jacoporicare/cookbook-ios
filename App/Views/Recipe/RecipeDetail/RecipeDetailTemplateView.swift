@@ -34,8 +34,8 @@ struct RecipeDetailTemplateView: View {
                 
             VStack(alignment: .leading, spacing: 30) {
                 RecipeDetailActionButtonsView(
-                    isUserLoggedIn: isUserLoggedIn,
-                    cookedDatePickerVisible: $cookedDatePickerVisible
+                    cookedDatePickerVisible: $cookedDatePickerVisible,
+                    isUserLoggedIn: isUserLoggedIn
                 )
                     
                 if cookedDatePickerVisible {

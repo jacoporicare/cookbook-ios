@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct RecipeDetailBasicInfoView: View {
-    var preparationTime: String?
-    var servingCount: String?
-    var sideDish: String?
+    let preparationTime: String?
+    let servingCount: String?
+    let sideDish: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -46,9 +46,9 @@ struct RecipeDetailBasicInfoView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             RecipeDetailBasicInfoView(preparationTime: "10 min", servingCount: "10", sideDish: "brambory")
-            RecipeDetailBasicInfoView(preparationTime: "10 min")
-            RecipeDetailBasicInfoView(servingCount: "10")
-            RecipeDetailBasicInfoView(sideDish: "brambory")
+            RecipeDetailBasicInfoView(preparationTime: "10 min", servingCount: nil, sideDish: nil)
+            RecipeDetailBasicInfoView(preparationTime: nil, servingCount: "10", sideDish: nil)
+            RecipeDetailBasicInfoView(preparationTime: nil, servingCount: nil, sideDish: "brambory")
         }
     }
 }

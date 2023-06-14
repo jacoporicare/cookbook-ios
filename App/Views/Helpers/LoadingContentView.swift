@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct LoadingContentView<Content: View, ErrorContent: View>: View {
-    var status: LoadingStatus
+    let status: LoadingStatus
     var loadingText: String = "Načítání..."
-    @ViewBuilder var content: () -> Content
-    @ViewBuilder var errorContent: (String) -> ErrorContent
+    @ViewBuilder let content: () -> Content
+    @ViewBuilder let errorContent: (String) -> ErrorContent
 
     var body: some View {
         switch status {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeDetailIngredientsView: View {
-    var ingredients: [Recipe.Ingredient]
+    let ingredients: [Recipe.Ingredient]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

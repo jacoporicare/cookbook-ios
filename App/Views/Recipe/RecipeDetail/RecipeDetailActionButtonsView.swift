@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct RecipeDetailActionButtonsView: View {
-    var isUserLoggedIn: Bool
     @Binding var cookedDatePickerVisible: Bool
+
+    let isUserLoggedIn: Bool
 
     @State private var isIdleTimerDisabled = UIApplication.shared.isIdleTimerDisabled
 
@@ -48,12 +49,12 @@ struct RecipeDetailActionButtonsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             RecipeDetailActionButtonsView(
-                isUserLoggedIn: false,
-                cookedDatePickerVisible: .constant(false)
+                cookedDatePickerVisible: .constant(false),
+                isUserLoggedIn: false
             )
             RecipeDetailActionButtonsView(
-                isUserLoggedIn: true,
-                cookedDatePickerVisible: .constant(false)
+                cookedDatePickerVisible: .constant(false),
+                isUserLoggedIn: true
             )
         }
     }
