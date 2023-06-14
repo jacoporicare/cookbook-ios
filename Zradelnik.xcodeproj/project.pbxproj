@@ -199,8 +199,8 @@
 			children = (
 				09395F872800953200AACAA3 /* RecipeEditView.swift */,
 				0905C3B028048B41005E3949 /* RecipeFormScreenView.swift */,
-				09D98A582A3A4E4800CC5373 /* RecipeFormTemplateView.swift */,
 				09CFF8C128F8A89400117107 /* RecipeFormScreenModel.swift */,
+				09D98A582A3A4E4800CC5373 /* RecipeFormTemplateView.swift */,
 			);
 			path = RecipeEdit;
 			sourceTree = "<group>";
