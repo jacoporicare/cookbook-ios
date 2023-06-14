@@ -9,22 +9,55 @@ import Apollo
 import SwiftUI
 
 class RecipeFormScreenModel: ObservableObject {
+    @Published var draftRecipe = RecipeEdit.default
+    @Published var inputImage: UIImage?
     @Published var isSaving = false
     @Published var isError = false
+    
+    let recipe: Recipe?
+    let isInstantPotNewRecipe: Bool?
+    
+    var isValid: Bool {
+        !draftRecipe.title.isEmpty && !draftRecipe.ingredients.contains { ingredient in
+            !ingredient.amount.isEmpty && Double(ingredient.amount.replacingOccurrences(of: ",", with: ".")) == nil
+        }
+    }
+    
+    var isDirty: Bool {
+        (recipe == nil && (
+            (isInstantPotNewRecipe != true && draftRecipe != RecipeEdit.default)
+                || (isInstantPotNewRecipe == true && draftRecipe != RecipeEdit.defaultInstantPot)
+        ))
+            || (recipe != nil && draftRecipe != RecipeEdit(from: recipe!))
+            || inputImage != nil
+    }
+    
+    init(recipe: Recipe?, isInstantPotNewRecipe: Bool?) {
+        self.recipe = recipe
+        self.isInstantPotNewRecipe = isInstantPotNewRecipe
         
-    func save(id: String? = nil, data recipe: RecipeEdit, image: UIImage?, completionHandler: @escaping (Recipe) -> Void) {
+        if let recipe {
+            draftRecipe = RecipeEdit(from: recipe)
+        }
+        
+        if isInstantPotNewRecipe == true {
+            draftRecipe.isForInstantPot = true
+        }
+    }
+        
+    func save(completionHandler: @escaping (Recipe) -> Void) {
         isSaving = true
             
         var files: [GraphQLFile] = []
-        if let data = image?.jpegData(compressionQuality: 100) {
+        if let data = inputImage?.jpegData(compressionQuality: 100) {
             files.append(.init(fieldName: "image", originalName: "image", data: data))
         }
             
-        if let id {
+        if let id = recipe?.id {
             let mutation = UpdateRecipeMutation(
                 id: id,
-                recipe: recipe.toRecipeInput(),
-                image: image != nil ? "image" : nil
+                recipe: draftRecipe.toRecipeInput(),
+                image: inputImage != nil ? "image" : nil
             )
                 
             Network.shared.apollo.upload(operation: mutation, files: files) { [weak self] result in
@@ -40,8 +73,8 @@ class RecipeFormScreenModel: ObservableObject {
             }
         } else {
             let mutation = CreateRecipeMutation(
-                recipe: recipe.toRecipeInput(),
-                image: image != nil ? "image" : nil
+                recipe: draftRecipe.toRecipeInput(),
+                image: inputImage != nil ? "image" : nil
             )
                 
             Network.shared.apollo.upload(operation: mutation, files: files) { [weak self] result in
@@ -58,7 +91,12 @@ class RecipeFormScreenModel: ObservableObject {
         }
     }
         
-    func delete(id: String, completionHandler: @escaping Callback) {
+    func delete(completionHandler: @escaping Callback) {
+        guard let id = recipe?.id else {
+            completionHandler()
+            return
+        }
+        
         isSaving = true
             
         let mutation = DeleteRecipeMutation(id: id)
