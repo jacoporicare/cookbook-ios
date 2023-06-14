@@ -35,13 +35,13 @@ struct RecipesTemplateView: View {
     var body: some View {
         LoadingContentView(status: loadingStatus, loadingText: "Načítání receptů...") {
             if displayMode == .grid {
-                RecipesGrid(
+                RecipesGridView(
                     recipeGroups: recipeGroups,
                     searchText: $searchText,
                     shouldResetScrollPosition: $shouldResetScrollPosition
                 )
             } else {
-                RecipesList(
+                RecipesListView(
                     recipeGroups: recipeGroups,
                     searchText: $searchText,
                     shouldResetScrollPosition: $shouldResetScrollPosition

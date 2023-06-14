@@ -1,5 +1,5 @@
 //
-//  RecipesGrid.swift
+//  RecipesGridView.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 24.09.2022.
@@ -8,7 +8,7 @@
 import CachedAsyncImage
 import SwiftUI
 
-struct RecipesGrid: View {
+struct RecipesGridView: View {
     var recipeGroups: [RecipeGroup]
     @Binding var searchText: String
     @Binding var shouldResetScrollPosition: Bool

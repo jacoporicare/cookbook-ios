@@ -1,5 +1,5 @@
 //
-//  RecipesList.swift
+//  RecipesListView.swift
 //  Zradelnik
 //
 //  Created by Jakub Řičař on 24.09.2022.
@@ -8,7 +8,7 @@
 import CachedAsyncImage
 import SwiftUI
 
-struct RecipesList: View {
+struct RecipesListView: View {
     @EnvironmentObject private var recipeStore: RecipeStore
 
     var recipeGroups: [RecipeGroup]
