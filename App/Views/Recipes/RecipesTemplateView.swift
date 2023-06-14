@@ -113,7 +113,9 @@ struct RecipesTemplateView: View {
 
 #if DEBUG
 struct RecipesTemplateView_Previews: PreviewProvider {
-    private static let recipeGroups = groupRecipes(recipes: recipePreviewData.map { Recipe(from: $0.fragments.recipeDetails) })
+    private static let recipeGroups = recipePreviewData
+        .map { Recipe(from: $0.fragments.recipeDetails) }
+        .groupedByFirstLetter()
 
     static var previews: some View {
         Group {

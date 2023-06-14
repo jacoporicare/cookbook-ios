@@ -29,7 +29,7 @@ struct RecipesScreenView: View {
                     .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
             }
 
-        return groupRecipes(recipes: filteredRecipes)
+        return filteredRecipes.groupedByFirstLetter()
     }
 
     var body: some View {
@@ -57,18 +57,4 @@ struct RecipesScreenView: View {
             UserDefaults.standard.set(newValue.rawValue, forKey: "displayMode")
         }
     }
-}
-
-private let alphabet = ["#", "A", "Á", "B", "C", "Č", "D", "Ď", "E", "É", "F", "G", "H", "CH", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "P", "Q", "R", "Ř", "S", "Š", "T", "Ť", "U", "Ú", "V", "W", "X", "Y", "Ý", "Z", "Ž"]
-
-func groupRecipes(recipes: [Recipe]) -> [RecipeGroup] {
-    return Dictionary(grouping: recipes) { recipe in
-        alphabet.contains(String(recipe.title.uppercased().prefix(2)))
-            ? String(recipe.title.uppercased().prefix(2))
-            : alphabet.contains(String(recipe.title.uppercased().prefix(1)))
-            ? String(recipe.title.uppercased().prefix(1))
-            : "#"
-    }
-    .map { key, value in RecipeGroup(id: key, recipes: value) }
-    .sorted { $0.id.compare($1.id, locale: zradelnikLocale) == .orderedAscending }
 }
