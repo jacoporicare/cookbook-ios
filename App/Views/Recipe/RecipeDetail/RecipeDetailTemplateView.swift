@@ -98,6 +98,7 @@ struct RecipeDetailTemplateView: View {
     }
 }
 
+#if DEBUG
 struct RecipeDetailTemplateView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -162,3 +163,4 @@ struct RecipeDetailTemplateView_Previews: PreviewProvider {
         }
     }
 }
+#endif

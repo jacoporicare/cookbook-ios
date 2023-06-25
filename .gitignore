@@ -1,1 +1,7 @@
 xcuserdata/
+output/
+fastlane/report.xml
+.gitsecret/keys/random_seed
+!*.secret
+fastlane/app-store-api-key.json
+fastlane/Appfile
