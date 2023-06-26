@@ -21,6 +21,6 @@ platform :ios do
     increment_build_number(build_number: latest_testflight_build_number + 1)
     match(type: "appstore", readonly: true)
     build_app
-    upload_to_testflight(api_key_path: './app-store-api-key.json')
+    upload_to_testflight(api_key_path: 'fastlane/app-store-api-key.json')
   end
 end

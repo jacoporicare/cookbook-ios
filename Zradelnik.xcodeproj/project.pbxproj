@@ -96,6 +96,7 @@
 		0955941A27F332AA00E270E4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		095C1D602801B5FF0074AA70 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		096DB8242A4A32F3007066FD /* Zradelnik.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Zradelnik.entitlements; sourceTree = "<group>"; };
 		09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInstantPotInfoView.swift; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
@@ -257,6 +258,7 @@
 			children = (
 				09AE246D27F31C9200BC6208 /* App */,
 				09FF048B2903354F009FA412 /* apollo-codegen-config.json */,
+				096DB8242A4A32F3007066FD /* Zradelnik.entitlements */,
 				09FF048F290339AB009FA412 /* Packages */,
 				092DC68D27FC4CFB00A1B0D6 /* Configuration */,
 				09AE246C27F31C9200BC6208 /* Products */,
@@ -620,9 +622,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Zradelnik.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "App/Preview\\ Content";
 				DEVELOPMENT_TEAM = 75N8ZPU23Q;
 				ENABLE_PREVIEWS = YES;
@@ -656,9 +659,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Zradelnik.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: CN Group CZ s.r.o. (75N8ZPU23Q)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "App/Preview\\ Content";
 				DEVELOPMENT_TEAM = 75N8ZPU23Q;
 				ENABLE_PREVIEWS = YES;
