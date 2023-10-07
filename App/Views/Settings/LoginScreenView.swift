@@ -8,6 +8,7 @@
 import Apollo
 import SwiftUI
 
+@available(*, deprecated, message: "Not used, using web view (WebAuthenticationSession) instead.")
 struct LoginScreenView: View {
     @EnvironmentObject private var currentUserStore: CurrentUserStore
     @Environment(\.dismiss) private var dismiss

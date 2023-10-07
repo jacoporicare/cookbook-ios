@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(*, deprecated, message: "Not used, using web view (WebAuthenticationSession) instead.")
 struct LoginTemplateView: View {
     @Environment(\.dismiss) private var dismiss
 
@@ -51,6 +52,7 @@ struct LoginTemplateView: View {
     }
 }
 
+@available(*, deprecated, message: "Not used, using web view (WebAuthenticationSession) instead.")
 struct LoginTemplateView_Previews: PreviewProvider {
     static var previews: some View {
         Group {

@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct SettingsTemplateView: View {
-    @State private var showingLoginSheet = false
-
     let isUserLoggedIn: Bool
     let userLoadingStatus: LoadingStatus
     let userDisplayName: String?
 
+    let onLogin: Callback
     let onLogout: Callback
 
     var body: some View {
@@ -35,18 +34,11 @@ struct SettingsTemplateView: View {
 
                     Button("Odhlásit", action: onLogout)
                 } else {
-                    Button("Přihlásit") {
-                        showingLoginSheet = true
-                    }
+                    Button("Přihlásit", action: onLogin)
                 }
             }
         }
         .navigationTitle("Nastavení")
-        .sheet(isPresented: $showingLoginSheet) {
-            NavigationStack {
-                LoginScreenView()
-            }
-        }
     }
 }
 
@@ -58,6 +50,7 @@ struct SettingsTemplateView_Previews: PreviewProvider {
                     isUserLoggedIn: false,
                     userLoadingStatus: .data,
                     userDisplayName: nil,
+                    onLogin: {},
                     onLogout: {}
                 )
             }
@@ -68,6 +61,7 @@ struct SettingsTemplateView_Previews: PreviewProvider {
                     isUserLoggedIn: true,
                     userLoadingStatus: .data,
                     userDisplayName: "User name",
+                    onLogin: {},
                     onLogout: {}
                 )
             }
@@ -78,6 +72,7 @@ struct SettingsTemplateView_Previews: PreviewProvider {
                     isUserLoggedIn: true,
                     userLoadingStatus: .loading,
                     userDisplayName: nil,
+                    onLogin: {},
                     onLogout: {}
                 )
             }
