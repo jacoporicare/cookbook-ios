@@ -4,8 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  static let RecipeCooked = Object(
+  static let RecipeCooked = ApolloAPI.Object(
     typename: "RecipeCooked",
-    implementedInterfaces: []
+    implementedInterfaces: [],
+    keyFields: nil
   )
 }

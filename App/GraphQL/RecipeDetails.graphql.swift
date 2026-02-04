@@ -1,51 +1,20 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import ApolloAPI
-@_exported import enum ApolloAPI.GraphQLEnum
-@_exported import enum ApolloAPI.GraphQLNullable
+@_exported import ApolloAPI
 import API
 
 public struct RecipeDetails: API.SelectionSet, Fragment {
-  public static var fragmentDefinition: StaticString { """
-    fragment RecipeDetails on Recipe {
-      __typename
-      id
-      title
-      gridImageUrl: imageUrl(size: {width: 640, height: 640}, format: WEBP)
-      listImageUrl: imageUrl(size: {width: 240, height: 180}, format: WEBP)
-      fullImageUrl: imageUrl(size: {width: 1280, height: 960}, format: WEBP)
-      directions
-      sideDish
-      preparationTime
-      servingCount
-      tags
-      ingredients {
-        __typename
-        id
-        name
-        isGroup
-        amount
-        amountUnit
-      }
-      cookedHistory {
-        __typename
-        id
-        date
-        user {
-          __typename
-          id
-          displayName
-        }
-      }
-    }
-    """ }
+  public static var fragmentDefinition: StaticString {
+    #"fragment RecipeDetails on Recipe { __typename id title gridImageUrl: imageUrl(size: { width: 640, height: 640 }, format: WEBP) listImageUrl: imageUrl(size: { width: 240, height: 180 }, format: WEBP) fullImageUrl: imageUrl(size: { width: 1280, height: 960 }, format: WEBP) directions sideDish preparationTime servingCount tags ingredients { __typename id name isGroup amount amountUnit } cookedHistory { __typename id date user { __typename id displayName } } }"#
+  }
 
   public let __data: DataDict
-  public init(data: DataDict) { __data = data }
+  public init(_dataDict: DataDict) { __data = _dataDict }
 
-  public static var __parentType: ParentType { API.Objects.Recipe }
-  public static var __selections: [Selection] { [
+  public static var __parentType: any ApolloAPI.ParentType { API.Objects.Recipe }
+  public static var __selections: [ApolloAPI.Selection] { [
+    .field("__typename", String.self),
     .field("id", API.ID.self),
     .field("title", String.self),
     .field("imageUrl", alias: "gridImageUrl", String?.self, arguments: [
@@ -77,6 +46,9 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
     .field("ingredients", [Ingredient].self),
     .field("cookedHistory", [CookedHistory].self),
   ] }
+  public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [
+    RecipeDetails.self
+  ] }
 
   public var id: API.ID { __data["id"] }
   public var title: String { __data["title"] }
@@ -96,15 +68,19 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
   /// Parent Type: `Ingredient`
   public struct Ingredient: API.SelectionSet {
     public let __data: DataDict
-    public init(data: DataDict) { __data = data }
+    public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ParentType { API.Objects.Ingredient }
-    public static var __selections: [Selection] { [
+    public static var __parentType: any ApolloAPI.ParentType { API.Objects.Ingredient }
+    public static var __selections: [ApolloAPI.Selection] { [
+      .field("__typename", String.self),
       .field("id", API.ID.self),
       .field("name", String.self),
       .field("isGroup", Bool.self),
       .field("amount", Double?.self),
       .field("amountUnit", String?.self),
+    ] }
+    public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [
+      RecipeDetails.Ingredient.self
     ] }
 
     public var id: API.ID { __data["id"] }
@@ -119,13 +95,17 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
   /// Parent Type: `RecipeCooked`
   public struct CookedHistory: API.SelectionSet {
     public let __data: DataDict
-    public init(data: DataDict) { __data = data }
+    public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ParentType { API.Objects.RecipeCooked }
-    public static var __selections: [Selection] { [
+    public static var __parentType: any ApolloAPI.ParentType { API.Objects.RecipeCooked }
+    public static var __selections: [ApolloAPI.Selection] { [
+      .field("__typename", String.self),
       .field("id", API.ID.self),
       .field("date", API.Date.self),
       .field("user", User.self),
+    ] }
+    public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [
+      RecipeDetails.CookedHistory.self
     ] }
 
     public var id: API.ID { __data["id"] }
@@ -137,12 +117,16 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
     /// Parent Type: `User`
     public struct User: API.SelectionSet {
       public let __data: DataDict
-      public init(data: DataDict) { __data = data }
+      public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ParentType { API.Objects.User }
-      public static var __selections: [Selection] { [
+      public static var __parentType: any ApolloAPI.ParentType { API.Objects.User }
+      public static var __selections: [ApolloAPI.Selection] { [
+        .field("__typename", String.self),
         .field("id", API.ID.self),
         .field("displayName", String.self),
+      ] }
+      public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [
+        RecipeDetails.CookedHistory.User.self
       ] }
 
       public var id: API.ID { __data["id"] }

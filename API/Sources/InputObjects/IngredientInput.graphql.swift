@@ -25,22 +25,22 @@ public struct IngredientInput: InputObject {
   }
 
   public var amount: GraphQLNullable<Double> {
-    get { __data.amount }
-    set { __data.amount = newValue }
+    get { __data["amount"] }
+    set { __data["amount"] = newValue }
   }
 
   public var amountUnit: GraphQLNullable<String> {
-    get { __data.amountUnit }
-    set { __data.amountUnit = newValue }
+    get { __data["amountUnit"] }
+    set { __data["amountUnit"] = newValue }
   }
 
   public var name: String {
-    get { __data.name }
-    set { __data.name = newValue }
+    get { __data["name"] }
+    set { __data["name"] = newValue }
   }
 
   public var isGroup: GraphQLNullable<Bool> {
-    get { __data.isGroup }
-    set { __data.isGroup = newValue }
+    get { __data["isGroup"] }
+    set { __data["isGroup"] = newValue }
   }
 }

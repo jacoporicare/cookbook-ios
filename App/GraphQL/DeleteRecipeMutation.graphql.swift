@@ -1,20 +1,14 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import ApolloAPI
-@_exported import enum ApolloAPI.GraphQLEnum
-@_exported import enum ApolloAPI.GraphQLNullable
+@_exported import ApolloAPI
 import API
 
 public class DeleteRecipeMutation: GraphQLMutation {
   public static let operationName: String = "DeleteRecipe"
-  public static let document: DocumentType = .notPersisted(
+  public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      """
-      mutation DeleteRecipe($id: ID!) {
-        deleteRecipe(id: $id)
-      }
-      """
+      #"mutation DeleteRecipe($id: ID!) { deleteRecipe(id: $id) }"#
     ))
 
   public var id: API.ID
@@ -27,11 +21,14 @@ public class DeleteRecipeMutation: GraphQLMutation {
 
   public struct Data: API.SelectionSet {
     public let __data: DataDict
-    public init(data: DataDict) { __data = data }
+    public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ParentType { API.Objects.Mutation }
-    public static var __selections: [Selection] { [
+    public static var __parentType: any ApolloAPI.ParentType { API.Objects.Mutation }
+    public static var __selections: [ApolloAPI.Selection] { [
       .field("deleteRecipe", Bool.self, arguments: ["id": .variable("id")]),
+    ] }
+    public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [
+      DeleteRecipeMutation.Data.self
     ] }
 
     public var deleteRecipe: Bool { __data["deleteRecipe"] }

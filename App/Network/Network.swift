@@ -29,6 +29,8 @@ class Network {
 }
 
 class TokenAddInterceptor: ApolloInterceptor {
+    var id: String = "TokenAddInterceptor"
+
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,
@@ -41,11 +43,14 @@ class TokenAddInterceptor: ApolloInterceptor {
 
         chain.proceedAsync(request: request,
                            response: response,
+                           interceptor: self,
                            completion: completion)
     }
 }
 
 class UnauthenticatedInterceptor: ApolloInterceptor {
+    var id: String = "UnauthenticatedInterceptor"
+
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,
@@ -58,6 +63,7 @@ class UnauthenticatedInterceptor: ApolloInterceptor {
 
         chain.proceedAsync(request: request,
                            response: response,
+                           interceptor: self,
                            completion: completion)
     }
 }

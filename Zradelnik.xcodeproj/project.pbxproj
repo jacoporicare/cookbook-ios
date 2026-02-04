@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -389,8 +389,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1340;
+				LastSwiftUpdateCheck = 2620;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					09AE246A27F31C9200BC6208 = {
 						CreatedOnToolsVersion = 13.3;
@@ -398,7 +398,6 @@
 				};
 			};
 			buildConfigurationList = 09AE246627F31C9200BC6208 /* Build configuration list for PBXProject "Zradelnik" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = cs;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -408,10 +407,11 @@
 			mainGroup = 09AE246227F31C9200BC6208;
 			packageReferences = (
 				0989F8E027F32CBA009CB6BD /* XCRemoteSwiftPackageReference "apollo-ios" */,
-				09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */,
+				09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				091815F827FDF836003A2250 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				09A06827280970A70008563A /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 09AE246C27F31C9200BC6208 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -548,12 +548,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_LANGUAGE_MODE = 5;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -607,11 +608,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_LANGUAGE_MODE = 5;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -627,7 +629,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "App/Preview\\ Content";
-				DEVELOPMENT_TEAM = 75N8ZPU23Q;
+				DEVELOPMENT_TEAM = LVQ73P9V59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "App/Zradelnik-Info.plist";
@@ -637,19 +639,20 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dk.cngroup.zradelnik;
+				PRODUCT_BUNDLE_IDENTIFIER = "cz.zradelnik.app-native";
 				PRODUCT_NAME = Zradelnik;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_LANGUAGE_MODE = 5;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -675,7 +678,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -689,6 +692,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_LANGUAGE_MODE = 5;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -742,12 +746,12 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+		09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -774,7 +778,7 @@
 		};
 		09DC1F9D27F9DED200F01BBC /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			package = 09DC1F9C27F9DED200F01BBC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
 		};
 		09FE90E027FA36BD005C6AE3 /* ApolloSQLite */ = {

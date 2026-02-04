@@ -1,5 +1,5 @@
 {
-  "schemaName" : "API",
+  "schemaNamespace" : "API",
   "input" : {
     "operationSearchPaths" : [
       "**/*.graphql"

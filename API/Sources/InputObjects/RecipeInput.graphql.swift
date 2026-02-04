@@ -31,37 +31,37 @@ public struct RecipeInput: InputObject {
   }
 
   public var title: String {
-    get { __data.title }
-    set { __data.title = newValue }
+    get { __data["title"] }
+    set { __data["title"] = newValue }
   }
 
   public var directions: GraphQLNullable<String> {
-    get { __data.directions }
-    set { __data.directions = newValue }
+    get { __data["directions"] }
+    set { __data["directions"] = newValue }
   }
 
   public var sideDish: GraphQLNullable<String> {
-    get { __data.sideDish }
-    set { __data.sideDish = newValue }
+    get { __data["sideDish"] }
+    set { __data["sideDish"] = newValue }
   }
 
   public var preparationTime: GraphQLNullable<Int> {
-    get { __data.preparationTime }
-    set { __data.preparationTime = newValue }
+    get { __data["preparationTime"] }
+    set { __data["preparationTime"] = newValue }
   }
 
   public var servingCount: GraphQLNullable<Int> {
-    get { __data.servingCount }
-    set { __data.servingCount = newValue }
+    get { __data["servingCount"] }
+    set { __data["servingCount"] = newValue }
   }
 
   public var ingredients: GraphQLNullable<[API.IngredientInput]> {
-    get { __data.ingredients }
-    set { __data.ingredients = newValue }
+    get { __data["ingredients"] }
+    set { __data["ingredients"] = newValue }
   }
 
   public var tags: GraphQLNullable<[String]> {
-    get { __data.tags }
-    set { __data.tags = newValue }
+    get { __data["tags"] }
+    set { __data["tags"] = newValue }
   }
 }

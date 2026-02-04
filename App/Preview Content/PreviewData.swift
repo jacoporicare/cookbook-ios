@@ -172,4 +172,4 @@ private let data: JSONObject = [
     ]
 ]
 
-let recipePreviewData: [RecipesQuery.Data.Recipe] = RecipesQuery.Data(data: DataDict(data, variables: nil)).recipes
+let recipePreviewData: [RecipesQuery.Data.Recipe] = RecipesQuery.Data(unsafelyWithData: data).recipes

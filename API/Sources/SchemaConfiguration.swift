@@ -8,7 +8,7 @@
 import ApolloAPI
 
 public enum SchemaConfiguration: ApolloAPI.SchemaConfiguration {
-    public static func cacheKeyInfo(for type: Object, object: JSONObject) -> CacheKeyInfo? {
+    public static func cacheKeyInfo(for type: Object, object: ObjectData) -> CacheKeyInfo? {
         guard let id = object["id"] as? String else {
             return nil
         }
