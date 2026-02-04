@@ -1,8 +1,48 @@
+"""
+A directive used by the Apollo iOS client to annotate operations or fragments that should be used exclusively for generating local cache mutations instead of as standard operations.
+"""
+directive @apollo_client_ios_localCacheMutation on QUERY | MUTATION | SUBSCRIPTION | FRAGMENT_DEFINITION
+
+"""
+A directive used by the Apollo iOS code generation engine to generate custom import statements in operation or fragment definition files. An import statement to import a module with the name provided in the `module` argument will be added to the generated definition file.
+"""
+directive @import(
+  """The name of the module to import."""
+  module: String!
+) repeatable on QUERY | MUTATION | SUBSCRIPTION | FRAGMENT_DEFINITION
+
+"""Attach extra information to a given type."""
+directive @typePolicy(
+  """
+  A selection set containing fields used to compute the cache key of an object. Referenced fields must have non-nullable scalar types. Order is important.
+  """
+  keyFields: String!
+) on OBJECT | INTERFACE
+
+"""
+A directive used by Apollo iOS to map query input data to cache keys of objects.
+"""
+directive @fieldPolicy(
+  """The field you are setting the @fieldPolicy for."""
+  forField: String!
+
+  """Set of fields used to compute the cache key."""
+  keyArgs: String!
+) repeatable on OBJECT | INTERFACE
+
+"""
+Directs the executor to defer this fragment when the `if` argument is true or undefined.
+"""
+directive @defer(
+  """Deferred when true or undefined."""
+  if: Boolean
+
+  """Unique name"""
+  label: String
+) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
 """Date custom scalar type"""
 scalar Date
-
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
 
 input ImageSize {
   width: Int!
@@ -21,12 +61,13 @@ type Recipe {
   sideDish: String
   preparationTime: Int
   servingCount: Int
-  user: User!
+  user: User
   imageUrl(size: ImageSize, format: ImageFormat): String
   creationDate: Date!
   lastModifiedDate: Date!
   ingredients: [Ingredient!]!
   tags: [String!]!
+  sousVideOptions: [SousVideOption!]!
   cookedHistory: [RecipeCooked!]!
   deleted: Boolean!
 }
@@ -42,7 +83,14 @@ type Ingredient {
 type RecipeCooked {
   id: ID!
   date: Date!
-  user: User!
+  user: User
+}
+
+type SousVideOption {
+  id: ID!
+  temperature: Float!
+  time: String!
+  label: String!
 }
 
 type User {
@@ -65,6 +113,7 @@ input RecipeInput {
   servingCount: Int
   ingredients: [IngredientInput!]
   tags: [String!]
+  sousVideOptions: [SousVideOptionInput!]
 }
 
 input IngredientInput {
@@ -72,6 +121,12 @@ input IngredientInput {
   amountUnit: String
   name: String!
   isGroup: Boolean
+}
+
+input SousVideOptionInput {
+  temperature: Float!
+  time: String!
+  label: String!
 }
 
 input UserInput {
@@ -92,9 +147,10 @@ type Query {
 
 type Mutation {
   login(username: String!, password: String!): AuthPayload!
-  createRecipe(recipe: RecipeInput!, image: Upload): Recipe!
-  updateRecipe(id: ID!, recipe: RecipeInput!, image: Upload): Recipe!
+  createRecipe(recipe: RecipeInput!, imageId: ID): Recipe!
+  updateRecipe(id: ID!, recipe: RecipeInput!, imageId: ID): Recipe!
   deleteRecipe(id: ID!): Boolean!
+  importRecipe(url: String!): Recipe!
   recipeCooked(id: ID!, date: Date!): Recipe!
   deleteRecipeCooked(recipeId: ID!, cookedId: ID!): Recipe!
   updateUserLastActivity: Boolean!

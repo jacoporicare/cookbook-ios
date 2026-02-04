@@ -8,28 +8,28 @@ public class UpdateRecipeMutation: GraphQLMutation {
   public static let operationName: String = "UpdateRecipe"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"mutation UpdateRecipe($id: ID!, $recipe: RecipeInput!, $image: Upload) { updateRecipe(id: $id, recipe: $recipe, image: $image) { __typename ...RecipeDetails } }"#,
+      #"mutation UpdateRecipe($id: ID!, $recipe: RecipeInput!, $imageId: ID) { updateRecipe(id: $id, recipe: $recipe, imageId: $imageId) { __typename ...RecipeDetails } }"#,
       fragments: [RecipeDetails.self]
     ))
 
   public var id: API.ID
   public var recipe: API.RecipeInput
-  public var image: GraphQLNullable<API.Upload>
+  public var imageId: GraphQLNullable<API.ID>
 
   public init(
     id: API.ID,
     recipe: API.RecipeInput,
-    image: GraphQLNullable<API.Upload>
+    imageId: GraphQLNullable<API.ID>
   ) {
     self.id = id
     self.recipe = recipe
-    self.image = image
+    self.imageId = imageId
   }
 
   public var __variables: Variables? { [
     "id": id,
     "recipe": recipe,
-    "image": image
+    "imageId": imageId
   ] }
 
   public struct Data: API.SelectionSet {
@@ -41,7 +41,7 @@ public class UpdateRecipeMutation: GraphQLMutation {
       .field("updateRecipe", UpdateRecipe.self, arguments: [
         "id": .variable("id"),
         "recipe": .variable("recipe"),
-        "image": .variable("image")
+        "imageId": .variable("imageId")
       ]),
     ] }
     public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [

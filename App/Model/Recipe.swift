@@ -41,7 +41,7 @@ struct Recipe: Identifiable, Decodable, Hashable {
     struct Cooked: Identifiable, Decodable, Hashable {
         let id: String
         let date: Date
-        let user: User
+        let user: User?
 
         struct User: Identifiable, Decodable, Hashable {
             let id: String
@@ -84,7 +84,7 @@ extension Recipe.Cooked {
     init(from cooked: RecipeDetails.CookedHistory) {
         self.id = cooked.id
         self.date = cooked.date
-        self.user = User(from: cooked.user)
+        self.user = cooked.user.map { User(from: $0) }
     }
 }
 

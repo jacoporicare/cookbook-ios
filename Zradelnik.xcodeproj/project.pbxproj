@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09000837AAAA000100000001 /* ImageUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09000837AAAA000200000001 /* ImageUploadService.swift */; };
 		0900083727F35B9A00D5A746 /* RecipesScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083627F35B9A00D5A746 /* RecipesScreenView.swift */; };
 		0905C3B128048B41005E3949 /* RecipeFormScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905C3B028048B41005E3949 /* RecipeFormScreenView.swift */; };
 		0905EF2C28DF55D500C65B11 /* RecipesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905EF2B28DF55D500C65B11 /* RecipesListView.swift */; };
@@ -99,6 +100,7 @@
 		096DB8242A4A32F3007066FD /* Zradelnik.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Zradelnik.entitlements; sourceTree = "<group>"; };
 		09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInstantPotInfoView.swift; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		09000837AAAA000200000001 /* ImageUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadService.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		099AAE9228F466B40063466F /* Zradelnik-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zradelnik-Info.plist"; sourceTree = "<group>"; };
 		09A068212809562C0008563A /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		092DC67027FB6F6000A1B0D6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				09000837AAAA000200000001 /* ImageUploadService.swift */,
 				0989F8E527F32D45009CB6BD /* Network.swift */,
 				09A0682A280974D10008563A /* URLCache+imageCache.swift */,
 			);
@@ -441,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */,
+				09000837AAAA000100000001 /* ImageUploadService.swift in Sources */,
 				0989F8E627F32D45009CB6BD /* Network.swift in Sources */,
 				09CFF8C228F8A89400117107 /* RecipeFormScreenModel.swift in Sources */,
 				0955941B27F332AA00E270E4 /* Recipe.swift in Sources */,

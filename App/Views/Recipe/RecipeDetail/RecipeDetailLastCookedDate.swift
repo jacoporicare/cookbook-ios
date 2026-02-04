@@ -21,7 +21,9 @@ struct RecipeDetailLastCookedDate: View {
             Text("Naposledy uvařeno:")
                 .foregroundColor(.gray)
             Text(cooked.date.formatted(date: .abbreviated, time: .omitted))
-            Text("(\(cooked.user.displayName))")
+            if let user = cooked.user {
+                Text("(\(user.displayName))")
+            }
 
             Spacer()
 
@@ -40,7 +42,9 @@ struct RecipeDetailLastCookedDate: View {
                         HStack {
                             Text(row.date.formatted(date: .abbreviated, time: .omitted))
                             Spacer()
-                            Text(row.user.displayName)
+                            if let user = row.user {
+                                Text(user.displayName)
+                            }
                         }
                     }
                     .onDelete(perform: currentUserStore.isLoggedIn ? { indexSet in

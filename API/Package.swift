@@ -1,20 +1,20 @@
-// swift-tools-version:6.2
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
   name: "API",
   platforms: [
-    .iOS(.v26),
-    .macOS(.v26),
-    .tvOS(.v26),
-    .watchOS(.v11),
+    .iOS(.v12),
+    .macOS(.v10_14),
+    .tvOS(.v12),
+    .watchOS(.v5),
   ],
   products: [
     .library(name: "API", targets: ["API"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.25.3"),
+    .package(url: "https://github.com/apollographql/apollo-ios", exact: "1.25.3"),
   ],
   targets: [
     .target(
@@ -22,10 +22,7 @@ let package = Package(
       dependencies: [
         .product(name: "ApolloAPI", package: "apollo-ios"),
       ],
-      path: "./Sources",
-      swiftSettings: [
-        .swiftLanguageMode(.v5)
-      ]
+      path: "./Sources"
     ),
   ]
 )

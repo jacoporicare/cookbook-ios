@@ -8,24 +8,24 @@ public class CreateRecipeMutation: GraphQLMutation {
   public static let operationName: String = "CreateRecipe"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"mutation CreateRecipe($recipe: RecipeInput!, $image: Upload) { createRecipe(recipe: $recipe, image: $image) { __typename ...RecipeDetails } }"#,
+      #"mutation CreateRecipe($recipe: RecipeInput!, $imageId: ID) { createRecipe(recipe: $recipe, imageId: $imageId) { __typename ...RecipeDetails } }"#,
       fragments: [RecipeDetails.self]
     ))
 
   public var recipe: API.RecipeInput
-  public var image: GraphQLNullable<API.Upload>
+  public var imageId: GraphQLNullable<API.ID>
 
   public init(
     recipe: API.RecipeInput,
-    image: GraphQLNullable<API.Upload>
+    imageId: GraphQLNullable<API.ID>
   ) {
     self.recipe = recipe
-    self.image = image
+    self.imageId = imageId
   }
 
   public var __variables: Variables? { [
     "recipe": recipe,
-    "image": image
+    "imageId": imageId
   ] }
 
   public struct Data: API.SelectionSet {
@@ -36,7 +36,7 @@ public class CreateRecipeMutation: GraphQLMutation {
     public static var __selections: [ApolloAPI.Selection] { [
       .field("createRecipe", CreateRecipe.self, arguments: [
         "recipe": .variable("recipe"),
-        "image": .variable("image")
+        "imageId": .variable("imageId")
       ]),
     ] }
     public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [

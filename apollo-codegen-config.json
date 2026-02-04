@@ -24,5 +24,18 @@
       "relative" : {
       }
     }
+  },
+  "schemaDownload" : {
+    "downloadMethod" : {
+      "introspection" : {
+        "endpointURL" : "http://localhost:4000/graphql",
+        "httpMethod" : {
+          "POST" : {}
+        },
+        "outputFormat" : "SDL",
+        "includeDeprecatedInputValues" : false
+      }
+    },
+    "outputPath" : "./App/GraphQL/schema.graphqls"
   }
 }

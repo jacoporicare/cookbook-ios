@@ -102,7 +102,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
       .field("__typename", String.self),
       .field("id", API.ID.self),
       .field("date", API.Date.self),
-      .field("user", User.self),
+      .field("user", User?.self),
     ] }
     public static var __fulfilledFragments: [any ApolloAPI.SelectionSet.Type] { [
       RecipeDetails.CookedHistory.self
@@ -110,7 +110,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
 
     public var id: API.ID { __data["id"] }
     public var date: API.Date { __data["date"] }
-    public var user: User { __data["user"] }
+    public var user: User? { __data["user"] }
 
     /// CookedHistory.User
     ///

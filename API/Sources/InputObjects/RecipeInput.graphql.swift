@@ -17,7 +17,8 @@ public struct RecipeInput: InputObject {
     preparationTime: GraphQLNullable<Int> = nil,
     servingCount: GraphQLNullable<Int> = nil,
     ingredients: GraphQLNullable<[API.IngredientInput]> = nil,
-    tags: GraphQLNullable<[String]> = nil
+    tags: GraphQLNullable<[String]> = nil,
+    sousVideOptions: GraphQLNullable<[API.SousVideOptionInput]> = nil
   ) {
     __data = InputDict([
       "title": title,
@@ -26,7 +27,8 @@ public struct RecipeInput: InputObject {
       "preparationTime": preparationTime,
       "servingCount": servingCount,
       "ingredients": ingredients,
-      "tags": tags
+      "tags": tags,
+      "sousVideOptions": sousVideOptions
     ])
   }
 
@@ -63,5 +65,10 @@ public struct RecipeInput: InputObject {
   public var tags: GraphQLNullable<[String]> {
     get { __data["tags"] }
     set { __data["tags"] = newValue }
+  }
+
+  public var sousVideOptions: GraphQLNullable<[API.SousVideOptionInput]> {
+    get { __data["sousVideOptions"] }
+    set { __data["sousVideOptions"] = newValue }
   }
 }

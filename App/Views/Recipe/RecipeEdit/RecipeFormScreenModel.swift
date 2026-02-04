@@ -6,23 +6,25 @@
 //
 
 import Apollo
+import ApolloAPI
 import SwiftUI
 
 class RecipeFormScreenModel: ObservableObject {
     @Published var draftRecipe = RecipeEdit.default
     @Published var inputImage: UIImage?
     @Published var isSaving = false
+    @Published var isUploading = false
     @Published var isError = false
-    
+
     let recipe: Recipe?
     let isInstantPotNewRecipe: Bool?
-    
+
     var isValid: Bool {
         !draftRecipe.title.isEmpty && !draftRecipe.ingredients.contains { ingredient in
             !ingredient.amount.isEmpty && Double(ingredient.amount.replacingOccurrences(of: ",", with: ".")) == nil
         }
     }
-    
+
     var isDirty: Bool {
         (recipe == nil && (
             (isInstantPotNewRecipe != true && draftRecipe != RecipeEdit.default)
@@ -31,61 +33,85 @@ class RecipeFormScreenModel: ObservableObject {
             || (recipe != nil && draftRecipe != RecipeEdit(from: recipe!))
             || inputImage != nil
     }
-    
+
+    var isBusy: Bool {
+        isSaving || isUploading
+    }
+
     init(recipe: Recipe?, isInstantPotNewRecipe: Bool?) {
         self.recipe = recipe
         self.isInstantPotNewRecipe = isInstantPotNewRecipe
-        
+
         if let recipe {
             draftRecipe = RecipeEdit(from: recipe)
         }
-        
+
         if isInstantPotNewRecipe == true {
             draftRecipe.isForInstantPot = true
         }
     }
-        
-    func save(completionHandler: @escaping (Recipe) -> Void) {
-        isSaving = true
-            
-        var files: [GraphQLFile] = []
-        if let data = inputImage?.jpegData(compressionQuality: 100) {
-            files.append(.init(fieldName: "image", originalName: "image", data: data))
+
+    private func uploadImage() async -> String? {
+        guard let image = inputImage else { return nil }
+
+        isUploading = true
+        defer { isUploading = false }
+
+        do {
+            return try await ImageUploadService.shared.upload(image: image)
+        } catch {
+            isError = true
+            return nil
         }
-            
-        if let id = recipe?.id {
-            let mutation = UpdateRecipeMutation(
-                id: id,
-                recipe: draftRecipe.toRecipeInput(),
-                image: inputImage != nil ? "image" : nil
-            )
-                
-            Network.shared.apollo.upload(operation: mutation, files: files) { [weak self] result in
-                self?.isSaving = false
-                    
-                switch result {
-                case .success(let result):
-                    guard let recipe = result.data?.updateRecipe else { fallthrough }
-                    completionHandler(Recipe(from: recipe.fragments.recipeDetails))
-                case .failure:
-                    self?.isError = true
+    }
+
+    func save(completionHandler: @escaping (Recipe) -> Void) {
+        Task { @MainActor in
+            var imageId: String? = nil
+
+            if inputImage != nil {
+                imageId = await uploadImage()
+                if imageId == nil && inputImage != nil {
+                    return
                 }
             }
-        } else {
-            let mutation = CreateRecipeMutation(
-                recipe: draftRecipe.toRecipeInput(),
-                image: inputImage != nil ? "image" : nil
-            )
-                
-            Network.shared.apollo.upload(operation: mutation, files: files) { [weak self] result in
-                self?.isSaving = false
-                    
-                switch result {
-                case .success(let result):
-                    guard let recipe = result.data?.createRecipe else { fallthrough }
-                    completionHandler(Recipe(from: recipe.fragments.recipeDetails))
-                case .failure:
-                    self?.isError = true
+
+            isSaving = true
+
+            if let id = recipe?.id {
+                let mutation = UpdateRecipeMutation(
+                    id: id,
+                    recipe: draftRecipe.toRecipeInput(),
+                    imageId: imageId.map { .some($0) } ?? .none
+                )
+
+                Network.shared.apollo.perform(mutation: mutation) { [weak self] result in
+                    self?.isSaving = false
+
+                    switch result {
+                    case .success(let result):
+                        guard let recipe = result.data?.updateRecipe else { fallthrough }
+                        completionHandler(Recipe(from: recipe.fragments.recipeDetails))
+                    case .failure:
+                        self?.isError = true
+                    }
+                }
+            } else {
+                let mutation = CreateRecipeMutation(
+                    recipe: draftRecipe.toRecipeInput(),
+                    imageId: imageId.map { .some($0) } ?? .none
+                )
+
+                Network.shared.apollo.perform(mutation: mutation) { [weak self] result in
+                    self?.isSaving = false
+
+                    switch result {
+                    case .success(let result):
+                        guard let recipe = result.data?.createRecipe else { fallthrough }
+                        completionHandler(Recipe(from: recipe.fragments.recipeDetails))
+                    case .failure:
+                        self?.isError = true
+                    }
                 }
             }
         }

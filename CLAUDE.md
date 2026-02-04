@@ -10,7 +10,7 @@ Zradelnik is a Czech cookbook iOS app built with SwiftUI. It uses GraphQL (Apoll
 
 **Build the app:**
 ```bash
-xcodebuild -scheme Zradelnik -configuration Development build
+xcodebuild -scheme Zradelnik -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 ```
 
 **Run tests:** No test targets currently configured.
@@ -20,9 +20,14 @@ xcodebuild -scheme Zradelnik -configuration Development build
 bundle exec fastlane ios beta
 ```
 
+**Fetch GraphQL schema (requires local server at localhost:4000):**
+```bash
+./API/apollo-ios-cli fetch-schema
+```
+
 **Regenerate GraphQL code after schema changes:**
 ```bash
-./apollo-ios-cli generate
+./API/apollo-ios-cli generate
 ```
 
 ## Architecture
@@ -51,7 +56,7 @@ bundle exec fastlane ios beta
 
 **GraphQL:**
 - Queries/mutations in `App/GraphQL/` as `.graphql` files
-- Schema in `App/schema.graphqls`
+- Schema in `App/GraphQL/schema.graphqls`
 - Generated types output to `API/` package
 - Config in `apollo-codegen-config.json`
 

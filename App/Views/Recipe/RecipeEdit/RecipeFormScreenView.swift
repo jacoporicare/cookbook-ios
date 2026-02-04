@@ -50,7 +50,7 @@ struct RecipeFormScreenView: View {
             recipe: vm.recipe,
             isValid: vm.isValid,
             isDirty: vm.isDirty,
-            isSaving: vm.isSaving,
+            isSaving: vm.isBusy,
             onSave: { vm.save(completionHandler: onSave) },
             onCancel: onCancel,
             onDelete: { vm.delete(completionHandler: onDelete ?? {}) }
