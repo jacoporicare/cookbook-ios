@@ -23,7 +23,7 @@ struct RecipesTemplateView: View {
     @Binding var searchText: String
 
     let recipeGroups: [RecipeGroup]
-    let isInstantPotView: Bool
+    let isSousVideView: Bool
     let loadingStatus: LoadingStatus
     let isUserLoggedIn: Bool
 
@@ -66,7 +66,7 @@ struct RecipesTemplateView: View {
                     .padding(.top)
             }
         }
-        .navigationTitle(isInstantPotView ? "Instant Pot recepty" : "Žrádelník")
+        .navigationTitle(isSousVideView ? "Sous-vide recepty" : "Žrádelník")
         .toolbar {
             if isUserLoggedIn {
                 Button {
@@ -98,7 +98,7 @@ struct RecipesTemplateView: View {
         }
         .sheet(isPresented: $isRecipeFormPresented) {
             NavigationStack {
-                RecipeFormScreenView(isInstantPotNewRecipe: isInstantPotView) { recipe in
+                RecipeFormScreenView(isSousVideNewRecipe: isSousVideView) { recipe in
                     isRecipeFormPresented = false
                     onRecipeAdd(recipe)
                 } onCancel: {
@@ -125,7 +125,7 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                     displayMode: .constant(.list),
                     searchText: .constant(""),
                     recipeGroups: recipeGroups,
-                    isInstantPotView: false,
+                    isSousVideView: false,
                     loadingStatus: .data,
                     isUserLoggedIn: false,
                     onReload: {},
@@ -140,7 +140,7 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                     displayMode: .constant(.grid),
                     searchText: .constant(""),
                     recipeGroups: recipeGroups,
-                    isInstantPotView: false,
+                    isSousVideView: false,
                     loadingStatus: .data,
                     isUserLoggedIn: false,
                     onReload: {},
@@ -155,14 +155,14 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                     displayMode: .constant(.grid),
                     searchText: .constant(""),
                     recipeGroups: recipeGroups,
-                    isInstantPotView: true,
+                    isSousVideView: true,
                     loadingStatus: .data,
                     isUserLoggedIn: false,
                     onReload: {},
                     onRecipeAdd: { _ in }
                 )
             }
-            .previewDisplayName("Instant Pot")
+            .previewDisplayName("Sous-vide")
 
             NavigationStack {
                 RecipesTemplateView(
@@ -170,7 +170,7 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                     displayMode: .constant(.grid),
                     searchText: .constant(""),
                     recipeGroups: recipeGroups,
-                    isInstantPotView: false,
+                    isSousVideView: false,
                     loadingStatus: .data,
                     isUserLoggedIn: true,
                     onReload: {},
@@ -185,7 +185,7 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                     displayMode: .constant(.grid),
                     searchText: .constant(""),
                     recipeGroups: recipeGroups,
-                    isInstantPotView: false,
+                    isSousVideView: false,
                     loadingStatus: .loading,
                     isUserLoggedIn: true,
                     onReload: {},
@@ -200,7 +200,7 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                     displayMode: .constant(.grid),
                     searchText: .constant(""),
                     recipeGroups: recipeGroups,
-                    isInstantPotView: false,
+                    isSousVideView: false,
                     loadingStatus: .error("Jejda"),
                     isUserLoggedIn: true,
                     onReload: {},

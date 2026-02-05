@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecipeFormScreenView: View {
     let recipe: Recipe?
-    let isInstantPotNewRecipe: Bool?
+    let isSousVideNewRecipe: Bool?
     let onSave: (Recipe) -> Void
     let onCancel: Callback
     let onDelete: Callback?
@@ -24,18 +24,18 @@ struct RecipeFormScreenView: View {
     
     init(
         recipe: Recipe? = nil,
-        isInstantPotNewRecipe: Bool? = nil,
+        isSousVideNewRecipe: Bool? = nil,
         onSave: @escaping (Recipe) -> Void,
         onCancel: @escaping Callback,
         onDelete: Callback? = nil
     ) {
         self.recipe = recipe
-        self.isInstantPotNewRecipe = isInstantPotNewRecipe
+        self.isSousVideNewRecipe = isSousVideNewRecipe
         self.onSave = onSave
         self.onCancel = onCancel
         self.onDelete = onDelete
-        
-        _vm = StateObject(wrappedValue: RecipeFormScreenModel(recipe: recipe, isInstantPotNewRecipe: isInstantPotNewRecipe))
+
+        _vm = StateObject(wrappedValue: RecipeFormScreenModel(recipe: recipe, isSousVideNewRecipe: isSousVideNewRecipe))
     }
     
     var body: some View {

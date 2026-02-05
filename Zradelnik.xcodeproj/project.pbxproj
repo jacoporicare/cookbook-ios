@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09000837AAAA000100000001 /* ImageUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09000837AAAA000200000001 /* ImageUploadService.swift */; };
 		0900083727F35B9A00D5A746 /* RecipesScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083627F35B9A00D5A746 /* RecipesScreenView.swift */; };
+		09000837AAAA000100000001 /* ImageUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09000837AAAA000200000001 /* ImageUploadService.swift */; };
 		0905C3B128048B41005E3949 /* RecipeFormScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905C3B028048B41005E3949 /* RecipeFormScreenView.swift */; };
 		0905EF2C28DF55D500C65B11 /* RecipesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905EF2B28DF55D500C65B11 /* RecipesListView.swift */; };
 		090690932903448800BBA052 /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 090690922903448800BBA052 /* API */; };
@@ -37,7 +37,7 @@
 		0955941B27F332AA00E270E4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955941A27F332AA00E270E4 /* Recipe.swift */; };
 		095C1D5F2801ADDF0074AA70 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */; };
 		095C1D612801B5FF0074AA70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095C1D602801B5FF0074AA70 /* Extensions.swift */; };
-		09761A25292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */; };
+		09761A25292671E700F79F2F /* RecipeDetailSousVideInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09761A24292671E700F79F2F /* RecipeDetailSousVideInfoView.swift */; };
 		0989F8E227F32CBA009CB6BD /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0989F8E127F32CBA009CB6BD /* Apollo */; settings = {ATTRIBUTES = (Required, ); }; };
 		0989F8E627F32D45009CB6BD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0989F8E527F32D45009CB6BD /* Network.swift */; };
 		099AAE5828F42F5F0063466F /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900083427F35AFC00D5A746 /* PreviewData.swift */; };
@@ -70,6 +70,7 @@
 /* Begin PBXFileReference section */
 		0900083427F35AFC00D5A746 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		0900083627F35B9A00D5A746 /* RecipesScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesScreenView.swift; sourceTree = "<group>"; };
+		09000837AAAA000200000001 /* ImageUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadService.swift; sourceTree = "<group>"; };
 		0905C3B028048B41005E3949 /* RecipeFormScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeFormScreenView.swift; sourceTree = "<group>"; };
 		0905EF2B28DF55D500C65B11 /* RecipesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListView.swift; sourceTree = "<group>"; };
 		090690912903447E00BBA052 /* API */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = API; sourceTree = "<group>"; };
@@ -98,9 +99,8 @@
 		095C1D5E2801ADDF0074AA70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		095C1D602801B5FF0074AA70 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		096DB8242A4A32F3007066FD /* Zradelnik.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Zradelnik.entitlements; sourceTree = "<group>"; };
-		09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailInstantPotInfoView.swift; sourceTree = "<group>"; };
+		09761A24292671E700F79F2F /* RecipeDetailSousVideInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailSousVideInfoView.swift; sourceTree = "<group>"; };
 		0989F8E527F32D45009CB6BD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		09000837AAAA000200000001 /* ImageUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadService.swift; sourceTree = "<group>"; };
 		098BD2AC27FC8608006D9C7B /* Auth.graphql */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		099AAE9228F466B40063466F /* Zradelnik-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zradelnik-Info.plist"; sourceTree = "<group>"; };
 		09A068212809562C0008563A /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 				090905C02A34ADA7007D0BAD /* RecipeDetailTemplateView.swift */,
 				0934CC3129145BD800150F19 /* RecipeDetailActionButtonsView.swift */,
 				0934CC272914439B00150F19 /* RecipeCookedDatePicker.swift */,
-				09761A24292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift */,
+				09761A24292671E700F79F2F /* RecipeDetailSousVideInfoView.swift */,
 				0934CC2D291446D900150F19 /* RecipeDetailLastCookedDate.swift */,
 				0934CC2B2914459300150F19 /* RecipeDetailBasicInfoView.swift */,
 				0934CC292914443000150F19 /* RecipeDetailIngredientsView.swift */,
@@ -466,7 +466,7 @@
 				091815FE27FDFF68003A2250 /* LoginScreenView.swift in Sources */,
 				09395F8A2800959F00AACAA3 /* RecipeDetailScreenView.swift in Sources */,
 				094763BF28E1D24F00521ADF /* Routing.swift in Sources */,
-				09761A25292671E700F79F2F /* RecipeDetailInstantPotInfoView.swift in Sources */,
+				09761A25292671E700F79F2F /* RecipeDetailSousVideInfoView.swift in Sources */,
 				092A9555291317D30041638C /* RecipeCookedMutation.graphql.swift in Sources */,
 				09395F882800953200AACAA3 /* RecipeEditView.swift in Sources */,
 				0946D78D27FF265E00F81F18 /* SettingsScreenView.swift in Sources */,
@@ -668,11 +668,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Zradelnik.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution: CN Group CZ s.r.o. (75N8ZPU23Q)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "App/Preview\\ Content";
-				DEVELOPMENT_TEAM = 75N8ZPU23Q;
+				DEVELOPMENT_TEAM = LVQ73P9V59;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "App/Zradelnik-Info.plist";
@@ -688,10 +688,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dk.cngroup.zradelnik;
+				PRODUCT_BUNDLE_IDENTIFIER = "cz.zradelnik.app-native";
 				PRODUCT_NAME = Zradelnik;
 				PROVISIONING_PROFILE = "b6b29685-d303-4dca-bd73-8e8f6ec3d5c9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore dk.cngroup.zradelnik";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

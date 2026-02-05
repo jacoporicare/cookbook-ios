@@ -42,8 +42,8 @@ struct RecipeDetailTemplateView: View {
                     RecipeCookedDatePicker(confirmAction: onRecipeCook)
                 }
                 
-                if recipe.isForInstantPot {
-                    RecipeDetailInstantPotInfoView()
+                if recipe.isForSousVide {
+                    RecipeDetailSousVideInfoView()
                 }
                         
                 if let cooked = recipe.cookedHistory.last {
@@ -123,7 +123,7 @@ struct RecipeDetailTemplateView_Previews: PreviewProvider {
                     onCookedRecipeDelete: { _ in }
                 )
             }
-            .previewDisplayName("Instant Pot")
+            .previewDisplayName("Sous-vide")
             
             NavigationStack {
                 RecipeDetailTemplateView(

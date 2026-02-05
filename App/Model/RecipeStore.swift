@@ -12,8 +12,8 @@ class RecipeStore: ObservableObject {
     @Published var loadingStatus: LoadingStatus = .loading
     @Published var recipes: [Recipe] = []
     
-    var instantPotRecipes: [Recipe] {
-        recipes.filter { $0.isForInstantPot }
+    var sousVideRecipes: [Recipe] {
+        recipes.filter { $0.isForSousVide }
     }
 
     private var recipesWatcher: GraphQLQueryWatcher<RecipesQuery>?

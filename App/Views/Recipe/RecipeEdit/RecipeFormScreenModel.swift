@@ -17,7 +17,7 @@ class RecipeFormScreenModel: ObservableObject {
     @Published var isError = false
 
     let recipe: Recipe?
-    let isInstantPotNewRecipe: Bool?
+    let isSousVideNewRecipe: Bool?
 
     var isValid: Bool {
         !draftRecipe.title.isEmpty && !draftRecipe.ingredients.contains { ingredient in
@@ -27,8 +27,8 @@ class RecipeFormScreenModel: ObservableObject {
 
     var isDirty: Bool {
         (recipe == nil && (
-            (isInstantPotNewRecipe != true && draftRecipe != RecipeEdit.default)
-                || (isInstantPotNewRecipe == true && draftRecipe != RecipeEdit.defaultInstantPot)
+            (isSousVideNewRecipe != true && draftRecipe != RecipeEdit.default)
+                || (isSousVideNewRecipe == true && draftRecipe != RecipeEdit.defaultSousVide)
         ))
             || (recipe != nil && draftRecipe != RecipeEdit(from: recipe!))
             || inputImage != nil
@@ -38,16 +38,16 @@ class RecipeFormScreenModel: ObservableObject {
         isSaving || isUploading
     }
 
-    init(recipe: Recipe?, isInstantPotNewRecipe: Bool?) {
+    init(recipe: Recipe?, isSousVideNewRecipe: Bool?) {
         self.recipe = recipe
-        self.isInstantPotNewRecipe = isInstantPotNewRecipe
+        self.isSousVideNewRecipe = isSousVideNewRecipe
 
         if let recipe {
             draftRecipe = RecipeEdit(from: recipe)
         }
 
-        if isInstantPotNewRecipe == true {
-            draftRecipe.isForInstantPot = true
+        if isSousVideNewRecipe == true {
+            draftRecipe.isForSousVide = true
         }
     }
 

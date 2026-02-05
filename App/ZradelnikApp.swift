@@ -2,7 +2,7 @@
 //  ZradelnikApp.swift
 //  Zradelnik
 //
-//  Created by Jakub Řičař on 29.03.2022.
+//  Created by Jakub Řicař on 29.03.2022.
 //
 
 import BackgroundTasks
@@ -12,7 +12,7 @@ import SwiftUI
 struct ZradelnikApp: App {
     enum Tab {
         case recipes
-        case instantPotRecipes
+        case sousVideRecipes
         case settings
     }
 
@@ -31,11 +31,11 @@ struct ZradelnikApp: App {
             set: {
                 if routing.recipeListStack.isEmpty,
                    ($0 == .recipes && self.tabSelectionValue == .recipes) ||
-                   ($0 == .instantPotRecipes && self.tabSelectionValue == .instantPotRecipes)
+                   ($0 == .sousVideRecipes && self.tabSelectionValue == .sousVideRecipes)
                 {
                     shouldResetScrollPosition = true
-                } else if $0 == .recipes || $0 == .instantPotRecipes,
-                          self.tabSelectionValue == .recipes || self.tabSelectionValue == .instantPotRecipes
+                } else if $0 == .recipes || $0 == .sousVideRecipes,
+                          self.tabSelectionValue == .recipes || self.tabSelectionValue == .sousVideRecipes
                 {
                     shouldResetRecipeListStack = true
                 }
@@ -57,12 +57,12 @@ struct ZradelnikApp: App {
                 .tag(Tab.recipes)
 
                 NavigationStack(path: $routing.recipeListStack) {
-                    RecipesScreenView(isInstantPotView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
+                    RecipesScreenView(isSousVideView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
                 }
                 .tabItem {
-                    Label("Instant Pot", image: "multicooker")
+                    Label("Sous-vide", systemImage: "thermometer")
                 }
-                .tag(Tab.instantPotRecipes)
+                .tag(Tab.sousVideRecipes)
 
                 NavigationStack {
                     SettingsScreenView()
@@ -85,7 +85,7 @@ struct ZradelnikApp: App {
                 NSLog(error.localizedDescription)
             }
         }
-        .onChange(of: phase) { newPhase in
+        .onChange(of: phase) { oldPhase, newPhase in
             switch newPhase {
             case .active:
                 // In case of disabled background app refresh we want to get fresh data every 24h
@@ -102,7 +102,7 @@ struct ZradelnikApp: App {
                 break
             }
         }
-        .onChange(of: shouldResetRecipeListStack) { newValue in
+        .onChange(of: shouldResetRecipeListStack) { oldValue, newValue in
             guard newValue else { return }
             routing.recipeListStack = []
             shouldResetRecipeListStack = false

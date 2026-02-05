@@ -8,7 +8,7 @@
 import Foundation
 
 struct Recipe: Identifiable, Decodable, Hashable {
-    static let instantPotTag = "Instant Pot"
+    static let sousVideTag = "sous-vide"
 
     let id: String
     let title: String
@@ -25,8 +25,8 @@ struct Recipe: Identifiable, Decodable, Hashable {
     let ingredients: [Ingredient]
     let cookedHistory: [Cooked]
 
-    var isForInstantPot: Bool {
-        tags.contains(Recipe.instantPotTag)
+    var isForSousVide: Bool {
+        tags.contains(Recipe.sousVideTag)
     }
 
     struct Ingredient: Identifiable, Decodable, Hashable {

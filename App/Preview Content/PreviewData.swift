@@ -21,7 +21,7 @@ private let recipe1: JSONObject = [
     "sideDish": "sss",
     "preparationTime": 12,
     "servingCount": 22,
-    "tags": ["Instant Pot"],
+    "tags": ["sous-vide"],
     "ingredients": [
         [
             "__typename": "Ingredient",

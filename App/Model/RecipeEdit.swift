@@ -17,13 +17,13 @@ struct RecipeEdit: Equatable {
     var ingredients: [Ingredient] = []
     var tags: [String] = []
 
-    var isForInstantPot: Bool {
-        get { tags.contains(Recipe.instantPotTag) }
+    var isForSousVide: Bool {
+        get { tags.contains(Recipe.sousVideTag) }
         set {
-            if newValue, !tags.contains(Recipe.instantPotTag) {
-                tags.append(Recipe.instantPotTag)
-            } else if !newValue, tags.contains(Recipe.instantPotTag) {
-                tags.removeAll { $0 == Recipe.instantPotTag }
+            if newValue, !tags.contains(Recipe.sousVideTag) {
+                tags.append(Recipe.sousVideTag)
+            } else if !newValue, tags.contains(Recipe.sousVideTag) {
+                tags.removeAll { $0 == Recipe.sousVideTag }
             }
         }
     }
@@ -39,7 +39,7 @@ struct RecipeEdit: Equatable {
 
 extension RecipeEdit {
     static let `default` = RecipeEdit()
-    static let defaultInstantPot = RecipeEdit(tags: [Recipe.instantPotTag])
+    static let defaultSousVide = RecipeEdit(tags: [Recipe.sousVideTag])
 }
 
 extension RecipeEdit {

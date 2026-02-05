@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipesScreenView: View {
-    var isInstantPotView = false
+    var isSousVideView = false
     @Binding var shouldResetScrollPosition: Bool
 
     @EnvironmentObject private var routing: Routing
@@ -20,7 +20,7 @@ struct RecipesScreenView: View {
     @State private var searchText = ""
 
     var recipeGroups: [RecipeGroup] {
-        let recipes = isInstantPotView ? recipeStore.instantPotRecipes : recipeStore.recipes
+        let recipes = isSousVideView ? recipeStore.sousVideRecipes : recipeStore.recipes
         let filteredRecipes = searchText.isEmpty
             ? recipes
             : recipes.filter {
@@ -38,7 +38,7 @@ struct RecipesScreenView: View {
             displayMode: $displayMode,
             searchText: $searchText,
             recipeGroups: recipeGroups,
-            isInstantPotView: isInstantPotView,
+            isSousVideView: isSousVideView,
             loadingStatus: recipeStore.loadingStatus,
             isUserLoggedIn: currentUserStore.isLoggedIn,
             onReload: { recipeStore.reload() },

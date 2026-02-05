@@ -119,9 +119,9 @@ struct RecipeFormTemplateView: View {
             }
 
             HStack {
-                Text("Instant Pot recept")
+                Text("Sous-vide recept")
                 Spacer()
-                Toggle("Instant Pot recept", isOn: $draftRecipe.isForInstantPot)
+                Toggle("Sous-vide recept", isOn: $draftRecipe.isForSousVide)
                     .labelsHidden()
             }
         }
