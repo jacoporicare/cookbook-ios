@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RecipesGridView: View {
     var recipeGroups: [RecipeGroup]
-    @Binding var searchText: String
     @Binding var shouldResetScrollPosition: Bool
 
     private let columnLayout = Array(repeating: GridItem(), count: 2)
@@ -39,7 +38,6 @@ struct RecipesGridView: View {
                 }
                 .padding()
             }
-            .searchable(text: $searchText, prompt: "Hledat recept")
             .onChange(of: shouldResetScrollPosition) { newValue in
                 guard newValue else { return }
                 withAnimation {

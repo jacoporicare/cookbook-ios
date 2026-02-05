@@ -17,26 +17,16 @@ struct RecipesScreenView: View {
     // AppStorage works weirdly - only the first change triggers render then it's stuck
 //    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
     @State private var displayMode = RecipesDisplayMode(rawValue: UserDefaults.standard.string(forKey: "displayMode") ?? RecipesDisplayMode.grid.rawValue) ?? RecipesDisplayMode.grid
-    @State private var searchText = ""
 
     var recipeGroups: [RecipeGroup] {
         let recipes = isSousVideView ? recipeStore.sousVideRecipes : recipeStore.recipes
-        let filteredRecipes = searchText.isEmpty
-            ? recipes
-            : recipes.filter {
-                $0.title
-                    .folding(options: .diacriticInsensitive, locale: .current)
-                    .localizedCaseInsensitiveContains(searchText.folding(options: .diacriticInsensitive, locale: .current))
-            }
-
-        return filteredRecipes.groupedByFirstLetter()
+        return recipes.groupedByFirstLetter()
     }
 
     var body: some View {
         RecipesTemplateView(
             shouldResetScrollPosition: $shouldResetScrollPosition,
             displayMode: $displayMode,
-            searchText: $searchText,
             recipeGroups: recipeGroups,
             isSousVideView: isSousVideView,
             loadingStatus: recipeStore.loadingStatus,

@@ -12,7 +12,6 @@ struct RecipesListView: View {
     @EnvironmentObject private var recipeStore: RecipeStore
 
     var recipeGroups: [RecipeGroup]
-    @Binding var searchText: String
     @Binding var shouldResetScrollPosition: Bool
 
     var body: some View {
@@ -28,7 +27,6 @@ struct RecipesListView: View {
                 .id(recipeGroup.id)
             }
             .listStyle(.insetGrouped)
-            .searchable(text: $searchText, prompt: "Hledat recept")
             .refreshable {
                 try? await recipeStore.loadAsync()
             }

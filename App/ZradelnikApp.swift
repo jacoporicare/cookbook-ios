@@ -10,10 +10,11 @@ import SwiftUI
 
 @main
 struct ZradelnikApp: App {
-    enum Tab {
+    enum AppTab {
         case recipes
         case sousVideRecipes
         case settings
+        case search
     }
 
     @Environment(\.scenePhase) private var phase
@@ -21,11 +22,14 @@ struct ZradelnikApp: App {
     @StateObject private var recipeStore = RecipeStore()
     @StateObject private var currentUserStore = CurrentUserStore()
 
-    @State private var tabSelectionValue: Tab = .recipes
+    @State private var tabSelectionValue: AppTab = .recipes
+    @State private var previousTab: AppTab = .recipes
     @State private var shouldResetRecipeListStack = false
     @State private var shouldResetScrollPosition = false
+    @State private var searchText = ""
+    @State private var isSearchActive = false
 
-    var tabSelection: Binding<Tab> {
+    var tabSelection: Binding<AppTab> {
         Binding(
             get: { self.tabSelectionValue },
             set: {
@@ -40,6 +44,14 @@ struct ZradelnikApp: App {
                     shouldResetRecipeListStack = true
                 }
 
+                if self.tabSelectionValue != .search {
+                    previousTab = self.tabSelectionValue
+                }
+
+                if $0 == .search && self.tabSelectionValue != .search {
+                    isSearchActive = true
+                }
+
                 self.tabSelectionValue = $0
             }
         )
@@ -48,30 +60,32 @@ struct ZradelnikApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: tabSelection) {
-                NavigationStack(path: $routing.recipeListStack) {
-                    RecipesScreenView(shouldResetScrollPosition: $shouldResetScrollPosition)
+                Tab("Recepty", systemImage: "menucard", value: AppTab.recipes) {
+                    NavigationStack(path: $routing.recipeListStack) {
+                        RecipesScreenView(shouldResetScrollPosition: $shouldResetScrollPosition)
+                    }
                 }
-                .tabItem {
-                    Label("Recepty", systemImage: "menucard")
-                }
-                .tag(Tab.recipes)
 
-                NavigationStack(path: $routing.recipeListStack) {
-                    RecipesScreenView(isSousVideView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
+                Tab("Sous-vide", systemImage: "thermometer", value: AppTab.sousVideRecipes) {
+                    NavigationStack(path: $routing.recipeListStack) {
+                        RecipesScreenView(isSousVideView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
+                    }
                 }
-                .tabItem {
-                    Label("Sous-vide", systemImage: "thermometer")
-                }
-                .tag(Tab.sousVideRecipes)
 
-                NavigationStack {
-                    SettingsScreenView()
+                Tab("Nastavení", systemImage: "gear", value: AppTab.settings) {
+                    NavigationStack {
+                        SettingsScreenView()
+                    }
                 }
-                .tabItem {
-                    Label("Nastavení", systemImage: "gear")
+
+                Tab(value: AppTab.search, role: .search) {
+                    SearchResultsView(searchText: $searchText, isSearchActive: $isSearchActive) {
+                        searchText = ""
+                        tabSelectionValue = previousTab
+                    }
                 }
-                .tag(Tab.settings)
             }
+            .tabViewStyle(.sidebarAdaptable)
             .environmentObject(routing)
             .environmentObject(recipeStore)
             .environmentObject(currentUserStore)

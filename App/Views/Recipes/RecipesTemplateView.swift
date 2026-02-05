@@ -20,7 +20,6 @@ struct RecipeGroup: Identifiable {
 struct RecipesTemplateView: View {
     @Binding var shouldResetScrollPosition: Bool
     @Binding var displayMode: RecipesDisplayMode
-    @Binding var searchText: String
 
     let recipeGroups: [RecipeGroup]
     let isSousVideView: Bool
@@ -37,13 +36,11 @@ struct RecipesTemplateView: View {
             if displayMode == .grid {
                 RecipesGridView(
                     recipeGroups: recipeGroups,
-                    searchText: $searchText,
                     shouldResetScrollPosition: $shouldResetScrollPosition
                 )
             } else {
                 RecipesListView(
                     recipeGroups: recipeGroups,
-                    searchText: $searchText,
                     shouldResetScrollPosition: $shouldResetScrollPosition
                 )
             }
@@ -123,7 +120,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                 RecipesTemplateView(
                     shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.list),
-                    searchText: .constant(""),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
                     loadingStatus: .data,
@@ -138,7 +134,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                 RecipesTemplateView(
                     shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
-                    searchText: .constant(""),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
                     loadingStatus: .data,
@@ -153,7 +148,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                 RecipesTemplateView(
                     shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
-                    searchText: .constant(""),
                     recipeGroups: recipeGroups,
                     isSousVideView: true,
                     loadingStatus: .data,
@@ -168,7 +162,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                 RecipesTemplateView(
                     shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
-                    searchText: .constant(""),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
                     loadingStatus: .data,
@@ -183,7 +176,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                 RecipesTemplateView(
                     shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
-                    searchText: .constant(""),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
                     loadingStatus: .loading,
@@ -198,7 +190,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
                 RecipesTemplateView(
                     shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
-                    searchText: .constant(""),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
                     loadingStatus: .error("Jejda"),

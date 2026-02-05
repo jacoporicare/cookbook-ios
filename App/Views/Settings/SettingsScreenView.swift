@@ -31,7 +31,7 @@ struct SettingsScreenView: View {
         Task {
             do {
                 let urlWithToken = try await webAuthenticationSession.authenticate(
-                    using: URL(string: "https://www.zradelnik.eu/prihlaseni?redirect_uri=zradelnik://auth")!,
+                    using: URL(string: "https://www.zradelnik.cz/prihlaseni?redirect_uri=zradelnik://auth")!,
                     callbackURLScheme: "zradelnik"
                 )
                 

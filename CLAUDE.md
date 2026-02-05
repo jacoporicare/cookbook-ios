@@ -63,8 +63,8 @@ bundle exec fastlane ios beta
 ## Configuration
 
 Build-time configuration via xcconfig files:
-- `Development.xcconfig`: Uses `api-test.zradelnik.eu`
-- `Production.xcconfig`: Uses `api.zradelnik.eu`
+- `Development.xcconfig`: Uses `api-test.zradelnik.cz`
+- `Production.xcconfig`: Uses `api.zradelnik.cz`
 
 Access config values via `Configuration.value(for:)`.
 
