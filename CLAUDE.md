@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Zradelnik is a Czech cookbook iOS app built with SwiftUI. It uses GraphQL (Apollo iOS) for networking, features recipe browsing with Instant Pot filtering, recipe tracking (mark as cooked), and web-based authentication.
+Zradelnik is a Czech cookbook iOS app built with SwiftUI. It uses GraphQL (Apollo iOS) for networking, features recipe browsing with sous-vide filtering, recipe tracking (mark as cooked), and web-based authentication.
 
 ## Build Commands
 
@@ -31,6 +31,8 @@ bundle exec fastlane ios beta
 ```
 
 ## Architecture
+
+**Deployment target:** iOS 18+
 
 **Pattern:** SwiftUI + MVVM with Observable stores
 
@@ -63,7 +65,7 @@ bundle exec fastlane ios beta
 ## Configuration
 
 Build-time configuration via xcconfig files:
-- `Development.xcconfig`: Uses `api-test.zradelnik.cz`
+- `Development.xcconfig`: Uses `api.zradelnik.cz`
 - `Production.xcconfig`: Uses `api.zradelnik.cz`
 
 Access config values via `Configuration.value(for:)`.
@@ -72,5 +74,18 @@ Access config values via `Configuration.value(for:)`.
 
 - Use `zradelnikLocale` for Czech-aware string sorting/grouping
 - Use `CachedAsyncImage` for recipe images
-- Instant Pot recipes are filtered by the `"Instant Pot"` tag
+- Sous-vide recipes are filtered by the `"sous-vide"` tag (via `Recipe.sousVideTag`)
 - Authentication uses `WebAuthenticationSession` redirecting to a custom URL scheme
+
+## Dependencies (SPM)
+
+- `apollo-ios` 1.25.3 - GraphQL client with SQLite-backed cache
+- `KeychainAccess` - Secure token storage
+- `swift-markdown-ui` - Markdown rendering for recipe directions
+- `swiftui-cached-async-image` - Async image loading with caching
+
+## Gotchas
+
+- `Network.swift` and `ImageUploadService.swift` use force unwraps (`!`) for URL/config — will crash if config is missing
+- `LoginScreenView` is deprecated — use `SettingsScreenView` (WebAuthenticationSession) for auth
+- Generated Apollo code in `API/Sources/` should not be edited manually

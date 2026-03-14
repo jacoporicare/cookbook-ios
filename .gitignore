@@ -5,3 +5,4 @@ fastlane/report.xml
 !*.secret
 fastlane/app-store-api-key.json
 fastlane/Appfile
+.claude/settings.local.json
