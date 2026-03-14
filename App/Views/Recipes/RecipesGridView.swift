@@ -38,7 +38,7 @@ struct RecipesGridView: View {
                 }
                 .padding()
             }
-            .onChange(of: shouldResetScrollPosition) { newValue in
+            .onChange(of: shouldResetScrollPosition) { oldValue, newValue in
                 guard newValue else { return }
                 withAnimation {
                     proxy.scrollTo(recipeGroups.first?.id)

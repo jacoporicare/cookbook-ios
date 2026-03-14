@@ -14,9 +14,7 @@ struct RecipesScreenView: View {
     @EnvironmentObject private var routing: Routing
     @EnvironmentObject private var currentUserStore: CurrentUserStore
     @EnvironmentObject private var recipeStore: RecipeStore
-    // AppStorage works weirdly - only the first change triggers render then it's stuck
-//    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
-    @State private var displayMode = RecipesDisplayMode(rawValue: UserDefaults.standard.string(forKey: "displayMode") ?? RecipesDisplayMode.grid.rawValue) ?? RecipesDisplayMode.grid
+    @AppStorage("displayMode") private var displayMode = RecipesDisplayMode.grid
 
     var recipeGroups: [RecipeGroup] {
         let recipes = isSousVideView ? recipeStore.sousVideRecipes : recipeStore.recipes
@@ -42,9 +40,6 @@ struct RecipesScreenView: View {
         }
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeView(recipe: recipe)
-        }
-        .onChange(of: displayMode) { newValue in
-            UserDefaults.standard.set(newValue.rawValue, forKey: "displayMode")
         }
     }
 }

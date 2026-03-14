@@ -90,7 +90,7 @@ struct RecipeFormTemplateView: View {
                 TextField("nezadáno", text: $draftRecipe.preparationTime)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
-                    .onChange(of: draftRecipe.preparationTime) { newValue in
+                    .onChange(of: draftRecipe.preparationTime) { oldValue, newValue in
                         if !newValue.isEmpty, Int(newValue) == nil {
                             draftRecipe.preparationTime = newValue.filter { $0.isNumber }
                         }
@@ -103,7 +103,7 @@ struct RecipeFormTemplateView: View {
                 TextField("nezadáno", text: $draftRecipe.servingCount)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
-                    .onChange(of: draftRecipe.servingCount) { newValue in
+                    .onChange(of: draftRecipe.servingCount) { oldValue, newValue in
                         if !newValue.isEmpty, Int(newValue) == nil {
                             draftRecipe.servingCount = newValue.filter { $0.isNumber }
                         }
