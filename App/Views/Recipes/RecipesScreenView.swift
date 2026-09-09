@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RecipesScreenView: View {
     var isSousVideView = false
-    @Binding var shouldResetScrollPosition: Bool
 
     @EnvironmentObject private var routing: Routing
     @EnvironmentObject private var currentUserStore: CurrentUserStore
@@ -23,7 +22,6 @@ struct RecipesScreenView: View {
 
     var body: some View {
         RecipesTemplateView(
-            shouldResetScrollPosition: $shouldResetScrollPosition,
             displayMode: $displayMode,
             recipeGroups: recipeGroups,
             isSousVideView: isSousVideView,

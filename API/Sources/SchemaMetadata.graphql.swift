@@ -21,6 +21,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
   public static func objectType(forTypename typename: String) -> ApolloAPI.Object? {
     switch typename {
     case "AuthPayload": return API.Objects.AuthPayload
+    case "ImageUploadTarget": return API.Objects.ImageUploadTarget
     case "Ingredient": return API.Objects.Ingredient
     case "Mutation": return API.Objects.Mutation
     case "Query": return API.Objects.Query

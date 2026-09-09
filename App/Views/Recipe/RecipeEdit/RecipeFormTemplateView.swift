@@ -57,7 +57,7 @@ struct RecipeFormTemplateView: View {
                 isImagePickerPresented = true
             } label: {
                 Spacer()
-                Text(inputImage == nil && recipe?.gridImageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
+                Text(inputImage == nil && recipe?.imageUrl == nil ? "Vybrat fotku" : "Změnit fotku")
                 Spacer()
             }
 

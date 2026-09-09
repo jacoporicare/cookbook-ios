@@ -18,7 +18,6 @@ struct RecipeGroup: Identifiable {
 }
 
 struct RecipesTemplateView: View {
-    @Binding var shouldResetScrollPosition: Bool
     @Binding var displayMode: RecipesDisplayMode
 
     let recipeGroups: [RecipeGroup]
@@ -34,15 +33,9 @@ struct RecipesTemplateView: View {
     var body: some View {
         LoadingContentView(status: loadingStatus, loadingText: "Načítání receptů...") {
             if displayMode == .grid {
-                RecipesGridView(
-                    recipeGroups: recipeGroups,
-                    shouldResetScrollPosition: $shouldResetScrollPosition
-                )
+                RecipesGridView(recipeGroups: recipeGroups)
             } else {
-                RecipesListView(
-                    recipeGroups: recipeGroups,
-                    shouldResetScrollPosition: $shouldResetScrollPosition
-                )
+                RecipesListView(recipeGroups: recipeGroups)
             }
         } errorContent: { err in
             VStack {
@@ -118,7 +111,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
         Group {
             NavigationStack {
                 RecipesTemplateView(
-                    shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.list),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
@@ -132,7 +124,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
 
             NavigationStack {
                 RecipesTemplateView(
-                    shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
@@ -146,7 +137,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
 
             NavigationStack {
                 RecipesTemplateView(
-                    shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
                     recipeGroups: recipeGroups,
                     isSousVideView: true,
@@ -160,7 +150,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
 
             NavigationStack {
                 RecipesTemplateView(
-                    shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
@@ -174,7 +163,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
 
             NavigationStack {
                 RecipesTemplateView(
-                    shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,
@@ -188,7 +176,6 @@ struct RecipesTemplateView_Previews: PreviewProvider {
 
             NavigationStack {
                 RecipesTemplateView(
-                    shouldResetScrollPosition: .constant(false),
                     displayMode: .constant(.grid),
                     recipeGroups: recipeGroups,
                     isSousVideView: false,

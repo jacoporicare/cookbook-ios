@@ -47,9 +47,7 @@ public class RecipesQuery: GraphQLQuery {
 
       public var id: API.ID { __data["id"] }
       public var title: String { __data["title"] }
-      public var gridImageUrl: String? { __data["gridImageUrl"] }
-      public var listImageUrl: String? { __data["listImageUrl"] }
-      public var fullImageUrl: String? { __data["fullImageUrl"] }
+      public var imageUrl: String? { __data["imageUrl"] }
       public var directions: String? { __data["directions"] }
       public var sideDish: String? { __data["sideDish"] }
       public var preparationTime: Int? { __data["preparationTime"] }

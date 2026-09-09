@@ -6,7 +6,7 @@ import API
 
 public struct RecipeDetails: API.SelectionSet, Fragment {
   public static var fragmentDefinition: StaticString {
-    #"fragment RecipeDetails on Recipe { __typename id title gridImageUrl: imageUrl(size: { width: 640, height: 640 }, format: WEBP) listImageUrl: imageUrl(size: { width: 240, height: 180 }, format: WEBP) fullImageUrl: imageUrl(size: { width: 1280, height: 960 }, format: WEBP) directions sideDish preparationTime servingCount tags ingredients { __typename id name isGroup amount amountUnit } cookedHistory { __typename id date user { __typename id displayName } } }"#
+    #"fragment RecipeDetails on Recipe { __typename id title imageUrl directions sideDish preparationTime servingCount tags ingredients { __typename id name isGroup amount amountUnit } cookedHistory { __typename id date user { __typename id displayName } } }"#
   }
 
   public let __data: DataDict
@@ -17,27 +17,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
     .field("__typename", String.self),
     .field("id", API.ID.self),
     .field("title", String.self),
-    .field("imageUrl", alias: "gridImageUrl", String?.self, arguments: [
-      "size": [
-        "width": 640,
-        "height": 640
-      ],
-      "format": "WEBP"
-    ]),
-    .field("imageUrl", alias: "listImageUrl", String?.self, arguments: [
-      "size": [
-        "width": 240,
-        "height": 180
-      ],
-      "format": "WEBP"
-    ]),
-    .field("imageUrl", alias: "fullImageUrl", String?.self, arguments: [
-      "size": [
-        "width": 1280,
-        "height": 960
-      ],
-      "format": "WEBP"
-    ]),
+    .field("imageUrl", String?.self),
     .field("directions", String?.self),
     .field("sideDish", String?.self),
     .field("preparationTime", Int?.self),
@@ -52,9 +32,7 @@ public struct RecipeDetails: API.SelectionSet, Fragment {
 
   public var id: API.ID { __data["id"] }
   public var title: String { __data["title"] }
-  public var gridImageUrl: String? { __data["gridImageUrl"] }
-  public var listImageUrl: String? { __data["listImageUrl"] }
-  public var fullImageUrl: String? { __data["fullImageUrl"] }
+  public var imageUrl: String? { __data["imageUrl"] }
   public var directions: String? { __data["directions"] }
   public var sideDish: String? { __data["sideDish"] }
   public var preparationTime: Int? { __data["preparationTime"] }

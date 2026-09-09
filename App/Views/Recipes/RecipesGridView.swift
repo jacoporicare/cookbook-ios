@@ -10,41 +10,31 @@ import SwiftUI
 
 struct RecipesGridView: View {
     var recipeGroups: [RecipeGroup]
-    @Binding var shouldResetScrollPosition: Bool
 
     private let columnLayout = Array(repeating: GridItem(), count: 2)
 
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                LazyVGrid(columns: columnLayout) {
-                    ForEach(recipeGroups) { recipeGroup in
-                        Section {
-                            ForEach(recipeGroup.recipes) { recipe in
-                                NavigationLink(value: recipe) {
-                                    RecipesGridItemView(recipe: recipe)
-                                }
+        ScrollView {
+            LazyVGrid(columns: columnLayout) {
+                ForEach(recipeGroups) { recipeGroup in
+                    Section {
+                        ForEach(recipeGroup.recipes) { recipe in
+                            NavigationLink(value: recipe) {
+                                RecipesGridItemView(recipe: recipe)
                             }
-                        } header: {
-                            HStack {
-                                Text(recipeGroup.id)
-                                    .foregroundColor(.gray)
-                                Spacer()
-                            }
-                            .padding(.top)
-                            .id(recipeGroup.id)
                         }
+                    } header: {
+                        HStack {
+                            Text(recipeGroup.id)
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
+                        .padding(.top)
+                        .id(recipeGroup.id)
                     }
                 }
-                .padding()
             }
-            .onChange(of: shouldResetScrollPosition) { oldValue, newValue in
-                guard newValue else { return }
-                withAnimation {
-                    proxy.scrollTo(recipeGroups.first?.id)
-                }
-                shouldResetScrollPosition = false
-            }
+            .padding()
         }
 //            .overlay {
 //                SectionLettersView(letters: letters, scrollViewProxy: proxy)

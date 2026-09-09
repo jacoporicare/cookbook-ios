@@ -12,31 +12,21 @@ struct RecipesListView: View {
     @EnvironmentObject private var recipeStore: RecipeStore
 
     var recipeGroups: [RecipeGroup]
-    @Binding var shouldResetScrollPosition: Bool
 
     var body: some View {
-        ScrollViewReader { proxy in
-            List(recipeGroups) { recipeGroup in
-                Section(header: Text(recipeGroup.id)) {
-                    ForEach(recipeGroup.recipes) { recipe in
-                        NavigationLink(value: recipe) {
-                            RecipesListItemView(recipe: recipe)
-                        }
+        List(recipeGroups) { recipeGroup in
+            Section(header: Text(recipeGroup.id)) {
+                ForEach(recipeGroup.recipes) { recipe in
+                    NavigationLink(value: recipe) {
+                        RecipesListItemView(recipe: recipe)
                     }
                 }
-                .id(recipeGroup.id)
             }
-            .listStyle(.insetGrouped)
-            .refreshable {
-                try? await recipeStore.loadAsync()
-            }
-            .onChange(of: shouldResetScrollPosition) { oldValue, newValue in
-                guard newValue else { return }
-                withAnimation {
-                    proxy.scrollTo(recipeGroups.first?.id)
-                }
-                shouldResetScrollPosition = false
-            }
+            .id(recipeGroup.id)
+        }
+        .listStyle(.insetGrouped)
+        .refreshable {
+            try? await recipeStore.loadAsync()
         }
     }
 }

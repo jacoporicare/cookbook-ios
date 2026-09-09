@@ -16,6 +16,13 @@ mutation UpdateRecipe($id: ID!, $recipe: RecipeInput!, $imageId: ID) {
 	}
 }
 
+mutation CreateImageUpload($contentType: String!) {
+	createImageUpload(contentType: $contentType) {
+		key
+		uploadUrl
+	}
+}
+
 mutation DeleteRecipe($id: ID!) {
 	deleteRecipe(id: $id)
 }
@@ -35,9 +42,7 @@ mutation DeleteRecipeCooked($recipeId: ID!, $cookedId: ID!) {
 fragment RecipeDetails on Recipe {
 	id
 	title
-	gridImageUrl: imageUrl(size: { width: 640, height: 640 }, format: WEBP)
-  listImageUrl: imageUrl(size: { width: 240, height: 180 }, format: WEBP)
-	fullImageUrl: imageUrl(size: { width: 1280, height: 960 }, format: WEBP)
+	imageUrl
 	directions
 	sideDish
 	preparationTime

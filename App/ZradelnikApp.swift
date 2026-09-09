@@ -8,15 +8,15 @@
 import BackgroundTasks
 import SwiftUI
 
+enum AppTab {
+    case recipes
+    case sousVideRecipes
+    case settings
+    case search
+}
+
 @main
 struct ZradelnikApp: App {
-    enum AppTab {
-        case recipes
-        case sousVideRecipes
-        case settings
-        case search
-    }
-
     @Environment(\.scenePhase) private var phase
     @StateObject private var routing = Routing()
     @StateObject private var recipeStore = RecipeStore()
@@ -24,35 +24,23 @@ struct ZradelnikApp: App {
 
     @State private var tabSelectionValue: AppTab = .recipes
     @State private var previousTab: AppTab = .recipes
-    @State private var shouldResetRecipeListStack = false
-    @State private var shouldResetScrollPosition = false
+    @State private var tabPendingPopToRoot: AppTab?
     @State private var searchText = ""
     @State private var isSearchActive = false
 
+    // Re-selecting the already selected tab is the only tab event SwiftUI doesn't
+    // report through onChange, so it needs a custom setter. Scrolling the list back
+    // to the top on re-selection is handled by the system since iOS 18; everything
+    // else that reacts to an actual change lives in onChange below.
     var tabSelection: Binding<AppTab> {
         Binding(
-            get: { self.tabSelectionValue },
-            set: {
-                if routing.recipeListStack.isEmpty,
-                   ($0 == .recipes && self.tabSelectionValue == .recipes) ||
-                   ($0 == .sousVideRecipes && self.tabSelectionValue == .sousVideRecipes)
-                {
-                    shouldResetScrollPosition = true
-                } else if $0 == .recipes || $0 == .sousVideRecipes,
-                          self.tabSelectionValue == .recipes || self.tabSelectionValue == .sousVideRecipes
-                {
-                    shouldResetRecipeListStack = true
+            get: { tabSelectionValue },
+            set: { newTab in
+                if newTab == tabSelectionValue {
+                    tabPendingPopToRoot = newTab
                 }
 
-                if self.tabSelectionValue != .search {
-                    previousTab = self.tabSelectionValue
-                }
-
-                if $0 == .search && self.tabSelectionValue != .search {
-                    isSearchActive = true
-                }
-
-                self.tabSelectionValue = $0
+                tabSelectionValue = newTab
             }
         )
     }
@@ -62,13 +50,13 @@ struct ZradelnikApp: App {
             TabView(selection: tabSelection) {
                 Tab("Recepty", systemImage: "menucard", value: AppTab.recipes) {
                     NavigationStack(path: $routing.recipeListStack) {
-                        RecipesScreenView(shouldResetScrollPosition: $shouldResetScrollPosition)
+                        RecipesScreenView()
                     }
                 }
 
                 Tab("Sous-vide", systemImage: "thermometer", value: AppTab.sousVideRecipes) {
-                    NavigationStack(path: $routing.recipeListStack) {
-                        RecipesScreenView(isSousVideView: true, shouldResetScrollPosition: $shouldResetScrollPosition)
+                    NavigationStack(path: $routing.sousVideListStack) {
+                        RecipesScreenView(isSousVideView: true)
                     }
                 }
 
@@ -116,10 +104,19 @@ struct ZradelnikApp: App {
                 break
             }
         }
-        .onChange(of: shouldResetRecipeListStack) { oldValue, newValue in
-            guard newValue else { return }
-            routing.recipeListStack = []
-            shouldResetRecipeListStack = false
+        .onChange(of: tabSelectionValue) { oldTab, newTab in
+            if oldTab != .search {
+                previousTab = oldTab
+            }
+
+            if newTab == .search {
+                isSearchActive = true
+            }
+        }
+        .onChange(of: tabPendingPopToRoot) { _, newValue in
+            guard let tab = newValue else { return }
+            routing.popToRoot(tab)
+            tabPendingPopToRoot = nil
         }
     }
 }

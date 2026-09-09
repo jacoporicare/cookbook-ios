@@ -12,9 +12,8 @@ struct Recipe: Identifiable, Decodable, Hashable {
 
     let id: String
     let title: String
-    let gridImageUrl: String?
-    let listImageUrl: String?
-    let fullImageUrl: String?
+    // Only the S3 object-key prefix; the renditions live under it (see below).
+    let imageUrl: String?
     let directions: String?
     let sideDish: String?
     let preparationTime: String?
@@ -54,9 +53,7 @@ extension Recipe {
     init(from recipe: RecipeDetails) {
         self.id = recipe.id
         self.title = recipe.title
-        self.gridImageUrl = recipe.gridImageUrl
-        self.listImageUrl = recipe.listImageUrl
-        self.fullImageUrl = recipe.fullImageUrl
+        self.imageUrl = recipe.imageUrl
         self.directions = recipe.directions
         self.sideDish = recipe.sideDish
         self.preparationTime = recipe.preparationTime?.formattedTime()
@@ -66,6 +63,34 @@ extension Recipe {
         self.tags = recipe.tags
         self.ingredients = recipe.ingredients.map { Ingredient(from: $0) }
         self.cookedHistory = recipe.cookedHistory.map { Cooked(from: $0) }
+    }
+}
+
+extension Recipe {
+    // The API is out of the image read path: it returns a bare S3 prefix and the
+    // pre-generated WebP renditions are served straight from the bucket as
+    // <prefix>/<width>.webp. Keep in sync with RENDITION_WIDTHS in the API
+    // (api/src/imageProcessing.ts) and the web loader (web/image-loader.js).
+    private static let renditionWidths = [96, 384, 640, 828, 1080, 1920]
+
+    /// 80x60pt thumbnail in the recipe list.
+    var listImageUrl: String? { renditionUrl(forPixelWidth: 240) }
+
+    /// ~181pt wide card in the two column grid.
+    var gridImageUrl: String? { renditionUrl(forPixelWidth: 543) }
+
+    /// Full width header on the detail and edit screens.
+    var fullImageUrl: String? { renditionUrl(forPixelWidth: 1206) }
+
+    // Same rule as the web's next/image loader: the smallest rendition at least as
+    // wide as the space it fills. Widths assume a 3x display, as the sizes the old
+    // server-side resizing asked for did.
+    private func renditionUrl(forPixelWidth width: Int) -> String? {
+        guard let imageUrl else { return nil }
+
+        let rendition = Self.renditionWidths.first { $0 >= width } ?? Self.renditionWidths[Self.renditionWidths.endIndex - 1]
+
+        return "\(imageUrl)/\(rendition).webp"
     }
 }
 
