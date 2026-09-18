@@ -8,19 +8,19 @@
 import BackgroundTasks
 import SwiftUI
 
-enum AppTab {
-    case recipes
-    case sousVideRecipes
-    case settings
-    case search
-}
+let zradelnikLocale = Locale(identifier: "cs")
+
+private let refreshTaskIdentifier = "cz.jakubricar.Zradelnik.refresh"
 
 @main
 struct ZradelnikApp: App {
     @Environment(\.scenePhase) private var phase
-    @StateObject private var routing = Routing()
-    @StateObject private var recipeStore = RecipeStore()
-    @StateObject private var currentUserStore = CurrentUserStore()
+
+    @State private var routing = Routing()
+    @State private var recipeStore: RecipeStore
+    @State private var currentUserStore: CurrentUserStore
+
+    private let services: AppServices
 
     @State private var tabSelectionValue: AppTab = .recipes
     @State private var previousTab: AppTab = .recipes
@@ -28,11 +28,19 @@ struct ZradelnikApp: App {
     @State private var searchText = ""
     @State private var isSearchActive = false
 
+    init() {
+        let services = AppServices.live()
+
+        self.services = services
+        _recipeStore = State(initialValue: RecipeStore(service: services.recipes))
+        _currentUserStore = State(initialValue: CurrentUserStore(service: services.auth))
+    }
+
     // Re-selecting the already selected tab is the only tab event SwiftUI doesn't
     // report through onChange, so it needs a custom setter. Scrolling the list back
     // to the top on re-selection is handled by the system since iOS 18; everything
     // else that reacts to an actual change lives in onChange below.
-    var tabSelection: Binding<AppTab> {
+    private var tabSelection: Binding<AppTab> {
         Binding(
             get: { tabSelectionValue },
             set: { newTab in
@@ -47,47 +55,48 @@ struct ZradelnikApp: App {
 
     var body: some Scene {
         WindowGroup {
+            @Bindable var routing = routing
+
             TabView(selection: tabSelection) {
                 Tab("Recepty", systemImage: "menucard", value: AppTab.recipes) {
-                    NavigationStack(path: $routing.recipeListStack) {
-                        RecipesScreenView()
+                    NavigationStack(path: $routing.recipeListPath) {
+                        RecipeListScreen()
                     }
                 }
 
                 Tab("Sous-vide", systemImage: "thermometer", value: AppTab.sousVideRecipes) {
-                    NavigationStack(path: $routing.sousVideListStack) {
-                        RecipesScreenView(isSousVideView: true)
+                    NavigationStack(path: $routing.sousVidePath) {
+                        RecipeListScreen(isSousVideView: true)
                     }
                 }
 
                 Tab("Nastavení", systemImage: "gear", value: AppTab.settings) {
                     NavigationStack {
-                        SettingsScreenView()
+                        SettingsScreen()
                     }
                 }
 
                 Tab(value: AppTab.search, role: .search) {
-                    SearchResultsView(searchText: $searchText, isSearchActive: $isSearchActive) {
-                        searchText = ""
-                        tabSelectionValue = previousTab
+                    NavigationStack(path: $routing.searchPath) {
+                        SearchScreen(searchText: $searchText, isSearchActive: $isSearchActive) {
+                            searchText = ""
+                            tabSelectionValue = previousTab
+                        }
                     }
                 }
             }
             .tabViewStyle(.sidebarAdaptable)
-            .environmentObject(routing)
-            .environmentObject(recipeStore)
-            .environmentObject(currentUserStore)
+            .environment(routing)
+            .environment(recipeStore)
+            .environment(currentUserStore)
+            .environment(\.imageUploader, services.imageUploader)
         }
-        .backgroundTask(.appRefresh("cz.jakubricar.Zradelnik.refresh")) {
+        .backgroundTask(.appRefresh(refreshTaskIdentifier)) {
             scheduleAppRefresh()
 
-            do {
-                try await recipeStore.loadAsync()
-            } catch {
-                NSLog(error.localizedDescription)
-            }
+            await recipeStore.refresh()
         }
-        .onChange(of: phase) { oldPhase, newPhase in
+        .onChange(of: phase) { _, newPhase in
             switch newPhase {
             case .active:
                 // In case of disabled background app refresh we want to get fresh data every 24h
@@ -96,7 +105,7 @@ struct ZradelnikApp: App {
                 }
 
                 BGTaskScheduler.shared.getPendingTaskRequests { requests in
-                    if !requests.contains(where: { $0.identifier == "cz.jakubricar.Zradelnik.refresh" }) {
+                    if !requests.contains(where: { $0.identifier == refreshTaskIdentifier }) {
                         scheduleAppRefresh()
                     }
                 }
@@ -121,11 +130,9 @@ struct ZradelnikApp: App {
     }
 }
 
-func scheduleAppRefresh() {
-    let request = BGAppRefreshTaskRequest(identifier: "cz.jakubricar.Zradelnik.refresh")
+private func scheduleAppRefresh() {
+    let request = BGAppRefreshTaskRequest(identifier: refreshTaskIdentifier)
     request.earliestBeginDate = Date(timeIntervalSinceNow: 24 * 3600)
 
     try? BGTaskScheduler.shared.submit(request)
 }
-
-let zradelnikLocale = Locale(identifier: "cs")

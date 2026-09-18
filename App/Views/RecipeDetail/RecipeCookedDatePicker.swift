@@ -1,0 +1,40 @@
+//
+//  RecipeCookedDatePicker.swift
+//  Zradelnik
+//
+//  Created by Jakub Řičař on 03.11.2022.
+//
+
+import SwiftUI
+
+struct RecipeCookedDatePicker: View {
+    let confirmAction: (Date) -> Void
+
+    @State private var cookedDate = Date.now
+
+    var body: some View {
+        VStack {
+            HStack {
+                DatePicker("Uvařeno dne", selection: $cookedDate, displayedComponents: .date)
+
+                Spacer()
+
+                Button {
+                    confirmAction(cookedDate)
+                } label: {
+                    Text("Potvrdit")
+                        .fontWeight(.bold)
+                        .padding(.leading)
+                }
+            }
+
+            Divider()
+        }
+    }
+}
+
+#if DEBUG
+#Preview {
+    RecipeCookedDatePicker { _ in }
+}
+#endif

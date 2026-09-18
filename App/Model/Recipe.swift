@@ -5,14 +5,15 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
+import API
 import Foundation
 
-struct Recipe: Identifiable, Decodable, Hashable {
+struct Recipe: Identifiable, Hashable {
     static let sousVideTag = "sous-vide"
 
     let id: String
     let title: String
-    // Only the S3 object-key prefix; the renditions live under it (see below).
+    // Only the S3 object-key prefix; the renditions live under it (see Recipe+ImageURLs).
     let imageUrl: String?
     let directions: String?
     let sideDish: String?
@@ -28,7 +29,7 @@ struct Recipe: Identifiable, Decodable, Hashable {
         tags.contains(Recipe.sousVideTag)
     }
 
-    struct Ingredient: Identifiable, Decodable, Hashable {
+    struct Ingredient: Identifiable, Hashable {
         let id: String
         let name: String
         let isGroup: Bool
@@ -37,17 +38,40 @@ struct Recipe: Identifiable, Decodable, Hashable {
         let amountUnit: String?
     }
 
-    struct Cooked: Identifiable, Decodable, Hashable {
+    struct Cooked: Identifiable, Hashable {
         let id: String
         let date: Date
         let user: User?
 
-        struct User: Identifiable, Decodable, Hashable {
+        struct User: Identifiable, Hashable {
             let id: String
             let displayName: String
         }
     }
 }
+
+// MARK: - Search
+
+extension Recipe {
+    /// Diacritic- and case-insensitive match against the title and the ingredient names.
+    /// This is the single definition of "matches a search term" in the app.
+    func matches(_ term: String) -> Bool {
+        let term = term.searchNormalized
+
+        guard !term.isEmpty else { return true }
+
+        return title.searchNormalized.contains(term)
+            || ingredients.contains { $0.name.searchNormalized.contains(term) }
+    }
+}
+
+private extension String {
+    var searchNormalized: String {
+        folding(options: [.diacriticInsensitive, .caseInsensitive], locale: zradelnikLocale)
+    }
+}
+
+// MARK: - Mapping from the API
 
 extension Recipe {
     init(from recipe: RecipeDetails) {
@@ -63,34 +87,6 @@ extension Recipe {
         self.tags = recipe.tags
         self.ingredients = recipe.ingredients.map { Ingredient(from: $0) }
         self.cookedHistory = recipe.cookedHistory.map { Cooked(from: $0) }
-    }
-}
-
-extension Recipe {
-    // The API is out of the image read path: it returns a bare S3 prefix and the
-    // pre-generated WebP renditions are served straight from the bucket as
-    // <prefix>/<width>.webp. Keep in sync with RENDITION_WIDTHS in the API
-    // (api/src/imageProcessing.ts) and the web loader (web/image-loader.js).
-    private static let renditionWidths = [96, 384, 640, 828, 1080, 1920]
-
-    /// 80x60pt thumbnail in the recipe list.
-    var listImageUrl: String? { renditionUrl(forPixelWidth: 240) }
-
-    /// ~181pt wide card in the two column grid.
-    var gridImageUrl: String? { renditionUrl(forPixelWidth: 543) }
-
-    /// Full width header on the detail and edit screens.
-    var fullImageUrl: String? { renditionUrl(forPixelWidth: 1206) }
-
-    // Same rule as the web's next/image loader: the smallest rendition at least as
-    // wide as the space it fills. Widths assume a 3x display, as the sizes the old
-    // server-side resizing asked for did.
-    private func renditionUrl(forPixelWidth width: Int) -> String? {
-        guard let imageUrl else { return nil }
-
-        let rendition = Self.renditionWidths.first { $0 >= width } ?? Self.renditionWidths[Self.renditionWidths.endIndex - 1]
-
-        return "\(imageUrl)/\(rendition).webp"
     }
 }
 
@@ -117,14 +113,6 @@ extension Recipe.Cooked.User {
     init(from user: RecipeDetails.CookedHistory.User) {
         self.id = user.id
         self.displayName = user.displayName
-    }
-}
-
-extension Recipe {
-    func matches(_ string: String) -> Bool {
-        string.isEmpty
-            || title.localizedCaseInsensitiveContains(string)
-            || ingredients.contains { $0.name.localizedCaseInsensitiveContains(string) }
     }
 }
 

@@ -5,167 +5,186 @@
 //  Created by Jakub Řičař on 29.03.2022.
 //
 
-import API
-import Apollo
-import ApolloAPI
-import Foundation
+#if DEBUG
 
-private let recipe1: JSONObject = [
-    "__typename": "Recipe",
-    "id": "63506df6f463890829ae047b",
-    "title": "With all details",
-    "imageUrl": "https://zradelnik-recipe-images.s3.eu-central-1.amazonaws.com/images/60b625c871cc4b28a638d3fd",
-    "directions": "Fsdfsdf",
-    "sideDish": "sss",
-    "preparationTime": 12,
-    "servingCount": 22,
-    "tags": ["sous-vide"],
-    "ingredients": [
-        [
-            "__typename": "Ingredient",
-            "id": "63599979345b99a0f87f9d19",
-            "name": "xxx",
-            "isGroup": false
-        ] as JSONObject
-    ],
-    "cookedHistory": [
-        [
-            "__typename": "RecipeCooked",
-            "id": "1",
-            "date": try! Date(_jsonValue: "2022-11-01T21:58:00.000Z"),
-            "user": [
-                "__typename": "User",
-                "id": "5cfbe70e4309d1001b800400",
-                "displayName": "Kubík"
-            ]
-        ] as JSONObject
-    ]
-]
+import SwiftUI
 
-private let recipe2: JSONObject = [
-    "__typename": "Recipe",
-    "id": "6320a3c94e2b78b722e5325d",
-    "title": "Some long title and without any details",
-    "tags": [String](),
-    "ingredients": [JSONObject](),
-    "cookedHistory": [JSONObject]()
-]
+// MARK: - Sample data
 
-private let recipe3: JSONObject = [
-    "__typename": "Recipe",
-    "id": "5b4f00f4f275000019d0c3b6",
-    "title": "Bábovka",
-    "imageUrl": "https://zradelnik-recipe-images.s3.eu-central-1.amazonaws.com/images/60b625c871cc4b28a638d3fb",
-    "directions": "1. Vejce rozklepneme a oddělíme žloutky od bílků, žloutky vyšleháme s 1/3 cukru, z bílků ušleháme sníh s 1/3 cukru\n1. Všechny sypké ingredience smícháme v míse a přisypeme ke žloutkům\n1. Přidáme olej a vodu\n1. Opatrně vmícháme sníh\n1. Asi 2/3 těsta nalijeme do vymazané a moukou vysypané formy. Do zbylé třetiny těsta přidáme 2 lžíce kakaa, zamícháme a nalijeme na světlé těsto do formy.\n1. Bábovku vkládáme do předehřáté trouby a pečeme asi 60 minut na 160 °C (horkovzduch 140 °C). Zkusíme špejlí, jestli je uvnitř hotová\n1. Upečenou bábovku vyklopíme, pocukrujeme a můžeme servírovat",
-    "preparationTime": 90,
-    "tags": [String](),
-    "ingredients": [
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9af",
-            "name": "polohrubá mouka",
-            "isGroup": false,
-            "amount": 2,
-            "amountUnit": "hrnky"
-        ] as JSONObject,
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b0",
-            "name": "cukr",
-            "isGroup": false,
-            "amount": 1,
-            "amountUnit": "hrnek"
+// Built as plain domain values rather than decoded Apollo payloads, so previews do
+// not depend on the generated API types at all.
+
+let previewRecipes: [Recipe] = [
+    Recipe(
+        id: "63506df6f463890829ae047b",
+        title: "Hovězí steak sous-vide",
+        imageUrl: nil,
+        directions: """
+        Maso osolte a opepřete, vložte do sáčku a **vakuujte**.
+
+        1. Nastavte lázeň na 54 °C
+        2. Vařte 2 hodiny
+        3. Zprudka opečte na pánvi
+        """,
+        sideDish: "hranolky",
+        preparationTime: "2 h 15 min",
+        preparationTimeRaw: 135,
+        servingCount: "2",
+        servingCountRaw: 2,
+        tags: [Recipe.sousVideTag],
+        ingredients: [
+            .init(id: "i1", name: "Maso", isGroup: true, amount: nil, amountRaw: nil, amountUnit: nil),
+            .init(id: "i2", name: "hovězí roštěná", isGroup: false, amount: "400", amountRaw: 400, amountUnit: "g"),
+            .init(id: "i3", name: "máslo", isGroup: false, amount: "2", amountRaw: 2, amountUnit: "lžíce"),
+            .init(id: "i4", name: "sůl", isGroup: false, amount: nil, amountRaw: nil, amountUnit: nil),
         ],
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b1",
-            "name": "řepkový olej",
-            "isGroup": false,
-            "amount": 1,
-            "amountUnit": "sklenka"
-        ],
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b2",
-            "name": "teplá voda",
-            "isGroup": false,
-            "amount": 1,
-            "amountUnit": "sklenka"
-        ],
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b3",
-            "name": "vejce",
-            "isGroup": false,
-            "amount": 3,
-            "amountUnit": "ks"
-        ],
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b4",
-            "name": "prášek do pečiva",
-            "isGroup": false,
-            "amount": 1,
-            "amountUnit": "ks"
-        ],
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b5",
-            "name": "vanilkový cukr",
-            "isGroup": false,
-            "amount": 1,
-            "amountUnit": "ks"
-        ],
-        [
-            "__typename": "Ingredient",
-            "id": "6043e32822d1620018b0c9b6",
-            "name": "kakao",
-            "isGroup": false,
-            "amount": 2,
-            "amountUnit": "lžíce"
+        cookedHistory: [
+            .init(id: "c1", date: Date(timeIntervalSinceNow: -60 * 60 * 24 * 30), user: .init(id: "u1", displayName: "Jakub")),
+            .init(id: "c2", date: Date(timeIntervalSinceNow: -60 * 60 * 24 * 3), user: .init(id: "u1", displayName: "Jakub")),
         ]
-    ],
-    "cookedHistory": [
-        [
-            "__typename": "RecipeCooked",
-            "id": "1",
-            "date": try! Date(_jsonValue: "2022-10-21T20:44:00.000Z"),
-            "user": [
-                "__typename": "User",
-                "id": "5cfbe70e4309d1001b800400",
-                "displayName": "Kubík"
-            ]
-        ] as JSONObject,
-        [
-            "__typename": "RecipeCooked",
-            "id": "2",
-            "date": try! Date(_jsonValue: "2022-10-22T20:44:00.000Z"),
-            "user": [
-                "__typename": "User",
-                "id": "5cfbe70e4309d1001b800400",
-                "displayName": "Kubík"
-            ]
-        ]
-    ]
+    ),
+    Recipe(
+        id: "63506df6f463890829ae047c",
+        title: "Čočková polévka",
+        imageUrl: nil,
+        directions: "Čočku propláchněte a vařte doměkka.",
+        sideDish: nil,
+        preparationTime: "45 min",
+        preparationTimeRaw: 45,
+        servingCount: "4",
+        servingCountRaw: 4,
+        tags: [],
+        ingredients: [
+            .init(id: "i5", name: "čočka", isGroup: false, amount: "250", amountRaw: 250, amountUnit: "g"),
+            .init(id: "i6", name: "cibule", isGroup: false, amount: "1", amountRaw: 1, amountUnit: "ks"),
+        ],
+        cookedHistory: []
+    ),
+    Recipe(
+        id: "63506df6f463890829ae047d",
+        title: "Řízek",
+        imageUrl: nil,
+        directions: nil,
+        sideDish: "bramborový salát",
+        preparationTime: nil,
+        preparationTimeRaw: nil,
+        servingCount: nil,
+        servingCountRaw: nil,
+        tags: [],
+        ingredients: [],
+        cookedHistory: []
+    ),
+    Recipe(
+        id: "63506df6f463890829ae047e",
+        title: "Špagety carbonara",
+        imageUrl: nil,
+        directions: "Uvařte špagety al dente.",
+        sideDish: nil,
+        preparationTime: "25 min",
+        preparationTimeRaw: 25,
+        servingCount: "2",
+        servingCountRaw: 2,
+        tags: [],
+        ingredients: [
+            .init(id: "i7", name: "špagety", isGroup: false, amount: "200", amountRaw: 200, amountUnit: "g"),
+            .init(id: "i8", name: "slanina", isGroup: false, amount: "100", amountRaw: 100, amountUnit: "g"),
+        ],
+        cookedHistory: []
+    ),
 ]
 
-private let recipe4: JSONObject = [
-    "__typename": "Recipe",
-    "id": "6320a3c94e2b78b722e5324d",
-    "title": "Some long title with preparation for list test",
-    "preparationTime": 185,
-    "tags": [String](),
-    "ingredients": [JSONObject](),
-    "cookedHistory": [JSONObject]()
-]
+// MARK: - Stub services
 
-private let data: JSONObject = [
-    "recipes": [
-        recipe1,
-        recipe2,
-        recipe3,
-        recipe4
-    ]
-]
+final class PreviewRecipeService: RecipeService {
+    /// `nil` never emits, which leaves the store in its initial loading state.
+    private let result: Result<[Recipe], Error>?
 
-let recipePreviewData: [RecipesQuery.Data.Recipe] = RecipesQuery.Data(unsafelyWithData: data).recipes
+    init(result: Result<[Recipe], Error>?) {
+        self.result = result
+    }
+
+    func recipeUpdates() -> AsyncStream<Result<[Recipe], Error>> {
+        AsyncStream { continuation in
+            if let result {
+                continuation.yield(result)
+            }
+        }
+    }
+
+    func refreshRecipes() async throws {}
+
+    func markCooked(recipeId: String, date: Date) async throws -> Recipe { previewRecipes[0] }
+    func deleteCooked(recipeId: String, cookedId: String) async throws -> Recipe { previewRecipes[0] }
+    func createRecipe(_ draft: RecipeDraft, imageId: String?) async throws -> Recipe { previewRecipes[0] }
+    func updateRecipe(id: String, draft: RecipeDraft, imageId: String?) async throws -> Recipe { previewRecipes[0] }
+    func deleteRecipe(id: String) async throws {}
+}
+
+final class PreviewAuthService: AuthService {
+    private let tokenStore: any TokenStore
+    private let displayName: String
+
+    init(isLoggedIn: Bool, displayName: String = "Jakub") {
+        self.tokenStore = InMemoryTokenStore(accessToken: isLoggedIn ? "preview-token" : nil)
+        self.displayName = displayName
+    }
+
+    var accessToken: String? { tokenStore.accessToken }
+
+    func logIn(username: String, password: String) async throws -> String {
+        try await Task.sleep(for: .seconds(1))
+
+        guard password == "heslo" else { throw AuthError.invalidCredentials }
+
+        return "preview-token"
+    }
+
+    func storeAccessToken(_ token: String) { tokenStore.setAccessToken(token) }
+    func clearAccessToken() { tokenStore.setAccessToken(nil) }
+    func loadDisplayName() async throws -> String { displayName }
+}
+
+// MARK: - Preview environment
+
+extension View {
+    /// Injects stores backed by stub services, so previews exercise the same code
+    /// path as the app without touching the network.
+    func previewStores(
+        status: LoadingStatus = .data,
+        isLoggedIn: Bool = false,
+        recipes: [Recipe] = previewRecipes
+    ) -> some View {
+        modifier(PreviewStoresModifier(status: status, isLoggedIn: isLoggedIn, recipes: recipes))
+    }
+}
+
+@MainActor
+private struct PreviewStoresModifier: ViewModifier {
+    @State private var routing = Routing()
+    @State private var recipeStore: RecipeStore
+    @State private var currentUserStore: CurrentUserStore
+
+    init(status: LoadingStatus, isLoggedIn: Bool, recipes: [Recipe]) {
+        let result: Result<[Recipe], Error>? = switch status {
+        case .data: .success(recipes)
+        case .error(let message): .failure(RecipeServiceError.noData(message))
+        case .loading: nil
+        }
+
+        _recipeStore = State(initialValue: RecipeStore(service: PreviewRecipeService(result: result)))
+        _currentUserStore = State(initialValue: CurrentUserStore(service: PreviewAuthService(isLoggedIn: isLoggedIn)))
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .environment(routing)
+            .environment(recipeStore)
+            .environment(currentUserStore)
+            .task {
+                recipeStore.startWatching()
+                await currentUserStore.loadCurrentUserIfNeeded()
+            }
+    }
+}
+
+#endif

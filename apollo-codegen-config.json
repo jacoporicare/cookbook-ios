@@ -1,41 +1,38 @@
 {
-  "schemaNamespace" : "API",
-  "input" : {
-    "operationSearchPaths" : [
-      "**/*.graphql"
+  "schemaNamespace": "API",
+  "input": {
+    "operationSearchPaths": [
+      "./GraphQL/**/*.graphql"
     ],
-    "schemaSearchPaths" : [
-      "**/*.graphqls"
+    "schemaSearchPaths": [
+      "./GraphQL/**/*.graphqls"
     ]
   },
-  "output" : {
-    "testMocks" : {
-      "none" : {
+  "output": {
+    "testMocks": {
+      "none": {}
+    },
+    "schemaTypes": {
+      "path": "./API",
+      "moduleType": {
+        "swiftPackage": {}
       }
     },
-    "schemaTypes" : {
-      "path" : "./API",
-      "moduleType" : {
-        "swiftPackageManager" : {
-        }
-      }
-    },
-    "operations" : {
-      "relative" : {
-      }
+    "operations": {
+      "inSchemaModule": {}
     }
   },
-  "schemaDownload" : {
-    "downloadMethod" : {
-      "introspection" : {
-        "endpointURL" : "http://localhost:4000/graphql",
-        "httpMethod" : {
-          "POST" : {}
+  "schemaDownload": {
+    "downloadMethod": {
+      "introspection": {
+        "endpointURL": "http://localhost:4000/graphql",
+        "httpMethod": {
+          "POST": {}
         },
-        "outputFormat" : "SDL",
-        "includeDeprecatedInputValues" : false
+        "outputFormat": "SDL",
+        "includeDeprecatedInputValues": false
       }
     },
-    "outputPath" : "./App/GraphQL/schema.graphqls"
+    "outputPath": "./GraphQL/schema.graphqls"
   }
 }
