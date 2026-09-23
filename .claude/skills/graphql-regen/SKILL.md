@@ -15,7 +15,7 @@ Run these steps in order:
 
 After generation, verify the build still compiles:
 ```
-xcodebuild -scheme Zradelnik -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
+xcodebuild -scheme Zradelnik -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 18 Pro' build
 ```
 
 Never hand-edit files in API/Sources/ — always regenerate.

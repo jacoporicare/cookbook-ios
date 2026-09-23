@@ -92,7 +92,7 @@ struct ZradelnikApp: App {
             .environment(\.imageUploader, services.imageUploader)
         }
         .backgroundTask(.appRefresh(refreshTaskIdentifier)) {
-            scheduleAppRefresh()
+            await scheduleAppRefresh()
 
             await recipeStore.refresh()
         }
@@ -104,9 +104,10 @@ struct ZradelnikApp: App {
                     recipeStore.reload(silent: true)
                 }
 
-                BGTaskScheduler.shared.getPendingTaskRequests { requests in
+                Task {
+                    let requests = await BGTaskScheduler.shared.pendingTaskRequests()
                     if !requests.contains(where: { $0.identifier == refreshTaskIdentifier }) {
-                        scheduleAppRefresh()
+                        await scheduleAppRefresh()
                     }
                 }
             default:
@@ -130,9 +131,11 @@ struct ZradelnikApp: App {
     }
 }
 
-private func scheduleAppRefresh() {
+/// `@concurrent` because `submitTaskRequest` must not be called from the main thread.
+@concurrent
+private func scheduleAppRefresh() async {
     let request = BGAppRefreshTaskRequest(identifier: refreshTaskIdentifier)
     request.earliestBeginDate = Date(timeIntervalSinceNow: 24 * 3600)
 
-    try? BGTaskScheduler.shared.submit(request)
+    try? await BGTaskScheduler.shared.submitTaskRequest(request)
 }
